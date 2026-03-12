@@ -1,0 +1,41 @@
+---
+import ArticlePageLayout from '../../layouts/ArticlePageLayout.astro';
+
+const toc = [
+  { id: 'design', label: 'Design principles' },
+  { id: 'clues', label: 'Sample clues' },
+  { id: 'safety', label: 'Safety notes' },
+];
+---
+
+<ArticlePageLayout
+  title="Forest Scavenger Hunt Clues | Trees Puzzle"
+  heading="Forest Scavenger Hunt Clues"
+  description="Plan a forest scavenger hunt with observation-based clues that keep children engaged without overcomplicating supervision."
+  canonicalPath="/forest-scavenger-hunt/"
+  readTime="7 min"
+  toc={toc}
+>
+  <section id="design">
+    <h2 class="font-display text-2xl text-white">Design clues around noticing, not collecting</h2>
+    <p>The best scavenger hunts point children toward details they might ignore: bark cracks, branching direction, seed shapes, moss, canopy layers, and signs of wildlife. Observation-based clues are also easier to run in parks that restrict collecting natural materials.</p>
+    <p>A good hunt mixes fast wins with slower clues. That keeps energy high while still giving the activity enough depth to feel meaningful.</p>
+  </section>
+
+  <section id="clues">
+    <h2 class="font-display text-2xl text-white">Sample clue ideas</h2>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>Find a tree with bark that looks cracked like puzzle pieces.</li>
+      <li>Spot a leaf shape that reminds you of a star or a hand.</li>
+      <li>Find a tree that has seeds or cones on the ground nearby.</li>
+      <li>Look for a tree that provides a strong patch of shade at midday.</li>
+      <li>Notice a trunk with moss, lichen, or a visible pattern change.</li>
+      <li>Find two nearby trees with very different branching styles.</li>
+    </ul>
+  </section>
+
+  <section id="safety">
+    <h2 class="font-display text-2xl text-white">Safety notes</h2>
+    <p>Set clear boundaries, keep children on approved paths, and tell them which objects should not be touched. If the area includes poison ivy, stinging plants, unstable banks, or steep roots, remove those zones from the game area entirely.</p>
+  </section>
+</ArticlePageLayout>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0d1017"/>
+  <circle cx="940" cy="150" r="120" fill="#1a1f2b"/>
+  <circle cx="1020" cy="520" r="180" fill="#1a1f2b"/>
+  <path d="M260 140c-70 85-110 165-110 240 0 87 54 157 150 201 96-44 150-114 150-201 0-75-40-155-110-240Z" fill="#527c52"/>
+  <path d="M289 275h22v198h-22z" fill="#ec7a12"/>
+  <path d="M210 350h180v22H210z" fill="#ec7a12"/>
+  <text x="520" y="255" fill="#ffffff" font-family="Georgia, serif" font-size="86">Trees Puzzle</text>
+  <text x="520" y="340" fill="#b0b9c9" font-family="Arial, sans-serif" font-size="34">Nature games, printables, and outdoor learning ideas.</text>
+</svg>

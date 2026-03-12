@@ -1,0 +1,67 @@
+<script is:inline>
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (!menu || !menuIcon || !closeIcon) {
+      return;
+    }
+
+    menu.classList.toggle('open');
+    menuIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+  }
+
+  window.toggleMenu = toggleMenu;
+
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  const sections = document.querySelectorAll('article[id]');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const tocObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('active');
+              link.style.color = '#ec7a12';
+              link.style.borderLeftColor = '#ec7a12';
+            } else {
+              link.style.color = '';
+              link.style.borderLeftColor = '';
+            }
+          });
+        }
+      });
+    },
+    { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' },
+  );
+
+  sections.forEach((section) => tocObserver.observe(section));
+
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (!navbar) {
+      return;
+    }
+
+    if (window.scrollY > 100) {
+      navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
+    } else {
+      navbar.style.boxShadow = 'none';
+    }
+  });
+</script>

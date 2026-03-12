@@ -1,0 +1,32 @@
+---
+import ContentPageLayout from '../../layouts/ContentPageLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Printable Tree Activities',
+  url: 'https://treespuzzle.com/printables/',
+};
+---
+
+<ContentPageLayout
+  title="Printable Tree Activities | Trees Puzzle Worksheets and Game Cards"
+  heading="Printable Tree Activities"
+  description="A launch-ready resource page for printable tree worksheets, leaf matching cards, bark rubbings, and forest scavenger hunt prompts."
+  canonicalPath="/printables/"
+  schemas={[schema]}
+>
+  <p>This page is structured as the resource hub for future downloads on Trees Puzzle. It gives visitors a clear place to find printable materials instead of scattering them across articles.</p>
+  <h2 class="font-display text-2xl text-white pt-4">Planned printable formats</h2>
+  <ul class="list-disc pl-6 space-y-2">
+    <li>Leaf silhouette matching cards</li>
+    <li>Tree observation journals</li>
+    <li>Bark texture rub-and-guess sheets</li>
+    <li>Forest scavenger hunt checklists</li>
+    <li>Seasonal tree comparison worksheets</li>
+  </ul>
+  <h2 class="font-display text-2xl text-white pt-4">How this page supports growth</h2>
+  <p>You can later attach PDFs, email signup forms, or premium bundles here without changing the rest of the site structure. That makes this a strong monetization and lead-generation page for the domain.</p>
+  <h2 class="font-display text-2xl text-white pt-4">Recommended next additions</h2>
+  <p>Add one free worksheet first, then expand with themed bundles such as autumn leaves, evergreen identification, and schoolyard scavenger packs.</p>
+</ContentPageLayout>

@@ -1,0 +1,53 @@
+---
+import ContentPageLayout from '../../layouts/ContentPageLayout.astro';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What age range fits tree puzzles best?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Most activities on Trees Puzzle work well for ages 5 to 12, with optional extensions for older learners.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need to know local tree species first?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No. Many activities begin with shape, texture, and observation before species names are introduced.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I use the site indoors?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Several puzzle formats use printed cards, collected leaves, bark rubbings, and matching grids that work indoors.',
+      },
+    },
+  ],
+};
+---
+
+<ContentPageLayout
+  title="Trees Puzzle FAQ | Common Questions About Tree Games and Printables"
+  heading="Frequently Asked Questions"
+  description="Answers to common Trees Puzzle questions about age range, setup, safety, printables, and indoor or outdoor use."
+  canonicalPath="/faq/"
+  schemas={[faqSchema]}
+>
+  <h2 class="font-display text-2xl text-white">What age range works best?</h2>
+  <p>Most activities are designed for ages 5 to 12. Younger children can focus on matching and observation, while older learners can add species names, habitats, and seasonal comparisons.</p>
+  <h2 class="font-display text-2xl text-white pt-4">Do I need to identify tree species perfectly?</h2>
+  <p>No. Trees Puzzle starts with noticing shape, bark, branching, color, and texture. Exact identification can come later.</p>
+  <h2 class="font-display text-2xl text-white pt-4">Can I run these activities indoors?</h2>
+  <p>Yes. Printable cards, photo matching, bark rubbings, and collected leaves can all support indoor sessions.</p>
+  <h2 class="font-display text-2xl text-white pt-4">What supplies are usually needed?</h2>
+  <p>Typical supplies include paper, pencils, clipboards, leaves, crayons for bark rubbings, and a small bag or tray for sorting natural items.</p>
+  <h2 class="font-display text-2xl text-white pt-4">Are the activities safe for public parks?</h2>
+  <p>They are designed to be flexible, but adults should always follow local rules, stay on paths where needed, and avoid collecting protected materials.</p>
+</ContentPageLayout>

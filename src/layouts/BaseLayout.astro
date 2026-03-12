@@ -1,0 +1,121 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  keywords?: string;
+  includeHomeSchemas?: boolean;
+  includeAdsense?: boolean;
+  ogImagePath?: string;
+  schemas?: Record<string, unknown>[];
+  ogType?: string;
+}
+
+const {
+  title = 'Trees Puzzle | Nature Puzzles, Printable Activities, and Outdoor Learning',
+  description = 'Trees Puzzle helps families, teachers, and curious kids explore tree puzzles, leaf games, forest scavenger hunts, and printable nature activities.',
+  canonicalPath = '/',
+  keywords = 'tree puzzles, printable tree puzzles, leaf identification game, forest scavenger hunt, nature puzzle activities, outdoor learning for kids',
+  includeHomeSchemas = true,
+  includeAdsense = false,
+  ogImagePath = '/og-image.svg',
+  schemas = [],
+  ogType = 'website',
+} = Astro.props;
+
+const siteOrigin = 'https://treespuzzle.com';
+const canonicalUrl = new URL(canonicalPath, siteOrigin).toString();
+const ogImage = new URL(ogImagePath, siteOrigin).toString();
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Trees Puzzle',
+  url: siteOrigin,
+  logo: ogImage,
+};
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  inLanguage: 'en',
+  url: canonicalUrl,
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Trees Puzzle',
+  url: siteOrigin,
+  description: 'Nature puzzles, printable activities, and outdoor learning ideas.',
+  inLanguage: 'en',
+};
+
+const structuredData = [
+  organizationSchema,
+  webPageSchema,
+  ...(includeHomeSchemas ? [websiteSchema] : []),
+  ...schemas,
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Trees Puzzle" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Trees Puzzle" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <link rel="alternate" hreflang="en" href={siteOrigin} />
+    <link rel="alternate" hreflang="x-default" href={siteOrigin} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    {
+      structuredData.map((schema) => (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+      ))
+    }
+  </head>
+
+  <body class="bg-ink-950 text-ink-200 antialiased">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-500 text-white px-4 py-2 rounded z-50"
+      >Skip to main content</a
+    >
+    <slot />
+  </body>
+</html>

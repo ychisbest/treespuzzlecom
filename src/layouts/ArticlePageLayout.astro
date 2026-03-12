@@ -1,0 +1,175 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface TocItem {
+  id: string;
+  label: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  title: string;
+  heading: string;
+  description: string;
+  canonicalPath: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  authorName?: string;
+  readTime?: string;
+  toc?: TocItem[];
+  faqItems?: FaqItem[];
+}
+
+const {
+  title,
+  heading,
+  description,
+  canonicalPath,
+  updatedAt = 'March 12, 2026',
+  publishedAt = 'March 12, 2026',
+  authorName = 'Trees Puzzle Editorial Team',
+  readTime = '10 min',
+  toc = [],
+  faqItems = [],
+} = Astro.props;
+
+const siteOrigin = 'https://treespuzzle.com';
+const canonicalUrl = `${siteOrigin}${canonicalPath}`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: heading,
+  description,
+  author: {
+    '@type': 'Organization',
+    name: authorName,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Trees Puzzle',
+  },
+  datePublished: publishedAt,
+  dateModified: '2026-03-12',
+  mainEntityOfPage: canonicalUrl,
+  inLanguage: 'en',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${siteOrigin}/`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: heading,
+      item: canonicalUrl,
+    },
+  ],
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
+const schemas = [articleSchema, breadcrumbSchema, ...(faqItems.length > 0 ? [faqSchema] : [])];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  includeHomeSchemas={false}
+  includeAdsense={false}
+  schemas={schemas}
+  ogType="article"
+>
+  <header class="sticky top-0 z-40 border-b border-ink-800/60 bg-ink-950/95 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center font-mono text-sm font-bold text-white">TP</div>
+        <div><span class="font-display text-lg text-white">Trees</span><span class="text-brand-500">Puzzle</span></div>
+      </a>
+      <nav class="hidden md:flex items-center gap-4 text-sm">
+        <a href="/tree-puzzle-ideas/" class="text-ink-300 hover:text-brand-400 transition-colors">Ideas</a>
+        <a href="/faq/" class="text-ink-300 hover:text-brand-400 transition-colors">FAQ</a>
+        <a href="/printables/" class="text-ink-300 hover:text-brand-400 transition-colors">Printables</a>
+        <a href="/blog/" class="text-ink-300 hover:text-brand-400 transition-colors">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <nav aria-label="Breadcrumb" class="mb-5 text-sm text-ink-400">
+      <a href="/" class="hover:text-brand-400 transition-colors">Home</a>
+      <span class="mx-2 text-ink-600">/</span>
+      <span>{heading}</span>
+    </nav>
+
+    <div class="lg:grid lg:grid-cols-[1fr_280px] lg:gap-10">
+      <article class="bg-ink-900/40 border border-ink-800/50 rounded-2xl p-6 md:p-10">
+        <p class="text-xs tracking-wide uppercase text-ink-400 mb-3">Published: {publishedAt} · Updated: {updatedAt}</p>
+        <h1 class="font-display text-3xl md:text-5xl text-white leading-tight mb-6">{heading}</h1>
+        <div class="flex flex-wrap gap-x-4 gap-y-2 text-sm text-ink-400 mb-8">
+          <span>Author: {authorName}</span>
+          <span>Read time: {readTime}</span>
+        </div>
+
+        <div class="space-y-6 text-ink-300 leading-relaxed">
+          <slot />
+        </div>
+      </article>
+
+      <aside class="hidden lg:block">
+        <div class="sticky top-24 space-y-4">
+          {toc.length > 0 && (
+            <div class="bg-ink-900/40 border border-ink-800/50 rounded-2xl p-5">
+              <h2 class="font-display text-lg text-white mb-4">On this page</h2>
+              <nav class="flex flex-col gap-2" aria-label="Table of contents">
+                {toc.map((item) => (
+                  <a class="text-sm text-ink-400 hover:text-brand-400 transition-colors" href={`#${item.id}`}>{item.label}</a>
+                ))}
+              </nav>
+            </div>
+          )}
+
+          <div class="rounded-2xl border border-ink-800/60 bg-ink-900/30 p-4 text-sm text-ink-400">
+            Trees Puzzle publishes classroom-safe, family-friendly nature games and printable activities.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="border-t border-ink-800/50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+      <p class="text-sm text-ink-500">&copy; 2026 Trees Puzzle</p>
+      <nav class="flex flex-wrap gap-x-4 gap-y-2">
+        <a href="/about/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">About</a>
+        <a href="/contact/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">Contact</a>
+        <a href="/privacy-policy/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">Privacy</a>
+        <a href="/terms-of-service/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">Terms</a>
+        <a href="/disclaimer/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">Disclaimer</a>
+      </nav>
+    </div>
+  </footer>
+</BaseLayout>
