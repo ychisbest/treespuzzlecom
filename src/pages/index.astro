@@ -1,195 +1,30 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'What is a tree puzzle?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'A tree puzzle is any activity that helps players learn about trees through clues, matching, observation, or printable games.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Who is Trees Puzzle for?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Trees Puzzle is built for parents, teachers, homeschool families, camp leaders, and curious kids who want nature-based learning ideas.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Do I need special materials?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Most activities use simple supplies such as pencils, paper, leaves, a clipboard, and a local park or schoolyard.',
-      },
-    },
-  ],
-};
+const siteName = 'trees puzzle';
+const siteUrl = 'https://treespuzzle.com';
 ---
 
-<BaseLayout
-  title="Trees Puzzle | Tree Games, Printable Nature Activities, and Outdoor Learning"
-  description="Explore tree puzzles, printable leaf games, forest scavenger hunts, and easy outdoor learning ideas for families, teachers, and kids."
-  canonicalPath="/"
-  keywords="tree puzzle, tree games for kids, printable leaf puzzle, forest scavenger hunt, nature learning activities"
-  schemas={[faqSchema]}
->
-  <header class="sticky top-0 z-40 border-b border-ink-800/60 bg-ink-950/95 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-      <a href="/" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center font-mono text-sm font-bold text-white">TP</div>
-        <div><span class="font-display text-lg text-white">Trees</span><span class="text-brand-500">Puzzle</span></div>
-      </a>
-      <nav class="hidden md:flex items-center gap-5 text-sm">
-        <a href="/tree-puzzle-ideas/" class="text-ink-300 hover:text-brand-400 transition-colors">Ideas</a>
-        <a href="/leaf-identification-puzzles/" class="text-ink-300 hover:text-brand-400 transition-colors">Leaf Games</a>
-        <a href="/forest-scavenger-hunt/" class="text-ink-300 hover:text-brand-400 transition-colors">Scavenger Hunt</a>
-        <a href="/printables/" class="text-ink-300 hover:text-brand-400 transition-colors">Printables</a>
-        <a href="/blog/" class="text-ink-300 hover:text-brand-400 transition-colors">Blog</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main-content">
-    <section class="relative overflow-hidden grain">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(82,124,82,0.35),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(236,122,18,0.18),transparent_30%)]"></div>
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-        <div class="max-w-3xl">
-          <p class="inline-flex rounded-full border border-sage-400/30 bg-sage-400/10 px-4 py-1 text-sm text-sage-200">Tree puzzles for homes, classrooms, camps, and weekend walks</p>
-          <h1 class="mt-6 font-display text-5xl md:text-7xl leading-[0.95] text-white">
-            Learn trees through puzzles, clues, and outdoor play.
-          </h1>
-          <p class="mt-6 max-w-2xl text-lg md:text-xl text-ink-300">
-            Trees Puzzle turns leaf shapes, bark textures, seeds, and forest observations into friendly activities that build attention, memory, and curiosity.
-          </p>
-          <div class="mt-10 flex flex-col sm:flex-row gap-4">
-            <a href="/printables/" class="inline-flex items-center justify-center rounded-xl bg-brand-500 px-7 py-4 font-semibold text-white hover:bg-brand-400 transition-colors">Browse printables</a>
-            <a href="/tree-puzzle-ideas/" class="inline-flex items-center justify-center rounded-xl border border-ink-700 px-7 py-4 font-semibold text-ink-200 hover:border-brand-500 hover:text-white transition-colors">Start with ideas</a>
-          </div>
-        </div>
-
-        <div class="mt-16 grid gap-4 md:grid-cols-3">
-          <div class="rounded-2xl border border-ink-800/60 bg-ink-900/50 p-6">
-            <p class="font-mono text-brand-400 text-3xl">12+</p>
-            <p class="mt-2 text-ink-300">activity prompts for leaf matching, bark decoding, and acorn sorting</p>
-          </div>
-          <div class="rounded-2xl border border-ink-800/60 bg-ink-900/50 p-6">
-            <p class="font-mono text-brand-400 text-3xl">4</p>
-            <p class="mt-2 text-ink-300">core page types: ideas, printables, FAQ, and blog guides</p>
-          </div>
-          <div class="rounded-2xl border border-ink-800/60 bg-ink-900/50 p-6">
-            <p class="font-mono text-brand-400 text-3xl">100%</p>
-            <p class="mt-2 text-ink-300">family-friendly content with no intrusive scripts or ads enabled by default</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="max-w-2xl">
-        <p class="text-sm uppercase tracking-[0.25em] text-brand-400">Featured paths</p>
-        <h2 class="mt-4 font-display text-4xl text-white">Choose the kind of tree puzzle experience you want to build.</h2>
-      </div>
-      <div class="mt-10 grid gap-5 md:grid-cols-3">
-        <a href="/tree-puzzle-ideas/" class="card-hover rounded-3xl border border-ink-800/60 bg-ink-900/45 p-7">
-          <h3 class="font-display text-2xl text-white">Tree Puzzle Ideas</h3>
-          <p class="mt-3 text-ink-300">Quick activities for classrooms, family walks, and homeschool nature units.</p>
-        </a>
-        <a href="/leaf-identification-puzzles/" class="card-hover rounded-3xl border border-ink-800/60 bg-ink-900/45 p-7">
-          <h3 class="font-display text-2xl text-white">Leaf Identification Puzzles</h3>
-          <p class="mt-3 text-ink-300">Shape-based matching games that help kids notice veins, edges, and seasonal changes.</p>
-        </a>
-        <a href="/forest-scavenger-hunt/" class="card-hover rounded-3xl border border-ink-800/60 bg-ink-900/45 p-7">
-          <h3 class="font-display text-2xl text-white">Forest Scavenger Hunt</h3>
-          <p class="mt-3 text-ink-300">Observation prompts and clue cards for parks, schoolyards, and camp trails.</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="border-y border-ink-800/50 bg-ink-900/30">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <p class="text-sm uppercase tracking-[0.25em] text-brand-400">Why this site works</p>
-          <h2 class="mt-4 font-display text-4xl text-white">Built around repeatable nature-learning formats.</h2>
-          <div class="mt-8 space-y-6 text-ink-300">
-            <p>Every page is designed to help an adult run an activity without extra prep. We focus on clear directions, flexible age ranges, and prompts that work with common trees in many regions.</p>
-            <p>The site architecture also supports future content growth: printable worksheets, tree trivia rounds, bark texture matching, seed sorting games, and seasonal identification guides.</p>
-          </div>
-        </div>
-        <div class="rounded-3xl border border-sage-500/20 bg-sage-500/8 p-8">
-          <h3 class="font-display text-2xl text-white">Popular use cases</h3>
-          <ul class="mt-6 space-y-4 text-ink-300">
-            <li>Rainy-day indoor nature stations with printable cards</li>
-            <li>Forest school warm-up games and scavenger trails</li>
-            <li>Elementary science centers focused on observation</li>
-            <li>Family park walks with low-prep challenge lists</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div class="flex items-end justify-between gap-6 flex-wrap">
-        <div>
-          <p class="text-sm uppercase tracking-[0.25em] text-brand-400">Latest guides</p>
-          <h2 class="mt-4 font-display text-4xl text-white">Start with these core articles.</h2>
-        </div>
-        <a href="/blog/" class="text-brand-300 hover:text-brand-200 transition-colors">See all guides</a>
-      </div>
-      <div class="mt-10 grid gap-5 md:grid-cols-3">
-        <a href="/tree-puzzle-ideas/" class="rounded-2xl border border-ink-800/60 bg-ink-900/45 p-6">
-          <p class="text-xs uppercase tracking-[0.2em] text-ink-500">Guide</p>
-          <h3 class="mt-3 text-2xl font-display text-white">10 tree puzzle ideas for kids</h3>
-          <p class="mt-3 text-ink-300">Mix movement, observation, matching, and storytelling without overcomplicating setup.</p>
-        </a>
-        <a href="/leaf-identification-puzzles/" class="rounded-2xl border border-ink-800/60 bg-ink-900/45 p-6">
-          <p class="text-xs uppercase tracking-[0.2em] text-ink-500">Guide</p>
-          <h3 class="mt-3 text-2xl font-display text-white">Leaf identification puzzles</h3>
-          <p class="mt-3 text-ink-300">Help learners compare rounded, lobed, serrated, and needle-like shapes with simple clues.</p>
-        </a>
-        <a href="/forest-scavenger-hunt/" class="rounded-2xl border border-ink-800/60 bg-ink-900/45 p-6">
-          <p class="text-xs uppercase tracking-[0.2em] text-ink-500">Guide</p>
-          <h3 class="mt-3 text-2xl font-display text-white">Forest scavenger hunt clues</h3>
-          <p class="mt-3 text-ink-300">Create safe, repeatable prompts that guide children toward observation instead of collecting everything.</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-      <h2 class="font-display text-4xl text-white">Quick answers</h2>
-      <div class="mt-8 space-y-3">
-        <details class="rounded-2xl border border-ink-800/60 bg-ink-900/45 p-5">
-          <summary class="cursor-pointer font-semibold text-white">What age group fits these activities?</summary>
-          <p class="mt-3 text-ink-300">Most ideas work for ages 5 to 12 with small adjustments. Younger children can match shapes and colors, while older learners can compare species traits and habitats.</p>
-        </details>
-        <details class="rounded-2xl border border-ink-800/60 bg-ink-900/45 p-5">
-          <summary class="cursor-pointer font-semibold text-white">Can this work without a forest nearby?</summary>
-          <p class="mt-3 text-ink-300">Yes. A schoolyard, neighborhood street, botanical garden, or even collected leaves on a table can support many of the puzzle formats on the site.</p>
-        </details>
-        <details class="rounded-2xl border border-ink-800/60 bg-ink-900/45 p-5">
-          <summary class="cursor-pointer font-semibold text-white">Are the printables free?</summary>
-          <p class="mt-3 text-ink-300">The site is structured to host free printable pages first. You can later add premium bundles or email downloads if you want to expand monetization.</p>
-        </details>
-      </div>
-    </section>
-  </main>
-
-  <footer class="border-t border-ink-800/50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-      <p class="text-sm text-ink-500">&copy; 2026 Trees Puzzle</p>
-      <nav class="flex flex-wrap gap-x-4 gap-y-2">
-        <a href="/about/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">About</a>
-        <a href="/contact/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">Contact</a>
-        <a href="/privacy-policy/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">Privacy</a>
-        <a href="/terms-of-service/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">Terms</a>
-        <a href="/disclaimer/" class="text-sm text-ink-400 hover:text-brand-400 transition-colors">Disclaimer</a>
-      </nav>
-    </div>
-  </footer>
-</BaseLayout>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{siteName}</title>
+	</head>
+	<body class="bg-stone-50 text-stone-900">
+		<main class="mx-auto flex min-h-screen max-w-4xl flex-col justify-center gap-6 px-6 py-20">
+			<p class="text-sm font-medium uppercase tracking-[0.3em] text-stone-500">Astro Starter</p>
+			<h1 class="text-5xl font-semibold tracking-tight sm:text-6xl">{siteName}</h1>
+			<p class="max-w-2xl text-lg text-stone-600">
+				A fresh Astro project scaffolded from the official starter with Tailwind CSS and Sitemap configured.
+			</p>
+			<p class="text-base text-stone-700">
+				Domain:
+				<a class="underline decoration-stone-400 underline-offset-4" href={siteUrl}>{siteUrl}</a>
+			</p>
+		</main>
+	</body>
+</html>

@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://treespuzzle.com/sitemap-index.xml
