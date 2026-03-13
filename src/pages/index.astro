@@ -127,6 +127,20 @@ const faqs = [
 							referrerpolicy="strict-origin-when-cross-origin"
 						></iframe>
 					</div>
+					<div class="game-toolbar">
+						<p class="game-intro">
+							玩法很简单：点击场景、移动物件并观察它们之间的关系，谜题通常靠位置、顺序和组合来解开。
+						</p>
+						<button
+							type="button"
+							class="fullscreen-button"
+							data-game-fullscreen
+							data-target-id="her-trees-first-puzzle"
+							aria-controls="her-trees-first-puzzle"
+						>
+							全屏游玩
+						</button>
+					</div>
 				</div>
 			</section>
 
@@ -196,22 +210,56 @@ const faqs = [
 			</footer>
 		</div>
 		<script is:inline>
+			const loadEmbeddedGame = (trigger) => {
+				const targetId = trigger.getAttribute('data-target-id');
+				const src = trigger.getAttribute('data-embed-src');
+				if (!targetId || !src) return null;
+
+				const iframe = document.getElementById(targetId);
+				if (!(iframe instanceof HTMLIFrameElement)) return null;
+
+				if (iframe.dataset.loaded !== 'true') {
+					iframe.src = src;
+					iframe.dataset.loaded = 'true';
+				}
+
+				iframe.classList.add('is-visible');
+				trigger.classList.add('is-hidden');
+				return iframe;
+			};
+
 			document.querySelectorAll('[data-game-launch]').forEach((button) => {
 				button.addEventListener('click', () => {
+					loadEmbeddedGame(button);
+				});
+			});
+
+			document.querySelectorAll('[data-game-fullscreen]').forEach((button) => {
+				button.addEventListener('click', async () => {
 					const targetId = button.getAttribute('data-target-id');
-					const src = button.getAttribute('data-embed-src');
-					if (!targetId || !src) return;
+					if (!targetId) return;
 
 					const iframe = document.getElementById(targetId);
 					if (!(iframe instanceof HTMLIFrameElement)) return;
 
-					if (iframe.dataset.loaded !== 'true') {
-						iframe.src = src;
-						iframe.dataset.loaded = 'true';
+					const launchButton = document.querySelector(
+						`[data-game-launch][data-target-id="${targetId}"]`,
+					);
+					if (launchButton instanceof HTMLButtonElement) {
+						loadEmbeddedGame(launchButton);
 					}
 
-					iframe.classList.add('is-visible');
-					button.classList.add('is-hidden');
+					const fullscreenTarget = iframe.closest('.game-embed-shell');
+					if (!(fullscreenTarget instanceof HTMLElement)) return;
+
+					if (document.fullscreenElement === fullscreenTarget) {
+						await document.exitFullscreen?.();
+						return;
+					}
+
+					if (fullscreenTarget.requestFullscreen) {
+						await fullscreenTarget.requestFullscreen();
+					}
 				});
 			});
 		</script>
