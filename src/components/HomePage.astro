@@ -1,0 +1,250 @@
+---
+import { Image } from 'astro:assets';
+import '../styles/global.css';
+import firstPuzzleImage from '../assets/first_puzzle.png';
+import puzzleHouseImage from '../assets/puzzle_house.jpg';
+import puzzleDreamImage from '../assets/puzzle_dream.png';
+import animationVideo from '../assets/animation.webm';
+import { homeContent, languageLabels, localeOrder, type Locale } from '../data/home-content';
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const siteUrl = 'https://treespuzzle.com';
+const firstPuzzleEmbedUrl = '/her-trees-first-puzzle/index.html';
+
+const localizedGames = content.games.map((game, index) => ({
+	...game,
+	image: [firstPuzzleImage, puzzleHouseImage, puzzleDreamImage][index],
+}));
+
+const languageLinks = localeOrder.map((item) => ({
+	locale: item,
+	label: languageLabels[item],
+	href: homeContent[item].path,
+}));
+---
+
+<html lang={content.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#111111" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{content.pageTitle}</title>
+		<meta name="description" content={content.pageDescription} />
+		<link rel="canonical" href={`${siteUrl}${content.path === '/' ? '' : content.path}`} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={content.pageTitle} />
+		<meta property="og:description" content={content.pageDescription} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={`${siteUrl}${content.path === '/' ? '' : content.path}`} />
+		<meta property="og:site_name" content={content.siteName} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={content.pageTitle} />
+		<meta name="twitter:description" content={content.pageDescription} />
+		{
+			languageLinks.map((link) => (
+				<link
+					rel="alternate"
+					hreflang={link.locale === 'zh-cn' ? 'zh-CN' : link.locale}
+					href={`${siteUrl}${link.href === '/' ? '' : link.href}`}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={siteUrl} />
+	</head>
+	<body>
+		<div class="container-shell">
+			<header class="site-header">
+				<div class="header-topline">
+					<h1>Her Trees Puzzle Game</h1>
+					<nav class="language-switcher" aria-label={content.languageSwitchLabel}>
+						{
+							languageLinks.map((link) => (
+								<a href={link.href} class:list={{ active: link.locale === locale }}>
+									{link.label}
+								</a>
+							))
+						}
+					</nav>
+				</div>
+				<p>{content.headerIntro}</p>
+			</header>
+
+			<section class="hero-section">
+				<div class="feature-panel">
+					<div class="panel-header">
+						<h2>{content.playHeading}</h2>
+					</div>
+					<div class="feature-box game-embed-shell">
+						<button
+							type="button"
+							class="embed-launch"
+							data-game-launch
+							data-embed-src={firstPuzzleEmbedUrl}
+							data-target-id="her-trees-first-puzzle"
+							aria-controls="her-trees-first-puzzle"
+						>
+							<span class="embed-kicker">HER TREES : First Puzzle</span>
+							<strong>{content.playButton}</strong>
+						</button>
+						<iframe
+							id="her-trees-first-puzzle"
+							class="game-embed"
+							title={content.iframeTitle}
+							loading="lazy"
+							allow="fullscreen; autoplay"
+							referrerpolicy="strict-origin-when-cross-origin"
+						></iframe>
+					</div>
+					<div class="game-toolbar">
+						<p class="game-intro">{content.gameIntro}</p>
+						<button
+							type="button"
+							class="fullscreen-button"
+							data-game-fullscreen
+							data-target-id="her-trees-first-puzzle"
+							aria-controls="her-trees-first-puzzle"
+						>
+							{content.fullscreenButton}
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<section class="content-section" id="series">
+				<h2>{content.seriesHeading}</h2>
+				<div class="games-grid">
+					{
+						localizedGames.map((game) => (
+							<article class="game-card">
+								<div class="game-thumbnail">
+									<Image src={game.image} alt={game.alt} widths={[480]} sizes="(max-width: 760px) 100vw, 280px" />
+								</div>
+								<p class="game-meta">{game.meta}</p>
+								<h3 class="game-title">{game.title}</h3>
+								<p class="game-desc">{game.copy}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="content-section">
+				<h2>{content.whyHeading}</h2>
+				<div class="insight-grid">
+					<div>
+						<div class="media-block media-wide">
+							<video
+								class="media-video"
+								src={animationVideo}
+								autoplay
+								muted
+								loop
+								playsinline
+								preload="metadata"
+								aria-label={content.videoLabel}
+							/>
+						</div>
+						<p class="analysis-copy">
+							<strong>{content.analysisStrong}</strong> {content.analysisBody}
+						</p>
+					</div>
+					<div>
+						{
+							content.highlights.map((item) => (
+								<article class="note-card">
+									<h3>{item.title}</h3>
+									<p>{item.copy}</p>
+								</article>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section class="content-section">
+				<h2>{content.faqHeading}</h2>
+				<div class="faq-list">
+					{
+						content.faqs.map((faq) => (
+							<details class="faq-item">
+								<summary>{faq.question}</summary>
+								<p>{faq.answer}</p>
+							</details>
+						))
+					}
+				</div>
+			</section>
+
+			<footer class="site-footer">
+				<p>&copy; 2026 treespuzzle.com。{content.footerCopy}</p>
+				<p>
+					<a href={siteUrl}>{siteUrl}</a>
+				</p>
+			</footer>
+		</div>
+		<script is:inline>
+			const loadEmbeddedGame = (trigger) => {
+				const targetId = trigger.getAttribute('data-target-id');
+				const src = trigger.getAttribute('data-embed-src');
+				if (!targetId || !src) return null;
+
+				const iframe = document.getElementById(targetId);
+				if (!(iframe instanceof HTMLIFrameElement)) return null;
+
+				if (iframe.dataset.loaded !== 'true') {
+					iframe.src = src;
+					iframe.dataset.loaded = 'true';
+				}
+
+				iframe.classList.add('is-visible');
+				trigger.classList.add('is-hidden');
+				return iframe;
+			};
+
+			document.querySelectorAll('[data-game-launch]').forEach((button) => {
+				button.addEventListener('click', () => {
+					loadEmbeddedGame(button);
+				});
+			});
+
+			document.querySelectorAll('[data-game-fullscreen]').forEach((button) => {
+				button.addEventListener('click', async () => {
+					const targetId = button.getAttribute('data-target-id');
+					if (!targetId) return;
+
+					const iframe = document.getElementById(targetId);
+					if (!(iframe instanceof HTMLIFrameElement)) return;
+
+					const launchButton = document.querySelector(
+						`[data-game-launch][data-target-id="${targetId}"]`,
+					);
+					if (launchButton instanceof HTMLButtonElement) {
+						loadEmbeddedGame(launchButton);
+					}
+
+					const fullscreenTarget = iframe.closest('.game-embed-shell');
+					if (!(fullscreenTarget instanceof HTMLElement)) return;
+
+					if (document.fullscreenElement === fullscreenTarget) {
+						await document.exitFullscreen?.();
+						return;
+					}
+
+					if (fullscreenTarget.requestFullscreen) {
+						await fullscreenTarget.requestFullscreen();
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
