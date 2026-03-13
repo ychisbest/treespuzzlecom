@@ -1,8 +1,74 @@
 ---
 import '../styles/global.css';
 
-const siteName = 'trees puzzle';
+const siteName = 'HER TREES';
 const siteUrl = 'https://treespuzzle.com';
+const firstPuzzleEmbedUrl = '/her-trees-first-puzzle/index.html';
+const pageTitle = 'HER TREES | Quiet Black-and-White Puzzle Series';
+const pageDescription =
+	'Discover HER TREES, Stone’s black-and-white puzzle series built on observation, object combination, and quiet surreal atmosphere.';
+
+const games = [
+	{
+		title: 'HER TREES : First Puzzle',
+		meta: 'HTML5 / Windows · About 1 hour · Free / support optional',
+		copy:
+			'The first entry establishes the series language: room-scale puzzles, hand-drawn black-and-white scenes, and solutions found by moving and combining objects.',
+	},
+	{
+		title: 'HER TREES : THE PUZZLE HOUSE',
+		meta: 'Steam · Released February 29, 2024 · About 1 hour',
+		copy:
+			'A compact surreal house where symbols, spatial logic, and quiet observation replace text-heavy explanation or mechanical complexity.',
+	},
+	{
+		title: 'HER TREES : PUZZLE DREAM',
+		meta: 'Steam / itch.io Demo · Released February 10, 2026 · 1.5 to 3 hours',
+		copy:
+			'The largest release so far, expanding the formula into a longer dream journey with 40+ puzzles while keeping the series calm and intuitive.',
+	},
+];
+
+const highlights = [
+	{
+		title: 'Move + combine puzzle logic',
+		copy:
+			'The core pleasure of HER TREES is not inventory management. It is the act of repositioning and combining visual elements until a hidden rule becomes readable.',
+	},
+	{
+		title: 'Non-verbal and low-friction',
+		copy:
+			'The series is designed to be read through images, shapes, and spatial relationships. It does not depend on heavy text, color recognition, or sound clues.',
+	},
+	{
+		title: 'Short, complete experiences',
+		copy:
+			'Most entries can be finished in one focused sitting, which gives the series a clean sense of closure without requiring a long-term time commitment.',
+	},
+];
+
+const faqs = [
+	{
+		question: 'What kind of game is HER TREES?',
+		answer:
+			'HER TREES is a hand-drawn puzzle series built around observation, object movement, and visual combination. It sits between room escape, point-and-click adventure, and surreal art puzzle.',
+	},
+	{
+		question: 'Do I need to play the games in order?',
+		answer:
+			'No. The later entries are designed so new players can start there directly, then return to the earlier game if they want the full series arc.',
+	},
+	{
+		question: 'Is HER TREES text-heavy or difficult to parse?',
+		answer:
+			'No. The series is deliberately low-text or non-verbal. Most progression comes from seeing relationships in the scene rather than reading instructions.',
+	},
+	{
+		question: 'Who is this series for?',
+		answer:
+			'It fits players who like short atmospheric puzzle games, gentle difficulty curves, and the feeling of understanding a rule through observation rather than exposition.',
+	},
+];
 ---
 
 <html lang="en">
@@ -10,21 +76,141 @@ const siteUrl = 'https://treespuzzle.com';
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{siteName}</title>
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<link rel="canonical" href={siteUrl} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={siteUrl} />
+		<meta property="og:site_name" content={siteName} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
 	</head>
-	<body class="bg-stone-50 text-stone-900">
-		<main class="mx-auto flex min-h-screen max-w-4xl flex-col justify-center gap-6 px-6 py-20">
-			<p class="text-sm font-medium uppercase tracking-[0.3em] text-stone-500">Astro Starter</p>
-			<h1 class="text-5xl font-semibold tracking-tight sm:text-6xl">{siteName}</h1>
-			<p class="max-w-2xl text-lg text-stone-600">
-				A fresh Astro project scaffolded from the official starter with Tailwind CSS and Sitemap configured.
-			</p>
-			<p class="text-base text-stone-700">
-				Domain:
-				<a class="underline decoration-stone-400 underline-offset-4" href={siteUrl}>{siteUrl}</a>
-			</p>
-		</main>
+	<body>
+		<div class="container-shell">
+			<header class="site-header">
+				<h1>HER TREES</h1>
+				<p>A quiet introduction to Stone’s surreal black-and-white puzzle series.</p>
+			</header>
+
+			<section class="hero-section">
+				<div class="feature-panel">
+					<div class="panel-header">
+						<h2>Play HER TREES : First Puzzle</h2>
+					</div>
+					<div class="feature-box game-embed-shell">
+						<button
+							type="button"
+							class="embed-launch"
+							data-game-launch
+							data-embed-src={firstPuzzleEmbedUrl}
+							data-target-id="her-trees-first-puzzle"
+							aria-controls="her-trees-first-puzzle"
+						>
+							<span class="embed-kicker">HER TREES : First Puzzle</span>
+							<strong>Play Now</strong>
+						</button>
+						<iframe
+							id="her-trees-first-puzzle"
+							class="game-embed"
+							title="HER TREES First Puzzle"
+							loading="lazy"
+							allow="fullscreen; autoplay"
+							referrerpolicy="strict-origin-when-cross-origin"
+						></iframe>
+					</div>
+				</div>
+			</section>
+
+			<section class="content-section" id="series">
+				<h2>Explore the HER TREES releases</h2>
+				<div class="games-grid">
+					{
+						games.map((game) => (
+							<article class="game-card">
+								<div class="game-thumbnail">
+									<span>{game.title}</span>
+								</div>
+								<p class="game-meta">{game.meta}</p>
+								<h3 class="game-title">{game.title}</h3>
+								<p class="game-desc">{game.copy}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="content-section">
+				<h2>Why the series stands out</h2>
+				<div class="insight-grid">
+					<div>
+						<div class="media-block media-wide">
+							<div class="media-caption">Visual puzzle language</div>
+						</div>
+						<p class="analysis-copy">
+							<strong>Observation before explanation.</strong> HER TREES treats the screen itself as
+							the ruleset. Shapes, placements, order, and adjacency matter more than dialogue. That
+							makes each solution feel like discovery rather than instruction-following.
+						</p>
+					</div>
+					<div>
+						{
+							highlights.map((item) => (
+								<article class="note-card">
+									<h3>{item.title}</h3>
+									<p>{item.copy}</p>
+								</article>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<section class="content-section">
+				<h2>Common questions</h2>
+				<div class="faq-list">
+					{
+						faqs.map((faq) => (
+							<details class="faq-item">
+								<summary>{faq.question}</summary>
+								<p>{faq.answer}</p>
+							</details>
+						))
+					}
+				</div>
+			</section>
+
+			<footer class="site-footer">
+				<p>&copy; 2026 treespuzzle.com. Independent informational homepage for the HER TREES keyword.</p>
+				<p>
+					<a href={siteUrl}>{siteUrl}</a>
+				</p>
+			</footer>
+		</div>
+		<script is:inline>
+			document.querySelectorAll('[data-game-launch]').forEach((button) => {
+				button.addEventListener('click', () => {
+					const targetId = button.getAttribute('data-target-id');
+					const src = button.getAttribute('data-embed-src');
+					if (!targetId || !src) return;
+
+					const iframe = document.getElementById(targetId);
+					if (!(iframe instanceof HTMLIFrameElement)) return;
+
+					if (iframe.dataset.loaded !== 'true') {
+						iframe.src = src;
+						iframe.dataset.loaded = 'true';
+					}
+
+					iframe.classList.add('is-visible');
+					button.classList.add('is-hidden');
+				});
+			});
+		</script>
 	</body>
 </html>
