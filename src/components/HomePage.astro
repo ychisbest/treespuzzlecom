@@ -1,11 +1,16 @@
 ---
-import { Image } from 'astro:assets';
-import '../styles/global.css';
-import firstPuzzleImage from '../assets/first_puzzle.png';
-import puzzleHouseImage from '../assets/puzzle_house.jpg';
-import puzzleDreamImage from '../assets/puzzle_dream.png';
-import animationVideo from '../assets/animation.webm';
-import { homeContent, languageLabels, localeOrder, type Locale } from '../data/home-content';
+import { Image } from "astro:assets";
+import "../styles/global.css";
+import firstPuzzleImage from "../assets/first_puzzle.png";
+import puzzleHouseImage from "../assets/puzzle_house.jpg";
+import puzzleDreamImage from "../assets/puzzle_dream.png";
+import animationVideo from "../assets/animation.webm";
+import {
+	homeContent,
+	languageLabels,
+	localeOrder,
+	type Locale,
+} from "../data/home-content";
 
 type Props = {
 	locale: Locale;
@@ -13,8 +18,8 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const siteUrl = 'https://treespuzzle.com';
-const firstPuzzleEmbedUrl = '/her-trees-first-puzzle/index.html';
+const siteUrl = "https://treespuzzle.com";
+const firstPuzzleEmbedUrl = "/her-trees-first-puzzle/index.html";
 
 const localizedGames = content.games.map((game, index) => ({
 	...game,
@@ -33,19 +38,29 @@ const languageLinks = localeOrder.map((item) => ({
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/apple-touch-icon.png"
+		/>
 		<link rel="manifest" href="/site.webmanifest" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#111111" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{content.pageTitle}</title>
 		<meta name="description" content={content.pageDescription} />
-		<link rel="canonical" href={`${siteUrl}${content.path === '/' ? '' : content.path}`} />
+		<link
+			rel="canonical"
+			href={`${siteUrl}${content.path === "/" ? "" : content.path}`}
+		/>
 		<meta name="robots" content="index, follow" />
 		<meta property="og:title" content={content.pageTitle} />
 		<meta property="og:description" content={content.pageDescription} />
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={`${siteUrl}${content.path === '/' ? '' : content.path}`} />
+		<meta
+			property="og:url"
+			content={`${siteUrl}${content.path === "/" ? "" : content.path}`}
+		/>
 		<meta property="og:site_name" content={content.siteName} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={content.pageTitle} />
@@ -54,22 +69,44 @@ const languageLinks = localeOrder.map((item) => ({
 			languageLinks.map((link) => (
 				<link
 					rel="alternate"
-					hreflang={link.locale === 'zh-cn' ? 'zh-CN' : link.locale}
-					href={`${siteUrl}${link.href === '/' ? '' : link.href}`}
+					hreflang={link.locale === "zh-cn" ? "zh-CN" : link.locale}
+					href={`${siteUrl}${link.href === "/" ? "" : link.href}`}
 				/>
 			))
 		}
 		<link rel="alternate" hreflang="x-default" href={siteUrl} />
+		<script type="text/javascript">
+			(function (c, l, a, r, i, t, y) {
+				c[a] =
+					c[a] ||
+					function () {
+						(c[a].q = c[a].q || []).push(arguments);
+					};
+				t = l.createElement(r);
+				t.async = 1;
+				t.src = "https://www.clarity.ms/tag/" + i;
+				y = l.getElementsByTagName(r)[0];
+				y.parentNode.insertBefore(t, y);
+			})(window, document, "clarity", "script", "vw15uoxtay");
+		</script>
 	</head>
 	<body>
 		<div class="container-shell">
 			<header class="site-header">
 				<div class="header-topline">
 					<h1>Her Trees Puzzle Game</h1>
-					<nav class="language-switcher" aria-label={content.languageSwitchLabel}>
+					<nav
+						class="language-switcher"
+						aria-label={content.languageSwitchLabel}
+					>
 						{
 							languageLinks.map((link) => (
-								<a href={link.href} class:list={{ active: link.locale === locale }}>
+								<a
+									href={link.href}
+									class:list={{
+										active: link.locale === locale,
+									}}
+								>
 									{link.label}
 								</a>
 							))
@@ -93,7 +130,9 @@ const languageLinks = localeOrder.map((item) => ({
 							data-target-id="her-trees-first-puzzle"
 							aria-controls="her-trees-first-puzzle"
 						>
-							<span class="embed-kicker">HER TREES : First Puzzle</span>
+							<span class="embed-kicker"
+								>HER TREES : First Puzzle</span
+							>
 							<strong>{content.playButton}</strong>
 						</button>
 						<iframe
@@ -127,7 +166,12 @@ const languageLinks = localeOrder.map((item) => ({
 						localizedGames.map((game) => (
 							<article class="game-card">
 								<div class="game-thumbnail">
-									<Image src={game.image} alt={game.alt} widths={[480]} sizes="(max-width: 760px) 100vw, 280px" />
+									<Image
+										src={game.image}
+										alt={game.alt}
+										widths={[480]}
+										sizes="(max-width: 760px) 100vw, 280px"
+									/>
 								</div>
 								<p class="game-meta">{game.meta}</p>
 								<h3 class="game-title">{game.title}</h3>
@@ -151,11 +195,11 @@ const languageLinks = localeOrder.map((item) => ({
 								loop
 								playsinline
 								preload="metadata"
-								aria-label={content.videoLabel}
-							/>
+								aria-label={content.videoLabel}></video>
 						</div>
 						<p class="analysis-copy">
-							<strong>{content.analysisStrong}</strong> {content.analysisBody}
+							<strong>{content.analysisStrong}</strong>
+							{content.analysisBody}
 						</p>
 					</div>
 					<div>
@@ -194,57 +238,62 @@ const languageLinks = localeOrder.map((item) => ({
 		</div>
 		<script is:inline>
 			const loadEmbeddedGame = (trigger) => {
-				const targetId = trigger.getAttribute('data-target-id');
-				const src = trigger.getAttribute('data-embed-src');
+				const targetId = trigger.getAttribute("data-target-id");
+				const src = trigger.getAttribute("data-embed-src");
 				if (!targetId || !src) return null;
 
 				const iframe = document.getElementById(targetId);
 				if (!(iframe instanceof HTMLIFrameElement)) return null;
 
-				if (iframe.dataset.loaded !== 'true') {
+				if (iframe.dataset.loaded !== "true") {
 					iframe.src = src;
-					iframe.dataset.loaded = 'true';
+					iframe.dataset.loaded = "true";
 				}
 
-				iframe.classList.add('is-visible');
-				trigger.classList.add('is-hidden');
+				iframe.classList.add("is-visible");
+				trigger.classList.add("is-hidden");
 				return iframe;
 			};
 
-			document.querySelectorAll('[data-game-launch]').forEach((button) => {
-				button.addEventListener('click', () => {
-					loadEmbeddedGame(button);
+			document
+				.querySelectorAll("[data-game-launch]")
+				.forEach((button) => {
+					button.addEventListener("click", () => {
+						loadEmbeddedGame(button);
+					});
 				});
-			});
 
-			document.querySelectorAll('[data-game-fullscreen]').forEach((button) => {
-				button.addEventListener('click', async () => {
-					const targetId = button.getAttribute('data-target-id');
-					if (!targetId) return;
+			document
+				.querySelectorAll("[data-game-fullscreen]")
+				.forEach((button) => {
+					button.addEventListener("click", async () => {
+						const targetId = button.getAttribute("data-target-id");
+						if (!targetId) return;
 
-					const iframe = document.getElementById(targetId);
-					if (!(iframe instanceof HTMLIFrameElement)) return;
+						const iframe = document.getElementById(targetId);
+						if (!(iframe instanceof HTMLIFrameElement)) return;
 
-					const launchButton = document.querySelector(
-						`[data-game-launch][data-target-id="${targetId}"]`,
-					);
-					if (launchButton instanceof HTMLButtonElement) {
-						loadEmbeddedGame(launchButton);
-					}
+						const launchButton = document.querySelector(
+							`[data-game-launch][data-target-id="${targetId}"]`,
+						);
+						if (launchButton instanceof HTMLButtonElement) {
+							loadEmbeddedGame(launchButton);
+						}
 
-					const fullscreenTarget = iframe.closest('.game-embed-shell');
-					if (!(fullscreenTarget instanceof HTMLElement)) return;
+						const fullscreenTarget =
+							iframe.closest(".game-embed-shell");
+						if (!(fullscreenTarget instanceof HTMLElement)) return;
 
-					if (document.fullscreenElement === fullscreenTarget) {
-						await document.exitFullscreen?.();
-						return;
-					}
+						if (document.fullscreenElement === fullscreenTarget) {
+							await document.exitFullscreen?.();
+							return;
+						}
 
-					if (fullscreenTarget.requestFullscreen) {
-						await fullscreenTarget.requestFullscreen();
-					}
+						if (fullscreenTarget.requestFullscreen) {
+							await fullscreenTarget.requestFullscreen();
+						}
+					});
 				});
-			});
 		</script>
 	</body>
 </html>
