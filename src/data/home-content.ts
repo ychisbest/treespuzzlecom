@@ -48,7 +48,7 @@ export const languageLabels: Record<Locale, string> = {
 export const homeContent: Record<Locale, HomeContent> = {
 	'zh-cn': {
 		lang: 'zh-CN',
-		path: '/',
+		path: '/zh-cn/',
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Game',
 		pageDescription:
@@ -124,7 +124,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 	},
 	en: {
 		lang: 'en',
-		path: '/en/',
+		path: '/',
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Game',
 		pageDescription:
