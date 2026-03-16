@@ -1,0 +1,105 @@
+---
+import "../styles/global.css";
+import {
+	homeContent,
+	languageLabels,
+	localeOrder,
+	type Locale,
+} from "../data/home-content";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const siteUrl = "https://treespuzzle.com";
+const guideEmbedUrl = "https://www.youtube.com/embed/yzNEcdAW-cU";
+
+const languageLinks = localeOrder.map((item) => ({
+	locale: item,
+	label: languageLabels[item],
+	href: homeContent[item].guidePath,
+}));
+---
+
+<html lang={content.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/apple-touch-icon.png"
+		/>
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#111111" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{content.guidePageTitle}</title>
+		<meta name="description" content={content.guidePageDescription} />
+		<link rel="canonical" href={`${siteUrl}${content.guidePath}`} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={content.guidePageTitle} />
+		<meta property="og:description" content={content.guidePageDescription} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={`${siteUrl}${content.guidePath}`} />
+		<meta property="og:site_name" content={content.siteName} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={content.guidePageTitle} />
+		<meta name="twitter:description" content={content.guidePageDescription} />
+		{
+			languageLinks.map((link) => (
+				<link
+					rel="alternate"
+					hreflang={link.locale === "zh-cn" ? "zh-CN" : link.locale}
+					href={`${siteUrl}${link.href}`}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={`${siteUrl}/guide/`} />
+	</head>
+	<body>
+		<div class="container-shell guide-page">
+			<header class="guide-header">
+				<div>
+					<h1>{content.guidePageTitle}</h1>
+					<p>{content.guidePageDescription}</p>
+				</div>
+				<nav class="language-switcher" aria-label={content.languageSwitchLabel}>
+					{
+						languageLinks.map((link) => (
+							<a
+								href={link.href}
+								class:list={{
+									active: link.locale === locale,
+								}}
+							>
+								{link.label}
+							</a>
+						))
+					}
+				</nav>
+			</header>
+
+			<section class="guide-frame-shell">
+				<iframe
+					class="guide-frame"
+					src={guideEmbedUrl}
+					title={content.guideIframeTitle}
+					loading="lazy"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin"
+					allowfullscreen
+				></iframe>
+			</section>
+
+			<footer class="site-footer">
+				<p>
+					<a href={content.path}>{content.backHomeLabel}</a>
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

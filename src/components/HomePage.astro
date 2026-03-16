@@ -146,15 +146,25 @@ const languageLinks = localeOrder.map((item) => ({
 					</div>
 					<div class="game-toolbar">
 						<p class="game-intro">{content.gameIntro}</p>
-						<button
-							type="button"
-							class="fullscreen-button"
-							data-game-fullscreen
-							data-target-id="her-trees-first-puzzle"
-							aria-controls="her-trees-first-puzzle"
-						>
-							{content.fullscreenButton}
-						</button>
+						<div class="game-actions">
+							<a
+								href={content.guidePath}
+								class="guide-link"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								{content.guideButton}
+							</a>
+							<button
+								type="button"
+								class="fullscreen-button"
+								data-game-fullscreen
+								data-target-id="her-trees-first-puzzle"
+								aria-controls="her-trees-first-puzzle"
+							>
+								{content.fullscreenButton}
+							</button>
+						</div>
 					</div>
 				</div>
 			</section>

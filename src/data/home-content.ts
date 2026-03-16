@@ -3,15 +3,21 @@ export type Locale = 'zh-cn' | 'en' | 'ja' | 'vi';
 export type HomeContent = {
 	lang: string;
 	path: string;
+	guidePath: string;
 	siteName: string;
 	pageTitle: string;
 	pageDescription: string;
+	guidePageTitle: string;
+	guidePageDescription: string;
 	headerIntro: string;
 	playHeading: string;
 	playButton: string;
+	guideButton: string;
 	iframeTitle: string;
+	guideIframeTitle: string;
 	gameIntro: string;
 	fullscreenButton: string;
+	backHomeLabel: string;
 	seriesHeading: string;
 	whyHeading: string;
 	videoLabel: string;
@@ -49,17 +55,23 @@ export const homeContent: Record<Locale, HomeContent> = {
 	'zh-cn': {
 		lang: 'zh-CN',
 		path: '/zh-cn/',
+		guidePath: '/zh-cn/guide/',
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Game',
 		pageDescription:
 			'了解 HER TREES 这个由 Stone 创作的黑白手绘解谜系列，体验以观察、物件组合与安静超现实氛围为核心的解谜过程。',
+		guidePageTitle: 'HER TREES 攻略视频',
+		guidePageDescription: '查看 HER TREES 攻略视频，页面内直接播放 YouTube 攻略内容。',
 		headerIntro:
 			'是一款独特的解谜游戏系列，玩家通过移动和组合物品来解谜。揭开这间奇特房间的奥秘。',
 		playHeading: '在线游玩 HER TREES : First Puzzle',
 		playButton: '开始游戏',
+		guideButton: '点击查看攻略',
 		iframeTitle: 'HER TREES : First Puzzle 在线试玩',
+		guideIframeTitle: 'HER TREES 攻略视频',
 		gameIntro: '玩法很简单：用鼠标拖动物件并观察它们之间的关系，然后在右侧点击对应密码来解开谜题。',
 		fullscreenButton: '全屏游玩',
+		backHomeLabel: '返回首页',
 		seriesHeading: '系列作品一览',
 		whyHeading: '这个系列为什么值得玩',
 		videoLabel: 'HER TREES 解谜动画演示',
@@ -125,18 +137,24 @@ export const homeContent: Record<Locale, HomeContent> = {
 	en: {
 		lang: 'en',
 		path: '/',
+		guidePath: '/guide/',
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Game',
 		pageDescription:
 			'Explore HER TREES, Stone’s black-and-white hand-drawn puzzle series built around observation, object combinations, and quiet surreal atmosphere.',
+		guidePageTitle: 'HER TREES Guide Video',
+		guidePageDescription: 'Watch a HER TREES guide video embedded directly on this page.',
 		headerIntro:
 			'An unusual puzzle game series where you solve mysteries by moving and combining objects inside strange, hand-drawn rooms.',
 		playHeading: 'Play HER TREES : First Puzzle Online',
 		playButton: 'Start Game',
+		guideButton: 'View Guide',
 		iframeTitle: 'HER TREES : First Puzzle online demo',
+		guideIframeTitle: 'HER TREES guide video',
 		gameIntro:
 			'The idea is simple: drag objects with your mouse, study how they relate to each other, and click the matching code on the right to solve the room.',
 		fullscreenButton: 'Fullscreen',
+		backHomeLabel: 'Back to Home',
 		seriesHeading: 'Games In The Series',
 		whyHeading: 'Why This Series Is Worth Playing',
 		videoLabel: 'HER TREES puzzle animation demo',
@@ -202,18 +220,24 @@ export const homeContent: Record<Locale, HomeContent> = {
 	ja: {
 		lang: 'ja',
 		path: '/ja/',
+		guidePath: '/ja/guide/',
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Game',
 		pageDescription:
 			'Stone による白黒手描きパズルシリーズ HER TREES を紹介。観察、オブジェクトの組み合わせ、静かな幻想性を中心にした体験を楽しめます。',
+		guidePageTitle: 'HER TREES 攻略動画',
+		guidePageDescription: 'YouTube の HER TREES 攻略動画をこのページ内で視聴できます。',
 		headerIntro:
 			'物を動かして組み合わせながら謎を解いていく、独特なパズルゲームシリーズです。不思議な部屋に隠された仕組みを見つけてください。',
 		playHeading: 'HER TREES : First Puzzle をブラウザで遊ぶ',
 		playButton: 'ゲーム開始',
+		guideButton: '攻略を見る',
 		iframeTitle: 'HER TREES : First Puzzle オンライン体験版',
+		guideIframeTitle: 'HER TREES 攻略動画',
 		gameIntro:
 			'遊び方はシンプルです。マウスで物を動かし、関係性を観察しながら、右側の対応するコードをクリックして謎を解きます。',
 		fullscreenButton: '全画面で遊ぶ',
+		backHomeLabel: 'ホームに戻る',
 		seriesHeading: 'シリーズ作品一覧',
 		whyHeading: 'このシリーズを遊ぶ価値',
 		videoLabel: 'HER TREES パズルアニメーション',
@@ -279,18 +303,24 @@ export const homeContent: Record<Locale, HomeContent> = {
 	vi: {
 		lang: 'vi',
 		path: '/vi/',
+		guidePath: '/vi/guide/',
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Game',
 		pageDescription:
 			'Khám phá HER TREES, loạt game giải đố vẽ tay đen trắng của Stone, tập trung vào quan sát, kết hợp đồ vật và bầu không khí siêu thực yên tĩnh.',
+		guidePageTitle: 'Video huong dan HER TREES',
+		guidePageDescription: 'Xem video huong dan HER TREES duoc nhung truc tiep tren trang nay.',
 		headerIntro:
 			'Đây là một series game giải đố khác lạ, nơi bạn giải mật mã bằng cách di chuyển và kết hợp đồ vật trong những căn phòng kỳ quái.',
 		playHeading: 'Chơi HER TREES : First Puzzle Trực Tuyến',
 		playButton: 'Bắt đầu chơi',
+		guideButton: 'Xem huong dan',
 		iframeTitle: 'HER TREES : First Puzzle bản chơi trực tuyến',
+		guideIframeTitle: 'Video huong dan HER TREES',
 		gameIntro:
 			'Cách chơi rất đơn giản: kéo các đồ vật bằng chuột, quan sát mối liên hệ giữa chúng, rồi bấm vào mã tương ứng ở bên phải để giải câu đố.',
 		fullscreenButton: 'Toàn màn hình',
+		backHomeLabel: 'Quay lai trang chu',
 		seriesHeading: 'Các game trong series',
 		whyHeading: 'Vì sao series này đáng chơi',
 		videoLabel: 'Hoạt ảnh giải đố HER TREES',
