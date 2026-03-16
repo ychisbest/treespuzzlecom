@@ -18,11 +18,38 @@ export type HomeContent = {
 	gameIntro: string;
 	fullscreenButton: string;
 	backHomeLabel: string;
+	introHeading: string;
+	introParagraphs: string[];
+	positioningHeading: string;
+	positioningPoints: string[];
+	startHeading: string;
+	startItems: Array<{
+		title: string;
+		copy: string;
+	}>;
 	seriesHeading: string;
+	compareHeading: string;
+	compareColumns: {
+		game: string;
+		platform: string;
+		playtime: string;
+		access: string;
+		bestFor: string;
+	};
+	comparisonRows: Array<{
+		game: string;
+		platform: string;
+		playtime: string;
+		access: string;
+		bestFor: string;
+	}>;
 	whyHeading: string;
+	sellingPointsHeading: string;
 	videoLabel: string;
 	analysisStrong: string;
 	analysisBody: string;
+	audienceHeading: string;
+	audienceItems: string[];
 	faqHeading: string;
 	footerCopy: string;
 	languageSwitchLabel: string;
@@ -72,12 +99,80 @@ export const homeContent: Record<Locale, HomeContent> = {
 		gameIntro: '玩法很简单：用鼠标拖动物件并观察它们之间的关系，然后在右侧点击对应密码来解开谜题。',
 		fullscreenButton: '全屏游玩',
 		backHomeLabel: '返回首页',
+		introHeading: 'HER TREES 是什么',
+		introParagraphs: [
+			'HER TREES 是独立开发者 Stone 创作的解谜游戏系列，核心玩法不是传统找物或复杂道具管理，而是通过移动、摆放与组合画面中的对象来推动谜题。',
+			'整个系列以黑白手绘、低文本或无文本表达、梦境与超现实氛围为主要特征，更强调观察、空间关系与直觉理解，而不是繁琐计算或大量记笔记。',
+		],
+		positioningHeading: '这个系列的体验定位',
+		positioningPoints: [
+			'观察驱动的点按式谜题体验，重视图形关系和空间联动。',
+			'房间与场景本身就是谜题结构的一部分，答案往往藏在摆放顺序与邻接关系里。',
+			'低门槛但有顿悟感，不需要复杂数值推导，也不靠长篇文本说明。',
+			'整体更像一本安静的黑白绘本，被做成了可以亲手操作的独立解谜作品。',
+		],
+		startHeading: '新玩家从哪一部开始',
+		startItems: [
+			{
+				title: '想先免费体验系列风格',
+				copy: '从 HER TREES : First Puzzle 开始最合适。它是系列起点，时长短、上手快，也最能直接感受到“移动 + 组合”式解谜的核心玩法。',
+			},
+			{
+				title: '想直接玩完成度更高的作品',
+				copy: '可以从 HER TREES : THE PUZZLE HOUSE 或 HER TREES : PUZZLE DREAM 开始。第二作和第三作都适合新玩家直接进入，不必强制按顺序补前作。',
+			},
+			{
+				title: '想先看体量和代表性',
+				copy: 'THE PUZZLE HOUSE 更像系列代表作，PUZZLE DREAM 则是目前内容量最大、谜题数量最多的一部，并且还提供 Demo 入口。',
+			},
+		],
 		seriesHeading: '系列作品一览',
+		compareHeading: '三部作品快速对比',
+		compareColumns: {
+			game: '作品',
+			platform: '平台',
+			playtime: '时长',
+			access: '入口特点',
+			bestFor: '适合谁先玩',
+		},
+		comparisonRows: [
+			{
+				game: 'HER TREES : First Puzzle',
+				platform: 'HTML5 / Windows',
+				playtime: '约 1 小时',
+				access: '免费游玩，可直接在浏览器体验',
+				bestFor: '想零门槛入坑、快速感受系列气质的玩家',
+			},
+			{
+				game: 'HER TREES : THE PUZZLE HOUSE',
+				platform: 'Steam',
+				playtime: '约 1 小时',
+				access: '正式作品，提供提示与答案',
+				bestFor: '想先玩系列代表作、偏好完整短篇体验的玩家',
+			},
+			{
+				game: 'HER TREES : PUZZLE DREAM',
+				platform: 'Steam / itch.io Demo',
+				playtime: '1.5 到 3 小时',
+				access: '40+ 谜题，正式版加 Demo 双入口',
+				bestFor: '想要更完整内容量，或想先试玩 Demo 再决定的玩家',
+			},
+		],
 		whyHeading: '这个系列为什么值得玩',
+		sellingPointsHeading: '核心卖点',
 		videoLabel: 'HER TREES 解谜动画演示',
 		analysisStrong: '先观察，再理解。',
 		analysisBody:
 			'HER TREES 把整个画面本身当作规则的一部分。形状、摆放位置、顺序和相邻关系往往比对白更重要，因此每次解开谜题更像是发现，而不是照着说明执行。',
+		audienceHeading: '这系列适合谁',
+		audienceItems: [
+			'喜欢观察、图形关系、空间联动谜题的玩家。',
+			'喜欢短流程、完成感强、一次可以专注打完的独立游戏玩家。',
+			'偏好黑白手绘、梦境、超现实、安静氛围的用户。',
+			'不喜欢大段文字、复杂教程或说明书式引导的玩家。',
+			'希望玩到不依赖颜色识别和声音机制的解谜作品的用户。',
+			'喜欢 Rusty Lake、Cube Escape、房间谜题气质，但希望整体表达更安静、更抽象的玩家。',
+		],
 		faqHeading: '常见问题',
 		footerCopy: '独立整理的 HER TREES 系列信息与试玩首页。',
 		games: [
@@ -112,6 +207,18 @@ export const homeContent: Record<Locale, HomeContent> = {
 			{
 				title: '短流程但完整',
 				copy: '多数作品都可以在一次专注游玩中完成，既有完整闭环，又不需要投入很长时间。',
+			},
+			{
+				title: '不依赖复杂计算或记笔记',
+				copy: '公开信息多次强调，系列更看重观察和直觉，不要求繁琐计算，也不是那种必须边玩边做表格的谜题设计。',
+			},
+			{
+				title: '非语言化表达，跨语言更友好',
+				copy: '第二作和第三作明确强调 non-verbal，第一作也带有 textless 属性，因此即使不靠大量文字说明，仍能完整传达玩法与氛围。',
+			},
+			{
+				title: '可访问性优势清晰',
+				copy: '公开资料显示，系列不依赖颜色识别和声音解谜；第一作还标注了色盲友好、单按钮、无文本等特征。',
 			},
 		],
 		faqs: [
@@ -155,12 +262,80 @@ export const homeContent: Record<Locale, HomeContent> = {
 			'The idea is simple: drag objects with your mouse, study how they relate to each other, and click the matching code on the right to solve the room.',
 		fullscreenButton: 'Fullscreen',
 		backHomeLabel: 'Back to Home',
+		introHeading: 'What HER TREES Is',
+		introParagraphs: [
+			'HER TREES is a puzzle game series by the independent creator Stone. Its core interaction is not traditional hidden object play or heavy inventory management, but solving rooms by moving, arranging, and combining the objects already inside the scene.',
+			'Across the series, the identity stays consistent: black-and-white hand-drawn art, low-text or textless presentation, dreamlike surreal atmosphere, and puzzle design built around observation, spatial relationships, and intuition instead of complex calculation.',
+		],
+		positioningHeading: 'How The Series Feels To Play',
+		positioningPoints: [
+			'Observation-driven point-and-click puzzle design centered on shapes, symbols, and spatial relationships.',
+			'Rooms and scenes function as puzzle structures themselves, with answers hidden in placement, order, and adjacency.',
+			'Low friction but still capable of real aha moments, without requiring difficult math or pages of notes.',
+			'The overall tone feels closer to an interactive black-and-white picture book than a noisy conventional puzzle game.',
+		],
+		startHeading: 'Where New Players Should Start',
+		startItems: [
+			{
+				title: 'If you want a free first taste',
+				copy: 'Start with HER TREES : First Puzzle. It is the series entry point, short enough to finish in one sitting, and the clearest introduction to the move-and-combine puzzle logic.',
+			},
+			{
+				title: 'If you want a more complete standalone game',
+				copy: 'Start with HER TREES : THE PUZZLE HOUSE or HER TREES : PUZZLE DREAM. Both later entries are described as approachable even if you have never played the earlier games.',
+			},
+			{
+				title: 'If you care most about scale',
+				copy: 'THE PUZZLE HOUSE works well as a representative short-form entry, while PUZZLE DREAM is the largest game so far and also offers a demo path for cautious newcomers.',
+			},
+		],
 		seriesHeading: 'Games In The Series',
+		compareHeading: 'Quick Comparison Of The Three Games',
+		compareColumns: {
+			game: 'Game',
+			platform: 'Platform',
+			playtime: 'Playtime',
+			access: 'Access',
+			bestFor: 'Best First For',
+		},
+		comparisonRows: [
+			{
+				game: 'HER TREES : First Puzzle',
+				platform: 'HTML5 / Windows',
+				playtime: 'About 1 hour',
+				access: 'Free to play and playable in the browser',
+				bestFor: 'Players who want the easiest possible entry point',
+			},
+			{
+				game: 'HER TREES : THE PUZZLE HOUSE',
+				platform: 'Steam',
+				playtime: 'About 1 hour',
+				access: 'Full release with hints and answers',
+				bestFor: 'Players who want the most representative compact game',
+			},
+			{
+				game: 'HER TREES : PUZZLE DREAM',
+				platform: 'Steam / itch.io Demo',
+				playtime: '1.5 to 3 hours',
+				access: 'Largest entry so far with 40+ puzzles and a demo',
+				bestFor: 'Players who want the fullest version of the formula',
+			},
+		],
 		whyHeading: 'Why This Series Is Worth Playing',
+		sellingPointsHeading: 'Core Strengths',
 		videoLabel: 'HER TREES puzzle animation demo',
 		analysisStrong: 'Observe first, understand after.',
 		analysisBody:
 			'HER TREES treats the whole screen as part of the rule set. Shapes, placement, sequence, and adjacency matter more than dialogue, so each solution feels discovered rather than instructed.',
+		audienceHeading: 'Who This Series Fits Best',
+		audienceItems: [
+			'Players who enjoy observation, pattern recognition, and spatial puzzle logic.',
+			'People looking for short indie games with a strong sense of completion.',
+			'Anyone drawn to black-and-white, dreamlike, surreal, and quiet visual design.',
+			'Players who do not want long tutorials or walls of text.',
+			'People seeking puzzle games that do not rely on color recognition or audio clues.',
+			'Fans of Rusty Lake, Cube Escape, or room-puzzle games who want something calmer and more abstract.',
+		],
 		faqHeading: 'FAQ',
 		footerCopy: 'Independent landing page and playable overview for the HER TREES series.',
 		games: [
@@ -195,6 +370,18 @@ export const homeContent: Record<Locale, HomeContent> = {
 			{
 				title: 'Short, but complete',
 				copy: 'Most entries can be finished in one focused sitting, giving you a full arc without asking for a huge time commitment.',
+			},
+			{
+				title: 'Built around intuition, not calculation',
+				copy: 'Public descriptions repeatedly frame the series as observation-first puzzle design, so it is not the kind of game that expects heavy arithmetic or constant note taking.',
+			},
+			{
+				title: 'Non-verbal by design',
+				copy: 'Later entries explicitly describe themselves as non-verbal, and the first game also presents itself as text-light, which makes the series easier to approach across languages.',
+			},
+			{
+				title: 'Clear accessibility advantages',
+				copy: 'Publicly listed features note that the games do not rely on color recognition or audio-based puzzle solving, and the first game is marked as color-blind friendly, one-button, and textless.',
 			},
 		],
 		faqs: [
@@ -238,12 +425,80 @@ export const homeContent: Record<Locale, HomeContent> = {
 			'遊び方はシンプルです。マウスで物を動かし、関係性を観察しながら、右側の対応するコードをクリックして謎を解きます。',
 		fullscreenButton: '全画面で遊ぶ',
 		backHomeLabel: 'ホームに戻る',
+		introHeading: 'HER TREES とは',
+		introParagraphs: [
+			'HER TREES はインディー開発者 Stone によるパズルゲームシリーズです。一般的なアイテム収集や複雑な管理よりも、画面内のオブジェクトを動かし、並べ、組み合わせることで謎を解いていきます。',
+			'シリーズ全体を通して、白黒の手描き表現、少ないテキスト、夢のようで少し超現実的な雰囲気、そして計算より観察と直感を重視する設計が一貫しています。',
+		],
+		positioningHeading: 'このシリーズの体験の特徴',
+		positioningPoints: [
+			'図形、記号、空間関係を読む観察主導のポイント＆クリック型パズルです。',
+			'部屋や場面そのものが謎の構造であり、配置や順番、隣接関係が答えにつながります。',
+			'難解な計算や長いメモを求めず、それでもしっかりしたひらめきの瞬間があります。',
+			'全体の印象は、騒がしいゲームというより操作できる白黒の絵本に近い作品です。',
+		],
+		startHeading: '新規プレイヤーはどこから始めるべきか',
+		startItems: [
+			{
+				title: '無料で雰囲気を試したいなら',
+				copy: 'HER TREES : First Puzzle から始めるのが最適です。シリーズの出発点であり、短時間で遊べて、移動と組み合わせを軸にした解き方を最も分かりやすく体験できます。',
+			},
+			{
+				title: '完成度の高い単独作品から入りたいなら',
+				copy: 'HER TREES : THE PUZZLE HOUSE か HER TREES : PUZZLE DREAM がおすすめです。どちらも前作未経験でも入りやすい作品として案内されています。',
+			},
+			{
+				title: 'ボリューム重視なら',
+				copy: 'THE PUZZLE HOUSE は代表的な短編として優秀で、PUZZLE DREAM は現時点で最大規模の作品です。しかも Demo から試すこともできます。',
+			},
+		],
 		seriesHeading: 'シリーズ作品一覧',
+		compareHeading: '3作品の比較',
+		compareColumns: {
+			game: '作品名',
+			platform: 'プラットフォーム',
+			playtime: 'プレイ時間',
+			access: '入口の特徴',
+			bestFor: '最初に向く人',
+		},
+		comparisonRows: [
+			{
+				game: 'HER TREES : First Puzzle',
+				platform: 'HTML5 / Windows',
+				playtime: '約1時間',
+				access: '無料でブラウザから体験可能',
+				bestFor: '最も気軽にシリーズへ入りたい人',
+			},
+			{
+				game: 'HER TREES : THE PUZZLE HOUSE',
+				platform: 'Steam',
+				playtime: '約1時間',
+				access: 'ヒントと答えのある正式作品',
+				bestFor: '代表的な短編を先に遊びたい人',
+			},
+			{
+				game: 'HER TREES : PUZZLE DREAM',
+				platform: 'Steam / itch.io Demo',
+				playtime: '1.5〜3時間',
+				access: '40以上の謎と Demo の両方がある',
+				bestFor: '最も内容量の多い作品から入りたい人',
+			},
+		],
 		whyHeading: 'このシリーズを遊ぶ価値',
+		sellingPointsHeading: '主な魅力',
 		videoLabel: 'HER TREES パズルアニメーション',
 		analysisStrong: 'まず観察し、そのあと理解する。',
 		analysisBody:
 			'HER TREES では画面そのものがルールの一部です。形、配置、順番、隣り合い方が会話より重要で、答えは説明されるものではなく発見するものとして感じられます。',
+		audienceHeading: 'このシリーズが向いている人',
+		audienceItems: [
+			'観察、図形関係、空間的なつながりを読むパズルが好きな人。',
+			'短時間で遊べて満足感の高いインディー作品を探している人。',
+			'白黒の手描き、夢、超現実、静かな雰囲気に惹かれる人。',
+			'長い説明文や過剰なチュートリアルを好まない人。',
+			'色や音に依存しないパズル作品を求めている人。',
+			'Rusty Lake や Cube Escape の空気感が好きで、さらに静かで抽象的な表現を味わいたい人。',
+		],
 		faqHeading: 'よくある質問',
 		footerCopy: 'HER TREES シリーズを紹介する独立制作の情報ページ兼プレイ導線です。',
 		games: [
@@ -278,6 +533,18 @@ export const homeContent: Record<Locale, HomeContent> = {
 			{
 				title: '短いが、一本として完結している',
 				copy: '多くの作品は集中した1回のプレイで最後まで進められ、短時間でもしっかりした満足感があります。',
+			},
+			{
+				title: '複雑な計算や大量のメモが要らない',
+				copy: '公開情報でも繰り返し、観察と直感を重視するシリーズとして説明されており、数式や表作りのような負荷は中心ではありません。',
+			},
+			{
+				title: '非言語表現で入りやすい',
+				copy: '後続作品は non-verbal と明記されており、第1作もテキスト依存が少ないため、言語の壁を感じにくい構成です。',
+			},
+			{
+				title: 'アクセシビリティ面でも強みがある',
+				copy: '色の識別や音の手掛かりに頼らず、第1作には色覚対応、単ボタン、無テキストといった特性も公開されています。',
 			},
 		],
 		faqs: [
@@ -321,12 +588,80 @@ export const homeContent: Record<Locale, HomeContent> = {
 			'Cách chơi rất đơn giản: kéo các đồ vật bằng chuột, quan sát mối liên hệ giữa chúng, rồi bấm vào mã tương ứng ở bên phải để giải câu đố.',
 		fullscreenButton: 'Toàn màn hình',
 		backHomeLabel: 'Quay lai trang chu',
+		introHeading: 'HER TREES La Gi',
+		introParagraphs: [
+			'HER TREES là series game giải đố của nhà phát triển độc lập Stone. Thay vì tập trung vào tìm đồ vật hay quản lý vật phẩm phức tạp, game để bạn giải câu đố bằng cách di chuyển, sắp xếp và kết hợp các đối tượng ngay trong khung cảnh.',
+			'Toàn bộ series giữ một bản sắc khá rõ: hình vẽ tay đen trắng, rất ít chữ hoặc gần như không chữ, bầu không khí như mơ và hơi siêu thực, cùng kiểu thiết kế đặt trọng tâm vào quan sát, quan hệ không gian và trực giác hơn là tính toán rắc rối.',
+		],
+		positioningHeading: 'Cảm Giác Khi Chơi Series Nay',
+		positioningPoints: [
+			'Giải đố point-and-click thiên về quan sát hình dạng, ký hiệu và quan hệ không gian.',
+			'Chính căn phòng và bố cục khung cảnh là một phần của cấu trúc câu đố, nơi đáp án nằm trong vị trí, thứ tự và sự kề nhau.',
+			'Dễ tiếp cận nhưng vẫn tạo được khoảnh khắc a-ha, không cần toán khó hay ghi chú dài dòng.',
+			'Tổng thể giống một cuốn sách tranh đen trắng có thể tương tác hơn là một game giải đố ồn ào thông thường.',
+		],
+		startHeading: 'Người Moi Nen Bat Dau Tu Dau',
+		startItems: [
+			{
+				title: 'Neu ban muon thu mien phi truoc',
+				copy: 'Hay bat dau voi HER TREES : First Puzzle. Day la diem vao series, ngan gon, de hoan thanh trong mot lan choi va the hien ro nhat logic giai do dua tren di chuyen va ket hop.',
+			},
+			{
+				title: 'Neu ban muon choi mot ban hoan chinh hon ngay lap tuc',
+				copy: 'Ban co the bat dau voi HER TREES : THE PUZZLE HOUSE hoac HER TREES : PUZZLE DREAM. Ca hai deu phu hop voi nguoi moi ngay ca khi chua choi phan truoc.',
+			},
+			{
+				title: 'Neu ban quan tam den do lon noi dung',
+				copy: 'THE PUZZLE HOUSE hop voi vai tro tac pham dai dien gon gang, con PUZZLE DREAM la phan co quy mo lon nhat hien tai va con co ca demo de thu truoc.',
+			},
+		],
 		seriesHeading: 'Các game trong series',
+		compareHeading: 'So Sanh Nhanh Ba Tua Game',
+		compareColumns: {
+			game: 'Game',
+			platform: 'Nen tang',
+			playtime: 'Thoi luong',
+			access: 'Loi vao',
+			bestFor: 'Hop voi ai',
+		},
+		comparisonRows: [
+			{
+				game: 'HER TREES : First Puzzle',
+				platform: 'HTML5 / Windows',
+				playtime: 'Khoảng 1 giờ',
+				access: 'Miễn phí và có thể chơi ngay trên trình duyệt',
+				bestFor: 'Người muốn vào series với rào cản thấp nhất',
+			},
+			{
+				game: 'HER TREES : THE PUZZLE HOUSE',
+				platform: 'Steam',
+				playtime: 'Khoảng 1 giờ',
+				access: 'Bản phát hành đầy đủ có gợi ý và đáp án',
+				bestFor: 'Người muốn chơi bản tiêu biểu và gọn gàng nhất trước',
+			},
+			{
+				game: 'HER TREES : PUZZLE DREAM',
+				platform: 'Steam / itch.io Demo',
+				playtime: '1.5 đến 3 giờ',
+				access: 'Phần lớn nhất hiện tại với hơn 40 câu đố và có demo',
+				bestFor: 'Người muốn trải nghiệm phiên bản đầy đặn nhất',
+			},
+		],
 		whyHeading: 'Vì sao series này đáng chơi',
+		sellingPointsHeading: 'Diem Manh Cot Loi',
 		videoLabel: 'Hoạt ảnh giải đố HER TREES',
 		analysisStrong: 'Quan sát trước, hiểu sau.',
 		analysisBody:
 			'HER TREES biến toàn bộ khung hình thành một phần của luật chơi. Hình dạng, vị trí, thứ tự và sự kề nhau quan trọng hơn lời thoại, nên mỗi lời giải giống như một khám phá hơn là làm theo hướng dẫn.',
+		audienceHeading: 'Series Nay Hop Nhat Voi Ai',
+		audienceItems: [
+			'Người thích quan sát, nhận diện quy luật hình ảnh và logic không gian.',
+			'Người tìm game indie ngắn nhưng cho cảm giác hoàn thành rõ ràng.',
+			'Người thích phong cách đen trắng, như mơ, siêu thực và yên tĩnh.',
+			'Người không muốn đọc hướng dẫn dài hoặc tutorial quá nhiều.',
+			'Người cần game giải đố không phụ thuộc vào phân biệt màu sắc hay âm thanh.',
+			'Fan của Rusty Lake, Cube Escape hoặc room puzzle nhưng muốn một trải nghiệm trầm hơn và trừu tượng hơn.',
+		],
 		faqHeading: 'Câu hỏi thường gặp',
 		footerCopy: 'Trang giới thiệu độc lập và lối vào bản chơi thử của series HER TREES.',
 		games: [
@@ -361,6 +696,18 @@ export const homeContent: Record<Locale, HomeContent> = {
 			{
 				title: 'Ngắn nhưng trọn vẹn',
 				copy: 'Phần lớn các game có thể hoàn thành trong một lần chơi tập trung, cho cảm giác khép kín đầy đủ mà không đòi hỏi quá nhiều thời gian.',
+			},
+			{
+				title: 'Dua vao truc giac hon la tinh toan',
+				copy: 'Mo ta cong khai cua series nhan manh quan sat va truc giac, vi vay day khong phai dang game bat ban phai lam toan hay ghi chu lien tuc.',
+			},
+			{
+				title: 'Thiet ke phi ngon ngu',
+				copy: 'Cac phan sau duoc mo ta ro rang la non-verbal, con phan dau cung rat it phu thuoc vao chu, nen de tiep can hon voi nguoi choi quoc te.',
+			},
+			{
+				title: 'Loi the ve kha nang tiep can',
+				copy: 'Thong tin cong khai cho thay game khong dua vao nhan biet mau sac hay giai do bang am thanh, va phan dau con duoc gan nhan color-blind friendly, one-button va textless.',
 			},
 		],
 		faqs: [

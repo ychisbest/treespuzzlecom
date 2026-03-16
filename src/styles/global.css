@@ -107,6 +107,50 @@ a:hover {
 	padding-bottom: 10px;
 }
 
+.prose-block {
+	display: grid;
+	gap: 16px;
+}
+
+.prose-block p,
+.bullet-card p,
+.audience-item p,
+.comparison-table,
+.comparison-table td,
+.comparison-table th {
+	color: var(--accent-color);
+	font-size: 0.92rem;
+	line-height: 1.7;
+}
+
+.prose-block p {
+	margin: 0;
+}
+
+.bullet-grid,
+.start-grid,
+.notes-grid,
+.audience-list {
+	display: grid;
+	gap: 18px;
+}
+
+.bullet-grid {
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.bullet-card,
+.audience-item {
+	border: 1px solid var(--border-color);
+	background: #fff;
+	padding: 18px;
+}
+
+.bullet-card p,
+.audience-item p {
+	margin: 0;
+}
+
 .hero-section {
 	display: block;
 }
@@ -292,6 +336,37 @@ a:hover {
 	gap: 30px;
 }
 
+.comparison-table-shell {
+	border: 1px solid var(--border-color);
+	background: #fff;
+	box-shadow: var(--shadow);
+	overflow-x: auto;
+}
+
+.comparison-table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 760px;
+}
+
+.comparison-table th,
+.comparison-table td {
+	padding: 16px 18px;
+	text-align: left;
+	vertical-align: top;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table th {
+	font-weight: 400;
+	color: var(--text-color);
+	background: #fafafa;
+}
+
+.comparison-table tbody tr:last-child td {
+	border-bottom: 0;
+}
+
 .game-card {
 	border: 1px solid var(--border-color);
 	background: #fff;
@@ -332,10 +407,20 @@ a:hover {
 	font-weight: 400;
 }
 
-.insight-grid {
+.insight-stack {
 	display: grid;
-	grid-template-columns: 1.5fr 1fr;
-	gap: 30px;
+	gap: 24px;
+}
+
+.insight-lead {
+	display: grid;
+	gap: 15px;
+}
+
+.insight-notes {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 18px;
 }
 
 .media-block {
@@ -347,7 +432,7 @@ a:hover {
 }
 
 .media-wide {
-	aspect-ratio: 2 / 1;
+	aspect-ratio: 16 / 9;
 }
 
 .media-video {
@@ -366,7 +451,6 @@ a:hover {
 	border: 1px solid var(--border-color);
 	background: #fff;
 	padding: 18px;
-	margin-bottom: 18px;
 }
 
 .note-card h3 {
@@ -465,9 +549,13 @@ a:hover {
 	}
 
 	.hero-section,
-	.insight-grid {
+	.insight-notes {
 		display: grid;
 		grid-template-columns: 1fr;
+	}
+
+	.comparison-table {
+		min-width: 640px;
 	}
 
 	.embed-launch {

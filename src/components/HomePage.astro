@@ -169,6 +169,44 @@ const languageLinks = localeOrder.map((item) => ({
 				</div>
 			</section>
 
+			<section class="content-section">
+				<h2>{content.introHeading}</h2>
+				<div class="prose-block">
+					{
+						content.introParagraphs.map((paragraph) => (
+							<p>{paragraph}</p>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="content-section">
+				<h2>{content.positioningHeading}</h2>
+				<div class="bullet-grid">
+					{
+						content.positioningPoints.map((item) => (
+							<article class="bullet-card">
+								<p>{item}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="content-section">
+				<h2>{content.startHeading}</h2>
+				<div class="start-grid">
+					{
+						content.startItems.map((item) => (
+							<article class="note-card">
+								<h3>{item.title}</h3>
+								<p>{item.copy}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
 			<section class="content-section" id="series">
 				<h2>{content.seriesHeading}</h2>
 				<div class="games-grid">
@@ -193,9 +231,39 @@ const languageLinks = localeOrder.map((item) => ({
 			</section>
 
 			<section class="content-section">
+				<h2>{content.compareHeading}</h2>
+				<div class="comparison-table-shell">
+					<table class="comparison-table">
+						<thead>
+							<tr>
+								<th>{content.compareColumns.game}</th>
+								<th>{content.compareColumns.platform}</th>
+								<th>{content.compareColumns.playtime}</th>
+								<th>{content.compareColumns.access}</th>
+								<th>{content.compareColumns.bestFor}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								content.comparisonRows.map((row) => (
+									<tr>
+										<td>{row.game}</td>
+										<td>{row.platform}</td>
+										<td>{row.playtime}</td>
+										<td>{row.access}</td>
+										<td>{row.bestFor}</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section class="content-section">
 				<h2>{content.whyHeading}</h2>
-				<div class="insight-grid">
-					<div>
+				<div class="insight-stack">
+					<div class="insight-lead">
 						<div class="media-block media-wide">
 							<video
 								class="media-video"
@@ -212,7 +280,7 @@ const languageLinks = localeOrder.map((item) => ({
 							{content.analysisBody}
 						</p>
 					</div>
-					<div>
+					<div class="insight-notes">
 						{
 							content.highlights.map((item) => (
 								<article class="note-card">
@@ -222,6 +290,33 @@ const languageLinks = localeOrder.map((item) => ({
 							))
 						}
 					</div>
+				</div>
+			</section>
+
+			<section class="content-section">
+				<h2>{content.sellingPointsHeading}</h2>
+				<div class="notes-grid">
+					{
+						content.highlights.map((item) => (
+							<article class="note-card">
+								<h3>{item.title}</h3>
+								<p>{item.copy}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="content-section">
+				<h2>{content.audienceHeading}</h2>
+				<div class="audience-list">
+					{
+						content.audienceItems.map((item) => (
+							<article class="audience-item">
+								<p>{item}</p>
+							</article>
+						))
+					}
 				</div>
 			</section>
 
