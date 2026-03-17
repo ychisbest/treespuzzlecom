@@ -126,14 +126,20 @@ const languageLinks = localeOrder.map((item) => ({
 							type="button"
 							class="embed-launch"
 							data-game-launch
+							data-zoom-surface
 							data-embed-src={firstPuzzleEmbedUrl}
 							data-target-id="her-trees-first-puzzle"
 							aria-controls="her-trees-first-puzzle"
+							style={`--launch-image: url(${firstPuzzleImage.src})`}
 						>
+							<span class="embed-launch-image" aria-hidden="true"></span>
+							<span class="embed-launch-overlay" aria-hidden="true"></span>
+							<span class="embed-launch-content">
 							<span class="embed-kicker"
 								>HER TREES : First Puzzle</span
 							>
 							<strong>{content.playButton}</strong>
+							</span>
 						</button>
 						<iframe
 							id="her-trees-first-puzzle"
@@ -180,6 +186,29 @@ const languageLinks = localeOrder.map((item) => ({
 				</div>
 			</section>
 
+			<section class="content-section" id="series">
+				<h2>{content.seriesHeading}</h2>
+				<div class="games-grid">
+					{
+						localizedGames.map((game) => (
+							<article class="game-card">
+								<div class="game-thumbnail">
+									<Image
+										src={game.image}
+										alt={game.alt}
+										widths={[480]}
+										sizes="(max-width: 760px) 100vw, 280px"
+									/>
+								</div>
+								<p class="game-meta">{game.meta}</p>
+								<h3 class="game-title">{game.title}</h3>
+								<p class="game-desc">{game.copy}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
 			<section class="content-section">
 				<h2>{content.positioningHeading}</h2>
 				<div class="bullet-grid">
@@ -201,29 +230,6 @@ const languageLinks = localeOrder.map((item) => ({
 							<article class="note-card">
 								<h3>{item.title}</h3>
 								<p>{item.copy}</p>
-							</article>
-						))
-					}
-				</div>
-			</section>
-
-			<section class="content-section" id="series">
-				<h2>{content.seriesHeading}</h2>
-				<div class="games-grid">
-					{
-						localizedGames.map((game) => (
-							<article class="game-card">
-								<div class="game-thumbnail">
-									<Image
-										src={game.image}
-										alt={game.alt}
-										widths={[480]}
-										sizes="(max-width: 760px) 100vw, 280px"
-									/>
-								</div>
-								<p class="game-meta">{game.meta}</p>
-								<h3 class="game-title">{game.title}</h3>
-								<p class="game-desc">{game.copy}</p>
 							</article>
 						))
 					}
@@ -399,6 +405,28 @@ const languageLinks = localeOrder.map((item) => ({
 						}
 					});
 				});
+
+			document.querySelectorAll("[data-zoom-surface]").forEach((surface) => {
+				if (!(surface instanceof HTMLElement)) return;
+
+				const resetSurface = () => {
+					surface.style.setProperty("--pointer-x", "50%");
+					surface.style.setProperty("--pointer-y", "50%");
+				};
+
+				resetSurface();
+
+				surface.addEventListener("mousemove", (event) => {
+					const rect = surface.getBoundingClientRect();
+					const x = ((event.clientX - rect.left) / rect.width) * 100;
+					const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+					surface.style.setProperty("--pointer-x", `${x}%`);
+					surface.style.setProperty("--pointer-y", `${y}%`);
+				});
+
+				surface.addEventListener("mouseleave", resetSurface);
+			});
 		</script>
 	</body>
 </html>
