@@ -360,10 +360,12 @@ a:hover {
 	height: 100dvh;
 	aspect-ratio: auto;
 	border: 0;
+	background: #000;
 }
 
 .game-embed-shell:fullscreen .game-embed {
 	height: 100%;
+	background: #000;
 }
 
 @media (hover: none) {
