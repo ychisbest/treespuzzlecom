@@ -17,6 +17,7 @@ export type HomeContent = {
 	guideIframeTitle: string;
 	gameIntro: string;
 	fullscreenButton: string;
+	rotateHint: string;
 	backHomeLabel: string;
 	introHeading: string;
 	introParagraphs: string[];
@@ -98,6 +99,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		guideIframeTitle: 'HER TREES 攻略视频',
 		gameIntro: '玩法很简单：用鼠标拖动物件并观察它们之间的关系，然后在右侧点击对应密码来解开谜题。',
 		fullscreenButton: '全屏游玩',
+		rotateHint: '如果没有自动横屏，请打开手机自动旋转，或手动将设备横过来游玩。',
 		backHomeLabel: '返回首页',
 		introHeading: 'HER TREES 是什么',
 		introParagraphs: [
@@ -261,6 +263,8 @@ export const homeContent: Record<Locale, HomeContent> = {
 		gameIntro:
 			'The idea is simple: drag objects with your mouse, study how they relate to each other, and click the matching code on the right to solve the room.',
 		fullscreenButton: 'Fullscreen',
+		rotateHint:
+			'If the game does not switch to landscape automatically, turn on auto-rotate or rotate your phone manually.',
 		backHomeLabel: 'Back to Home',
 		introHeading: 'What HER TREES Is',
 		introParagraphs: [
@@ -424,6 +428,8 @@ export const homeContent: Record<Locale, HomeContent> = {
 		gameIntro:
 			'遊び方はシンプルです。マウスで物を動かし、関係性を観察しながら、右側の対応するコードをクリックして謎を解きます。',
 		fullscreenButton: '全画面で遊ぶ',
+		rotateHint:
+			'自動で横向きにならない場合は、端末の自動回転をオンにするか、手動で横向きにしてください。',
 		backHomeLabel: 'ホームに戻る',
 		introHeading: 'HER TREES とは',
 		introParagraphs: [
@@ -587,6 +593,8 @@ export const homeContent: Record<Locale, HomeContent> = {
 		gameIntro:
 			'Cách chơi rất đơn giản: kéo các đồ vật bằng chuột, quan sát mối liên hệ giữa chúng, rồi bấm vào mã tương ứng ở bên phải để giải câu đố.',
 		fullscreenButton: 'Toàn màn hình',
+		rotateHint:
+			'Neu game khong tu dong xoay ngang, hay bat tu dong xoay hoac tu xoay dien thoai sang ngang.',
 		backHomeLabel: 'Quay lai trang chu',
 		introHeading: 'HER TREES La Gi',
 		introParagraphs: [

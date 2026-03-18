@@ -149,6 +149,9 @@ const languageLinks = localeOrder.map((item) => ({
 							allow="fullscreen; autoplay"
 							referrerpolicy="strict-origin-when-cross-origin"
 						></iframe>
+						<div class="rotate-hint" data-rotate-hint aria-live="polite">
+							<p>{content.rotateHint}</p>
+						</div>
 					</div>
 					<div class="game-toolbar">
 						<p class="game-intro">{content.gameIntro}</p>
@@ -348,6 +351,8 @@ const languageLinks = localeOrder.map((item) => ({
 			</footer>
 		</div>
 		<script is:inline>
+			const fullscreenTargets = new Set();
+
 			const loadEmbeddedGame = (trigger) => {
 				const targetId = trigger.getAttribute("data-target-id");
 				const src = trigger.getAttribute("data-embed-src");
@@ -365,6 +370,62 @@ const languageLinks = localeOrder.map((item) => ({
 				trigger.classList.add("is-hidden");
 				return iframe;
 			};
+
+			const isMobileViewport = () =>
+				window.matchMedia("(pointer: coarse)").matches &&
+				Math.min(window.innerWidth, window.innerHeight) < 1024;
+
+			const updateRotateHintState = (target, shouldShowHint) => {
+				if (!(target instanceof HTMLElement)) return;
+
+				if (shouldShowHint) {
+					target.dataset.rotateHintVisible = "true";
+					return;
+				}
+
+				delete target.dataset.rotateHintVisible;
+			};
+
+			const tryLockLandscape = async (target) => {
+				if (!(target instanceof HTMLElement)) return false;
+
+				if (!screen.orientation?.lock || !isMobileViewport()) {
+					updateRotateHintState(target, false);
+					return false;
+				}
+
+				try {
+					await screen.orientation.lock("landscape");
+					updateRotateHintState(target, false);
+					return true;
+				} catch {
+					updateRotateHintState(target, true);
+					return false;
+				}
+			};
+
+			const releaseOrientationLock = () => {
+				try {
+					screen.orientation?.unlock?.();
+				} catch {
+					/* no-op */
+				}
+			};
+
+			document.addEventListener("fullscreenchange", () => {
+				fullscreenTargets.forEach((target) => {
+					if (!(target instanceof HTMLElement)) return;
+
+					const isActive = document.fullscreenElement === target;
+					if (!isActive) {
+						updateRotateHintState(target, false);
+					}
+				});
+
+				if (!document.fullscreenElement) {
+					releaseOrientationLock();
+				}
+			});
 
 			document
 				.querySelectorAll("[data-game-launch]")
@@ -394,6 +455,7 @@ const languageLinks = localeOrder.map((item) => ({
 						const fullscreenTarget =
 							iframe.closest(".game-embed-shell");
 						if (!(fullscreenTarget instanceof HTMLElement)) return;
+						fullscreenTargets.add(fullscreenTarget);
 
 						if (document.fullscreenElement === fullscreenTarget) {
 							await document.exitFullscreen?.();
@@ -402,6 +464,7 @@ const languageLinks = localeOrder.map((item) => ({
 
 						if (fullscreenTarget.requestFullscreen) {
 							await fullscreenTarget.requestFullscreen();
+							await tryLockLandscape(fullscreenTarget);
 						}
 					});
 				});
