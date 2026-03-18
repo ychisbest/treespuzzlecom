@@ -122,7 +122,11 @@ export const siteLinksForLocale = (locale: Locale) => {
 
 	return [
 		{ label: shell.homeLabel, href: homeContent[locale].path },
-		{ label: shell.guideLabel, href: homeContent[locale].guidePath },
+		{
+			label: shell.guideLabel,
+			href: homeContent[locale].guidePath,
+			openInNewTab: true,
+		},
 		{ label: shell.analysisLabel, href: analysisPathForLocale(locale) },
 		{ label: shell.aboutLabel, href: globalPaths.about },
 		{ label: shell.contactLabel, href: globalPaths.contact },

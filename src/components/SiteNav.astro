@@ -16,6 +16,8 @@ const links = siteLinksForLocale(locale);
 		links.map((link) => (
 			<a
 				href={link.href}
+				target={link.openInNewTab ? "_blank" : undefined}
+				rel={link.openInNewTab ? "noopener noreferrer" : undefined}
 				class:list={{
 					active: currentPath === link.href,
 				}}
