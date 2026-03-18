@@ -1,0 +1,84 @@
+---
+import StaticPageLayout from "../../layouts/StaticPageLayout.astro";
+import { globalPaths, siteUrl } from "../../data/site-shell";
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		name: "Editorial Policy",
+		url: `${siteUrl}${globalPaths.editorial}`,
+		description:
+			"Editorial standards and maintenance approach used on treespuzzle.com.",
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: siteUrl,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Editorial Policy",
+				item: `${siteUrl}${globalPaths.editorial}`,
+			},
+		],
+	},
+];
+---
+
+<StaticPageLayout
+	title="Editorial Policy"
+	description="Read the editorial standards used on treespuzzle.com for gameplay coverage, summaries, updates, and corrections."
+	canonicalPath={globalPaths.editorial}
+	pageHeading="Editorial Policy"
+	pageIntro="This site is maintained as an independent editorial resource, and these standards explain how pages are selected, written, and updated."
+	breadcrumbLabel="Editorial Policy"
+	schema={schema}
+>
+	<p>
+		treespuzzle.com publishes original editorial material designed to help readers
+		understand a small puzzle-game series with minimal friction. The core standard
+		is usefulness. Each page should answer a real visitor question such as what the
+		series is about, where to start, how spoiler-heavy a guide is, or what kind of
+		puzzle language a player should expect.
+	</p>
+	<p>
+		We avoid thin content built only to capture search traffic. If a page does not
+		add meaningful explanation, it should not exist. That is why this site favors
+		deeper overview pages, evergreen guide pages, and clearly labeled analysis over
+		fast but low-value posts that repeat store descriptions without context.
+	</p>
+	<h3>Source handling</h3>
+	<p>
+		When public release dates, platform availability, or feature summaries are
+		mentioned, the site relies on publicly visible information from the relevant
+		store page, official media, or the playable build itself. Interpretive writing,
+		series comparisons, spoiler framing, and player-facing recommendations are
+		editorial judgments produced for this site.
+	</p>
+	<p>
+		If a fact cannot be verified confidently, it should either be omitted or stated
+		as a qualified observation rather than presented as certainty. This matters
+		because the games are niche, small changes can be easy to miss, and visitors
+		depend on concise pages being accurate.
+	</p>
+	<h3>Corrections and revisions</h3>
+	<p>
+		Pages may be updated for factual corrections, readability improvements, policy
+		changes, or to add more useful explanatory material. Significant changes are
+		made when the current page stops serving the reader well, not merely to refresh
+		the timestamp. Corrections tied to official release details or mistaken
+		attribution are prioritized.
+	</p>
+	<p>
+		Spoiler-sensitive pages are expected to make that status obvious. Pages that
+		link to external videos or off-site game pages should also provide enough
+		original text that the page remains useful even without the embed.
+	</p>
+</StaticPageLayout>

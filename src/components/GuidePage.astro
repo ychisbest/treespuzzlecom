@@ -1,11 +1,14 @@
 ---
 import "../styles/global.css";
+import SiteFooter from "./SiteFooter.astro";
+import SiteNav from "./SiteNav.astro";
 import {
 	homeContent,
 	languageLabels,
 	localeOrder,
 	type Locale,
 } from "../data/home-content";
+import { globalPaths, shareImageUrl, siteUrl } from "../data/site-shell";
 
 type Props = {
 	locale: Locale;
@@ -13,7 +16,6 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const siteUrl = "https://treespuzzle.com";
 const guideEmbedUrl = "https://www.youtube.com/embed/yzNEcdAW-cU";
 
 const languageLinks = localeOrder.map((item) => ({
@@ -21,6 +23,116 @@ const languageLinks = localeOrder.map((item) => ({
 	label: languageLabels[item],
 	href: homeContent[item].guidePath,
 }));
+
+const guideSupport: Record<
+	Locale,
+	{
+		breadcrumbLabel: string;
+		beforeHeading: string;
+		beforeBody: string;
+		videoHeading: string;
+		videoBody: string;
+		afterHeading: string;
+		afterBody: string;
+		nextHeading: string;
+		nextBody: string;
+		analysisLabel: string;
+	}
+> = {
+	"zh-cn": {
+		breadcrumbLabel: "攻略",
+		beforeHeading: "看视频前先做什么",
+		beforeBody:
+			"建议先自己观察可移动物件、重复图形和右侧密码区域，再决定是否需要完整视频。这样既能保留顿悟感，也更容易理解视频里每一步为什么成立。",
+		videoHeading: "这个视频适合什么情况",
+		videoBody:
+			"如果你已经卡住，或者只想确认某一步是否理解正确，嵌入视频可以直接帮助你对照场景顺序。它更适合当作完整解法，而不是第一时间就打开的教程。",
+		afterHeading: "更稳妥的使用方式",
+		afterBody:
+			"先自己尝试一次，再回到这里看完整视频，体验会更平衡，也更容易理解每个动作之间的关联。",
+		nextHeading: "继续阅读",
+		nextBody: "如果你还想看系列定位和玩法判断，可以继续查看分析页面。",
+		analysisLabel: "玩法解析",
+	},
+	en: {
+		breadcrumbLabel: "Guide",
+		beforeHeading: "Before you watch",
+		beforeBody:
+			"Give yourself a few minutes with the room before opening the full guide. HER TREES is at its best when you first test object relationships, repeated symbols, and the code area on your own.",
+		videoHeading: "What this video is best for",
+		videoBody:
+			"The embedded guide works best when you already know the mood and want a direct answer. It is a full spoiler resource, so it is more useful as a recovery tool than as your first step.",
+		afterHeading: "A better hint flow",
+		afterBody:
+			"Try the puzzle yourself first, then return here if the logic still does not click. That keeps more of the discovery intact while still giving you a reliable fallback.",
+		nextHeading: "More original reading",
+		nextBody:
+			"If you want series analysis in addition to the video, continue with the page below.",
+		analysisLabel: "Puzzle Design Analysis",
+	},
+	ja: {
+		breadcrumbLabel: "攻略",
+		beforeHeading: "動画を見る前に",
+		beforeBody:
+			"まずは自分で少し観察してみるのがおすすめです。動かせる物、繰り返し出る記号、コード入力部分を見てから動画に入ると、ひらめきが残りやすくなります。",
+		videoHeading: "この動画が向いている場面",
+		videoBody:
+			"埋め込み動画は完全な答えを確認したいときに向いています。最初から見るより、行き詰まったあとに使うほうがシリーズの良さを残せます。",
+		afterHeading: "おすすめの見方",
+		afterBody:
+			"先に自力で試し、それでも止まったらこの動画に戻る流れが最も自然です。",
+		nextHeading: "関連ページ",
+		nextBody: "分析記事も用意しているので、必要に応じて続けて確認できます。",
+		analysisLabel: "分析記事",
+	},
+	vi: {
+		breadcrumbLabel: "Huong dan",
+		beforeHeading: "Truoc khi mo video",
+		beforeBody:
+			"Hay tu quan sat phong choi trong vai phut truoc. HER TREES hay hon khi ban tu thu ket noi do vat, ky hieu lap lai, va khu vuc ma so truoc khi xem loi giai day du.",
+		videoHeading: "Video nay phu hop luc nao",
+		videoBody:
+			"Video nhung vao day phu hop nhat khi ban da bi mac va can mot loi giai truc tiep. Day la tai nguyen co spoiler day du, vi vay nen dung sau khi da thu tu minh.",
+		afterHeading: "Cach dung hop ly hon",
+		afterBody:
+			"Hay thu tu minh truoc, roi moi quay lai day neu ban van con mac. Cach nay giu duoc nhieu cam giac tu kham pha hon.",
+		nextHeading: "Doc tiep",
+		nextBody: "Neu ban muon doc them ve thiet ke cua dong game, hay mo bai phan tich.",
+		analysisLabel: "Phan tich thiet ke",
+	},
+};
+
+const guideNotes = guideSupport[locale];
+const canonicalUrl = `${siteUrl}${content.guidePath}`;
+const guideSchema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoObject",
+		name: content.guidePageTitle,
+		description: content.guidePageDescription,
+		embedUrl: guideEmbedUrl,
+		url: canonicalUrl,
+		thumbnailUrl: shareImageUrl,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: `${siteUrl}${content.path === "/" ? "" : content.path}`,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: guideNotes.breadcrumbLabel,
+				item: canonicalUrl,
+			},
+		],
+	},
+]);
 ---
 
 <html lang={content.lang}>
@@ -28,27 +140,25 @@ const languageLinks = localeOrder.map((item) => ({
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/apple-touch-icon.png"
-		/>
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#111111" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{content.guidePageTitle}</title>
 		<meta name="description" content={content.guidePageDescription} />
-		<link rel="canonical" href={`${siteUrl}${content.guidePath}`} />
+		<link rel="canonical" href={canonicalUrl} />
 		<meta name="robots" content="index, follow" />
 		<meta property="og:title" content={content.guidePageTitle} />
 		<meta property="og:description" content={content.guidePageDescription} />
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={`${siteUrl}${content.guidePath}`} />
+		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={content.siteName} />
+		<meta property="og:image" content={shareImageUrl} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={content.guidePageTitle} />
 		<meta name="twitter:description" content={content.guidePageDescription} />
+		<meta name="twitter:image" content={shareImageUrl} />
 		{
 			languageLinks.map((link) => (
 				<link
@@ -59,6 +169,7 @@ const languageLinks = localeOrder.map((item) => ({
 			))
 		}
 		<link rel="alternate" hreflang="x-default" href={`${siteUrl}/guide/`} />
+		<script type="application/ld+json" set:html={guideSchema}></script>
 	</head>
 	<body>
 		<div class="container-shell guide-page">
@@ -83,23 +194,63 @@ const languageLinks = localeOrder.map((item) => ({
 				</nav>
 			</header>
 
-			<section class="guide-frame-shell">
-				<iframe
-					class="guide-frame"
-					src={guideEmbedUrl}
-					title={content.guideIframeTitle}
-					loading="lazy"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					referrerpolicy="strict-origin-when-cross-origin"
-					allowfullscreen
-				></iframe>
-			</section>
+			<SiteNav locale={locale} currentPath={content.guidePath} />
 
-			<footer class="site-footer">
-				<p>
+			<main>
+				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
 					<a href={content.path}>{content.backHomeLabel}</a>
-				</p>
-			</footer>
+					<span>/</span>
+					<span aria-current="page">{guideNotes.breadcrumbLabel}</span>
+				</nav>
+
+				<section class="guide-frame-shell">
+					<iframe
+						class="guide-frame"
+						src={guideEmbedUrl}
+						title={content.guideIframeTitle}
+						loading="lazy"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						referrerpolicy="strict-origin-when-cross-origin"
+						allowfullscreen
+					></iframe>
+				</section>
+
+				<section class="content-section">
+					<h2>{guideNotes.beforeHeading}</h2>
+					<div class="prose-block">
+						<p>{guideNotes.beforeBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{guideNotes.videoHeading}</h2>
+					<div class="prose-block">
+						<p>{guideNotes.videoBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{guideNotes.afterHeading}</h2>
+					<div class="prose-block">
+						<p>{guideNotes.afterBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{guideNotes.nextHeading}</h2>
+					<p class="section-intro">{guideNotes.nextBody}</p>
+					<div class="resource-grid">
+						<article class="resource-card">
+							<h3>
+								<a href={globalPaths.analysis}>{guideNotes.analysisLabel}</a>
+							</h3>
+							<p>{guideNotes.videoBody}</p>
+						</article>
+					</div>
+				</section>
+			</main>
+
+			<SiteFooter locale={locale} />
 		</div>
 	</body>
 </html>

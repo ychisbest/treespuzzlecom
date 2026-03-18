@@ -5,12 +5,15 @@ import firstPuzzleImage from "../assets/first_puzzle.png";
 import puzzleHouseImage from "../assets/puzzle_house.jpg";
 import puzzleDreamImage from "../assets/puzzle_dream.png";
 import animationVideo from "../assets/animation.webm";
+import SiteFooter from "./SiteFooter.astro";
+import SiteNav from "./SiteNav.astro";
 import {
 	homeContent,
 	languageLabels,
 	localeOrder,
 	type Locale,
 } from "../data/home-content";
+import { contactEmail, globalPaths, siteUrl } from "../data/site-shell";
 
 type Props = {
 	locale: Locale;
@@ -18,8 +21,9 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const siteUrl = "https://treespuzzle.com";
 const firstPuzzleEmbedUrl = "/her-trees-first-puzzle/index.html";
+const shareImage = new URL(firstPuzzleImage.src, siteUrl).toString();
+const lastUpdated = "2026-03-18";
 
 const localizedGames = content.games.map((game, index) => ({
 	...game,
@@ -31,6 +35,130 @@ const languageLinks = localeOrder.map((item) => ({
 	label: languageLabels[item],
 	href: homeContent[item].path,
 }));
+
+const supportContent: Record<
+	Locale,
+	{
+		editorialHeading: string;
+		editorialBody: string;
+		resourcesHeading: string;
+		resourcesIntro: string;
+		guideTitle: string;
+		guideBody: string;
+		analysisTitle: string;
+		analysisBody: string;
+		aboutTitle: string;
+		aboutBody: string;
+		contactTitle: string;
+		contactBody: string;
+		updatedLabel: string;
+	}
+> = {
+		"zh-cn": {
+			editorialHeading: "站点说明",
+			editorialBody:
+				"本页是独立整理的 HER TREES 系列信息首页，补充了系列定位、玩法判断、攻略入口、以及站点政策页面，便于审核与访客快速判断内容是否可靠。",
+		resourcesHeading: "继续阅读",
+		resourcesIntro:
+			"如果你想看更多原创内容，可以继续查看攻略、玩法解析、站点介绍和联系方式。",
+			guideTitle: "攻略",
+			guideBody: "查看嵌入式视频攻略，快速确认关键步骤和解法顺序。",
+		analysisTitle: "玩法解析",
+		analysisBody: "解释这个系列为什么依赖观察、顺序和图形关系，而不是长篇文字。",
+		aboutTitle: "关于本站",
+		aboutBody: "说明本站的独立编辑属性、维护方式和更正流程。",
+		contactTitle: "联系",
+		contactBody: "用于纠错、版权沟通、页面问题反馈和站点行政联系。",
+		updatedLabel: "最近更新",
+	},
+		en: {
+			editorialHeading: "Editorial Note",
+			editorialBody:
+				"This homepage is part of an independent editorial site covering the HER TREES series. Alongside the overview and playable entry point, the site includes policy pages, original analysis, and a dedicated guide page so visitors and reviewers can evaluate the site as a complete publication.",
+		resourcesHeading: "Read Next",
+		resourcesIntro:
+			"If you want more than the landing page, continue to the guide page, design analysis, site background, or contact page.",
+			guideTitle: "Guide",
+			guideBody:
+				"Open the embedded video guide when you want a direct solution for the room.",
+		analysisTitle: "Puzzle Design Analysis",
+		analysisBody:
+			"See why the series feels observation-driven rather than text-heavy.",
+		aboutTitle: "About This Site",
+		aboutBody:
+			"Learn who runs the site, what is original here, and how updates are handled.",
+		contactTitle: "Contact",
+		contactBody:
+			"Use the site contact page for corrections, rights requests, or technical issues.",
+		updatedLabel: "Last updated",
+	},
+		ja: {
+			editorialHeading: "編集メモ",
+			editorialBody:
+				"このページは HER TREES シリーズを扱う独立編集サイトのトップページです。概要だけでなく、ポリシー、分析記事、攻略ページも用意し、訪問者と審査側の両方がサイト全体を確認しやすい構成にしています。",
+		resourcesHeading: "続けて読む",
+		resourcesIntro:
+			"トップページ以外にも、攻略、分析記事、サイト紹介、連絡先ページを用意しています。",
+		guideTitle: "攻略",
+		guideBody: "埋め込み動画で手順を確認したいときに使えるページです。",
+		analysisTitle: "分析記事",
+		analysisBody: "このシリーズが観察重視で成立している理由を整理しています。",
+		aboutTitle: "このサイトについて",
+		aboutBody: "独立運営であること、更新方針、修正対応について説明します。",
+		contactTitle: "お問い合わせ",
+		contactBody: "誤記修正、権利対応、技術的な問題の連絡窓口です。",
+		updatedLabel: "最終更新",
+	},
+		vi: {
+			editorialHeading: "Ghi chu bien tap",
+			editorialBody:
+				"Trang chu nay la mot phan cua website bien tap doc lap gioi thieu dong game HER TREES. Ben canh tong quan va diem choi thu, trang con bo sung bai viet goc, trang huong dan, va cac trang chinh sach de tang do tin cay.",
+		resourcesHeading: "Doc tiep",
+		resourcesIntro:
+			"Neu ban muon xem them noi dung goc, hay mo trang huong dan, bai phan tich, trang gioi thieu, hoac trang lien he.",
+		guideTitle: "Huong dan",
+		guideBody: "Mo video huong dan nhung san khi ban muon xem loi giai truc tiep.",
+		analysisTitle: "Phan tich thiet ke",
+		analysisBody: "Giai thich vi sao dong game nay dua vao quan sat hon la nhieu van ban.",
+		aboutTitle: "Gioi thieu ve trang",
+		aboutBody: "Trinh bay muc dich, cach cap nhat, va tinh doc lap cua website.",
+		contactTitle: "Lien he",
+		contactBody: "Dung cho yeu cau chinh sua, van de ban quyen, hoac loi ky thuat.",
+		updatedLabel: "Cap nhat",
+	},
+};
+
+const support = supportContent[locale];
+const homeSchema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		name: "Her Trees Puzzle Game",
+		url: `${siteUrl}${content.path === "/" ? "" : content.path}`,
+		description: content.pageDescription,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		name: "treespuzzle.com",
+		url: siteUrl,
+		email: contactEmail,
+		description:
+			"Independent editorial website covering the HER TREES puzzle series.",
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: content.faqs.map((faq) => ({
+			"@type": "Question",
+			name: faq.question,
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: faq.answer,
+			},
+		})),
+	},
+]);
 ---
 
 <html lang={content.lang}>
@@ -38,33 +166,25 @@ const languageLinks = localeOrder.map((item) => ({
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/apple-touch-icon.png"
-		/>
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#111111" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{content.pageTitle}</title>
 		<meta name="description" content={content.pageDescription} />
-		<link
-			rel="canonical"
-			href={`${siteUrl}${content.path === "/" ? "" : content.path}`}
-		/>
+		<link rel="canonical" href={`${siteUrl}${content.path === "/" ? "" : content.path}`} />
 		<meta name="robots" content="index, follow" />
 		<meta property="og:title" content={content.pageTitle} />
 		<meta property="og:description" content={content.pageDescription} />
 		<meta property="og:type" content="website" />
-		<meta
-			property="og:url"
-			content={`${siteUrl}${content.path === "/" ? "" : content.path}`}
-		/>
+		<meta property="og:url" content={`${siteUrl}${content.path === "/" ? "" : content.path}`} />
 		<meta property="og:site_name" content={content.siteName} />
+		<meta property="og:image" content={shareImage} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={content.pageTitle} />
 		<meta name="twitter:description" content={content.pageDescription} />
+		<meta name="twitter:image" content={shareImage} />
 		{
 			languageLinks.map((link) => (
 				<link
@@ -89,16 +209,14 @@ const languageLinks = localeOrder.map((item) => ({
 				y.parentNode.insertBefore(t, y);
 			})(window, document, "clarity", "script", "vw15uoxtay");
 		</script>
+		<script type="application/ld+json" set:html={homeSchema}></script>
 	</head>
 	<body>
 		<div class="container-shell">
 			<header class="site-header">
 				<div class="header-topline">
 					<h1>Her Trees Puzzle Game</h1>
-					<nav
-						class="language-switcher"
-						aria-label={content.languageSwitchLabel}
-					>
+					<nav class="language-switcher" aria-label={content.languageSwitchLabel}>
 						{
 							languageLinks.map((link) => (
 								<a
@@ -114,182 +232,192 @@ const languageLinks = localeOrder.map((item) => ({
 					</nav>
 				</div>
 				<p>{content.headerIntro}</p>
+				<SiteNav locale={locale} currentPath={content.path} />
 			</header>
 
-			<section class="hero-section">
-				<div class="feature-panel">
-					<div class="panel-header">
-						<h2>{content.playHeading}</h2>
-					</div>
-					<div class="feature-box game-embed-shell">
-						<button
-							type="button"
-							class="embed-launch"
-							data-game-launch
-							data-zoom-surface
-							data-embed-src={firstPuzzleEmbedUrl}
-							data-target-id="her-trees-first-puzzle"
-							aria-controls="her-trees-first-puzzle"
-							style={`--launch-image: url(${firstPuzzleImage.src})`}
-						>
-							<span class="embed-launch-image" aria-hidden="true"></span>
-							<span class="embed-launch-overlay" aria-hidden="true"></span>
-							<span class="embed-launch-content">
-							<span class="embed-kicker"
-								>HER TREES : First Puzzle</span
-							>
-							<strong>{content.playButton}</strong>
-							</span>
-						</button>
-						<iframe
-							id="her-trees-first-puzzle"
-							class="game-embed"
-							title={content.iframeTitle}
-							loading="lazy"
-							allow="fullscreen; autoplay"
-							referrerpolicy="strict-origin-when-cross-origin"
-						></iframe>
-						<div class="rotate-hint" data-rotate-hint aria-live="polite">
-							<p>{content.rotateHint}</p>
+			<main>
+				<section class="hero-section">
+					<div class="feature-panel">
+						<div class="panel-header">
+							<h2>{content.playHeading}</h2>
+							<p class="section-intro">
+								{support.updatedLabel}: {lastUpdated}
+							</p>
 						</div>
-					</div>
-					<div class="game-toolbar">
-						<p class="game-intro">{content.gameIntro}</p>
-						<div class="game-actions">
-							<a
-								href={content.guidePath}
-								class="guide-link"
-								target="_blank"
-								rel="noopener noreferrer"
+						<div class="feature-box game-embed-shell">
+							<button
+								type="button"
+								class="embed-launch"
+								data-game-launch
+								data-zoom-surface
+								data-embed-src={firstPuzzleEmbedUrl}
+								data-target-id="her-trees-first-puzzle"
+								aria-controls="her-trees-first-puzzle"
+								style={`--launch-image: url(${firstPuzzleImage.src})`}
 							>
+								<span class="embed-launch-image" aria-hidden="true"></span>
+								<span class="embed-launch-overlay" aria-hidden="true"></span>
+								<span class="embed-launch-content">
+									<span class="embed-kicker">HER TREES : First Puzzle</span>
+									<strong>{content.playButton}</strong>
+								</span>
+							</button>
+							<iframe
+								id="her-trees-first-puzzle"
+								class="game-embed"
+								title={content.iframeTitle}
+								loading="lazy"
+								allow="fullscreen; autoplay"
+								referrerpolicy="strict-origin-when-cross-origin"
+							></iframe>
+							<div class="rotate-hint" data-rotate-hint aria-live="polite">
+								<p>{content.rotateHint}</p>
+							</div>
+						</div>
+						<div class="game-toolbar">
+							<p class="game-intro">{content.gameIntro}</p>
+						<div class="game-actions">
+							<a href={content.guidePath} class="guide-link">
 								{content.guideButton}
 							</a>
 							<button
 								type="button"
 								class="fullscreen-button"
-								data-game-fullscreen
-								data-target-id="her-trees-first-puzzle"
-								aria-controls="her-trees-first-puzzle"
-							>
-								{content.fullscreenButton}
-							</button>
+									data-game-fullscreen
+									data-target-id="her-trees-first-puzzle"
+									aria-controls="her-trees-first-puzzle"
+								>
+									{content.fullscreenButton}
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
+				</section>
 
-			<section class="content-section">
-				<h2>{content.introHeading}</h2>
-				<div class="prose-block">
-					{
-						content.introParagraphs.map((paragraph) => (
-							<p>{paragraph}</p>
-						))
-					}
-				</div>
-			</section>
+				<section class="content-section">
+					<h2>{content.introHeading}</h2>
+					<div class="prose-block">
+						{content.introParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+					</div>
+				</section>
 
-			<section class="content-section" id="series">
-				<h2>{content.seriesHeading}</h2>
-				<div class="games-grid">
-					{
-						localizedGames.map((game) => (
-							<article class="game-card">
-								<div class="game-thumbnail">
-									<Image
-										src={game.image}
-										alt={game.alt}
-										widths={[480]}
-										sizes="(max-width: 760px) 100vw, 280px"
-									/>
-								</div>
-								<p class="game-meta">{game.meta}</p>
-								<h3 class="game-title">{game.title}</h3>
-								<p class="game-desc">{game.copy}</p>
-							</article>
-						))
-					}
-				</div>
-			</section>
+				<section class="content-section" id="series">
+					<h2>{content.seriesHeading}</h2>
+					<div class="games-grid">
+						{
+							localizedGames.map((game) => (
+								<article class="game-card">
+									<div class="game-thumbnail">
+										<Image
+											src={game.image}
+											alt={game.alt}
+											widths={[480]}
+											sizes="(max-width: 760px) 100vw, 280px"
+										/>
+									</div>
+									<p class="game-meta">{game.meta}</p>
+									<h3 class="game-title">{game.title}</h3>
+									<p class="game-desc">{game.copy}</p>
+								</article>
+							))
+						}
+					</div>
+				</section>
 
-			<section class="content-section">
-				<h2>{content.positioningHeading}</h2>
-				<div class="bullet-grid">
-					{
-						content.positioningPoints.map((item) => (
-							<article class="bullet-card">
-								<p>{item}</p>
-							</article>
-						))
-					}
-				</div>
-			</section>
+				<section class="content-section">
+					<h2>{content.positioningHeading}</h2>
+					<div class="bullet-grid">
+						{
+							content.positioningPoints.map((item) => (
+								<article class="bullet-card">
+									<p>{item}</p>
+								</article>
+							))
+						}
+					</div>
+				</section>
 
-			<section class="content-section">
-				<h2>{content.startHeading}</h2>
-				<div class="start-grid">
-					{
-						content.startItems.map((item) => (
-							<article class="note-card">
-								<h3>{item.title}</h3>
-								<p>{item.copy}</p>
-							</article>
-						))
-					}
-				</div>
-			</section>
+				<section class="content-section">
+					<h2>{content.startHeading}</h2>
+					<div class="start-grid">
+						{
+							content.startItems.map((item) => (
+								<article class="note-card">
+									<h3>{item.title}</h3>
+									<p>{item.copy}</p>
+								</article>
+							))
+						}
+					</div>
+				</section>
 
-			<section class="content-section">
-				<h2>{content.compareHeading}</h2>
-				<div class="comparison-table-shell">
-					<table class="comparison-table">
-						<thead>
-							<tr>
-								<th>{content.compareColumns.game}</th>
-								<th>{content.compareColumns.platform}</th>
-								<th>{content.compareColumns.playtime}</th>
-								<th>{content.compareColumns.access}</th>
-								<th>{content.compareColumns.bestFor}</th>
-							</tr>
-						</thead>
-						<tbody>
+				<section class="content-section">
+					<h2>{content.compareHeading}</h2>
+					<div class="comparison-table-shell">
+						<table class="comparison-table">
+							<thead>
+								<tr>
+									<th>{content.compareColumns.game}</th>
+									<th>{content.compareColumns.platform}</th>
+									<th>{content.compareColumns.playtime}</th>
+									<th>{content.compareColumns.access}</th>
+									<th>{content.compareColumns.bestFor}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{
+									content.comparisonRows.map((row) => (
+										<tr>
+											<td>{row.game}</td>
+											<td>{row.platform}</td>
+											<td>{row.playtime}</td>
+											<td>{row.access}</td>
+											<td>{row.bestFor}</td>
+										</tr>
+									))
+								}
+							</tbody>
+						</table>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{content.whyHeading}</h2>
+					<div class="insight-stack">
+						<div class="insight-lead">
+							<div class="media-block media-wide">
+								<video
+									class="media-video"
+									src={animationVideo}
+									autoplay
+									muted
+									loop
+									playsinline
+									preload="metadata"
+									aria-label={content.videoLabel}
+								></video>
+							</div>
+							<p class="analysis-copy">
+								<strong>{content.analysisStrong}</strong>
+								{content.analysisBody}
+							</p>
+						</div>
+						<div class="insight-notes">
 							{
-								content.comparisonRows.map((row) => (
-									<tr>
-										<td>{row.game}</td>
-										<td>{row.platform}</td>
-										<td>{row.playtime}</td>
-										<td>{row.access}</td>
-										<td>{row.bestFor}</td>
-									</tr>
+								content.highlights.map((item) => (
+									<article class="note-card">
+										<h3>{item.title}</h3>
+										<p>{item.copy}</p>
+									</article>
 								))
 							}
-						</tbody>
-					</table>
-				</div>
-			</section>
-
-			<section class="content-section">
-				<h2>{content.whyHeading}</h2>
-				<div class="insight-stack">
-					<div class="insight-lead">
-						<div class="media-block media-wide">
-							<video
-								class="media-video"
-								src={animationVideo}
-								autoplay
-								muted
-								loop
-								playsinline
-								preload="metadata"
-								aria-label={content.videoLabel}></video>
 						</div>
-						<p class="analysis-copy">
-							<strong>{content.analysisStrong}</strong>
-							{content.analysisBody}
-						</p>
 					</div>
-					<div class="insight-notes">
+				</section>
+
+				<section class="content-section">
+					<h2>{content.sellingPointsHeading}</h2>
+					<div class="notes-grid">
 						{
 							content.highlights.map((item) => (
 								<article class="note-card">
@@ -299,56 +427,80 @@ const languageLinks = localeOrder.map((item) => ({
 							))
 						}
 					</div>
-				</div>
-			</section>
+				</section>
 
-			<section class="content-section">
-				<h2>{content.sellingPointsHeading}</h2>
-				<div class="notes-grid">
-					{
-						content.highlights.map((item) => (
-							<article class="note-card">
-								<h3>{item.title}</h3>
-								<p>{item.copy}</p>
-							</article>
-						))
-					}
-				</div>
-			</section>
+				<section class="content-section">
+					<h2>{support.editorialHeading}</h2>
+					<div class="prose-block">
+						<p>{support.editorialBody}</p>
+						<p>
+							<a href={globalPaths.about}>{support.aboutTitle}</a> ·{" "}
+							<a href={globalPaths.editorial}>Editorial Policy</a> ·{" "}
+							<a href={globalPaths.privacy}>Privacy Policy</a>
+						</p>
+					</div>
+				</section>
 
-			<section class="content-section">
-				<h2>{content.audienceHeading}</h2>
-				<div class="audience-list">
-					{
-						content.audienceItems.map((item) => (
-							<article class="audience-item">
-								<p>{item}</p>
-							</article>
-						))
-					}
-				</div>
-			</section>
+				<section class="content-section">
+					<h2>{content.audienceHeading}</h2>
+					<div class="audience-list">
+						{
+							content.audienceItems.map((item) => (
+								<article class="audience-item">
+									<p>{item}</p>
+								</article>
+							))
+						}
+					</div>
+				</section>
 
-			<section class="content-section">
-				<h2>{content.faqHeading}</h2>
-				<div class="faq-list">
-					{
-						content.faqs.map((faq) => (
-							<details class="faq-item">
-								<summary>{faq.question}</summary>
-								<p>{faq.answer}</p>
-							</details>
-						))
-					}
-				</div>
-			</section>
+				<section class="content-section">
+					<h2>{support.resourcesHeading}</h2>
+					<p class="section-intro">{support.resourcesIntro}</p>
+					<div class="resource-grid">
+						<article class="resource-card">
+							<h3>
+								<a href={content.guidePath}>{support.guideTitle}</a>
+							</h3>
+							<p>{support.guideBody}</p>
+						</article>
+						<article class="resource-card">
+							<h3>
+								<a href={globalPaths.analysis}>{support.analysisTitle}</a>
+							</h3>
+							<p>{support.analysisBody}</p>
+						</article>
+						<article class="resource-card">
+							<h3>
+								<a href={globalPaths.about}>{support.aboutTitle}</a>
+							</h3>
+							<p>{support.aboutBody}</p>
+						</article>
+						<article class="resource-card">
+							<h3>
+								<a href={globalPaths.contact}>{support.contactTitle}</a>
+							</h3>
+							<p>{support.contactBody}</p>
+						</article>
+					</div>
+				</section>
 
-			<footer class="site-footer">
-				<p>&copy; 2026 treespuzzle.com。{content.footerCopy}</p>
-				<p>
-					<a href={siteUrl}>{siteUrl}</a>
-				</p>
-			</footer>
+				<section class="content-section">
+					<h2>{content.faqHeading}</h2>
+					<div class="faq-list">
+						{
+							content.faqs.map((faq) => (
+								<details class="faq-item">
+									<summary>{faq.question}</summary>
+									<p>{faq.answer}</p>
+								</details>
+							))
+						}
+					</div>
+				</section>
+			</main>
+
+			<SiteFooter locale={locale} />
 		</div>
 		<script is:inline>
 			const fullscreenTargets = new Set();
@@ -427,47 +579,42 @@ const languageLinks = localeOrder.map((item) => ({
 				}
 			});
 
-			document
-				.querySelectorAll("[data-game-launch]")
-				.forEach((button) => {
-					button.addEventListener("click", () => {
-						loadEmbeddedGame(button);
-					});
+			document.querySelectorAll("[data-game-launch]").forEach((button) => {
+				button.addEventListener("click", () => {
+					loadEmbeddedGame(button);
 				});
+			});
 
-			document
-				.querySelectorAll("[data-game-fullscreen]")
-				.forEach((button) => {
-					button.addEventListener("click", async () => {
-						const targetId = button.getAttribute("data-target-id");
-						if (!targetId) return;
+			document.querySelectorAll("[data-game-fullscreen]").forEach((button) => {
+				button.addEventListener("click", async () => {
+					const targetId = button.getAttribute("data-target-id");
+					if (!targetId) return;
 
-						const iframe = document.getElementById(targetId);
-						if (!(iframe instanceof HTMLIFrameElement)) return;
+					const iframe = document.getElementById(targetId);
+					if (!(iframe instanceof HTMLIFrameElement)) return;
 
-						const launchButton = document.querySelector(
-							`[data-game-launch][data-target-id="${targetId}"]`,
-						);
-						if (launchButton instanceof HTMLButtonElement) {
-							loadEmbeddedGame(launchButton);
-						}
+					const launchButton = document.querySelector(
+						`[data-game-launch][data-target-id="${targetId}"]`,
+					);
+					if (launchButton instanceof HTMLButtonElement) {
+						loadEmbeddedGame(launchButton);
+					}
 
-						const fullscreenTarget =
-							iframe.closest(".game-embed-shell");
-						if (!(fullscreenTarget instanceof HTMLElement)) return;
-						fullscreenTargets.add(fullscreenTarget);
+					const fullscreenTarget = iframe.closest(".game-embed-shell");
+					if (!(fullscreenTarget instanceof HTMLElement)) return;
+					fullscreenTargets.add(fullscreenTarget);
 
-						if (document.fullscreenElement === fullscreenTarget) {
-							await document.exitFullscreen?.();
-							return;
-						}
+					if (document.fullscreenElement === fullscreenTarget) {
+						await document.exitFullscreen?.();
+						return;
+					}
 
-						if (fullscreenTarget.requestFullscreen) {
-							await fullscreenTarget.requestFullscreen();
-							await tryLockLandscape(fullscreenTarget);
-						}
-					});
+					if (fullscreenTarget.requestFullscreen) {
+						await fullscreenTarget.requestFullscreen();
+						await tryLockLandscape(fullscreenTarget);
+					}
 				});
+			});
 
 			document.querySelectorAll("[data-zoom-surface]").forEach((surface) => {
 				if (!(surface instanceof HTMLElement)) return;

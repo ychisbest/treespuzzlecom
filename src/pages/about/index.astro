@@ -1,0 +1,99 @@
+---
+import StaticPageLayout from "../../layouts/StaticPageLayout.astro";
+import { contactEmail, globalPaths, siteUrl } from "../../data/site-shell";
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "AboutPage",
+		name: "About treespuzzle.com",
+		url: `${siteUrl}${globalPaths.about}`,
+		description:
+			"Background, editorial purpose, and update approach for the independent HER TREES information site.",
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: siteUrl,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "About",
+				item: `${siteUrl}${globalPaths.about}`,
+			},
+		],
+	},
+];
+---
+
+<StaticPageLayout
+	title="About treespuzzle.com"
+	description="Learn who runs treespuzzle.com, what this independent HER TREES site covers, and how the editorial content is maintained."
+	canonicalPath={globalPaths.about}
+	pageHeading="About This Site"
+	pageIntro="treespuzzle.com is an independent editorial project built to help players understand the HER TREES puzzle series before they decide where and how to play it."
+	breadcrumbLabel="About"
+	schema={schema}
+>
+	<p>
+		This website was created as a focused reference hub for a small puzzle-game
+		series that can otherwise be difficult to evaluate at a glance. The HER TREES
+		games rely on mood, hand-drawn art, and non-verbal puzzle language, so many
+		players want a compact explanation of the tone, expected playtime, and
+		accessibility before they commit to a download or purchase. The goal here is
+		to provide that context in one place.
+	</p>
+	<p>
+		The site is not an official publisher or developer property. It is an
+		independent editorial website that curates publicly visible information,
+		writes original summaries, and organizes gameplay notes for visitors who want a
+		clear overview. When this site links to Steam, itch.io, YouTube, or the
+		browser build of a game, those links are provided for convenience and do not
+		change the ownership of the underlying intellectual property.
+	</p>
+	<h3>What readers should expect</h3>
+	<p>
+		Content on treespuzzle.com is written to answer practical player questions:
+		what the game feels like, what kind of puzzle logic it uses, whether it is
+		text-heavy, how long it lasts, where the first entry can be played, and what a
+		new player should try first. The homepage gives a quick orientation, the guide
+		page points readers toward spoiler-heavy help, and the article pages expand on
+		design themes in more detail.
+	</p>
+	<p>
+		We aim to keep the writing concise but useful. Instead of publishing thin
+		announcement posts, the site focuses on evergreen pages that help visitors make
+		a decision. That means we prefer updated comparison tables, explanation of the
+		series structure, and carefully framed spoiler notices over filler content that
+		does not help the reader.
+	</p>
+	<h3>How the site is maintained</h3>
+	<p>
+		Pages are updated when the public-facing status of the series changes, such as
+		a release date update, a newly available demo, or a meaningful change to where
+		a title can be played. We also revise pages when a section becomes unclear,
+		under-documented, or too dependent on outside embeds. Editorial changes are
+		made to improve clarity and usefulness first.
+	</p>
+	<p>
+		If you are the rights holder and believe a factual correction, attribution
+		change, or asset removal is needed, please contact
+		<a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Requests tied to
+		trademarks, screenshots, or copyright claims are reviewed as a priority.
+	</p>
+	<h3>What is original on this site</h3>
+	<p>
+		The structure, summaries, feature explanations, guide framing, spoiler notes,
+		and editorial commentary on treespuzzle.com are original writing prepared for
+		this site. Game titles, trademarks, screenshots, platform names, and public
+		release facts belong to their respective owners. We separate site commentary
+		from the underlying game property on purpose so visitors can understand what is
+		editorial interpretation and what is source material.
+	</p>
+</StaticPageLayout>

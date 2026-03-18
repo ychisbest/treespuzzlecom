@@ -1,0 +1,87 @@
+---
+import StaticPageLayout from "../../../layouts/StaticPageLayout.astro";
+import { globalPaths, siteUrl } from "../../../data/site-shell";
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		headline: "How HER TREES uses observation-driven puzzle design",
+		url: `${siteUrl}${globalPaths.analysis}`,
+		description:
+			"Original analysis of the non-verbal puzzle design, visual logic, and player appeal of the HER TREES series.",
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: siteUrl,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Analysis",
+				item: `${siteUrl}${globalPaths.analysis}`,
+			},
+		],
+	},
+];
+---
+
+<StaticPageLayout
+	title="How HER TREES Uses Observation-Driven Puzzle Design"
+	description="Read an original analysis of why HER TREES feels different from text-heavy puzzle games and who the series suits best."
+	canonicalPath={globalPaths.analysis}
+	pageHeading="Why HER TREES Feels Different"
+	pageIntro="The strength of HER TREES is not complexity for its own sake. It is the way the games ask players to understand pictures, order, and spatial relationships without over-explaining them."
+	breadcrumbLabel="Analysis"
+	schema={schema}
+>
+	<p>
+		Many puzzle games teach themselves through text, inventory logic, or escalating
+		system layers. HER TREES moves in the other direction. It strips back language
+		and asks the player to read the room itself. That makes the series feel quieter
+		and more intuitive than a lot of escape-room design, even when the correct move
+		is not immediately obvious.
+	</p>
+	<p>
+		The black-and-white presentation matters here. Because color is not carrying
+		the puzzle language, attention shifts toward shape, adjacency, rhythm, and
+		object identity. The player is encouraged to compare outlines, notice repetition,
+		and test whether two pieces become meaningful only when they share the same
+		space. It is a form of visual reasoning that feels closer to reading a drawn
+		page than operating a machine.
+	</p>
+	<h3>Why the series is approachable</h3>
+	<p>
+		One reason the series works well for newcomers is that it does not demand a lot
+		of setup overhead. You are not memorizing a long control sheet or absorbing a
+		large body of lore before play starts. Instead, the rules emerge through
+		interaction. That makes the games easier to sample, especially for players who
+		want something atmospheric but do not want a puzzle game that feels like work.
+	</p>
+	<p>
+		The tradeoff is that some players initially misread the intent. Because the
+		games are quiet and minimal, they can look simpler than they really are. The
+		real challenge is not mechanical difficulty. It is learning to trust observation
+		and sequence instead of hunting for explicit instructions.
+	</p>
+	<h3>Who the series suits best</h3>
+	<p>
+		HER TREES tends to fit players who enjoy short-form, self-contained puzzle
+		experiences with a strong visual identity. It is also well suited to people who
+		do not want dense dialogue or systems that rely on audio and color cues. Fans
+		of surreal room puzzles often recognize the appeal quickly, but the series also
+		works for players who simply want a one-sitting game with a distinct mood.
+	</p>
+	<p>
+		If you want the shortest route into that experience, start with the first
+		browser-playable title. If you want the broader context first, return to the
+		<a href="/">series homepage</a>. If you are already stuck, open the
+		<a href="/guide/"> guide page</a> for the embedded spoiler video.
+	</p>
+</StaticPageLayout>

@@ -1,0 +1,90 @@
+---
+import StaticPageLayout from "../../layouts/StaticPageLayout.astro";
+import { globalPaths, siteUrl } from "../../data/site-shell";
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		name: "Terms of Use",
+		url: `${siteUrl}${globalPaths.terms}`,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: siteUrl,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Terms",
+				item: `${siteUrl}${globalPaths.terms}`,
+			},
+		],
+	},
+];
+---
+
+<StaticPageLayout
+	title="Terms of Use"
+	description="Terms governing the use of treespuzzle.com, including content use, external links, and intellectual property notices."
+	canonicalPath={globalPaths.terms}
+	pageHeading="Terms of Use"
+	pageIntro="By using treespuzzle.com, you agree to these terms for browsing, referencing, and interacting with the website."
+	breadcrumbLabel="Terms"
+	schema={schema}
+>
+	<p>
+		treespuzzle.com is provided as an informational and editorial website. The site
+		is intended to help visitors understand the HER TREES puzzle series, navigate
+		toward official or public game pages, and read original commentary prepared for
+		this site. By using the site, you agree to use it lawfully and in a way that
+		does not interfere with normal site operation.
+	</p>
+	<h3>Website content</h3>
+	<p>
+		Unless otherwise stated, the layout, editorial summaries, original guidance,
+		page structure, and explanatory writing on this site are provided for
+		personal, informational use. You may quote short excerpts for commentary or
+		reference if attribution is clear. You may not copy entire pages, scrape the
+		site aggressively, republish original site copy as your own, or use the site
+		in a way that misrepresents affiliation.
+	</p>
+	<p>
+		Game titles, trademarks, logos, platform names, and publisher-owned materials
+		remain the property of their respective owners. References to third-party marks
+		are descriptive only and do not imply sponsorship, endorsement, or ownership by
+		treespuzzle.com.
+	</p>
+	<h3>External links</h3>
+	<p>
+		This site links to third-party pages, including storefronts, video platforms,
+		and embedded gameplay destinations. Those services are operated independently.
+		Following an external link is your choice, and your use of those services is
+		governed by their own terms and privacy practices.
+	</p>
+	<p>
+		treespuzzle.com is not responsible for changes to off-site pricing,
+		availability, support policies, or technical performance after you leave this
+		site. External links may change, expire, or be removed without notice.
+	</p>
+	<h3>Availability and updates</h3>
+	<p>
+		We may revise, expand, or remove pages at any time to improve clarity, correct
+		errors, respond to rights requests, or adjust the structure of the website.
+		There is no guarantee that every page will remain continuously available or
+		that every summary will remain current without periodic revision.
+	</p>
+	<h3>No misuse</h3>
+	<p>
+		You agree not to use the site to transmit malicious code, attempt unauthorized
+		access, overload the service, harvest email addresses for spam, or reproduce
+		substantial portions of the site for deceptive or commercial purposes without
+		permission.
+	</p>
+</StaticPageLayout>

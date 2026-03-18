@@ -1,0 +1,74 @@
+---
+import StaticPageLayout from "../../layouts/StaticPageLayout.astro";
+import { contactEmail, globalPaths, siteUrl } from "../../data/site-shell";
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "ContactPage",
+		name: "Contact treespuzzle.com",
+		url: `${siteUrl}${globalPaths.contact}`,
+		description:
+			"Contact details for editorial questions, corrections, rights requests, and site administration.",
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: siteUrl,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Contact",
+				item: `${siteUrl}${globalPaths.contact}`,
+			},
+		],
+	},
+];
+---
+
+<StaticPageLayout
+	title="Contact treespuzzle.com"
+	description="Use this page to contact treespuzzle.com about corrections, rights requests, partnerships, or technical issues."
+	canonicalPath={globalPaths.contact}
+	pageHeading="Contact"
+	pageIntro="Questions about this website, requests for corrections, and rights-related notices can be sent directly by email."
+	breadcrumbLabel="Contact"
+	schema={schema}
+>
+	<p>
+		Email: <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+	</p>
+	<p>
+		This address is used for editorial questions, website corrections, policy
+		questions, and technical issues tied to the site itself. Messages that concern
+		the official HER TREES games, purchase support, account problems on third-party
+		stores, or platform billing should be sent to the appropriate official
+		developer or store support channel instead.
+	</p>
+	<h3>Best reasons to contact this site</h3>
+	<p>
+		Use the email above if you notice a factual error, broken page, bad link,
+		outdated release detail, or confusing guide section. You can also contact the
+		site if you are a rights holder and want to discuss attribution, screenshots,
+		quotations, or other material hosted or referenced here.
+	</p>
+	<p>
+		For advertising and partnership inquiries, include the site page you are
+		referencing, the purpose of the request, and any deadline that matters. Clear
+		emails are easier to review quickly. Messages that do not explain the request
+		or do not identify the sender may be ignored.
+	</p>
+	<h3>Response expectations</h3>
+	<p>
+		We try to review contact requests in the order they arrive. Correction requests
+		and rights-related notices are prioritized over general feedback. If your issue
+		affects privacy, copyright, or inaccurate claims about the game series, note
+		that clearly in the subject line so it can be reviewed faster.
+	</p>
+</StaticPageLayout>

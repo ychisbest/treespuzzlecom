@@ -1,0 +1,98 @@
+---
+import "../styles/global.css";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteNav from "../components/SiteNav.astro";
+import { shellContent, shareImageUrl, siteUrl } from "../data/site-shell";
+import type { Locale } from "../data/home-content";
+
+type Props = {
+	title: string;
+	description: string;
+	canonicalPath: string;
+	pageHeading: string;
+	pageIntro: string;
+	locale?: Locale;
+	breadcrumbLabel: string;
+	schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+};
+
+const {
+	title,
+	description,
+	canonicalPath,
+	pageHeading,
+	pageIntro,
+	locale = "en",
+	breadcrumbLabel,
+	schema,
+} = Astro.props;
+
+const shell = shellContent[locale];
+const canonicalUrl = `${siteUrl}${canonicalPath}`;
+const serializedSchema = schema
+	? JSON.stringify(Array.isArray(schema) ? schema : [schema])
+	: "";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#111111" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content="Her Trees Puzzle Game" />
+		<meta property="og:image" content={shareImageUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={shareImageUrl} />
+		{serializedSchema && <script type="application/ld+json" set:html={serializedSchema} />}
+	</head>
+	<body>
+		<div class="container-shell static-page-shell">
+			<header class="site-header site-header-compact">
+				<div class="header-topline header-topline-stacked">
+					<div>
+						<p class="eyebrow">treespuzzle.com</p>
+						<p class="site-title-link">
+							<a href="/">Her Trees Puzzle Game</a>
+						</p>
+					</div>
+					<SiteNav locale={locale} currentPath={canonicalPath} />
+				</div>
+			</header>
+
+			<main>
+				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
+					<a href="/">{shell.breadcrumbHome}</a>
+					<span>/</span>
+					<span aria-current="page">{breadcrumbLabel}</span>
+				</nav>
+
+				<article class="static-article">
+					<header class="article-header">
+						<h1>{pageHeading}</h1>
+						<p>{pageIntro}</p>
+					</header>
+					<div class="article-prose">
+						<slot />
+					</div>
+				</article>
+			</main>
+
+			<SiteFooter locale={locale} />
+		</div>
+	</body>
+</html>

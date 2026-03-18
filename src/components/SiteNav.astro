@@ -1,0 +1,27 @@
+---
+import { siteLinksForLocale } from "../data/site-shell";
+import type { Locale } from "../data/home-content";
+
+type Props = {
+	locale: Locale;
+	currentPath?: string;
+};
+
+const { locale, currentPath = "" } = Astro.props;
+const links = siteLinksForLocale(locale);
+---
+
+<nav class="site-nav" aria-label="Primary">
+	{
+		links.map((link) => (
+			<a
+				href={link.href}
+				class:list={{
+					active: currentPath === link.href,
+				}}
+			>
+				{link.label}
+			</a>
+		))
+	}
+</nav>

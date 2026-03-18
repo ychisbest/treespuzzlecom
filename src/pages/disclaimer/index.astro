@@ -1,0 +1,76 @@
+---
+import StaticPageLayout from "../../layouts/StaticPageLayout.astro";
+import { globalPaths, siteUrl } from "../../data/site-shell";
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		name: "Disclaimer",
+		url: `${siteUrl}${globalPaths.disclaimer}`,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: siteUrl,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Disclaimer",
+				item: `${siteUrl}${globalPaths.disclaimer}`,
+			},
+		],
+	},
+];
+---
+
+<StaticPageLayout
+	title="Disclaimer"
+	description="Important notices about affiliation, accuracy, external platforms, and intellectual property on treespuzzle.com."
+	canonicalPath={globalPaths.disclaimer}
+	pageHeading="Disclaimer"
+	pageIntro="This page clarifies the editorial status of treespuzzle.com and the limits of the information provided here."
+	breadcrumbLabel="Disclaimer"
+	schema={schema}
+>
+	<p>
+		treespuzzle.com is an independent editorial website. It is not the official
+		website of the HER TREES developer, publisher, Steam, itch.io, YouTube, or any
+		platform linked from this site. References to those names are used only to
+		describe the game series and the places where visitors may learn more or play.
+	</p>
+	<p>
+		All trademarks, service marks, logos, screenshots, and game-specific assets
+		belong to their respective owners unless explicitly stated otherwise. The site
+		uses game references for commentary, identification, and navigation purposes.
+		If a rights holder believes any use on this site is inaccurate or inappropriate,
+		they should contact the site directly for review.
+	</p>
+	<h3>Editorial judgment and accuracy</h3>
+	<p>
+		The site aims to keep summaries accurate and useful, but informational pages may
+		contain mistakes, outdated details, or interpretive judgments that other
+		players would frame differently. Release timing, storefront status, and public
+		descriptions can change. Readers should treat this site as a practical guide,
+		not as the final authority on official store, legal, or support matters.
+	</p>
+	<p>
+		Guide pages and design analysis reflect editorial opinion.
+		They are intended to help readers, but they are not a substitute for checking
+		official release notes or deciding independently how much spoiler information
+		you want before playing.
+	</p>
+	<h3>External services</h3>
+	<p>
+		When this site embeds or links to third-party services, those services operate
+		under their own rules, privacy practices, and technical limitations.
+		treespuzzle.com does not guarantee uninterrupted availability of an embed,
+		playable build, or external store page.
+	</p>
+</StaticPageLayout>
