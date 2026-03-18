@@ -8,7 +8,12 @@ import {
 	localeOrder,
 	type Locale,
 } from "../data/home-content";
-import { globalPaths, shareImageUrl, siteUrl } from "../data/site-shell";
+import {
+	adsensePublisherId,
+	globalPaths,
+	shareImageUrl,
+	siteUrl,
+} from "../data/site-shell";
 
 type Props = {
 	locale: Locale;
@@ -160,6 +165,7 @@ const guideSchema = JSON.stringify([
 		<meta name="twitter:title" content={content.guidePageTitle} />
 		<meta name="twitter:description" content={content.guidePageDescription} />
 		<meta name="twitter:image" content={shareImageUrl} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
 		{
 			languageLinks.map((link) => (
 				<link
@@ -170,6 +176,11 @@ const guideSchema = JSON.stringify([
 			))
 		}
 		<link rel="alternate" hreflang="x-default" href={`${siteUrl}/guide/`} />
+		<script
+			async
+			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}
+			crossorigin="anonymous"
+		></script>
 		<script type="application/ld+json" set:html={guideSchema}></script>
 	</head>
 	<body>

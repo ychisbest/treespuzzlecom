@@ -2,7 +2,12 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import { shellContent, shareImageUrl, siteUrl } from "../data/site-shell";
+import {
+	adsensePublisherId,
+	shellContent,
+	shareImageUrl,
+	siteUrl,
+} from "../data/site-shell";
 import type { Locale } from "../data/home-content";
 
 type LanguageLink = {
@@ -70,6 +75,12 @@ const htmlLang = locale === "zh-cn" ? "zh-CN" : locale;
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={shareImageUrl} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
+		<script
+			async
+			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}
+			crossorigin="anonymous"
+		></script>
 		{serializedSchema && <script type="application/ld+json" set:html={serializedSchema} />}
 	</head>
 	<body>

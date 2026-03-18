@@ -5,6 +5,7 @@ export const siteUrl = "https://treespuzzle.com";
 export const contactEmail = "contact@treespuzzle.com";
 export const shareImageUrl = `${siteUrl}/icon-512.png`;
 export const currentYear = new Date().getFullYear();
+export const adsensePublisherId = "ca-pub-8738419268805262";
 
 export const globalPaths = {
 	about: "/about/",

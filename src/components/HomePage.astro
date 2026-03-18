@@ -13,7 +13,12 @@ import {
 	localeOrder,
 	type Locale,
 } from "../data/home-content";
-import { contactEmail, globalPaths, siteUrl } from "../data/site-shell";
+import {
+	adsensePublisherId,
+	contactEmail,
+	globalPaths,
+	siteUrl,
+} from "../data/site-shell";
 
 type Props = {
 	locale: Locale;
@@ -186,6 +191,7 @@ const homeSchema = JSON.stringify([
 		<meta name="twitter:title" content={content.pageTitle} />
 		<meta name="twitter:description" content={content.pageDescription} />
 		<meta name="twitter:image" content={shareImage} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
 		{
 			languageLinks.map((link) => (
 				<link
@@ -196,6 +202,11 @@ const homeSchema = JSON.stringify([
 			))
 		}
 		<link rel="alternate" hreflang="x-default" href={siteUrl} />
+		<script
+			async
+			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}
+			crossorigin="anonymous"
+		></script>
 		<script type="text/javascript">
 			(function (c, l, a, r, i, t, y) {
 				c[a] =
