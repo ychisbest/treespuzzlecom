@@ -16,6 +16,9 @@ export const globalPaths = {
 	analysis: "/analysis/puzzle-design/",
 };
 
+export const analysisPathForLocale = (locale: Locale) =>
+	locale === "en" ? globalPaths.analysis : `/${locale}${globalPaths.analysis}`;
+
 type ShellCopy = {
 	homeLabel: string;
 	guideLabel: string;
@@ -119,7 +122,7 @@ export const siteLinksForLocale = (locale: Locale) => {
 	return [
 		{ label: shell.homeLabel, href: homeContent[locale].path },
 		{ label: shell.guideLabel, href: homeContent[locale].guidePath },
-		{ label: shell.analysisLabel, href: globalPaths.analysis },
+		{ label: shell.analysisLabel, href: analysisPathForLocale(locale) },
 		{ label: shell.aboutLabel, href: globalPaths.about },
 		{ label: shell.contactLabel, href: globalPaths.contact },
 	];

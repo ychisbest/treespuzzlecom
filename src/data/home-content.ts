@@ -70,7 +70,7 @@ export type HomeContent = {
 	}>;
 };
 
-export const localeOrder: Locale[] = ['zh-cn', 'en', 'ja', 'vi'];
+export const localeOrder: Locale[] = ['en', 'zh-cn', 'ja', 'vi'];
 
 export const languageLabels: Record<Locale, string> = {
 	'zh-cn': '中文',

@@ -59,6 +59,10 @@ a:hover {
 	margin-bottom: 60px;
 }
 
+.site-header-unified {
+	margin-bottom: 36px;
+}
+
 .header-topline {
 	display: flex;
 	align-items: flex-start;
@@ -79,11 +83,20 @@ a:hover {
 	font-size: 0.92rem;
 }
 
+.site-header-copy {
+	max-width: 680px;
+}
+
+.site-header-tagline {
+	margin: 10px 0 0;
+}
+
 .language-switcher {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	gap: 10px;
+	margin-top: 20px;
 }
 
 .language-switcher a {
@@ -105,7 +118,7 @@ a:hover {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
-	margin-top: 20px;
+	margin-top: 14px;
 }
 
 .site-nav a {
@@ -597,10 +610,6 @@ a:hover {
 	aspect-ratio: 16 / 9;
 }
 
-.site-header-compact {
-	margin-bottom: 30px;
-}
-
 .header-topline-stacked {
 	align-items: center;
 }
@@ -617,6 +626,25 @@ a:hover {
 	flex-wrap: wrap;
 	gap: 10px;
 	margin: 0 0 24px;
+}
+
+.page-intro-block {
+	margin: 0 0 34px;
+	padding-bottom: 18px;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.page-intro-block h1 {
+	margin: 0 0 12px;
+	font-size: 1.7rem;
+	font-weight: 400;
+}
+
+.page-intro-block p {
+	margin: 0;
+	color: var(--accent-color);
+	font-size: 0.92rem;
+	line-height: 1.7;
 }
 
 .static-article {
@@ -764,32 +792,6 @@ a:hover {
 	font-size: 0.85rem;
 }
 
-.guide-page {
-	max-width: 1120px;
-}
-
-.guide-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 20px;
-	padding: 40px 0 24px;
-	border-bottom: 1px solid var(--border-color);
-	margin-bottom: 32px;
-}
-
-.guide-header h1 {
-	margin: 0;
-	font-size: 1.5rem;
-	font-weight: 400;
-}
-
-.guide-header p {
-	margin: 6px 0 0;
-	color: var(--accent-color);
-	font-size: 0.92rem;
-}
-
 .guide-frame-shell {
 	border: 1px solid var(--border-color);
 	background: #fff;
@@ -843,8 +845,7 @@ a:hover {
 		align-items: flex-start;
 	}
 
-	.game-actions,
-	.guide-header {
+	.game-actions {
 		width: 100%;
 		flex-direction: column;
 		align-items: flex-start;

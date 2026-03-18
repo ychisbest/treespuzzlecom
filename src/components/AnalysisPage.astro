@@ -1,0 +1,190 @@
+---
+import StaticPageLayout from "../layouts/StaticPageLayout.astro";
+import type { Locale } from "../data/home-content";
+import { languageLabels, localeOrder } from "../data/home-content";
+import {
+	analysisPathForLocale,
+	globalPaths,
+	siteUrl,
+} from "../data/site-shell";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+
+const content: Record<
+	Locale,
+	{
+		title: string;
+		description: string;
+		pageHeading: string;
+		pageIntro: string;
+		breadcrumbLabel: string;
+		headline: string;
+		articleDescription: string;
+		whyHeading: string;
+		fitHeading: string;
+		languageSwitchLabel: string;
+		paragraphs: string[];
+	}
+> = {
+	"zh-cn": {
+		title: "HER TREES 为什么玩起来和普通解谜不一样",
+		description: "阅读 HER TREES 系列的多语言玩法解析，了解它为什么更依赖观察、顺序和空间关系。",
+		pageHeading: "HER TREES 为什么玩起来不一样",
+		pageIntro:
+			"HER TREES 的魅力不在于机制堆叠，而在于它让玩家通过图像、顺序和摆放关系自己读懂规则，而不是被大量文字直接说明。",
+		breadcrumbLabel: "玩法解析",
+		headline: "HER TREES 的观察驱动式解谜设计",
+		articleDescription:
+			"从非语言化表达、视觉逻辑和玩家体验角度，分析 HER TREES 系列为什么有辨识度。",
+		whyHeading: "为什么这个系列更容易被记住",
+		fitHeading: "它更适合什么样的玩家",
+		languageSwitchLabel: "切换语言",
+		paragraphs: [
+			"很多解谜游戏依赖文本提示、背包系统或者越来越复杂的机关层级来教学。HER TREES 则反过来处理这个问题。它有意减少说明，让玩家直接去读房间本身，于是整个体验会显得更安静、更直觉，也更接近在看一页会动的图像谜题。",
+			"白黑手绘风格在这里不是单纯的美术选择。因为颜色不是主要线索，玩家注意力会自然转向轮廓、邻接关系、摆放顺序和重复出现的图形。你不是在背规则，而是在观察哪些东西彼此有关，哪些位置本身就在暗示解法。",
+			"这也是为什么系列对新玩家其实并不算高门槛。它不要求你先记住很长的操作说明，也不要求先理解一套庞大的世界观。很多规则是在互动中逐步显现出来的，因此上手成本低，但顿悟时的满足感依然很强。",
+			"当然，这样的设计也有代价。因为游戏表达安静又克制，很多人第一次接触时会误以为它只是一个极简的小品。真正的难点不在操作复杂度，而在于你是否愿意相信自己的观察，而不是等待系统明确告诉你下一步应该做什么。",
+			"如果你喜欢短流程、强氛围、以观察取代讲解的独立谜题，HER TREES 很容易留下印象。对于不喜欢大段文字、不想被教程拖慢节奏、同时又想要一点发现感的玩家来说，这个系列会比很多常规解谜更顺手。",
+			"如果你已经准备开始体验，可以直接回到<a href=\"/\">首页</a>进入试玩；如果你已经卡住，也可以前往<a href=\"/guide/\">攻略页</a>查看视频解法。",
+		],
+	},
+	en: {
+		title: "How HER TREES Uses Observation-Driven Puzzle Design",
+		description: "Read a multilingual analysis of why HER TREES feels different from text-heavy puzzle games and who the series suits best.",
+		pageHeading: "Why HER TREES Feels Different",
+		pageIntro:
+			"The strength of HER TREES is not complexity for its own sake. It is the way the games ask players to understand pictures, order, and spatial relationships without over-explaining them.",
+		breadcrumbLabel: "Analysis",
+		headline: "How HER TREES uses observation-driven puzzle design",
+		articleDescription:
+			"Original analysis of the non-verbal puzzle design, visual logic, and player appeal of the HER TREES series.",
+		whyHeading: "Why the series is memorable",
+		fitHeading: "Who the series suits best",
+		languageSwitchLabel: "Language",
+		paragraphs: [
+			"Many puzzle games teach themselves through text, inventory logic, or escalating system layers. HER TREES moves in the other direction. It strips back language and asks the player to read the room itself. That makes the series feel quieter and more intuitive than a lot of escape-room design, even when the correct move is not immediately obvious.",
+			"The black-and-white presentation matters here. Because color is not carrying the puzzle language, attention shifts toward shape, adjacency, rhythm, and object identity. The player is encouraged to compare outlines, notice repetition, and test whether two pieces become meaningful only when they share the same space. It is a form of visual reasoning that feels closer to reading a drawn page than operating a machine.",
+			"One reason the series works well for newcomers is that it does not demand a lot of setup overhead. You are not memorizing a long control sheet or absorbing a large body of lore before play starts. Instead, the rules emerge through interaction. That makes the games easier to sample, especially for players who want something atmospheric but do not want a puzzle game that feels like work.",
+			"The tradeoff is that some players initially misread the intent. Because the games are quiet and minimal, they can look simpler than they really are. The real challenge is not mechanical difficulty. It is learning to trust observation and sequence instead of hunting for explicit instructions.",
+			"HER TREES tends to fit players who enjoy short-form, self-contained puzzle experiences with a strong visual identity. It is also well suited to people who do not want dense dialogue or systems that rely on audio and color cues. Fans of surreal room puzzles often recognize the appeal quickly, but the series also works for players who simply want a one-sitting game with a distinct mood.",
+			"If you want the shortest route into that experience, start with the first browser-playable title on the <a href=\"/\">homepage</a>. If you are already stuck, open the <a href=\"/guide/\">guide page</a> for the embedded spoiler video.",
+		],
+	},
+	ja: {
+		title: "HER TREES が普通の謎解きと違って感じられる理由",
+		description: "HER TREES シリーズがなぜ観察、配置、順序で成立しているのかを日本語で読める分析ページです。",
+		pageHeading: "HER TREES が違って見える理由",
+		pageIntro:
+			"HER TREES の強さは複雑さそのものではなく、図像、順序、空間関係をプレイヤー自身に読ませる設計にあります。",
+		breadcrumbLabel: "分析記事",
+		headline: "HER TREES の観察主導型パズル設計",
+		articleDescription:
+			"非言語的な表現、視覚ロジック、そしてプレイヤー体験の面から HER TREES の個性を整理します。",
+		whyHeading: "このシリーズが印象に残りやすい理由",
+		fitHeading: "どんな人に向いているか",
+		languageSwitchLabel: "言語切替",
+		paragraphs: [
+			"多くのパズルゲームはテキスト説明、インベントリ管理、あるいは段階的に増える仕組みで遊び方を教えます。HER TREES は逆です。説明を減らし、部屋そのものを読ませることで成立しています。そのため、正解がすぐ見えない場面でも、全体の体験は静かで直感的に感じられます。",
+			"白黒の手描き表現も重要です。色が主要な手がかりではないため、プレイヤーは輪郭、隣接関係、順番、反復される記号に意識を向けます。どの物が関連しているのか、どの配置が意味を持つのかを自分で読み解く設計になっているわけです。",
+			"このシリーズが新規プレイヤーにも入りやすいのは、最初に大量の前提知識を要求しないからです。長い操作説明を覚える必要も、巨大な設定を理解する必要もありません。ルールはプレイの途中で少しずつ見えてくるため、導入は軽く、それでいて気づいた瞬間の満足感はしっかり残ります。",
+			"一方で、その静かな表現のせいで、初見ではただのミニマルな作品に見えてしまうこともあります。本当の難しさは操作量ではなく、システムの説明を待つのではなく、自分の観察を信じられるかどうかにあります。",
+			"短くまとまった作品、強い雰囲気、観察によって理解するタイプの謎解きが好きなら、HER TREES はかなり相性がいいです。長文チュートリアルが苦手で、でもちゃんと発見の感覚は欲しい人には特に向いています。",
+			"実際に遊び始めるなら<a href=\"/ja/\">ホーム</a>に戻って体験版に進めます。すでに詰まっているなら、<a href=\"/ja/guide/\">攻略ページ</a>で動画解法を確認できます。",
+		],
+	},
+	vi: {
+		title: "Vi sao HER TREES khac voi nhieu game giai do thong thuong",
+		description: "Doc bai phan tich bang tieng Viet ve cach HER TREES dua vao quan sat, trinh tu va moi quan he khong gian.",
+		pageHeading: "Vi sao HER TREES tao cam giac khac biet",
+		pageIntro:
+			"Diem manh cua HER TREES khong nam o viec chong nhieu co che, ma nam o cach tro choi de nguoi choi tu doc hinh anh, trinh tu, va moi quan he trong khong gian.",
+		breadcrumbLabel: "Phan tich",
+		headline: "Thiet ke giai do dua tren quan sat trong HER TREES",
+		articleDescription:
+			"Phan tich cach bieu dat phi ngon ngu, logic thi giac, va suc hut rieng cua dong game HER TREES.",
+		whyHeading: "Vi sao dong game nay de de lai an tuong",
+		fitHeading: "Dong game nay hop voi ai",
+		languageSwitchLabel: "Ngon ngu",
+		paragraphs: [
+			"Nhieu game giai do day nguoi choi bang van ban, he thong vat pham, hoac nhieu lop co che tang dan. HER TREES di theo huong nguoc lai. No giam bot ngon ngu va de ban doc can phong. Vi vay toan bo trai nghiem tro nen yen tinh hon, truc giac hon, ngay ca khi dap an chua hien ra ngay.",
+			"Phong cach den trang rat quan trong. Khi mau sac khong phai la tin hieu chinh, su chu y se chuyen sang hinh dang, su ke can, nhip lap lai, va ban sac cua tung do vat. Nguoi choi duoc khuyen khich so sanh duong vien, nhan ra su lap lai, va thu xem khi nao hai mon do chi co y nghia khi dat cung mot khong gian.",
+			"Mot ly do khien dong game nay hop voi nguoi moi la no khong doi hoi qua nhieu buoc chuan bi. Ban khong can hoc mot bang dieu khien dai, cung khong can doc mot khoi lore lon truoc khi bat dau. Cac quy tac hien ra dan dan trong qua trinh tuong tac, nen viec bat dau rat nhe nhang nhung van co cam giac a ha khi ban nhan ra quy luat.",
+			"Tat nhien, cach thiet ke nay cung co doi doi. Vi game rat tiet che va toi gian, nhieu nguoi luc dau se nghi no don gian hon thuc te. Thu thach that su khong nam o thao tac, ma nam o viec ban co san sang tin vao kha nang quan sat cua minh hay khong.",
+			"HER TREES rat hop voi nhung ai thich game ngan, tron ven, co ban sac thi giac ro rang. No cung hop voi nguoi khong thich qua nhieu hoi thoai, hoac nhung he thong dua vao am thanh va mau sac. Neu ban thich game phong giai do surreal va muon mot trai nghiem mot mach co khong khi rieng, dong game nay rat dang thu.",
+			"Neu ban muon bat dau nhanh nhat, hay quay lai <a href=\"/vi/\">trang chu</a> de mo ban choi thu. Neu ban da bi mac, hay mo <a href=\"/vi/guide/\">trang huong dan</a> de xem video giai do.",
+		],
+	},
+};
+
+const page = content[locale];
+const canonicalPath = analysisPathForLocale(locale);
+const languageLinks = localeOrder.map((item) => ({
+	locale: item,
+	label: languageLabels[item],
+	href: analysisPathForLocale(item),
+	active: item === locale,
+}));
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		headline: page.headline,
+		url: `${siteUrl}${canonicalPath}`,
+		description: page.articleDescription,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: `${siteUrl}${locale === "en" ? "" : `/${locale}/`}`,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: page.breadcrumbLabel,
+				item: `${siteUrl}${canonicalPath}`,
+			},
+		],
+	},
+];
+---
+
+<StaticPageLayout
+	title={page.title}
+	description={page.description}
+	canonicalPath={canonicalPath}
+	pageHeading={page.pageHeading}
+	pageIntro={page.pageIntro}
+	breadcrumbLabel={page.breadcrumbLabel}
+	locale={locale}
+	schema={schema}
+	languageSwitchLabel={page.languageSwitchLabel}
+	languageLinks={languageLinks}
+>
+	{
+		page.paragraphs.slice(0, 2).map((paragraph) => (
+			<p set:html={paragraph}></p>
+		))
+	}
+	<h3>{page.whyHeading}</h3>
+	{
+		page.paragraphs.slice(2, 4).map((paragraph) => (
+			<p set:html={paragraph}></p>
+		))
+	}
+	<h3>{page.fitHeading}</h3>
+	{
+		page.paragraphs.slice(4).map((paragraph) => (
+			<p set:html={paragraph}></p>
+		))
+	}
+</StaticPageLayout>

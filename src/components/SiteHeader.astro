@@ -1,0 +1,58 @@
+---
+import type { Locale } from "../data/home-content";
+import SiteNav from "./SiteNav.astro";
+
+type LanguageLink = {
+	locale: string;
+	label: string;
+	href: string;
+	active: boolean;
+};
+
+type Props = {
+	locale: Locale;
+	currentPath: string;
+	tagline?: string;
+	languageSwitchLabel?: string;
+	languageLinks?: LanguageLink[];
+};
+
+const {
+	locale,
+	currentPath,
+	tagline,
+	languageSwitchLabel,
+	languageLinks = [],
+} = Astro.props;
+---
+
+<header class="site-header site-header-unified">
+	<div class="header-topline header-topline-stacked">
+		<div class="site-header-copy">
+			<p class="eyebrow">treespuzzle.com</p>
+			<p class="site-title-link">
+				<a href="/">Her Trees Puzzle Game</a>
+			</p>
+			{tagline && <p class="site-header-tagline">{tagline}</p>}
+		</div>
+	</div>
+	{
+		languageLinks.length > 0 && (
+			<nav class="language-switcher" aria-label={languageSwitchLabel}>
+				{
+					languageLinks.map((link) => (
+						<a
+							href={link.href}
+							class:list={{
+								active: link.active,
+							}}
+						>
+							{link.label}
+						</a>
+					))
+				}
+			</nav>
+		)
+	}
+	<SiteNav locale={locale} currentPath={currentPath} />
+</header>

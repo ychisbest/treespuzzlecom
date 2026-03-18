@@ -1,9 +1,16 @@
 ---
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
-import SiteNav from "../components/SiteNav.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import { shellContent, shareImageUrl, siteUrl } from "../data/site-shell";
 import type { Locale } from "../data/home-content";
+
+type LanguageLink = {
+	locale: string;
+	label: string;
+	href: string;
+	active: boolean;
+};
 
 type Props = {
 	title: string;
@@ -14,6 +21,8 @@ type Props = {
 	locale?: Locale;
 	breadcrumbLabel: string;
 	schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+	languageSwitchLabel?: string;
+	languageLinks?: LanguageLink[];
 };
 
 const {
@@ -25,6 +34,8 @@ const {
 	locale = "en",
 	breadcrumbLabel,
 	schema,
+	languageSwitchLabel,
+	languageLinks = [],
 } = Astro.props;
 
 const shell = shellContent[locale];
@@ -32,9 +43,10 @@ const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const serializedSchema = schema
 	? JSON.stringify(Array.isArray(schema) ? schema : [schema])
 	: "";
+const htmlLang = locale === "zh-cn" ? "zh-CN" : locale;
 ---
 
-<html lang="en">
+<html lang={htmlLang}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -62,17 +74,12 @@ const serializedSchema = schema
 	</head>
 	<body>
 		<div class="container-shell static-page-shell">
-			<header class="site-header site-header-compact">
-				<div class="header-topline header-topline-stacked">
-					<div>
-						<p class="eyebrow">treespuzzle.com</p>
-						<p class="site-title-link">
-							<a href="/">Her Trees Puzzle Game</a>
-						</p>
-					</div>
-					<SiteNav locale={locale} currentPath={canonicalPath} />
-				</div>
-			</header>
+			<SiteHeader
+				locale={locale}
+				currentPath={canonicalPath}
+				languageSwitchLabel={languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
 
 			<main>
 				<nav class="breadcrumb-trail" aria-label="Breadcrumb">

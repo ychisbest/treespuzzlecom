@@ -6,7 +6,7 @@ import puzzleHouseImage from "../assets/puzzle_house.jpg";
 import puzzleDreamImage from "../assets/puzzle_dream.png";
 import animationVideo from "../assets/animation.webm";
 import SiteFooter from "./SiteFooter.astro";
-import SiteNav from "./SiteNav.astro";
+import SiteHeader from "./SiteHeader.astro";
 import {
 	homeContent,
 	languageLabels,
@@ -34,6 +34,7 @@ const languageLinks = localeOrder.map((item) => ({
 	locale: item,
 	label: languageLabels[item],
 	href: homeContent[item].path,
+	active: item === locale,
 }));
 
 const supportContent: Record<
@@ -213,27 +214,13 @@ const homeSchema = JSON.stringify([
 	</head>
 	<body>
 		<div class="container-shell">
-			<header class="site-header">
-				<div class="header-topline">
-					<h1>Her Trees Puzzle Game</h1>
-					<nav class="language-switcher" aria-label={content.languageSwitchLabel}>
-						{
-							languageLinks.map((link) => (
-								<a
-									href={link.href}
-									class:list={{
-										active: link.locale === locale,
-									}}
-								>
-									{link.label}
-								</a>
-							))
-						}
-					</nav>
-				</div>
-				<p>{content.headerIntro}</p>
-				<SiteNav locale={locale} currentPath={content.path} />
-			</header>
+			<SiteHeader
+				locale={locale}
+				currentPath={content.path}
+				tagline={content.headerIntro}
+				languageSwitchLabel={content.languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
 
 			<main>
 				<section class="hero-section">

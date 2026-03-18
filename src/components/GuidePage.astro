@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import SiteFooter from "./SiteFooter.astro";
-import SiteNav from "./SiteNav.astro";
+import SiteHeader from "./SiteHeader.astro";
 import {
 	homeContent,
 	languageLabels,
@@ -22,6 +22,7 @@ const languageLinks = localeOrder.map((item) => ({
 	locale: item,
 	label: languageLabels[item],
 	href: homeContent[item].guidePath,
+	active: item === locale,
 }));
 
 const guideSupport: Record<
@@ -172,29 +173,14 @@ const guideSchema = JSON.stringify([
 		<script type="application/ld+json" set:html={guideSchema}></script>
 	</head>
 	<body>
-		<div class="container-shell guide-page">
-			<header class="guide-header">
-				<div>
-					<h1>{content.guidePageTitle}</h1>
-					<p>{content.guidePageDescription}</p>
-				</div>
-				<nav class="language-switcher" aria-label={content.languageSwitchLabel}>
-					{
-						languageLinks.map((link) => (
-							<a
-								href={link.href}
-								class:list={{
-									active: link.locale === locale,
-								}}
-							>
-								{link.label}
-							</a>
-						))
-					}
-				</nav>
-			</header>
-
-			<SiteNav locale={locale} currentPath={content.guidePath} />
+		<div class="container-shell">
+			<SiteHeader
+				locale={locale}
+				currentPath={content.guidePath}
+				tagline={content.guidePageDescription}
+				languageSwitchLabel={content.languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
 
 			<main>
 				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
@@ -202,6 +188,11 @@ const guideSchema = JSON.stringify([
 					<span>/</span>
 					<span aria-current="page">{guideNotes.breadcrumbLabel}</span>
 				</nav>
+
+				<section class="page-intro-block">
+					<h1>{content.guidePageTitle}</h1>
+					<p>{content.guidePageDescription}</p>
+				</section>
 
 				<section class="guide-frame-shell">
 					<iframe
