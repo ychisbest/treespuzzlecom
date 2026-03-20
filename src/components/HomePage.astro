@@ -9,8 +9,6 @@ import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
 import {
 	homeContent,
-	languageLabels,
-	localeOrder,
 	type Locale,
 } from "../data/home-content";
 import {
@@ -19,6 +17,13 @@ import {
 	globalPaths,
 	siteUrl,
 } from "../data/site-shell";
+import {
+	buildOgLocaleAlternates,
+	homeAlternateLinks,
+	localeToHreflang,
+	localeToOgLocale,
+	toAbsoluteUrl,
+} from "../data/seo";
 
 type Props = {
 	locale: Locale;
@@ -35,12 +40,10 @@ const localizedGames = content.games.map((game, index) => ({
 	image: [firstPuzzleImage, puzzleHouseImage, puzzleDreamImage][index],
 }));
 
-const languageLinks = localeOrder.map((item) => ({
-	locale: item,
-	label: languageLabels[item],
-	href: homeContent[item].path,
-	active: item === locale,
-}));
+const languageLinks = homeAlternateLinks(locale);
+const canonicalUrl = toAbsoluteUrl(content.path);
+const ogLocale = localeToOgLocale(locale);
+const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 
 const supportContent: Record<
 	Locale,
@@ -140,7 +143,7 @@ const homeSchema = JSON.stringify([
 		"@context": "https://schema.org",
 		"@type": "WebSite",
 		name: "Her Trees Puzzle Game",
-		url: `${siteUrl}${content.path === "/" ? "" : content.path}`,
+		url: canonicalUrl,
 		description: content.pageDescription,
 	},
 	{
@@ -179,13 +182,19 @@ const homeSchema = JSON.stringify([
 		<meta name="generator" content={Astro.generator} />
 		<title>{content.pageTitle}</title>
 		<meta name="description" content={content.pageDescription} />
-		<link rel="canonical" href={`${siteUrl}${content.path === "/" ? "" : content.path}`} />
+		<link rel="canonical" href={canonicalUrl} />
 		<meta name="robots" content="index, follow" />
 		<meta property="og:title" content={content.pageTitle} />
 		<meta property="og:description" content={content.pageDescription} />
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content={`${siteUrl}${content.path === "/" ? "" : content.path}`} />
+		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={content.siteName} />
+		<meta property="og:locale" content={ogLocale} />
+		{
+			ogLocaleAlternates.map((alternateLocale) => (
+				<meta property="og:locale:alternate" content={alternateLocale} />
+			))
+		}
 		<meta property="og:image" content={shareImage} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={content.pageTitle} />
@@ -196,12 +205,12 @@ const homeSchema = JSON.stringify([
 			languageLinks.map((link) => (
 				<link
 					rel="alternate"
-					hreflang={link.locale === "zh-cn" ? "zh-CN" : link.locale}
-					href={`${siteUrl}${link.href === "/" ? "" : link.href}`}
+					hreflang={localeToHreflang(link.locale)}
+					href={toAbsoluteUrl(link.href)}
 				/>
 			))
 		}
-		<link rel="alternate" hreflang="x-default" href={siteUrl} />
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/")} />
 		<script
 			async
 			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}

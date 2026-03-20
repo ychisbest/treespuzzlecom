@@ -1,12 +1,11 @@
 ---
 import StaticPageLayout from "../layouts/StaticPageLayout.astro";
 import type { Locale } from "../data/home-content";
-import { languageLabels, localeOrder } from "../data/home-content";
 import {
 	analysisPathForLocale,
-	globalPaths,
 	siteUrl,
 } from "../data/site-shell";
+import { buildAlternateLinks } from "../data/seo";
 
 type Props = {
 	locale: Locale;
@@ -122,12 +121,15 @@ const content: Record<
 
 const page = content[locale];
 const canonicalPath = analysisPathForLocale(locale);
-const languageLinks = localeOrder.map((item) => ({
-	locale: item,
-	label: languageLabels[item],
-	href: analysisPathForLocale(item),
-	active: item === locale,
-}));
+const languageLinks = buildAlternateLinks(
+	{
+		en: analysisPathForLocale("en"),
+		"zh-cn": analysisPathForLocale("zh-cn"),
+		ja: analysisPathForLocale("ja"),
+		vi: analysisPathForLocale("vi"),
+	},
+	locale,
+);
 
 const schema = [
 	{
@@ -169,6 +171,7 @@ const schema = [
 	schema={schema}
 	languageSwitchLabel={page.languageSwitchLabel}
 	languageLinks={languageLinks}
+	xDefaultHref={analysisPathForLocale("en")}
 >
 	{
 		page.paragraphs.slice(0, 2).map((paragraph) => (
