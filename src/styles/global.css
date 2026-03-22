@@ -519,6 +519,14 @@ a:hover {
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
 }
 
+.game-card-link {
+	display: block;
+}
+
+.game-card-link:hover {
+	text-decoration: none;
+}
+
 .game-thumbnail {
 	width: 100%;
 	aspect-ratio: 16 / 9;

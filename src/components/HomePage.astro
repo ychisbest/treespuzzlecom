@@ -32,12 +32,21 @@ type Props = {
 const { locale } = Astro.props;
 const content = homeContent[locale];
 const firstPuzzleEmbedUrl = "/her-trees-first-puzzle/index.html";
+const firstPuzzlePagePath = `${content.path}#play`;
+const puzzleDreamPagePath =
+	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
 const shareImage = new URL(firstPuzzleImage.src, siteUrl).toString();
 const lastUpdated = "2026-03-18";
 
 const localizedGames = content.games.map((game, index) => ({
 	...game,
 	image: [firstPuzzleImage, puzzleHouseImage, puzzleDreamImage][index],
+	href:
+		index === 0
+			? firstPuzzlePagePath
+			: index === 2
+				? puzzleDreamPagePath
+				: undefined,
 }));
 
 const languageLinks = homeAlternateLinks(locale);
@@ -243,7 +252,7 @@ const homeSchema = JSON.stringify([
 			/>
 
 			<main>
-				<section class="hero-section">
+				<section class="hero-section" id="play">
 					<div class="feature-panel">
 						<div class="panel-header">
 							<h2>{content.playHeading}</h2>
@@ -301,33 +310,49 @@ const homeSchema = JSON.stringify([
 					</div>
 				</section>
 
-				<section class="content-section">
-					<h2>{content.introHeading}</h2>
-					<div class="prose-block">
-						{content.introParagraphs.map((paragraph) => <p>{paragraph}</p>)}
-					</div>
-				</section>
-
 				<section class="content-section" id="series">
 					<h2>{content.seriesHeading}</h2>
 					<div class="games-grid">
 						{
-							localizedGames.map((game) => (
-								<article class="game-card">
-									<div class="game-thumbnail">
-										<Image
-											src={game.image}
-											alt={game.alt}
-											widths={[480]}
-											sizes="(max-width: 760px) 100vw, 280px"
-										/>
-									</div>
-									<p class="game-meta">{game.meta}</p>
-									<h3 class="game-title">{game.title}</h3>
-									<p class="game-desc">{game.copy}</p>
-								</article>
-							))
+							localizedGames.map((game) =>
+								game.href ? (
+									<a class="game-card game-card-link" href={game.href}>
+										<div class="game-thumbnail">
+											<Image
+												src={game.image}
+												alt={game.alt}
+												widths={[480]}
+												sizes="(max-width: 760px) 100vw, 280px"
+											/>
+										</div>
+										<p class="game-meta">{game.meta}</p>
+										<h3 class="game-title">{game.title}</h3>
+										<p class="game-desc">{game.copy}</p>
+									</a>
+								) : (
+									<article class="game-card">
+										<div class="game-thumbnail">
+											<Image
+												src={game.image}
+												alt={game.alt}
+												widths={[480]}
+												sizes="(max-width: 760px) 100vw, 280px"
+											/>
+										</div>
+										<p class="game-meta">{game.meta}</p>
+										<h3 class="game-title">{game.title}</h3>
+										<p class="game-desc">{game.copy}</p>
+									</article>
+								),
+							)
 						}
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{content.introHeading}</h2>
+					<div class="prose-block">
+						{content.introParagraphs.map((paragraph) => <p>{paragraph}</p>)}
 					</div>
 				</section>
 

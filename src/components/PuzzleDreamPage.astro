@@ -1,0 +1,454 @@
+---
+import puzzleDreamImage from "../assets/puzzle_dream.png";
+import "../styles/global.css";
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
+import {
+	homeContent,
+	type Locale,
+} from "../data/home-content";
+import {
+	adsensePublisherId,
+	siteUrl,
+} from "../data/site-shell";
+import {
+	buildAlternateLinks,
+	buildOgLocaleAlternates,
+	localeToHreflang,
+	localeToOgLocale,
+	toAbsoluteUrl,
+} from "../data/seo";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const puzzleDreamEmbedUrl = "/puzzle-dream/index.html";
+const puzzleDreamPath =
+	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const shareImage = new URL(puzzleDreamImage.src, siteUrl).toString();
+
+const languageLinks = buildAlternateLinks(
+	{
+		en: "/play/puzzle-dream/",
+		"zh-cn": "/zh-cn/play/puzzle-dream/",
+		ja: "/ja/play/puzzle-dream/",
+		vi: "/vi/play/puzzle-dream/",
+	},
+	locale,
+);
+
+const pageCopy: Record<
+	Locale,
+	{
+		title: string;
+		description: string;
+		breadcrumbLabel: string;
+		playHeading: string;
+		iframeTitle: string;
+		playButton: string;
+		intro: string;
+		overviewHeading: string;
+		overviewBody: string;
+		tipsHeading: string;
+		tips: string[];
+	}
+> = {
+	"zh-cn": {
+		title: "HER TREES : PUZZLE DREAM 在线试玩",
+		description:
+			"进入 HER TREES : PUZZLE DREAM 页面，直接在站内打开浏览器版游戏并体验更长篇幅的梦境解谜内容。",
+		breadcrumbLabel: "Puzzle Dream",
+		playHeading: "游玩 HER TREES : PUZZLE DREAM",
+		iframeTitle: "HER TREES : PUZZLE DREAM 在线试玩",
+		playButton: "开始 Puzzle Dream",
+		intro:
+			"这个页面直接加载 public 目录中的 Puzzle Dream 游戏资源，进入后可以像首页一样点击开始并切换全屏游玩。",
+		overviewHeading: "这一页提供什么",
+		overviewBody:
+			"相较于首页嵌入的 First Puzzle，这里对应的是系列第三作的独立入口，适合想直接体验更完整谜题量和更长流程的玩家。",
+		tipsHeading: "游玩提示",
+		tips: [
+			"首次进入会按需加载 WebGL 资源，开始前可能需要短暂等待。",
+			"手机上建议横屏体验；进入全屏时页面会尽量请求横屏锁定。",
+			"如果你只是想先快速感受系列风格，仍然可以回首页先玩 First Puzzle。",
+		],
+	},
+	en: {
+		title: "HER TREES : PUZZLE DREAM Online",
+		description:
+			"Open HER TREES : PUZZLE DREAM in its own page and play the browser build directly from this site.",
+		breadcrumbLabel: "Puzzle Dream",
+		playHeading: "Play HER TREES : PUZZLE DREAM",
+		iframeTitle: "HER TREES : PUZZLE DREAM online",
+		playButton: "Start Puzzle Dream",
+		intro:
+			"This page loads the Puzzle Dream build from the public directory and keeps the same click-to-launch and fullscreen flow used on the homepage.",
+		overviewHeading: "What this page is for",
+		overviewBody:
+			"Unlike the homepage embed for First Puzzle, this is a dedicated entry for the third game in the series, intended for players who want the larger dreamlike puzzle set right away.",
+		tipsHeading: "Play notes",
+		tips: [
+			"The first launch may take a moment while the WebGL files load.",
+			"Landscape works best on phones; fullscreen will try to lock orientation.",
+			"If you want a shorter introduction first, go back to the homepage and start with First Puzzle.",
+		],
+	},
+	ja: {
+		title: "HER TREES : PUZZLE DREAM をブラウザで遊ぶ",
+		description:
+			"HER TREES : PUZZLE DREAM の専用ページです。サイト内でそのままブラウザ版を起動できます。",
+		breadcrumbLabel: "Puzzle Dream",
+		playHeading: "HER TREES : PUZZLE DREAM を遊ぶ",
+		iframeTitle: "HER TREES : PUZZLE DREAM ブラウザ版",
+		playButton: "Puzzle Dream を始める",
+		intro:
+			"このページでは public ディレクトリ内の Puzzle Dream ビルドを読み込み、トップページと同じようにクリックして起動し、全画面でも遊べます。",
+		overviewHeading: "このページの役割",
+		overviewBody:
+			"トップページの First Puzzle 埋め込みとは別に、シリーズ第3作へ直接入るための専用ページです。よりボリュームのある夢的な謎解きを遊びたい人向けです。",
+		tipsHeading: "プレイのヒント",
+		tips: [
+			"初回起動では WebGL ファイルの読み込みに少し時間がかかる場合があります。",
+			"スマートフォンでは横画面が向いています。全画面時は横向き固定を試みます。",
+			"まず短くシリーズの雰囲気を見たい場合は、トップページの First Puzzle から入るのが適しています。",
+		],
+	},
+	vi: {
+		title: "Choi HER TREES : PUZZLE DREAM tren trinh duyet",
+		description:
+			"Mo trang rieng cho HER TREES : PUZZLE DREAM va choi ban browser truc tiep tren website.",
+		breadcrumbLabel: "Puzzle Dream",
+		playHeading: "Choi HER TREES : PUZZLE DREAM",
+		iframeTitle: "HER TREES : PUZZLE DREAM tren trinh duyet",
+		playButton: "Bat dau Puzzle Dream",
+		intro:
+			"Trang nay tai ban Puzzle Dream nam trong thu muc public, giu cung cach bam de mo game va choi fullscreen giong trang chu.",
+		overviewHeading: "Trang nay dung de lam gi",
+		overviewBody:
+			"Khac voi First Puzzle duoc nhung o trang chu, day la loi vao rieng cho phan thu ba trong series, hop voi nguoi muon choi ngay ban co noi dung dai hon.",
+		tipsHeading: "Luu y khi choi",
+		tips: [
+			"Lan mo dau tien co the can doi trong luc tai tep WebGL.",
+			"Dien thoai nen choi ngang man hinh; fullscreen se co gang khoa huong ngang.",
+			"Neu ban muon thu nhanh phong cach cua series truoc, hay quay ve trang chu va choi First Puzzle.",
+		],
+	},
+};
+
+const copy = pageCopy[locale];
+const canonicalUrl = toAbsoluteUrl(puzzleDreamPath);
+const ogLocale = localeToOgLocale(locale);
+const ogLocaleAlternates = buildOgLocaleAlternates(locale);
+const puzzleDreamSchema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoGame",
+		name: "HER TREES : PUZZLE DREAM",
+		url: canonicalUrl,
+		description: copy.description,
+		image: shareImage,
+		gamePlatform: "Web Browser",
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: toAbsoluteUrl(content.path),
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: copy.breadcrumbLabel,
+				item: canonicalUrl,
+			},
+		],
+	},
+]);
+---
+
+<html lang={content.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#111111" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{copy.title}</title>
+		<meta name="description" content={copy.description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={copy.title} />
+		<meta property="og:description" content={copy.description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content={content.siteName} />
+		<meta property="og:locale" content={ogLocale} />
+		{
+			ogLocaleAlternates.map((alternateLocale) => (
+				<meta property="og:locale:alternate" content={alternateLocale} />
+			))
+		}
+		<meta property="og:image" content={shareImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={copy.title} />
+		<meta name="twitter:description" content={copy.description} />
+		<meta name="twitter:image" content={shareImage} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
+		{
+			languageLinks.map((link) => (
+				<link
+					rel="alternate"
+					hreflang={localeToHreflang(link.locale)}
+					href={toAbsoluteUrl(link.href)}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/play/puzzle-dream/")} />
+		<script
+			async
+			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}
+			crossorigin="anonymous"
+		></script>
+		<script type="application/ld+json" set:html={puzzleDreamSchema}></script>
+	</head>
+	<body>
+		<div class="container-shell">
+			<SiteHeader
+				locale={locale}
+				currentPath={puzzleDreamPath}
+				tagline={copy.description}
+				languageSwitchLabel={content.languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
+
+			<main>
+				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
+					<a href={content.path}>{content.backHomeLabel}</a>
+					<span>/</span>
+					<span aria-current="page">{copy.breadcrumbLabel}</span>
+				</nav>
+
+				<section class="hero-section">
+					<div class="feature-panel">
+						<div class="panel-header">
+							<h2>{copy.playHeading}</h2>
+							<p class="section-intro">{copy.intro}</p>
+						</div>
+						<div class="feature-box game-embed-shell">
+							<button
+								type="button"
+								class="embed-launch"
+								data-game-launch
+								data-zoom-surface
+								data-embed-src={puzzleDreamEmbedUrl}
+								data-target-id="puzzle-dream-game"
+								aria-controls="puzzle-dream-game"
+								style={`--launch-image: url(${puzzleDreamImage.src})`}
+							>
+								<span class="embed-launch-image" aria-hidden="true"></span>
+								<span class="embed-launch-overlay" aria-hidden="true"></span>
+								<span class="embed-launch-content">
+									<span class="embed-kicker">HER TREES : Puzzle Dream</span>
+									<strong>{copy.playButton}</strong>
+								</span>
+							</button>
+							<iframe
+								id="puzzle-dream-game"
+								class="game-embed"
+								title={copy.iframeTitle}
+								loading="lazy"
+								allow="fullscreen; autoplay"
+								referrerpolicy="strict-origin-when-cross-origin"
+							></iframe>
+							<div class="rotate-hint" data-rotate-hint aria-live="polite">
+								<p>{content.rotateHint}</p>
+							</div>
+						</div>
+						<div class="game-toolbar">
+							<p class="game-intro">{copy.overviewBody}</p>
+							<div class="game-actions">
+								<button
+									type="button"
+									class="fullscreen-button"
+									data-game-fullscreen
+									data-target-id="puzzle-dream-game"
+									aria-controls="puzzle-dream-game"
+								>
+									{content.fullscreenButton}
+								</button>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.overviewHeading}</h2>
+					<div class="prose-block">
+						<p>{copy.overviewBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.tipsHeading}</h2>
+					<div class="bullet-grid">
+						{
+							copy.tips.map((item) => (
+								<article class="bullet-card">
+									<p>{item}</p>
+								</article>
+							))
+						}
+					</div>
+				</section>
+			</main>
+
+			<SiteFooter locale={locale} />
+		</div>
+		<script is:inline>
+			const fullscreenTargets = new Set();
+
+			const loadEmbeddedGame = (trigger) => {
+				const targetId = trigger.getAttribute("data-target-id");
+				const src = trigger.getAttribute("data-embed-src");
+				if (!targetId || !src) return null;
+
+				const iframe = document.getElementById(targetId);
+				if (!(iframe instanceof HTMLIFrameElement)) return null;
+
+				if (iframe.dataset.loaded !== "true") {
+					iframe.src = src;
+					iframe.dataset.loaded = "true";
+				}
+
+				iframe.classList.add("is-visible");
+				trigger.classList.add("is-hidden");
+				return iframe;
+			};
+
+			const isMobileViewport = () =>
+				window.matchMedia("(pointer: coarse)").matches &&
+				Math.min(window.innerWidth, window.innerHeight) < 1024;
+
+			const updateRotateHintState = (target, shouldShowHint) => {
+				if (!(target instanceof HTMLElement)) return;
+
+				if (shouldShowHint) {
+					target.dataset.rotateHintVisible = "true";
+					return;
+				}
+
+				delete target.dataset.rotateHintVisible;
+			};
+
+			const tryLockLandscape = async (target) => {
+				if (!(target instanceof HTMLElement)) return false;
+
+				if (!screen.orientation?.lock || !isMobileViewport()) {
+					updateRotateHintState(target, false);
+					return false;
+				}
+
+				try {
+					await screen.orientation.lock("landscape");
+					updateRotateHintState(target, false);
+					return true;
+				} catch {
+					updateRotateHintState(target, true);
+					return false;
+				}
+			};
+
+			const releaseOrientationLock = () => {
+				try {
+					screen.orientation?.unlock?.();
+				} catch {
+					/* no-op */
+				}
+			};
+
+			document.addEventListener("fullscreenchange", () => {
+				fullscreenTargets.forEach((target) => {
+					if (!(target instanceof HTMLElement)) return;
+
+					const isActive = document.fullscreenElement === target;
+					if (!isActive) {
+						updateRotateHintState(target, false);
+					}
+				});
+
+				if (!document.fullscreenElement) {
+					releaseOrientationLock();
+				}
+			});
+
+			document.querySelectorAll("[data-game-launch]").forEach((button) => {
+				button.addEventListener("click", () => {
+					loadEmbeddedGame(button);
+				});
+			});
+
+			document.querySelectorAll("[data-game-fullscreen]").forEach((button) => {
+				button.addEventListener("click", async () => {
+					const targetId = button.getAttribute("data-target-id");
+					if (!targetId) return;
+
+					const iframe = document.getElementById(targetId);
+					if (!(iframe instanceof HTMLIFrameElement)) return;
+
+					const launchButton = document.querySelector(
+						`[data-game-launch][data-target-id="${targetId}"]`,
+					);
+					if (launchButton instanceof HTMLButtonElement) {
+						loadEmbeddedGame(launchButton);
+					}
+
+					const fullscreenTarget = iframe.closest(".game-embed-shell");
+					if (!(fullscreenTarget instanceof HTMLElement)) return;
+					fullscreenTargets.add(fullscreenTarget);
+
+					if (document.fullscreenElement === fullscreenTarget) {
+						await document.exitFullscreen?.();
+						return;
+					}
+
+					if (fullscreenTarget.requestFullscreen) {
+						await fullscreenTarget.requestFullscreen();
+						await tryLockLandscape(fullscreenTarget);
+					}
+				});
+			});
+
+			document.querySelectorAll("[data-zoom-surface]").forEach((surface) => {
+				if (!(surface instanceof HTMLElement)) return;
+
+				const resetSurface = () => {
+					surface.style.setProperty("--pointer-x", "50%");
+					surface.style.setProperty("--pointer-y", "50%");
+				};
+
+				resetSurface();
+
+				surface.addEventListener("mousemove", (event) => {
+					const rect = surface.getBoundingClientRect();
+					const x = ((event.clientX - rect.left) / rect.width) * 100;
+					const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+					surface.style.setProperty("--pointer-x", `${x}%`);
+					surface.style.setProperty("--pointer-y", `${y}%`);
+				});
+
+				surface.addEventListener("mouseleave", resetSurface);
+			});
+		</script>
+	</body>
+</html>

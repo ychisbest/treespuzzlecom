@@ -1,0 +1,37 @@
+{
+  "targetUrl": "https://html-classic.itch.zone/html/13807123/HerTrees2WebGL/index.html",
+  "capturedAt": "2026-03-22T07:54:42.854Z",
+  "files": [
+    {
+      "url": "https://html-classic.itch.zone/html/13807123/HerTrees2WebGL/Build/HerTrees2WebGL.data.unityweb",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "outputPath": "Build/HerTrees2WebGL.data.unityweb",
+      "note": "saved via fetch fallback"
+    },
+    {
+      "url": "https://html-classic.itch.zone/html/13807123/HerTrees2WebGL/Build/HerTrees2WebGL.framework.js.unityweb",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "outputPath": "Build/HerTrees2WebGL.framework.js.unityweb"
+    },
+    {
+      "url": "https://html-classic.itch.zone/html/13807123/HerTrees2WebGL/Build/HerTrees2WebGL.loader.js",
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8",
+      "outputPath": "Build/HerTrees2WebGL.loader.js"
+    },
+    {
+      "url": "https://html-classic.itch.zone/html/13807123/HerTrees2WebGL/Build/HerTrees2WebGL.wasm.unityweb",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "outputPath": "Build/HerTrees2WebGL.wasm.unityweb"
+    },
+    {
+      "url": "https://html-classic.itch.zone/html/13807123/HerTrees2WebGL/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "outputPath": "index.html"
+    }
+  ]
+}
