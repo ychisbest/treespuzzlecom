@@ -28,7 +28,8 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const puzzleHouseEmbedUrl = "/her-trees-puzzle-house/index.html";
+const puzzleHouseEmbedUrl =
+	"https://game.doritosscript.com/her-trees-puzzle-house/index.html";
 const puzzleHousePath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
 const puzzleHouseGuidePath =

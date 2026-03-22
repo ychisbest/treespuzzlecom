@@ -28,7 +28,8 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const puzzleDreamEmbedUrl = "/puzzle-dream/index.html";
+const puzzleDreamEmbedUrl =
+	"https://game.doritosscript.com/puzzle-dream/index.html";
 const puzzleDreamPath =
 	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
 const puzzleDreamGuidePath =
