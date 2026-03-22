@@ -1,0 +1,37 @@
+{
+  "targetUrl": "https://game.cartoongames.io/h5/her-trees-first-puzzle/index.html",
+  "capturedAt": "2026-03-13T02:34:43.576Z",
+  "files": [
+    {
+      "url": "https://game.cartoongames.io/h5/her-trees-first-puzzle/Build/HerTreesFirstPuzzleWebGL.data.unityweb",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "outputPath": "Build/HerTreesFirstPuzzleWebGL.data.unityweb",
+      "note": "saved via fetch fallback"
+    },
+    {
+      "url": "https://game.cartoongames.io/h5/her-trees-first-puzzle/Build/HerTreesFirstPuzzleWebGL.framework.js.unityweb",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "outputPath": "Build/HerTreesFirstPuzzleWebGL.framework.js.unityweb"
+    },
+    {
+      "url": "https://game.cartoongames.io/h5/her-trees-first-puzzle/Build/HerTreesFirstPuzzleWebGL.loader.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "outputPath": "Build/HerTreesFirstPuzzleWebGL.loader.js"
+    },
+    {
+      "url": "https://game.cartoongames.io/h5/her-trees-first-puzzle/Build/HerTreesFirstPuzzleWebGL.wasm.unityweb",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "outputPath": "Build/HerTreesFirstPuzzleWebGL.wasm.unityweb"
+    },
+    {
+      "url": "https://game.cartoongames.io/h5/her-trees-first-puzzle/index.html",
+      "status": 200,
+      "contentType": "text/html",
+      "outputPath": "index.html"
+    }
+  ]
+}
