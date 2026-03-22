@@ -128,7 +128,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 				copy: 'THE PUZZLE HOUSE 更像系列代表作，PUZZLE DREAM 则是目前内容量最大、谜题数量最多的一部，并且还提供 Demo 入口。',
 			},
 		],
-		seriesHeading: '系列作品一览',
+		seriesHeading: 'Play More Game',
 		compareHeading: '三部作品快速对比',
 		compareColumns: {
 			game: '作品',
@@ -293,7 +293,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 				copy: 'THE PUZZLE HOUSE works well as a representative short-form entry, while PUZZLE DREAM is the largest game so far and also offers a demo path for cautious newcomers.',
 			},
 		],
-		seriesHeading: 'Games In The Series',
+		seriesHeading: 'Play More Game',
 		compareHeading: 'Quick Comparison Of The Three Games',
 		compareColumns: {
 			game: 'Game',
@@ -458,7 +458,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 				copy: 'THE PUZZLE HOUSE は代表的な短編として優秀で、PUZZLE DREAM は現時点で最大規模の作品です。しかも Demo から試すこともできます。',
 			},
 		],
-		seriesHeading: 'シリーズ作品一覧',
+		seriesHeading: 'Play More Game',
 		compareHeading: '3作品の比較',
 		compareColumns: {
 			game: '作品名',
@@ -623,7 +623,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 				copy: 'THE PUZZLE HOUSE hop voi vai tro tac pham dai dien gon gang, con PUZZLE DREAM la phan co quy mo lon nhat hien tai va con co ca demo de thu truoc.',
 			},
 		],
-		seriesHeading: 'Các game trong series',
+		seriesHeading: 'Play More Game',
 		compareHeading: 'So Sanh Nhanh Ba Tua Game',
 		compareColumns: {
 			game: 'Game',

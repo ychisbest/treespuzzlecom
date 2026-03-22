@@ -33,8 +33,12 @@ const { locale } = Astro.props;
 const content = homeContent[locale];
 const firstPuzzleEmbedUrl = "/her-trees-first-puzzle/index.html";
 const firstPuzzlePagePath = `${content.path}#play`;
+const puzzleHousePagePath =
+	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
 const puzzleDreamPagePath =
 	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const firstPuzzleDownloadUrl =
+	"https://game.doritosscript.com/HerTreesFirstPuzzle.zip";
 const shareImage = new URL(firstPuzzleImage.src, siteUrl).toString();
 const lastUpdated = "2026-03-18";
 
@@ -44,10 +48,13 @@ const localizedGames = content.games.map((game, index) => ({
 	href:
 		index === 0
 			? firstPuzzlePagePath
+			: index === 1
+				? puzzleHousePagePath
 			: index === 2
 				? puzzleDreamPagePath
 				: undefined,
 }));
+const relatedGames = localizedGames.filter((_, index) => index !== 0);
 
 const languageLinks = homeAlternateLinks(locale);
 const canonicalUrl = toAbsoluteUrl(content.path);
@@ -147,6 +154,30 @@ const supportContent: Record<
 };
 
 const support = supportContent[locale];
+const downloadCopy: Record<
+	Locale,
+	{
+		label: string;
+		note: string;
+	}
+> = {
+	"zh-cn": {
+		label: "完整版游戏下载",
+		note: "Windows 平台可直接游玩",
+	},
+	en: {
+		label: "Download Full Game",
+		note: "Windows version, playable directly after download",
+	},
+	ja: {
+		label: "完整版ゲームをダウンロード",
+		note: "Windows 版を直接プレイできます",
+	},
+	vi: {
+		label: "Tai ban day du",
+		note: "Ban Windows co the choi truc tiep",
+	},
+};
 const homeSchema = JSON.stringify([
 	{
 		"@context": "https://schema.org",
@@ -290,31 +321,56 @@ const homeSchema = JSON.stringify([
 								<p>{content.rotateHint}</p>
 							</div>
 						</div>
-						<div class="game-toolbar">
-							<p class="game-intro">{content.gameIntro}</p>
-						<div class="game-actions">
-							<a href={content.guidePath} class="guide-link">
-								{content.guideButton}
-							</a>
-							<button
-								type="button"
-								class="fullscreen-button"
-									data-game-fullscreen
-									data-target-id="her-trees-first-puzzle"
-									aria-controls="her-trees-first-puzzle"
-								>
-									{content.fullscreenButton}
-								</button>
+							<div class="game-toolbar">
+								<p class="game-intro">{content.gameIntro}</p>
+								<div class="game-actions">
+									<a href={content.guidePath} class="guide-link">
+										{content.guideButton}
+									</a>
+									<button
+										type="button"
+										class="fullscreen-button"
+										data-game-fullscreen
+										data-target-id="her-trees-first-puzzle"
+										aria-controls="her-trees-first-puzzle"
+									>
+										{content.fullscreenButton}
+									</button>
+								</div>
 							</div>
+							<p class="download-note">
+								<a
+									href={firstPuzzleDownloadUrl}
+									class="download-link download-button"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<span class="download-button-icons" aria-hidden="true">
+										<svg viewBox="0 0 24 24" class="download-icon">
+											<path
+												d="M3 5.75 11.1 4.6v7.06H3V5.75Zm9.2-1.31L21 3.2v8.46h-8.8V4.44ZM3 12.82h8.1v7.07L3 18.73v-5.91Zm9.2 0H21v8.47l-8.8-1.24v-7.23Z"
+												fill="currentColor"
+											></path>
+										</svg>
+										<svg viewBox="0 0 24 24" class="download-icon">
+											<path
+												d="M12 3a1 1 0 0 1 1 1v8.59l2.3-2.29a1 1 0 1 1 1.4 1.41l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.41L11 12.59V4a1 1 0 0 1 1-1Zm-7 14a1 1 0 0 1 1 1v1h12v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Z"
+												fill="currentColor"
+											></path>
+										</svg>
+									</span>
+									<span>{downloadCopy[locale].label}</span>
+								</a>
+								<span>{downloadCopy[locale].note}</span>
+							</p>
 						</div>
-					</div>
-				</section>
+					</section>
 
 				<section class="content-section" id="series">
 					<h2>{content.seriesHeading}</h2>
 					<div class="games-grid">
 						{
-							localizedGames.map((game) =>
+							relatedGames.map((game) =>
 								game.href ? (
 									<a class="game-card game-card-link" href={game.href}>
 										<div class="game-thumbnail">

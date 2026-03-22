@@ -1,0 +1,306 @@
+---
+import puzzleHouseImage from "../assets/puzzle_house.jpg";
+import "../styles/global.css";
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
+import {
+	homeContent,
+	type Locale,
+} from "../data/home-content";
+import {
+	adsensePublisherId,
+	globalPaths,
+	siteUrl,
+} from "../data/site-shell";
+import {
+	buildAlternateLinks,
+	buildOgLocaleAlternates,
+	localeToHreflang,
+	localeToOgLocale,
+	toAbsoluteUrl,
+} from "../data/seo";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const guideEmbedUrl = "https://www.youtube.com/embed/guJbhijh9jk?start=108";
+const guidePath =
+	locale === "en"
+		? "/play/puzzle-house/guide/"
+		: `/${locale}/play/puzzle-house/guide/`;
+const playPath =
+	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
+const shareImage = new URL(puzzleHouseImage.src, siteUrl).toString();
+
+const languageLinks = buildAlternateLinks(
+	{
+		en: "/play/puzzle-house/guide/",
+		"zh-cn": "/zh-cn/play/puzzle-house/guide/",
+		ja: "/ja/play/puzzle-house/guide/",
+		vi: "/vi/play/puzzle-house/guide/",
+	},
+	locale,
+);
+
+const guideCopy: Record<
+	Locale,
+	{
+		title: string;
+		description: string;
+		breadcrumbLabel: string;
+		beforeHeading: string;
+		beforeBody: string;
+		videoHeading: string;
+		videoBody: string;
+		afterHeading: string;
+		afterBody: string;
+		nextHeading: string;
+		nextBody: string;
+		playLabel: string;
+		analysisLabel: string;
+	}
+> = {
+	"zh-cn": {
+		title: "HER TREES : THE PUZZLE HOUSE 攻略视频",
+		description:
+			"查看 HER TREES : THE PUZZLE HOUSE 的嵌入式攻略视频，直接对应浏览器版游戏流程。",
+		breadcrumbLabel: "Puzzle House 攻略",
+		beforeHeading: "看视频前先做什么",
+		beforeBody:
+			"建议先自己观察房间里的可互动区域、重复图形和空间联动，再决定是否打开完整攻略。这样更容易保留顿悟感。",
+		videoHeading: "这个视频适合什么情况",
+		videoBody:
+			"如果你已经卡住，或者只想确认某一步的顺序是否正确，这个视频更适合作为完整解法参考，而不是一开始就直接照着做。",
+		afterHeading: "更稳妥的使用方式",
+		afterBody:
+			"先自己尝试，再回到这里对照视频，会更容易理解每个谜题之间的空间关系和推进逻辑。",
+		nextHeading: "继续阅读",
+		nextBody: "你也可以回到游戏页继续试玩，或查看系列分析页面。",
+		playLabel: "返回 Puzzle House",
+		analysisLabel: "玩法解析",
+	},
+	en: {
+		title: "HER TREES : THE PUZZLE HOUSE Guide Video",
+		description:
+			"Watch an embedded walkthrough for HER TREES : THE PUZZLE HOUSE, matched to the browser version on this site.",
+		breadcrumbLabel: "Puzzle House Guide",
+		beforeHeading: "Before you watch",
+		beforeBody:
+			"Spend a few minutes testing the room on your own first. Puzzle House works best when you notice object placement, repeated symbols, and spatial logic before opening a full solution.",
+		videoHeading: "What this video is best for",
+		videoBody:
+			"This video is most useful when you are already stuck or want to verify the order of a specific section. It is a full spoiler guide rather than a light hint page.",
+		afterHeading: "A better hint flow",
+		afterBody:
+			"Try solving each area yourself first, then return here when the structure stops clicking. That keeps more of the discovery intact.",
+		nextHeading: "Next steps",
+		nextBody: "You can jump back to the playable page or continue to the series analysis.",
+		playLabel: "Back to Puzzle House",
+		analysisLabel: "Puzzle Design Analysis",
+	},
+	ja: {
+		title: "HER TREES : THE PUZZLE HOUSE 攻略動画",
+		description:
+			"HER TREES : THE PUZZLE HOUSE の攻略動画をページ内で確認できます。サイト内のブラウザ版に対応しています。",
+		breadcrumbLabel: "Puzzle House 攻略",
+		beforeHeading: "動画を見る前に",
+		beforeBody:
+			"まずは自分で部屋の配置や繰り返し出る記号、動かせる要素を観察してみるのがおすすめです。その後に動画を見るほうが発見が残ります。",
+		videoHeading: "この動画が向いている場面",
+		videoBody:
+			"行き詰まった場面の確認や、手順の順序を確かめたいときに向いています。軽いヒントではなく、完全な攻略動画です。",
+		afterHeading: "おすすめの見方",
+		afterBody:
+			"自力で試してから動画に戻る流れのほうが、空間のつながりや謎の構造を理解しやすくなります。",
+		nextHeading: "次に見るページ",
+		nextBody: "ゲームページに戻るか、シリーズ分析ページも確認できます。",
+		playLabel: "Puzzle House に戻る",
+		analysisLabel: "分析記事",
+	},
+	vi: {
+		title: "Video huong dan HER TREES : THE PUZZLE HOUSE",
+		description:
+			"Xem video huong dan nhung san cho HER TREES : THE PUZZLE HOUSE, phu hop voi ban browser tren website.",
+		breadcrumbLabel: "Huong dan Puzzle House",
+		beforeHeading: "Truoc khi mo video",
+		beforeBody:
+			"Hay thu quan sat can phong, ky hieu lap lai, va cach sap xep vat the truoc. Puzzle House hay hon khi ban tu phat hien cau truc truoc khi xem loi giai day du.",
+		videoHeading: "Video nay phu hop luc nao",
+		videoBody:
+			"Video nay hop khi ban da bi mac hoac muon kiem tra dung thu tu cua mot doan cu the. Day la huong dan day du, khong phai chi la goi y nhe.",
+		afterHeading: "Cach xem hop ly hon",
+		afterBody:
+			"Hay thu tu minh truoc, roi quay lai video khi can. Cach nay giu duoc nhieu cam giac tu kham pha hon.",
+		nextHeading: "Buoc tiep theo",
+		nextBody: "Ban co the quay lai trang choi game hoac mo bai phan tich cua series.",
+		playLabel: "Quay lai Puzzle House",
+		analysisLabel: "Phan tich thiet ke",
+	},
+};
+
+const copy = guideCopy[locale];
+const canonicalUrl = toAbsoluteUrl(guidePath);
+const playUrl = toAbsoluteUrl(playPath);
+const ogLocale = localeToOgLocale(locale);
+const ogLocaleAlternates = buildOgLocaleAlternates(locale);
+const guideSchema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoObject",
+		name: copy.title,
+		description: copy.description,
+		embedUrl: guideEmbedUrl,
+		url: canonicalUrl,
+		thumbnailUrl: shareImage,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: toAbsoluteUrl(content.path),
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: copy.breadcrumbLabel,
+				item: canonicalUrl,
+			},
+		],
+	},
+]);
+---
+
+<html lang={content.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#111111" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{copy.title}</title>
+		<meta name="description" content={copy.description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={copy.title} />
+		<meta property="og:description" content={copy.description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content={content.siteName} />
+		<meta property="og:locale" content={ogLocale} />
+		{
+			ogLocaleAlternates.map((alternateLocale) => (
+				<meta property="og:locale:alternate" content={alternateLocale} />
+			))
+		}
+		<meta property="og:image" content={shareImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={copy.title} />
+		<meta name="twitter:description" content={copy.description} />
+		<meta name="twitter:image" content={shareImage} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
+		{
+			languageLinks.map((link) => (
+				<link
+					rel="alternate"
+					hreflang={localeToHreflang(link.locale)}
+					href={toAbsoluteUrl(link.href)}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/play/puzzle-house/guide/")} />
+		<script
+			async
+			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}
+			crossorigin="anonymous"
+		></script>
+		<script type="application/ld+json" set:html={guideSchema}></script>
+	</head>
+	<body>
+		<div class="container-shell">
+			<SiteHeader
+				locale={locale}
+				currentPath={guidePath}
+				tagline={copy.description}
+				languageSwitchLabel={content.languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
+
+			<main>
+				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
+					<a href={playPath}>{copy.playLabel}</a>
+					<span>/</span>
+					<span aria-current="page">{copy.breadcrumbLabel}</span>
+				</nav>
+
+				<section class="page-intro-block">
+					<h1>{copy.title}</h1>
+					<p>{copy.description}</p>
+				</section>
+
+				<section class="guide-frame-shell">
+					<iframe
+						class="guide-frame"
+						src={guideEmbedUrl}
+						title={copy.title}
+						loading="lazy"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						referrerpolicy="strict-origin-when-cross-origin"
+						allowfullscreen
+					></iframe>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.beforeHeading}</h2>
+					<div class="prose-block">
+						<p>{copy.beforeBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.videoHeading}</h2>
+					<div class="prose-block">
+						<p>{copy.videoBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.afterHeading}</h2>
+					<div class="prose-block">
+						<p>{copy.afterBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.nextHeading}</h2>
+					<p class="section-intro">{copy.nextBody}</p>
+					<div class="resource-grid">
+						<article class="resource-card">
+							<h3>
+								<a href={playPath}>{copy.playLabel}</a>
+							</h3>
+							<p>{copy.beforeBody}</p>
+						</article>
+						<article class="resource-card">
+							<h3>
+								<a href={globalPaths.analysis}>{copy.analysisLabel}</a>
+							</h3>
+							<p>{copy.videoBody}</p>
+						</article>
+					</div>
+				</section>
+			</main>
+
+			<SiteFooter locale={locale} />
+		</div>
+	</body>
+</html>

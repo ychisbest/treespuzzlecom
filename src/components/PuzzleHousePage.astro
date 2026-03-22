@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import firstPuzzleImage from "../assets/first_puzzle.png";
 import puzzleHouseImage from "../assets/puzzle_house.jpg";
+import firstPuzzleImage from "../assets/first_puzzle.png";
 import puzzleDreamImage from "../assets/puzzle_dream.png";
 import "../styles/global.css";
 import SiteFooter from "./SiteFooter.astro";
@@ -28,26 +28,26 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const puzzleDreamEmbedUrl = "/puzzle-dream/index.html";
-const puzzleDreamPath =
-	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
-const puzzleDreamGuidePath =
-	locale === "en"
-		? "/play/puzzle-dream/guide/"
-		: `/${locale}/play/puzzle-dream/guide/`;
-const firstPuzzlePagePath = `${content.path}#play`;
+const puzzleHouseEmbedUrl = "/her-trees-puzzle-house/index.html";
 const puzzleHousePath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
-const puzzleDreamDownloadUrl =
-	"https://game.doritosscript.com/HerTreesPuzzleDream.zip";
-const shareImage = new URL(puzzleDreamImage.src, siteUrl).toString();
+const puzzleHouseGuidePath =
+	locale === "en"
+		? "/play/puzzle-house/guide/"
+		: `/${locale}/play/puzzle-house/guide/`;
+const firstPuzzlePagePath = `${content.path}#play`;
+const puzzleDreamPath =
+	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const puzzleHouseDownloadUrl =
+	"https://game.doritosscript.com/HER.TREES.THE.PUZZLE.HOUSE.zip";
+const shareImage = new URL(puzzleHouseImage.src, siteUrl).toString();
 
 const languageLinks = buildAlternateLinks(
 	{
-		en: "/play/puzzle-dream/",
-		"zh-cn": "/zh-cn/play/puzzle-dream/",
-		ja: "/ja/play/puzzle-dream/",
-		vi: "/vi/play/puzzle-dream/",
+		en: "/play/puzzle-house/",
+		"zh-cn": "/zh-cn/play/puzzle-house/",
+		ja: "/ja/play/puzzle-house/",
+		vi: "/vi/play/puzzle-house/",
 	},
 	locale,
 );
@@ -63,7 +63,7 @@ const relatedGames = content.games
 					? puzzleHousePath
 					: puzzleDreamPath,
 	}))
-	.filter((_, index) => index !== 2);
+	.filter((_, index) => index !== 1);
 
 const pageCopy: Record<
 	Locale,
@@ -82,83 +82,83 @@ const pageCopy: Record<
 	}
 > = {
 	"zh-cn": {
-		title: "HER TREES : PUZZLE DREAM 在线试玩",
+		title: "HER TREES : THE PUZZLE HOUSE 在线试玩",
 		description:
-			"进入 HER TREES : PUZZLE DREAM 页面，直接在站内打开浏览器版游戏并体验更长篇幅的梦境解谜内容。",
-		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "游玩 HER TREES : PUZZLE DREAM",
-		iframeTitle: "HER TREES : PUZZLE DREAM 在线试玩",
-		playButton: "开始 Puzzle Dream",
+			"进入 HER TREES : THE PUZZLE HOUSE 页面，直接在站内打开浏览器版游戏并体验完整短篇谜题屋。",
+		breadcrumbLabel: "Puzzle House",
+		playHeading: "游玩 HER TREES : THE PUZZLE HOUSE",
+		iframeTitle: "HER TREES : THE PUZZLE HOUSE 在线试玩",
+		playButton: "开始 Puzzle House",
 		intro:
-			"这个页面直接加载 public 目录中的 Puzzle Dream 游戏资源，进入后可以像首页一样点击开始并切换全屏游玩。",
+			"这个页面直接加载 public 目录中的 Puzzle House 游戏资源，进入后可以像首页一样点击开始并切换全屏游玩。",
 		overviewHeading: "这一页提供什么",
 		overviewBody:
-			"相较于首页嵌入的 First Puzzle，这里对应的是系列第三作的独立入口，适合想直接体验更完整谜题量和更长流程的玩家。",
+			"这是系列第二作的独立入口，适合想先体验更完整成品，但又不想一上来就进入第三作更长流程的玩家。",
 		tipsHeading: "游玩提示",
 		tips: [
 			"首次进入会按需加载 WebGL 资源，开始前可能需要短暂等待。",
 			"手机上建议横屏体验；进入全屏时页面会尽量请求横屏锁定。",
-			"如果你只是想先快速感受系列风格，仍然可以回首页先玩 First Puzzle。",
+			"如果你想先从最短体验开始，仍然可以回首页游玩 First Puzzle。",
 		],
 	},
 	en: {
-		title: "HER TREES : PUZZLE DREAM Online",
+		title: "HER TREES : THE PUZZLE HOUSE Online",
 		description:
-			"Open HER TREES : PUZZLE DREAM in its own page and play the browser build directly from this site.",
-		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "Play HER TREES : PUZZLE DREAM",
-		iframeTitle: "HER TREES : PUZZLE DREAM online",
-		playButton: "Start Puzzle Dream",
+			"Open HER TREES : THE PUZZLE HOUSE in its own page and play the browser build directly from this site.",
+		breadcrumbLabel: "Puzzle House",
+		playHeading: "Play HER TREES : THE PUZZLE HOUSE",
+		iframeTitle: "HER TREES : THE PUZZLE HOUSE online",
+		playButton: "Start Puzzle House",
 		intro:
-			"This page loads the Puzzle Dream build from the public directory and keeps the same click-to-launch and fullscreen flow used on the homepage.",
+			"This page loads the Puzzle House build from the public directory and keeps the same click-to-launch and fullscreen flow used on the homepage.",
 		overviewHeading: "What this page is for",
 		overviewBody:
-			"Unlike the homepage embed for First Puzzle, this is a dedicated entry for the third game in the series, intended for players who want the larger dreamlike puzzle set right away.",
+			"This is a dedicated entry for the second game in the series, useful when you want a fuller standalone room before moving on to Puzzle Dream.",
 		tipsHeading: "Play notes",
 		tips: [
 			"The first launch may take a moment while the WebGL files load.",
 			"Landscape works best on phones; fullscreen will try to lock orientation.",
-			"If you want a shorter introduction first, go back to the homepage and start with First Puzzle.",
+			"If you want the shortest starting point first, go back to the homepage and start with First Puzzle.",
 		],
 	},
 	ja: {
-		title: "HER TREES : PUZZLE DREAM をブラウザで遊ぶ",
+		title: "HER TREES : THE PUZZLE HOUSE をブラウザで遊ぶ",
 		description:
-			"HER TREES : PUZZLE DREAM の専用ページです。サイト内でそのままブラウザ版を起動できます。",
-		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "HER TREES : PUZZLE DREAM を遊ぶ",
-		iframeTitle: "HER TREES : PUZZLE DREAM ブラウザ版",
-		playButton: "Puzzle Dream を始める",
+			"HER TREES : THE PUZZLE HOUSE の専用ページです。サイト内でそのままブラウザ版を起動できます。",
+		breadcrumbLabel: "Puzzle House",
+		playHeading: "HER TREES : THE PUZZLE HOUSE を遊ぶ",
+		iframeTitle: "HER TREES : THE PUZZLE HOUSE ブラウザ版",
+		playButton: "Puzzle House を始める",
 		intro:
-			"このページでは public ディレクトリ内の Puzzle Dream ビルドを読み込み、トップページと同じようにクリックして起動し、全画面でも遊べます。",
+			"このページでは public ディレクトリ内の Puzzle House ビルドを読み込み、トップページと同じようにクリックして起動し、全画面でも遊べます。",
 		overviewHeading: "このページの役割",
 		overviewBody:
-			"トップページの First Puzzle 埋め込みとは別に、シリーズ第3作へ直接入るための専用ページです。よりボリュームのある夢的な謎解きを遊びたい人向けです。",
+			"シリーズ第2作へ直接入るための専用ページです。Puzzle Dream より前に、よりまとまった短編作品を遊びたい人に向いています。",
 		tipsHeading: "プレイのヒント",
 		tips: [
 			"初回起動では WebGL ファイルの読み込みに少し時間がかかる場合があります。",
 			"スマートフォンでは横画面が向いています。全画面時は横向き固定を試みます。",
-			"まず短くシリーズの雰囲気を見たい場合は、トップページの First Puzzle から入るのが適しています。",
+			"まず最短の導入から入りたい場合は、トップページの First Puzzle が適しています。",
 		],
 	},
 	vi: {
-		title: "Choi HER TREES : PUZZLE DREAM tren trinh duyet",
+		title: "Choi HER TREES : THE PUZZLE HOUSE tren trinh duyet",
 		description:
-			"Mo trang rieng cho HER TREES : PUZZLE DREAM va choi ban browser truc tiep tren website.",
-		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "Choi HER TREES : PUZZLE DREAM",
-		iframeTitle: "HER TREES : PUZZLE DREAM tren trinh duyet",
-		playButton: "Bat dau Puzzle Dream",
+			"Mo trang rieng cho HER TREES : THE PUZZLE HOUSE va choi ban browser truc tiep tren website.",
+		breadcrumbLabel: "Puzzle House",
+		playHeading: "Choi HER TREES : THE PUZZLE HOUSE",
+		iframeTitle: "HER TREES : THE PUZZLE HOUSE tren trinh duyet",
+		playButton: "Bat dau Puzzle House",
 		intro:
-			"Trang nay tai ban Puzzle Dream nam trong thu muc public, giu cung cach bam de mo game va choi fullscreen giong trang chu.",
+			"Trang nay tai ban Puzzle House nam trong thu muc public, giu cung cach bam de mo game va choi fullscreen giong trang chu.",
 		overviewHeading: "Trang nay dung de lam gi",
 		overviewBody:
-			"Khac voi First Puzzle duoc nhung o trang chu, day la loi vao rieng cho phan thu ba trong series, hop voi nguoi muon choi ngay ban co noi dung dai hon.",
+			"Day la loi vao rieng cho phan thu hai trong series, phu hop neu ban muon choi mot tac pham ngan hon truoc khi chuyen sang Puzzle Dream.",
 		tipsHeading: "Luu y khi choi",
 		tips: [
 			"Lan mo dau tien co the can doi trong luc tai tep WebGL.",
 			"Dien thoai nen choi ngang man hinh; fullscreen se co gang khoa huong ngang.",
-			"Neu ban muon thu nhanh phong cach cua series truoc, hay quay ve trang chu va choi First Puzzle.",
+			"Neu ban muon bat dau bang trai nghiem ngan nhat, hay quay ve trang chu va choi First Puzzle.",
 		],
 	},
 };
@@ -188,14 +188,14 @@ const downloadCopy: Record<
 		note: "Ban Windows co the choi truc tiep",
 	},
 };
-const canonicalUrl = toAbsoluteUrl(puzzleDreamPath);
+const canonicalUrl = toAbsoluteUrl(puzzleHousePath);
 const ogLocale = localeToOgLocale(locale);
 const ogLocaleAlternates = buildOgLocaleAlternates(locale);
-const puzzleDreamSchema = JSON.stringify([
+const puzzleHouseSchema = JSON.stringify([
 	{
 		"@context": "https://schema.org",
 		"@type": "VideoGame",
-		name: "HER TREES : PUZZLE DREAM",
+		name: "HER TREES : THE PUZZLE HOUSE",
 		url: canonicalUrl,
 		description: copy.description,
 		image: shareImage,
@@ -262,19 +262,19 @@ const puzzleDreamSchema = JSON.stringify([
 				/>
 			))
 		}
-		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/play/puzzle-dream/")} />
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/play/puzzle-house/")} />
 		<script
 			async
 			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}
 			crossorigin="anonymous"
 		></script>
-		<script type="application/ld+json" set:html={puzzleDreamSchema}></script>
+		<script type="application/ld+json" set:html={puzzleHouseSchema}></script>
 	</head>
 	<body>
 		<div class="container-shell">
 			<SiteHeader
 				locale={locale}
-				currentPath={puzzleDreamPath}
+				currentPath={puzzleHousePath}
 				tagline={copy.description}
 				languageSwitchLabel={content.languageSwitchLabel}
 				languageLinks={languageLinks}
@@ -298,20 +298,20 @@ const puzzleDreamSchema = JSON.stringify([
 								class="embed-launch"
 								data-game-launch
 								data-zoom-surface
-								data-embed-src={puzzleDreamEmbedUrl}
-								data-target-id="puzzle-dream-game"
-								aria-controls="puzzle-dream-game"
-								style={`--launch-image: url(${puzzleDreamImage.src})`}
+								data-embed-src={puzzleHouseEmbedUrl}
+								data-target-id="puzzle-house-game"
+								aria-controls="puzzle-house-game"
+								style={`--launch-image: url(${puzzleHouseImage.src})`}
 							>
 								<span class="embed-launch-image" aria-hidden="true"></span>
 								<span class="embed-launch-overlay" aria-hidden="true"></span>
 								<span class="embed-launch-content">
-									<span class="embed-kicker">HER TREES : Puzzle Dream</span>
+									<span class="embed-kicker">HER TREES : The Puzzle House</span>
 									<strong>{copy.playButton}</strong>
 								</span>
 							</button>
 							<iframe
-								id="puzzle-dream-game"
+								id="puzzle-house-game"
 								class="game-embed"
 								title={copy.iframeTitle}
 								loading="lazy"
@@ -325,15 +325,15 @@ const puzzleDreamSchema = JSON.stringify([
 							<div class="game-toolbar">
 								<p class="game-intro">{copy.overviewBody}</p>
 								<div class="game-actions">
-									<a href={puzzleDreamGuidePath} class="guide-link">
+									<a href={puzzleHouseGuidePath} class="guide-link">
 										{content.guideButton}
 									</a>
 									<button
 										type="button"
 										class="fullscreen-button"
 									data-game-fullscreen
-									data-target-id="puzzle-dream-game"
-									aria-controls="puzzle-dream-game"
+									data-target-id="puzzle-house-game"
+									aria-controls="puzzle-house-game"
 								>
 									{content.fullscreenButton}
 								</button>
@@ -341,7 +341,7 @@ const puzzleDreamSchema = JSON.stringify([
 							</div>
 							<p class="download-note">
 								<a
-									href={puzzleDreamDownloadUrl}
+									href={puzzleHouseDownloadUrl}
 									class="download-link download-button"
 									target="_blank"
 									rel="noreferrer"

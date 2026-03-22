@@ -1,0 +1,305 @@
+---
+import puzzleDreamImage from "../assets/puzzle_dream.png";
+import "../styles/global.css";
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
+import {
+	homeContent,
+	type Locale,
+} from "../data/home-content";
+import {
+	adsensePublisherId,
+	globalPaths,
+	siteUrl,
+} from "../data/site-shell";
+import {
+	buildAlternateLinks,
+	buildOgLocaleAlternates,
+	localeToHreflang,
+	localeToOgLocale,
+	toAbsoluteUrl,
+} from "../data/seo";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const guideEmbedUrl = "https://www.youtube.com/embed/W2mEV-BnG_E";
+const guidePath =
+	locale === "en"
+		? "/play/puzzle-dream/guide/"
+		: `/${locale}/play/puzzle-dream/guide/`;
+const playPath =
+	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const shareImage = new URL(puzzleDreamImage.src, siteUrl).toString();
+
+const languageLinks = buildAlternateLinks(
+	{
+		en: "/play/puzzle-dream/guide/",
+		"zh-cn": "/zh-cn/play/puzzle-dream/guide/",
+		ja: "/ja/play/puzzle-dream/guide/",
+		vi: "/vi/play/puzzle-dream/guide/",
+	},
+	locale,
+);
+
+const guideCopy: Record<
+	Locale,
+	{
+		title: string;
+		description: string;
+		breadcrumbLabel: string;
+		beforeHeading: string;
+		beforeBody: string;
+		videoHeading: string;
+		videoBody: string;
+		afterHeading: string;
+		afterBody: string;
+		nextHeading: string;
+		nextBody: string;
+		playLabel: string;
+		analysisLabel: string;
+	}
+> = {
+	"zh-cn": {
+		title: "HER TREES : PUZZLE DREAM 攻略视频",
+		description:
+			"查看 HER TREES : PUZZLE DREAM 的嵌入式攻略视频，直接对应站内浏览器版游戏流程。",
+		breadcrumbLabel: "Puzzle Dream 攻略",
+		beforeHeading: "看视频前先做什么",
+		beforeBody:
+			"建议先自己探索梦境场景中的顺序、摆放和图形关联，再决定是否打开完整视频，这样更容易保留 Puzzle Dream 的探索感。",
+		videoHeading: "这个视频适合什么情况",
+		videoBody:
+			"如果你已经卡在某一段，或者想直接确认完整流程，这个视频适合作为完整攻略使用，而不是轻度提示。",
+		afterHeading: "更稳妥的使用方式",
+		afterBody:
+			"Puzzle Dream 的体量更大，先自己推进一段，再回来看对应视频，会更容易理解各个场景之间的连接方式。",
+		nextHeading: "继续阅读",
+		nextBody: "你可以回到游戏页继续试玩，或查看系列分析页面。",
+		playLabel: "返回 Puzzle Dream",
+		analysisLabel: "玩法解析",
+	},
+	en: {
+		title: "HER TREES : PUZZLE DREAM Guide Video",
+		description:
+			"Watch an embedded walkthrough for HER TREES : PUZZLE DREAM, matched to the browser version on this site.",
+		breadcrumbLabel: "Puzzle Dream Guide",
+		beforeHeading: "Before you watch",
+		beforeBody:
+			"Give yourself some time with the dream spaces first. Puzzle Dream has more room-to-room buildup, so the discoveries land better when you test sequence, placement, and visual logic on your own first.",
+		videoHeading: "What this video is best for",
+		videoBody:
+			"This walkthrough is most useful when you are stuck in a later section or want a full spoiler route through the game. It is a complete solution reference, not a minimal hint page.",
+		afterHeading: "A better hint flow",
+		afterBody:
+			"Because Puzzle Dream is larger than the earlier games, it works well to solve one section yourself, then return here only when the chain stops making sense.",
+		nextHeading: "Next steps",
+		nextBody: "You can jump back to the playable page or continue to the series analysis.",
+		playLabel: "Back to Puzzle Dream",
+		analysisLabel: "Puzzle Design Analysis",
+	},
+	ja: {
+		title: "HER TREES : PUZZLE DREAM 攻略動画",
+		description:
+			"HER TREES : PUZZLE DREAM の攻略動画をページ内で確認できます。サイト内のブラウザ版に対応しています。",
+		breadcrumbLabel: "Puzzle Dream 攻略",
+		beforeHeading: "動画を見る前に",
+		beforeBody:
+			"まずは夢の場面を自分で少し進めてみるのがおすすめです。順序や配置、図形の関係を先に試したほうが発見が残ります。",
+		videoHeading: "この動画が向いている場面",
+		videoBody:
+			"後半で行き詰まったときや、全体の流れを確認したいときに向いています。軽いヒントではなく、完全な攻略動画です。",
+		afterHeading: "おすすめの見方",
+		afterBody:
+			"Puzzle Dream はボリュームが大きいので、ひと区切りごとに自力で試し、必要なときだけ動画に戻るほうが自然です。",
+		nextHeading: "次に見るページ",
+		nextBody: "ゲームページに戻るか、シリーズ分析ページも確認できます。",
+		playLabel: "Puzzle Dream に戻る",
+		analysisLabel: "分析記事",
+	},
+	vi: {
+		title: "Video huong dan HER TREES : PUZZLE DREAM",
+		description:
+			"Xem video huong dan nhung san cho HER TREES : PUZZLE DREAM, phu hop voi ban browser tren website.",
+		breadcrumbLabel: "Huong dan Puzzle Dream",
+		beforeHeading: "Truoc khi mo video",
+		beforeBody:
+			"Hay tu thu nghiem cac khong gian trong mo truoc. Puzzle Dream co quy mo lon hon, nen se hay hon khi ban tu thu ve thu tu, vi tri, va logic hinh anh truoc.",
+		videoHeading: "Video nay phu hop luc nao",
+		videoBody:
+			"Video nay hop khi ban mac o mot doan sau hoac muon xem toan bo loi giai. Day la huong dan day du, khong phai chi la goi y ngan.",
+		afterHeading: "Cach xem hop ly hon",
+		afterBody:
+			"Vi Puzzle Dream dai hon, ban nen tu giai tung phan truoc, roi chi quay lai video khi chuoi logic khong con ro rang.",
+		nextHeading: "Buoc tiep theo",
+		nextBody: "Ban co the quay lai trang choi game hoac mo bai phan tich cua series.",
+		playLabel: "Quay lai Puzzle Dream",
+		analysisLabel: "Phan tich thiet ke",
+	},
+};
+
+const copy = guideCopy[locale];
+const canonicalUrl = toAbsoluteUrl(guidePath);
+const ogLocale = localeToOgLocale(locale);
+const ogLocaleAlternates = buildOgLocaleAlternates(locale);
+const guideSchema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoObject",
+		name: copy.title,
+		description: copy.description,
+		embedUrl: guideEmbedUrl,
+		url: canonicalUrl,
+		thumbnailUrl: shareImage,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: toAbsoluteUrl(content.path),
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: copy.breadcrumbLabel,
+				item: canonicalUrl,
+			},
+		],
+	},
+]);
+---
+
+<html lang={content.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#111111" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{copy.title}</title>
+		<meta name="description" content={copy.description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={copy.title} />
+		<meta property="og:description" content={copy.description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content={content.siteName} />
+		<meta property="og:locale" content={ogLocale} />
+		{
+			ogLocaleAlternates.map((alternateLocale) => (
+				<meta property="og:locale:alternate" content={alternateLocale} />
+			))
+		}
+		<meta property="og:image" content={shareImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={copy.title} />
+		<meta name="twitter:description" content={copy.description} />
+		<meta name="twitter:image" content={shareImage} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
+		{
+			languageLinks.map((link) => (
+				<link
+					rel="alternate"
+					hreflang={localeToHreflang(link.locale)}
+					href={toAbsoluteUrl(link.href)}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/play/puzzle-dream/guide/")} />
+		<script
+			async
+			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}
+			crossorigin="anonymous"
+		></script>
+		<script type="application/ld+json" set:html={guideSchema}></script>
+	</head>
+	<body>
+		<div class="container-shell">
+			<SiteHeader
+				locale={locale}
+				currentPath={guidePath}
+				tagline={copy.description}
+				languageSwitchLabel={content.languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
+
+			<main>
+				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
+					<a href={playPath}>{copy.playLabel}</a>
+					<span>/</span>
+					<span aria-current="page">{copy.breadcrumbLabel}</span>
+				</nav>
+
+				<section class="page-intro-block">
+					<h1>{copy.title}</h1>
+					<p>{copy.description}</p>
+				</section>
+
+				<section class="guide-frame-shell">
+					<iframe
+						class="guide-frame"
+						src={guideEmbedUrl}
+						title={copy.title}
+						loading="lazy"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						referrerpolicy="strict-origin-when-cross-origin"
+						allowfullscreen
+					></iframe>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.beforeHeading}</h2>
+					<div class="prose-block">
+						<p>{copy.beforeBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.videoHeading}</h2>
+					<div class="prose-block">
+						<p>{copy.videoBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.afterHeading}</h2>
+					<div class="prose-block">
+						<p>{copy.afterBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.nextHeading}</h2>
+					<p class="section-intro">{copy.nextBody}</p>
+					<div class="resource-grid">
+						<article class="resource-card">
+							<h3>
+								<a href={playPath}>{copy.playLabel}</a>
+							</h3>
+							<p>{copy.beforeBody}</p>
+						</article>
+						<article class="resource-card">
+							<h3>
+								<a href={globalPaths.analysis}>{copy.analysisLabel}</a>
+							</h3>
+							<p>{copy.videoBody}</p>
+						</article>
+					</div>
+				</section>
+			</main>
+
+			<SiteFooter locale={locale} />
+		</div>
+	</body>
+</html>
