@@ -1,0 +1,126 @@
+---
+import StaticPageLayout from "../../layouts/StaticPageLayout.astro";
+import { siteUrl } from "../../data/site-shell";
+
+const canonicalPath = "/focus-prompt/";
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "SoftwareApplication",
+		name: "Focus Prompt",
+		applicationCategory: "BrowserApplication",
+		operatingSystem: "Chrome",
+		url: `${siteUrl}${canonicalPath}`,
+		description:
+			"Focus Prompt is a lightweight Chrome extension that shows a brief full-screen reminder at the start of navigation.",
+		offers: {
+			"@type": "Offer",
+			price: "0",
+			priceCurrency: "USD",
+		},
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: siteUrl,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Focus Prompt",
+				item: `${siteUrl}${canonicalPath}`,
+			},
+		],
+	},
+];
+---
+
+<StaticPageLayout
+	title="Focus Prompt"
+	description="Focus Prompt is a lightweight Chrome extension that shows a brief full-screen reminder at the start of navigation."
+	canonicalPath={canonicalPath}
+	pageHeading="Focus Prompt"
+	pageIntro="A lightweight Chrome extension that briefly interrupts navigation with a full-screen reminder so attention can return to the intended task."
+	breadcrumbLabel="Focus Prompt"
+	schema={schema}
+>
+	<p>
+		Focus Prompt is designed for people who notice that page switching can become
+		automatic and unfocused. Instead of a small notification, it shows a strong
+		full-screen prompt at the start of navigation, then disappears after a short
+		configurable delay.
+	</p>
+
+	<section class="content-section">
+		<h3>Core behavior</h3>
+		<div class="bullet-grid">
+			<div class="bullet-card">
+				<p>
+					Shows a centered full-screen reminder during full page loads and
+					supported in-page navigation.
+				</p>
+			</div>
+			<div class="bullet-card">
+				<p>
+					Lets the user set the prompt message, visible duration, and trigger
+					probability.
+				</p>
+			</div>
+			<div class="bullet-card">
+				<p>
+					Includes a toolbar toggle with clear enabled and disabled state.
+				</p>
+			</div>
+			<div class="bullet-card">
+				<p>
+					Provides an options page in English and Simplified Chinese.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="content-section">
+		<h3>Why it runs during navigation</h3>
+		<p>
+			The extension only works if it can appear at the beginning of page
+			navigation. That is the product's single purpose. The reminder is intended
+			to interrupt distraction early, before the new page fully captures
+			attention.
+		</p>
+		<p>
+			Because modern websites use both full reloads and client-side route changes,
+			the extension is built to respond to both patterns so the behavior stays
+			consistent.
+		</p>
+	</section>
+
+	<section class="content-section">
+		<h3>Privacy summary</h3>
+		<p>
+			Focus Prompt stores only its own settings, such as message text, duration,
+			probability, enabled state, and interface language, using Chrome extension
+			storage APIs.
+		</p>
+		<p>
+			It does not require an account, does not use a developer-controlled remote
+			backend, does not include remote code, and does not send browsing data to an
+			external server.
+		</p>
+	</section>
+
+	<section class="content-section">
+		<h3>Reviewer note</h3>
+		<p>
+			For a quick test, set the trigger probability to 100%, choose a short custom
+			message, and navigate between pages or inside a single-page app. A brief
+			full-screen prompt should appear when the extension is enabled and stop
+			appearing when the toolbar toggle is turned off.
+		</p>
+	</section>
+</StaticPageLayout>
