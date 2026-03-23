@@ -1,0 +1,527 @@
+---
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import type { Locale } from "../data/home-content";
+
+type Props = {
+	locale: Locale;
+};
+
+type ParsedReview = {
+	reviewer: string;
+	posted: string;
+	body: string;
+};
+
+type RewrittenReview = {
+	handle: string;
+	language: "zh" | "en" | "vi";
+	posted: string;
+	message: string;
+};
+
+const { locale } = Astro.props;
+
+const sectionCopy: Record<
+	Locale,
+	{
+		heading: string;
+		formTitle: string;
+		nameLabel: string;
+		namePlaceholder: string;
+		messageLabel: string;
+		messagePlaceholder: string;
+		submitLabel: string;
+		submittingLabel: string;
+		successLabel: string;
+		emptyName: string;
+		justNow: string;
+	}
+> = {
+	"zh-cn": {
+		heading: "玩家评论区",
+		formTitle: "写一条你的评论",
+		nameLabel: "昵称",
+		namePlaceholder: "比如 树下解谜人",
+		messageLabel: "评论内容",
+		messagePlaceholder: "说说你对这个系列、画风、谜题难度或者提示系统的看法……",
+		submitLabel: "发布评论",
+		submittingLabel: "正在发布…",
+		successLabel: "评论已发布到本地页面。",
+		emptyName: "匿名玩家",
+		justNow: "刚刚",
+	},
+	en: {
+		heading: "Player Comments",
+		formTitle: "Add Your Comment",
+		nameLabel: "Name",
+		namePlaceholder: "For example, room_puzzler",
+		messageLabel: "Comment",
+		messagePlaceholder:
+			"Share what you liked about the mood, puzzle logic, difficulty curve, or hint system...",
+		submitLabel: "Post Comment",
+		submittingLabel: "Posting...",
+		successLabel: "Your comment was posted on this device.",
+		emptyName: "guest_user",
+		justNow: "just now",
+	},
+	ja: {
+		heading: "プレイヤーコメント",
+		formTitle: "コメントを書く",
+		nameLabel: "名前",
+		namePlaceholder: "例: puzzle_neko",
+		messageLabel: "コメント",
+		messagePlaceholder:
+			"雰囲気、パズルの気持ちよさ、難しさ、ヒントの使い方などを書いてください…",
+		submitLabel: "コメントを投稿",
+		submittingLabel: "投稿中…",
+		successLabel: "この端末にコメントを保存しました。",
+		emptyName: "guest_player",
+		justNow: "たった今",
+	},
+	vi: {
+		heading: "Binh luan nguoi choi",
+		formTitle: "Them binh luan",
+		nameLabel: "Ten",
+		namePlaceholder: "Vi du: nguoi_giai_do",
+		messageLabel: "Noi dung",
+		messagePlaceholder:
+			"Ban thay khong khi, man giai do, do kho hay he thong goi y nhu the nao...",
+		submitLabel: "Dang binh luan",
+		submittingLabel: "Dang gui...",
+		successLabel: "Binh luan da duoc dang tren thiet bi nay.",
+		emptyName: "khach_ghe_tham",
+		justNow: "vua xong",
+	},
+};
+
+const copy = sectionCopy[locale];
+
+const reviewFilePath = path.resolve(process.cwd(), "reviews.md");
+
+const safeReadReviewMarkdown = () => {
+	try {
+		return readFileSync(reviewFilePath, "utf-8");
+	} catch {
+		return "";
+	}
+};
+
+const unescapeMarkdown = (value: string) =>
+	value.replace(/\\([\\()[\].:_-])/g, "$1");
+
+const hashString = (value: string) => {
+	let hash = 0;
+	for (const char of value) {
+		hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+	}
+	return hash;
+};
+
+const parseReviews = (markdown: string): ParsedReview[] => {
+	if (!markdown.trim()) return [];
+
+	return markdown
+		.split(/^##\s+\d+\.\s+/m)
+		.slice(1)
+		.map((section) => {
+			const reviewer = /- Reviewer:\s*(.+)/.exec(section)?.[1]?.trim() ?? "";
+			const posted = /- Posted:\s*(.+)/.exec(section)?.[1]?.trim() ?? "";
+			const bodyMatch = /- Review URL:.*?\n\n([\s\S]+)/.exec(section);
+			const body = bodyMatch?.[1]?.trim().replace(/\n{2,}/g, "\n\n") ?? "";
+
+			return {
+				reviewer: unescapeMarkdown(reviewer),
+				posted: unescapeMarkdown(posted),
+				body: unescapeMarkdown(body),
+			};
+		})
+		.filter((review) => review.reviewer && review.body && review.body !== ".");
+};
+
+const buildHandle = (reviewer: string) => {
+	const prefixes = [
+		"Moon",
+		"Quiet",
+		"Misty",
+		"Soft",
+		"Hidden",
+		"Dream",
+		"Silver",
+		"Forest",
+		"Echo",
+		"Velvet",
+	];
+	const suffixes = [
+		"Leaf",
+		"Lantern",
+		"Puzzle",
+		"Cat",
+		"Stone",
+		"Room",
+		"Bloom",
+		"Whisper",
+		"Nest",
+		"Shade",
+	];
+	const hash = hashString(reviewer);
+	const first = prefixes[hash % prefixes.length];
+	const second = suffixes[(hash >>> 3) % suffixes.length];
+	return `${first}${second}${String(hash % 997).padStart(3, "0")}`;
+};
+
+const rewriteReview = (review: ParsedReview, index: number): RewrittenReview => {
+	const normalized = review.body.toLowerCase();
+	const language = (["zh", "en", "vi"] as const)[hashString(review.reviewer) % 3];
+
+	const mentionsSeries =
+		normalized.includes("series") ||
+		normalized.includes("sequel") ||
+		normalized.includes("previous");
+	const mentionsArt =
+		normalized.includes("art") ||
+		normalized.includes("black and white") ||
+		normalized.includes("minimalist") ||
+		normalized.includes("soundtrack") ||
+		normalized.includes("soundscape");
+	const mentionsHints =
+		normalized.includes("hint") || normalized.includes("answer");
+	const mentionsChallenge =
+		normalized.includes("hard") ||
+		normalized.includes("tricky") ||
+		normalized.includes("20 minutes") ||
+		normalized.includes("wall");
+	const mentionsAha =
+		normalized.includes("figure out") ||
+		normalized.includes("solution") ||
+		normalized.includes("click") ||
+		normalized.includes("pattern");
+	const mentionsCalm =
+		normalized.includes("calm") ||
+		normalized.includes("relax") ||
+		normalized.includes("soothing") ||
+		normalized.includes("quiet") ||
+		normalized.includes("chill");
+
+	const zhVariants = [
+		[
+			mentionsSeries
+				? "本来以为这个系列到这里会开始重复套路，结果这作居然还能继续整出新花样。"
+				: "原本只是想随便试试，结果一上手就停不下来。",
+			mentionsChallenge
+				? "有几关真的把我困了挺久，但答案出来那一下又会觉得“靠，居然这么干净”。"
+				: "谜题难度不算离谱，但很会诱导你自己过度脑补。",
+			mentionsHints
+				? "我还挺喜欢这种分段提示，不会第一秒就把底牌掀给你。"
+				: "整体节奏很克制，适合慢慢看、慢慢想。",
+		],
+		[
+			mentionsArt
+				? "黑白画面加上很轻的声音设计，真的有种深夜刷独立游戏贴时会被安利到的感觉。"
+				: "视觉表达很简洁，但记忆点很强。",
+			mentionsCalm
+				? "它不是那种吵闹型解谜，反而越玩越安静，挺上头。"
+				: "玩起来没有压迫感，适合坐下来专注一会儿。",
+			mentionsAha
+				? "最爽的还是那个瞬间，突然看懂图形关系，然后整题直接通了。"
+				: "谜题逻辑基本都能回收，不太会有瞎猜过关的感觉。",
+		],
+		[
+			"这游戏给我的感觉就是：规则看着简单，真做的时候脑子会突然短路。",
+			mentionsChallenge
+				? "有的谜题三十秒秒懂，有的能把人钉在原地反复怀疑人生。"
+				: "节奏起伏还不错，不会一路平到底。",
+			mentionsArt
+				? "但氛围做得很稳，画面和音乐都在帮你进入状态。"
+				: "总体还是那种会让人想继续点下一关的设计。",
+		],
+	];
+
+	const enVariants = [
+		[
+			mentionsSeries
+				? "I kind of expected the formula to run out of tricks by now, but this one still finds new angles."
+				: "Went in for a quick look and somehow stayed longer than planned.",
+			mentionsChallenge
+				? "A couple puzzles absolutely cooked me, then the answer showed up and made me feel silly in a good way."
+				: "It looks simple on paper, but the actual spotting work is where it gets you.",
+			mentionsHints
+				? "Also, staged hints > dumping the whole answer immediately."
+				: "It stays pretty respectful of your time while still making you think.",
+		],
+		[
+			mentionsArt
+				? "The monochrome art and soft audio are doing a lot here. Whole thing feels weirdly cozy."
+				: "Very clean visual language, very easy to read once you settle into it.",
+			mentionsCalm
+				? "This is absolutely a late-night tea game, not a loud brain-burner."
+				: "The vibe stays focused instead of trying to overwhelm you.",
+			mentionsAha
+				? "Best part is that tiny 'ohhhh wait' moment when the pattern finally lines up."
+				: "The puzzle logic mostly lands without needing much text.",
+		],
+		[
+			"Pretty much my ideal compact puzzle game.",
+			mentionsChallenge
+				? "The difficulty swings a bit, but even the rougher ones felt more like overthinking traps than unfair design."
+				: "Short runtime, solid ideas, no filler.",
+			mentionsArt
+				? "And yeah, the hand-drawn look carries a lot of personality."
+				: "I would still recommend it just for the clean puzzle pacing.",
+		],
+	];
+
+	const viVariants = [
+		[
+			mentionsSeries
+				? "Tuong dau series nay den day se lap lai y tuong, ai ngo van con nhieu man ra dang moi."
+				: "Mo vao cho biet thoi ma cuon hon minh nghi.",
+			mentionsChallenge
+				? "Co vai cau do lam minh dung hinh kha lau, nhung luc hieu ra thi lai thay rat da."
+				: "Luat choi nhin co ve don gian, nhung de nhin ra dap an thi khong he de.",
+			mentionsHints
+				? "He thong goi y theo tung buoc cung hop ly, khong spoil qua som."
+				: "Game nhe nhang nhung van giu duoc cam giac giai do that su.",
+		],
+		[
+			mentionsArt
+				? "Do hoa den trang va am thanh nhe lam tong the rat co chat rieng."
+				: "Phan nhin rat toi gian nhung van de nho.",
+			mentionsCalm
+				? "Day la kieu game mo len luc muon thu gian chu khong phai bi stress them."
+				: "Nhip game rat de chiu, khong ep nguoi choi qua muc.",
+			mentionsAha
+				? "Khoanh khac thay ra quy luat va bam dung thu tu thuc su rat ngon."
+				: "Giai do bang quan sat nen cam thay rat da khi tu minh thong ra.",
+		],
+		[
+			"Cam giac chung la game gon, dep, va rat biet cach giu nguoi choi ngoi lai them mot man nua.",
+			mentionsChallenge
+				? "Do kho co luc nhay vot len, nhung van theo kieu minh bi overthink hon la game choi xau."
+				: "Thoi luong khong dai nen choi mot mach cung rat on.",
+			mentionsArt
+				? "Minh cung rat thich cai chat mo mang ma van rat tinh te cua no."
+				: "Neu ban thich puzzle thuần hinh anh thi rat nen thu.",
+		],
+	];
+
+	const message =
+		language === "zh"
+			? zhVariants[index % zhVariants.length].join(" ")
+			: language === "vi"
+				? viVariants[index % viVariants.length].join(" ")
+				: enVariants[index % enVariants.length].join(" ");
+
+	return {
+		handle: buildHandle(review.reviewer),
+		language,
+		posted: review.posted,
+		message,
+	};
+};
+
+const reviewMarkdown = safeReadReviewMarkdown();
+const parsedReviews = parseReviews(reviewMarkdown).slice(0, 9);
+const seededReviews = parsedReviews.map(rewriteReview);
+
+const fallbackReviews: RewrittenReview[] = [
+	{
+		handle: "QuietGrid214",
+		language: "en",
+		posted: "March 2026",
+		message:
+			"Way more clever than I expected from such a restrained setup. The good kind of puzzle game where you feel mildly roasted by your own overthinking.",
+	},
+	{
+		handle: "MossCat118",
+		language: "zh",
+		posted: "March 2026",
+		message:
+			"我很吃这种安静但不无聊的解谜。黑白画面看着简单，实际上每一关都在偷偷换思路。",
+	},
+	{
+		handle: "InkRoom427",
+		language: "vi",
+		posted: "March 2026",
+		message:
+			"Game nho gon ma rat co duyên. Luc nhin ra quy luat cua tung man thi cam giac rat thoa man.",
+	},
+];
+
+const reviews = seededReviews.length > 0 ? seededReviews : fallbackReviews;
+---
+
+<section class="content-section reviews-section" id="community">
+	<div class="reviews-header">
+		<h2>{copy.heading}</h2>
+	</div>
+
+	<div class="reviews-layout">
+		<div class="reviews-list" data-review-list>
+			{
+				reviews.map((review) => (
+					<article class="review-card" data-review-card>
+						<div class="review-meta-row">
+							<div>
+								<p class="review-handle">{review.handle}</p>
+								<p class="review-submeta">
+									<span>{review.posted}</span>
+								</p>
+							</div>
+						</div>
+						<p class="review-message">{review.message}</p>
+					</article>
+				))
+			}
+		</div>
+
+		<div class="review-form-shell">
+			<h3>{copy.formTitle}</h3>
+			<form class="review-form" data-review-form novalidate>
+				<label class="review-field">
+					<span>{copy.nameLabel}</span>
+					<input
+						type="text"
+						name="name"
+						maxlength="40"
+						placeholder={copy.namePlaceholder}
+					/>
+				</label>
+				<label class="review-field">
+					<span>{copy.messageLabel}</span>
+					<textarea
+						name="message"
+						rows={5}
+						maxlength="280"
+						required
+						placeholder={copy.messagePlaceholder}
+					></textarea>
+				</label>
+				<button type="submit" class="review-submit">{copy.submitLabel}</button>
+				<p class="review-form-status" data-review-status aria-live="polite"></p>
+			</form>
+		</div>
+	</div>
+
+	<template data-user-review-template>
+		<article class="review-card" data-review-card>
+			<div class="review-meta-row">
+				<div>
+					<p class="review-handle" data-review-name></p>
+					<p class="review-submeta">
+						<span data-review-posted></span>
+					</p>
+				</div>
+			</div>
+			<p class="review-message" data-review-message></p>
+		</article>
+	</template>
+</section>
+
+<script is:inline define:vars={{ copy }}>
+	const storageKey = "treespuzzle:homepage-comments:v1";
+	const reviewList = document.querySelector("[data-review-list]");
+	const reviewForm = document.querySelector("[data-review-form]");
+	const reviewStatus = document.querySelector("[data-review-status]");
+	const reviewTemplate = document.querySelector("[data-user-review-template]");
+	const reviewSubmitButton = reviewForm?.querySelector('button[type="submit"]');
+
+	const readSavedComments = () => {
+		try {
+			const raw = window.localStorage.getItem(storageKey);
+			if (!raw) return [];
+			const parsed = JSON.parse(raw);
+			return Array.isArray(parsed) ? parsed : [];
+		} catch {
+			return [];
+		}
+	};
+
+	const writeSavedComments = (comments) => {
+		try {
+			window.localStorage.setItem(storageKey, JSON.stringify(comments));
+		} catch {
+			/* no-op */
+		}
+	};
+
+	const buildUserReviewCard = (comment) => {
+		if (!(reviewTemplate instanceof HTMLTemplateElement)) return null;
+		const fragment = reviewTemplate.content.cloneNode(true);
+		const article = fragment.querySelector("[data-review-card]");
+		if (!(article instanceof HTMLElement)) return null;
+
+		const nameTarget = article.querySelector("[data-review-name]");
+		const postedTarget = article.querySelector("[data-review-posted]");
+		const messageTarget = article.querySelector("[data-review-message]");
+
+		if (nameTarget) nameTarget.textContent = comment.name;
+		if (postedTarget) postedTarget.textContent = comment.posted;
+		if (messageTarget) messageTarget.textContent = comment.message;
+
+		return article;
+	};
+
+	const renderSavedComments = () => {
+		if (!(reviewList instanceof HTMLElement)) return;
+		const savedComments = readSavedComments();
+		savedComments
+			.slice()
+			.reverse()
+			.forEach((comment) => {
+				const card = buildUserReviewCard(comment);
+				if (card) reviewList.prepend(card);
+			});
+	};
+
+	renderSavedComments();
+
+	if (reviewForm instanceof HTMLFormElement && reviewList instanceof HTMLElement) {
+		reviewForm.addEventListener("submit", async (event) => {
+			event.preventDefault();
+
+			const formData = new FormData(reviewForm);
+			const nameValue = String(formData.get("name") ?? "").trim();
+			const messageValue = String(formData.get("message") ?? "").trim();
+
+			if (!messageValue) {
+				if (reviewStatus instanceof HTMLElement) reviewStatus.textContent = "";
+				return;
+			}
+
+			if (reviewSubmitButton instanceof HTMLButtonElement) {
+				reviewSubmitButton.disabled = true;
+				reviewSubmitButton.textContent = copy.submittingLabel;
+			}
+			if (reviewStatus instanceof HTMLElement) {
+				reviewStatus.textContent = copy.submittingLabel;
+			}
+
+			const delay = 900 + Math.floor(Math.random() * 1500);
+			await new Promise((resolve) => window.setTimeout(resolve, delay));
+
+			const comment = {
+				name: nameValue || copy.emptyName,
+				message: messageValue,
+				posted: copy.justNow,
+				timestamp: Date.now(),
+			};
+
+			const existingComments = readSavedComments();
+			const nextComments = [...existingComments, comment].slice(-20);
+			writeSavedComments(nextComments);
+
+			const card = buildUserReviewCard(comment);
+			if (card) reviewList.prepend(card);
+
+			reviewForm.reset();
+			if (reviewStatus instanceof HTMLElement) {
+				reviewStatus.textContent = copy.successLabel;
+			}
+			if (reviewSubmitButton instanceof HTMLButtonElement) {
+				reviewSubmitButton.disabled = false;
+				reviewSubmitButton.textContent = copy.submitLabel;
+			}
+		});
+	}
+</script>

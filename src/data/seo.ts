@@ -50,6 +50,12 @@ export const buildOgLocaleAlternates = (locale: Locale) =>
 		.filter((item) => item !== locale)
 		.map((item) => localeToOgLocale(item));
 
+export const guideVideoUploadDates = {
+	firstPuzzle: "2026-03-15T18:10:58-07:00",
+	puzzleDream: "2026-03-15T18:28:27-07:00",
+	puzzleHouse: "2026-03-15T18:23:10-07:00",
+} as const;
+
 export const homeAlternateLinks = (locale: Locale) =>
 	buildAlternateLinks(
 		{

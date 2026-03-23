@@ -13,6 +13,7 @@ import {
 } from "../data/site-shell";
 import {
 	buildOgLocaleAlternates,
+	guideVideoUploadDates,
 	guideAlternateLinks,
 	localeToHreflang,
 	localeToOgLocale,
@@ -121,6 +122,7 @@ const guideSchema = JSON.stringify([
 		embedUrl: guideEmbedUrl,
 		url: canonicalUrl,
 		thumbnailUrl: shareImageUrl,
+		uploadDate: guideVideoUploadDates.firstPuzzle,
 	},
 	{
 		"@context": "https://schema.org",
