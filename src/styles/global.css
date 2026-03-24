@@ -367,21 +367,30 @@ a:hover {
 
 .game-toolbar {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 20px;
-	margin-top: 16px;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+	margin: 16px 0 22px;
 }
 
 .game-actions {
 	display: flex;
-	flex-shrink: 0;
 	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
 	gap: 12px;
 }
 
+.guide-card,
+.download-card {
+	margin: 20px 0;
+	padding: 18px 20px;
+	border: 1px solid var(--border-color);
+	background: #fff;
+}
+
 .download-note {
-	margin: 16px 0 0;
+	margin: 0;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -440,6 +449,52 @@ a:hover {
 	line-height: 1.7;
 }
 
+.guide-note {
+	margin: 0;
+	color: var(--accent-color);
+	font-size: 0.92rem;
+	line-height: 1.7;
+}
+
+.guide-link,
+.guide-inline-link {
+	color: var(--text-color);
+}
+
+.guide-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.8rem 1.2rem;
+	border: 1px solid #111;
+	background: #fff;
+	font: inherit;
+	line-height: 1;
+	text-decoration: none;
+	transition:
+		background 0.2s ease,
+		color 0.2s ease,
+		border-color 0.2s ease;
+}
+
+.guide-inline-link {
+	text-decoration: underline;
+	text-underline-offset: 0.14em;
+}
+
+.guide-link:hover,
+.guide-inline-link:hover {
+	color: var(--hover-color);
+	background: #111;
+	border-color: #111;
+	text-decoration: none;
+}
+
+.guide-inline-link:hover {
+	background: transparent;
+	border-color: transparent;
+}
+
 .section-intro {
 	margin: 0 0 24px;
 	color: var(--accent-color);
@@ -447,8 +502,11 @@ a:hover {
 	line-height: 1.7;
 }
 
-.guide-link,
 .fullscreen-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
 	flex-shrink: 0;
 	border: 1px solid #111;
 	background: #111;
@@ -463,19 +521,25 @@ a:hover {
 		border-color 0.2s ease;
 }
 
-.guide-link {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	text-decoration: none;
-}
-
-.guide-link:hover,
 .fullscreen-button:hover {
 	background: #fff;
 	color: #111;
 	border-color: #111;
 	text-decoration: none;
+}
+
+.fullscreen-button-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1rem;
+	height: 1rem;
+}
+
+.fullscreen-button-icon svg {
+	width: 100%;
+	height: 100%;
+	display: block;
 }
 
 .game-embed-shell:fullscreen {
@@ -1053,13 +1117,17 @@ a:hover {
 		align-items: flex-start;
 	}
 
+	.guide-card,
+	.download-card {
+		padding: 16px;
+	}
+
 	.game-actions {
 		width: 100%;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: center;
 	}
 
-	.guide-link,
 	.fullscreen-button {
 		width: 100%;
 	}

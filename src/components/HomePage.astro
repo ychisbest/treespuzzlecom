@@ -56,6 +56,30 @@ const localizedGames = content.games.map((game, index) => ({
 				: undefined,
 }));
 const relatedGames = localizedGames.filter((_, index) => index !== 0);
+const guideNoteCopy: Record<
+	Locale,
+	{
+		prefix: string;
+		linkLabel: string;
+	}
+> = {
+	"zh-cn": {
+		prefix: "如果遇到卡关，",
+		linkLabel: "点击此处查看视频攻略",
+	},
+	en: {
+		prefix: "If you get stuck, ",
+		linkLabel: "watch the video guide here",
+	},
+	ja: {
+		prefix: "行き詰まったら、",
+		linkLabel: "こちらから攻略動画を確認してください",
+	},
+	vi: {
+		prefix: "Neu bi mac o mot doan, ",
+		linkLabel: "bam vao day de xem video huong dan",
+	},
+};
 
 const languageLinks = homeAlternateLinks(locale);
 const canonicalUrl = toAbsoluteUrl(content.path);
@@ -322,23 +346,41 @@ const homeSchema = JSON.stringify([
 								<p>{content.rotateHint}</p>
 							</div>
 						</div>
-							<div class="game-toolbar">
-								<p class="game-intro">{content.gameIntro}</p>
-								<div class="game-actions">
-									<a href={content.guidePath} class="guide-link">
-										{content.guideButton}
-									</a>
-									<button
-										type="button"
-										class="fullscreen-button"
-										data-game-fullscreen
-										data-target-id="her-trees-first-puzzle"
-										aria-controls="her-trees-first-puzzle"
-									>
-										{content.fullscreenButton}
-									</button>
-								</div>
+						<div class="game-toolbar">
+							<div class="game-actions">
+								<button
+									type="button"
+									class="fullscreen-button"
+									data-game-fullscreen
+									data-target-id="her-trees-first-puzzle"
+									aria-controls="her-trees-first-puzzle"
+								>
+									<span class="fullscreen-button-icon" aria-hidden="true">
+										<svg viewBox="0 0 24 24">
+											<path
+												d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="1.8"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											></path>
+										</svg>
+									</span>
+									<span>{content.fullscreenButton}</span>
+								</button>
 							</div>
+							<p class="game-intro">{content.gameIntro}</p>
+						</div>
+						<div class="guide-card">
+							<p class="guide-note">
+								{guideNoteCopy[locale].prefix}
+								<a href={content.guidePath} class="guide-inline-link">
+									{guideNoteCopy[locale].linkLabel}
+								</a>
+							</p>
+						</div>
+						<div class="download-card">
 							<p class="download-note">
 								<a
 									href={firstPuzzleDownloadUrl}
@@ -364,6 +406,7 @@ const homeSchema = JSON.stringify([
 								</a>
 								<span>{downloadCopy[locale].note}</span>
 							</p>
+						</div>
 						</div>
 					</section>
 
