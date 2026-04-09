@@ -1,6 +1,7 @@
 ---
 import puzzleHouseImage from "../assets/puzzle_house.jpg";
 import "../styles/global.css";
+import AdUnit from "./AdUnit.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
 import {
@@ -260,6 +261,8 @@ const guideSchema = JSON.stringify([
 						allowfullscreen
 					></iframe>
 				</section>
+
+				<AdUnit />
 
 				<section class="content-section">
 					<h2>{copy.beforeHeading}</h2>

@@ -389,6 +389,13 @@ a:hover {
 	background: #fff;
 }
 
+.ad-unit {
+	margin: 20px 0;
+	padding: 18px 20px;
+	border: 1px solid var(--border-color);
+	background: #fff;
+}
+
 .download-note {
 	margin: 0;
 	display: flex;
