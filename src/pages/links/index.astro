@@ -1,0 +1,96 @@
+---
+import StaticPageLayout from "../../layouts/StaticPageLayout.astro";
+import partnerLinks from "../../../links.json";
+import { globalPaths, siteUrl } from "../../data/site-shell";
+
+type PartnerLink = {
+	html: string;
+};
+
+const links = partnerLinks as PartnerLink[];
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "CollectionPage",
+		name: "Partner links on treespuzzle.com",
+		url: `${siteUrl}${globalPaths.links}`,
+		description:
+			"Collection of partner links published on treespuzzle.com.",
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Home",
+				item: siteUrl,
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Partner Links",
+				item: `${siteUrl}${globalPaths.links}`,
+			},
+		],
+	},
+];
+---
+
+<StaticPageLayout
+	title="Partner Links | treespuzzle.com"
+	description="Collection of partner links published on treespuzzle.com."
+	canonicalPath={globalPaths.links}
+	pageHeading="Partner Links"
+	pageIntro="This page gathers the external partner links assigned specifically to treespuzzle.com."
+	breadcrumbLabel="Partner Links"
+	schema={schema}
+>
+	<p>
+		Only the partner links prepared for treespuzzle.com appear here. The snippets
+		are displayed in the same HTML form used by this project.
+	</p>
+
+	<div class="partner-links-grid">
+		{
+			links.map((link, index) => (
+				<article class="partner-link-card">
+					<p class="partner-link-label">Link {index + 1}</p>
+					<div class="partner-link-copy" set:html={link.html} />
+				</article>
+			))
+		}
+	</div>
+</StaticPageLayout>
+
+<style>
+	.partner-links-grid {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.partner-link-card {
+		border: 1px solid var(--border-color);
+		border-radius: 24px;
+		padding: 1.5rem;
+		background: rgba(255, 255, 255, 0.78);
+	}
+
+	.partner-link-label {
+		margin: 0 0 0.85rem;
+		font-size: 0.78rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--accent-color);
+	}
+
+	.partner-link-copy {
+		line-height: 1.9;
+	}
+
+	.partner-link-copy :global(a) {
+		font-weight: 700;
+	}
+ </style>

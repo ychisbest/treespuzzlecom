@@ -11,6 +11,7 @@ export const globalPaths = {
 	about: "/about/",
 	contact: "/contact/",
 	editorial: "/editorial-policy/",
+	links: "/links/",
 	privacy: "/privacy-policy/",
 	terms: "/terms/",
 	disclaimer: "/disclaimer/",
@@ -27,6 +28,7 @@ type ShellCopy = {
 	aboutLabel: string;
 	contactLabel: string;
 	editorialLabel: string;
+	linksLabel: string;
 	privacyLabel: string;
 	termsLabel: string;
 	disclaimerLabel: string;
@@ -46,6 +48,7 @@ export const shellContent: Record<Locale, ShellCopy> = {
 		aboutLabel: "关于本站",
 		contactLabel: "联系",
 		editorialLabel: "编辑原则",
+		linksLabel: "友情链接",
 		privacyLabel: "隐私政策",
 		termsLabel: "使用条款",
 		disclaimerLabel: "免责声明",
@@ -65,6 +68,7 @@ export const shellContent: Record<Locale, ShellCopy> = {
 		aboutLabel: "About",
 		contactLabel: "Contact",
 		editorialLabel: "Editorial Policy",
+		linksLabel: "Partner Links",
 		privacyLabel: "Privacy Policy",
 		termsLabel: "Terms",
 		disclaimerLabel: "Disclaimer",
@@ -84,6 +88,7 @@ export const shellContent: Record<Locale, ShellCopy> = {
 		aboutLabel: "このサイトについて",
 		contactLabel: "お問い合わせ",
 		editorialLabel: "編集方針",
+		linksLabel: "パートナーリンク",
 		privacyLabel: "プライバシーポリシー",
 		termsLabel: "利用規約",
 		disclaimerLabel: "免責事項",
@@ -103,6 +108,7 @@ export const shellContent: Record<Locale, ShellCopy> = {
 		aboutLabel: "Gioi thieu",
 		contactLabel: "Lien he",
 		editorialLabel: "Chinh sach bien tap",
+		linksLabel: "Lien ket doi tac",
 		privacyLabel: "Chinh sach quyen rieng tu",
 		termsLabel: "Dieu khoan su dung",
 		disclaimerLabel: "Tuyen bo mien tru",
@@ -138,6 +144,7 @@ export const legalLinksForLocale = (locale: Locale) => {
 
 	return [
 		{ label: shell.editorialLabel, href: globalPaths.editorial },
+		{ label: shell.linksLabel, href: globalPaths.links },
 		{ label: shell.privacyLabel, href: globalPaths.privacy },
 		{ label: shell.termsLabel, href: globalPaths.terms },
 		{ label: shell.disclaimerLabel, href: globalPaths.disclaimer },

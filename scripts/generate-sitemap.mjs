@@ -33,6 +33,7 @@ const standaloneUrls = [
 	"/contact/",
 	"/disclaimer/",
 	"/editorial-policy/",
+	"/links/",
 	"/privacy-policy/",
 	"/terms/",
 ];
