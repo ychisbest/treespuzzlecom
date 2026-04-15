@@ -1,0 +1,1122 @@
+---
+import THYIcon from "./THYIcon.astro";
+
+const navItems = [
+    { label: "Home", href: "#home" },
+    { label: "Play Now", href: "#play" },
+    { label: "Gameplay", href: "#gameplay" },
+    { label: "Community", href: "#community" },
+    { label: "Developer", href: "#developer" },
+    { label: "FAQ", href: "#faq" },
+];
+
+const trustItems = [
+    "MoistCr1TiKaL",
+    "DashieGames",
+    "CaseOh",
+    "8-BitRyan",
+    "4.9/5 on itch.io",
+    "500K+ TikTok plays",
+];
+
+const features = [
+    {
+        icon: "target",
+        title: "Trap-First Design",
+        description:
+            "The forest plans every death like a stand-up comedy routine. Clean path → fake safety → instant punchline death. You'll laugh before you even respawn.",
+        color: "primary",
+    },
+    {
+        icon: "zap",
+        title: "Lightning-Fast Retry Loop",
+        description:
+            "Die in 3 seconds? Respawn in 1. No long loading screens. No frustration. Just pure chaotic joy.",
+        color: "secondary",
+    },
+    {
+        icon: "map",
+        title: "Multiple Biomes & Upgrades",
+        description:
+            "Start in the classic evil forest, then unlock cursed swamps, haunted orchards, and more. Collect ridiculous hats, find the secret axe, and maybe… fight back?",
+        color: "accent",
+    },
+    {
+        icon: "gamepad",
+        title: "Controller & Keyboard Friendly",
+        description:
+            "Simple controls. Deep troll mechanics. Zero hand-holding.",
+        color: "primary",
+    },
+];
+
+const videos = [
+    {
+        title: "DashieGames Full Playthrough",
+        views: "570K+ views",
+        thumbnail: "DashieGames",
+        href: "https://www.youtube.com/results?search_query=DashieGames+Trees+Hate+You",
+    },
+    {
+        title: "MoistCr1TiKaL Reacts",
+        views: "Most cursed deaths",
+        thumbnail: "MoistCr1TiKaL",
+        href: "https://www.youtube.com/results?search_query=MoistCr1TiKaL+Trees+Hate+You",
+    },
+    {
+        title: "TikTok Compilation",
+        views: "500K+ plays",
+        thumbnail: "TikTok",
+        href: "https://www.tiktok.com/@tykenn",
+    },
+];
+
+const quotes = [
+    {
+        text: "Bro the trees are actually bullying me",
+        author: "@CaseOh",
+    },
+    {
+        text: "This is the funniest rage game of 2026",
+        author: "Reddit r/IndieGaming",
+    },
+    {
+        text: "I hate these trees but I can't stop playing",
+        author: "8-BitRyan chat",
+    },
+];
+
+const milestones = [
+    { icon: "calendar", text: "Started June 2025 as a tiny joke project" },
+    { icon: "trend", text: "Went mega-viral on TikTok November 2025" },
+    { icon: "sparkles", text: "Full Steam release planned for 2026" },
+];
+
+const windowsDownloadUrl =
+    "https://itchio-mirror.cb031a832f44726753d6267436f3b414.r2.cloudflarestorage.com/build/1611202/6255350-archive-default?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=3edfcce40115d057d0b5606758e7e9ee%2F20260415%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260415T061149Z&X-Amz-Expires=60&X-Amz-SignedHeaders=host&X-Amz-Signature=a49be4a35fcad879b2845ae35ba1f61b9829623a3b62b309a0226dc6d42a1110";
+
+const faqs = [
+    {
+        question: "Is Trees Hate You free?",
+        answer: "The full demo is 100% free on itch.io. The complete game will be a paid release on Steam in 2026.",
+    },
+    {
+        question: "When does Trees Hate You release?",
+        answer: "Full version coming 2026. Wishlist now to get notified on launch day!",
+    },
+    {
+        question: "What kind of game is Trees Hate You?",
+        answer: "It's a rage-comedy trap platformer / walking simulator where the environment is the enemy. Short, replayable, and extremely funny.",
+    },
+    {
+        question: "Do I need a powerful PC?",
+        answer: "Nope! Minimum specs are super low – Windows 10 and 1 GB storage. Runs great on almost anything.",
+    },
+    {
+        question: "Are there more updates coming?",
+        answer: "Yes! Tykenn is actively adding new traps, biomes, and features every month. Join Discord for the latest.",
+    },
+];
+
+const buttonBase =
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all outline-none";
+const buttonLg = "h-10 rounded-md px-6";
+---
+
+<main class="min-h-screen bg-background text-foreground font-sans">
+    <header
+        class="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/90 backdrop-blur-md"
+    >
+        <div class="mx-auto h-16 max-w-7xl px-4">
+            <div class="flex h-16 items-center justify-between">
+                <a href="#home" class="group flex items-center gap-2">
+                    <div class="relative">
+                        <THYIcon
+                            name="tree"
+                            class="h-8 w-8 text-primary transition-transform group-hover:rotate-12"
+                        />
+                        <div
+                            class="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent animate-pulse"
+                        >
+                        </div>
+                    </div>
+                    <span
+                        class="font-display text-xl font-bold tracking-tight text-foreground"
+                    >
+                        TREES HATE YOU
+                    </span>
+                </a>
+
+                <nav class="hidden items-center gap-6 md:flex">
+                    {
+                        navItems.map((item) => (
+                            <a
+                                href={item.href}
+                                class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                            >
+                                {item.label}
+                            </a>
+                        ))
+                    }
+                </nav>
+
+                <div class="hidden md:block">
+                    <a
+                        href="https://store.steampowered.com/app/4171850/Trees_Hate_You/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`${buttonBase} bg-primary px-6 text-primary-foreground hover:bg-primary/90 rounded-full font-bold`}
+                    >
+                        Wishlist on Steam
+                    </a>
+                </div>
+
+                <button
+                    id="thy-mobile-toggle"
+                    type="button"
+                    class="p-2 text-foreground md:hidden"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                    aria-controls="thy-mobile-menu"
+                >
+                    <THYIcon name="menu" class="h-6 w-6" />
+                    <THYIcon name="close" class="hidden h-6 w-6" />
+                </button>
+            </div>
+
+            <div
+                id="thy-mobile-menu"
+                class="hidden py-4 border-t border-border md:hidden"
+            >
+                <nav class="flex flex-col gap-4">
+                    {
+                        navItems.map((item) => (
+                            <a
+                                href={item.href}
+                                class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                            >
+                                {item.label}
+                            </a>
+                        ))
+                    }
+                    <a
+                        href="https://store.steampowered.com/app/4171850/Trees_Hate_You/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`${buttonBase} bg-primary mt-2 rounded-full font-bold text-primary-foreground hover:bg-primary/90`}
+                    >
+                        Wishlist on Steam
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section
+        id="home"
+        class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-16"
+    >
+        <div class="pointer-events-none absolute inset-0 overflow-hidden">
+            <div
+                class="absolute top-20 left-10 h-32 w-32 rounded-full bg-primary/20 blur-3xl animate-pulse"
+            >
+            </div>
+            <div
+                class="absolute right-10 bottom-40 h-40 w-40 rounded-full bg-secondary/20 blur-3xl animate-pulse [animation-delay:700ms]"
+            >
+            </div>
+            <div
+                class="absolute top-1/2 left-1/4 h-24 w-24 rounded-full bg-accent/20 blur-2xl animate-pulse [animation-delay:1000ms]"
+            >
+            </div>
+        </div>
+
+        <div class="container relative z-10 mx-auto px-4 text-center">
+            <div
+                class="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-2 backdrop-blur-sm"
+            >
+                <THYIcon
+                    name="star"
+                    class="h-4 w-4 fill-secondary text-secondary"
+                />
+                <span class="text-sm font-medium text-foreground"
+                    >The Funniest Rage Game of 2026</span
+                >
+            </div>
+
+            <h1
+                class="mb-4 font-display text-5xl font-bold text-balance text-foreground md:text-7xl lg:text-8xl"
+            >
+                Trees Hate You
+            </h1>
+
+            <p class="mb-2 text-xl font-bold text-secondary md:text-2xl">
+                The worst forest you'll ever hike through.
+            </p>
+
+            <p
+                class="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-balance text-muted-foreground md:text-xl"
+            >
+                The trees are out to get you… and they're not even sorry. Every
+                path, every sign, every "shortcut" is a trap. If only you had an
+                axe…
+            </p>
+
+            <div
+                class="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
+            >
+                <a
+                    href="#play"
+                    class={`${buttonBase} ${buttonLg} rounded-full bg-primary px-8 py-6 text-lg font-bold text-primary-foreground shadow-lg shadow-primary/30 transition-all hover:scale-105 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40`}
+                >
+                    <THYIcon name="gamepad" class="mr-2 h-5 w-5" />
+                    Play Free Demo Now
+                </a>
+
+                <a
+                    href="https://store.steampowered.com/app/4171850/Trees_Hate_You/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`${buttonBase} ${buttonLg} rounded-full border-2 border-secondary px-8 py-6 text-lg font-bold text-secondary transition-all hover:scale-105 hover:bg-secondary hover:text-secondary-foreground`}
+                >
+                    Wishlist on Steam
+                </a>
+
+                <a
+                    href="https://www.tiktok.com/@tykenn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`${buttonBase} ${buttonLg} rounded-full px-8 py-6 text-lg font-bold text-accent transition-all hover:bg-accent/10 hover:text-accent`}
+                >
+                    <THYIcon name="play" class="mr-2 h-5 w-5 fill-current" />
+                    Watch Viral TikTok
+                </a>
+            </div>
+
+            <div
+                class="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground md:gap-8"
+            >
+                <span class="font-medium">Featured by:</span>
+                {
+                    trustItems.map((item) => (
+                        <span class="rounded-full border border-border bg-card/50 px-3 py-1 text-foreground/80 backdrop-blur-sm">
+                            {item}
+                        </span>
+                    ))
+                }
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <div
+                class="flex h-10 w-6 items-start justify-center rounded-full border-2 border-muted-foreground p-1"
+            >
+                <div
+                    class="h-3 w-1.5 rounded-full bg-muted-foreground animate-pulse"
+                >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="play" class="bg-card/30 py-20">
+        <div class="container mx-auto px-4">
+            <div class="mb-10 text-center">
+                <h2
+                    class="mb-4 font-display text-4xl font-bold text-foreground md:text-5xl"
+                >
+                    Play Trees Hate You Demo
+                </h2>
+                <p class="mx-auto mb-2 max-w-2xl text-lg text-muted-foreground">
+                    The latest demo (Version 17) is live! New traps, character
+                    creator, and even more savage trees.
+                </p>
+                <p class="text-sm font-medium text-accent">
+                    It's Free – Start hiking now!
+                </p>
+            </div>
+
+            <div class="relative mx-auto max-w-5xl">
+                <div
+                    class="relative overflow-hidden rounded-2xl border-4 border-primary/50 bg-background shadow-2xl shadow-primary/20"
+                >
+                    <div
+                        class="flex items-center justify-between border-b border-border bg-card px-4 py-2"
+                    >
+                        <div class="flex items-center gap-2">
+                            <div class="h-3 w-3 rounded-full bg-accent"></div>
+                            <div class="h-3 w-3 rounded-full bg-secondary">
+                            </div>
+                            <div class="h-3 w-3 rounded-full bg-primary"></div>
+                        </div>
+                        <span class="text-sm font-medium text-muted-foreground">
+                            Trees Hate You - Demo v17
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <button
+                                id="thy-fullscreen-button"
+                                type="button"
+                                class="rounded-md p-1.5 transition-colors hover:bg-muted"
+                                aria-label="Toggle fullscreen"
+                            >
+                                <THYIcon
+                                    name="max"
+                                    class="h-4 w-4 text-muted-foreground"
+                                />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="aspect-[16/9] w-full">
+                        <iframe
+                            id="game-iframe"
+                            src="https://game.doritosscript.com/trees-hate-you/index.html"
+                            class="h-full w-full border-0"
+                            allow="fullscreen; autoplay; clipboard-write"
+                            title="Trees Hate You Game"></iframe>
+                    </div>
+                </div>
+
+                <div
+                    class="absolute -top-4 -left-4 h-8 w-8 rounded-full bg-primary animate-bounce [animation-delay:100ms]"
+                >
+                </div>
+                <div
+                    class="absolute -right-4 -bottom-4 h-6 w-6 rounded-full bg-secondary animate-bounce [animation-delay:300ms]"
+                >
+                </div>
+                <div
+                    class="absolute top-1/2 -right-6 h-4 w-4 rounded-full bg-accent animate-pulse"
+                >
+                </div>
+            </div>
+
+            <div
+                class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+            >
+                <a
+                    href="https://tykenn.itch.io/trees-hate-you"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`${buttonBase} ${buttonLg} rounded-full bg-secondary px-8 font-bold text-secondary-foreground hover:bg-secondary/90`}
+                >
+                    <THYIcon name="external" class="mr-2 h-4 w-4" />
+                    Play on itch.io
+                </a>
+
+                <a
+                    href="https://store.steampowered.com/app/4171850/Trees_Hate_You/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class={`${buttonBase} ${buttonLg} rounded-full border-2 border-primary px-8 font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground`}
+                >
+                    Wishlist on Steam - Full Release 2026
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="mx-auto max-w-4xl">
+                <div class="mb-12 text-center">
+                    <div
+                        class="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2"
+                    >
+                        <THYIcon name="external" class="h-4 w-4 text-primary" />
+                        <span class="text-sm font-medium text-foreground">
+                            Download</span
+                        >
+                    </div>
+                    <h2
+                        class="mb-4 font-display text-4xl font-bold text-foreground md:text-5xl"
+                    >
+                        Trees Hate You Game Download
+                    </h2>
+                    <p class="mx-auto max-w-2xl text-lg text-muted-foreground">
+                        If the web version runs unsmoothly, please download and
+                        run the game client.
+                    </p>
+                </div>
+
+                <div
+                    class="rounded-3xl border border-border bg-card/80 p-8 backdrop-blur-sm md:p-12"
+                >
+                    <div
+                        class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center"
+                    >
+                        <div>
+                            <h3
+                                class="mb-2 font-display text-2xl font-bold text-foreground"
+                            >
+                                Windows Download
+                            </h3>
+                            <p class="text-muted-foreground">
+                                Direct build download for Windows systems.
+                            </p>
+                        </div>
+
+                        <a
+                            href={windowsDownloadUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class={`${buttonBase} ${buttonLg} rounded-full bg-primary px-8 font-bold text-primary-foreground hover:bg-primary/90`}
+                        >
+                            <THYIcon name="external" class="mr-2 h-4 w-4" />
+                            Download for Windows
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="mx-auto max-w-4xl">
+                <div class="mb-12 text-center">
+                    <div
+                        class="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2"
+                    >
+                        <THYIcon name="tree" class="h-4 w-4 text-primary" />
+                        <span class="text-sm font-medium text-foreground"
+                            >About the Game</span
+                        >
+                    </div>
+                    <h2
+                        class="mb-6 font-display text-4xl font-bold text-foreground md:text-5xl"
+                    >
+                        What the Heck is Trees Hate You?
+                    </h2>
+                </div>
+
+                <div
+                    class="relative overflow-hidden rounded-3xl border border-border bg-card/50 p-8 backdrop-blur-sm md:p-12"
+                >
+                    <div
+                        class="absolute top-0 right-0 h-64 w-64 translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl"
+                    >
+                    </div>
+
+                    <div class="relative z-10">
+                        <p
+                            class="mb-6 text-lg leading-relaxed text-foreground md:text-xl"
+                        >
+                            <span class="font-bold text-primary"
+                                >Trees Hate You</span
+                            > is a rage-comedy trap game created by solo developer
+                            <span class="font-bold text-secondary">
+                                Tykenn</span
+                            >. You hike through a beautiful-looking forest that
+                            absolutely despises you. Every "safe" path is a
+                            setup for the funniest, most humiliating death
+                            you've ever experienced.
+                        </p>
+
+                        <p
+                            class="mb-8 text-lg leading-relaxed text-foreground md:text-xl"
+                        >
+                            It's not just hard - it's <em class="text-accent"
+                                >smart</em
+                            >. The trees use psychology, fake road signs, fake
+                            safety, and punchline-level traps to mess with your
+                            head. Think "I Wanna Be The Guy" meets "Level
+                            Devil," but way funnier and way meaner.
+                        </p>
+
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                            <div class="flex items-start gap-4">
+                                <div class="rounded-xl bg-primary/20 p-3">
+                                    <THYIcon
+                                        name="skull"
+                                        class="h-6 w-6 text-primary"
+                                    />
+                                </div>
+                                <div>
+                                    <h3 class="mb-1 font-bold text-foreground">
+                                        Hilarious Deaths
+                                    </h3>
+                                    <p class="text-sm text-muted-foreground">
+                                        Every death is a punchline
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="rounded-xl bg-secondary/20 p-3">
+                                    <THYIcon
+                                        name="brain"
+                                        class="h-6 w-6 text-secondary"
+                                    />
+                                </div>
+                                <div>
+                                    <h3 class="mb-1 font-bold text-foreground">
+                                        Psychology Traps
+                                    </h3>
+                                    <p class="text-sm text-muted-foreground">
+                                        Trees play mind games
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="rounded-xl bg-accent/20 p-3">
+                                    <THYIcon
+                                        name="zap"
+                                        class="h-6 w-6 text-accent"
+                                    />
+                                </div>
+                                <div>
+                                    <h3 class="mb-1 font-bold text-foreground">
+                                        Perfect for Streaming
+                                    </h3>
+                                    <p class="text-sm text-muted-foreground">
+                                        Watch friends suffer
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gameplay" class="bg-card/30 py-20">
+        <div class="container mx-auto px-4">
+            <div class="mb-16 text-center">
+                <h2
+                    class="mb-4 font-display text-4xl font-bold text-foreground md:text-5xl"
+                >
+                    Why Players Can't Stop Playing
+                </h2>
+                <p class="text-lg text-muted-foreground">
+                    (Even When They Hate It)
+                </p>
+            </div>
+
+            <div
+                class="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2"
+            >
+                {
+                    features.map((feature) => (
+                        <div class="group rounded-2xl border border-border bg-card/80 p-8 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10">
+                            <div
+                                class:list={[
+                                    "mb-6 inline-flex rounded-2xl p-4",
+                                    feature.color === "primary" &&
+                                        "bg-primary/20",
+                                    feature.color === "secondary" &&
+                                        "bg-secondary/20",
+                                    feature.color === "accent" &&
+                                        "bg-accent/20",
+                                ]}
+                            >
+                                <THYIcon
+                                    name={feature.icon}
+                                    class:list={[
+                                        "h-8 w-8",
+                                        feature.color === "primary" &&
+                                            "text-primary",
+                                        feature.color === "secondary" &&
+                                            "text-secondary",
+                                        feature.color === "accent" &&
+                                            "text-accent",
+                                    ]}
+                                />
+                            </div>
+
+                            <h3 class="mb-3 font-display text-2xl font-bold text-foreground">
+                                {feature.title}
+                            </h3>
+
+                            <p class="leading-relaxed text-muted-foreground">
+                                {feature.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <div class="mt-12 text-center">
+                <p class="text-lg italic text-muted-foreground">
+                    "The pause menu isn't safe either." - every player ever
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="community" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="mb-16 text-center">
+                <h2
+                    class="mb-4 font-display text-4xl font-bold text-foreground md:text-5xl"
+                >
+                    The Internet is Obsessed
+                </h2>
+                <p class="text-lg text-muted-foreground">
+                    Join millions of players raging at these evil trees
+                </p>
+            </div>
+
+            <div
+                class="mx-auto mb-16 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3"
+            >
+                {
+                    videos.map((video) => (
+                        <a
+                            href={video.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="group relative overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-primary/50"
+                        >
+                            <div class="relative flex aspect-video items-center justify-center overflow-hidden bg-muted">
+                                <div class="absolute inset-0 bg-primary/10" />
+                                <div class="relative z-10 flex flex-col items-center gap-2">
+                                    <div class="flex h-16 w-16 items-center justify-center rounded-full bg-accent/90 transition-transform group-hover:scale-110">
+                                        <THYIcon
+                                            name="play"
+                                            class="ml-1 h-8 w-8 fill-accent-foreground text-accent-foreground"
+                                        />
+                                    </div>
+                                    <span class="font-bold text-foreground">
+                                        {video.thumbnail}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="p-4">
+                                <h3 class="mb-1 font-bold text-foreground">
+                                    {video.title}
+                                </h3>
+                                <p class="text-sm text-muted-foreground">
+                                    {video.views}
+                                </p>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+
+            <div class="mx-auto max-w-4xl">
+                <div class="mb-8 flex items-center justify-center gap-2">
+                    <THYIcon name="message" class="h-5 w-5 text-primary" />
+                    <span class="text-lg font-medium text-foreground"
+                        >What Players Are Saying</span
+                    >
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                    {
+                        quotes.map((quote) => (
+                            <div class="relative rounded-2xl border border-border bg-card/50 p-6 backdrop-blur-sm">
+                                <THYIcon
+                                    name="quote"
+                                    class="absolute top-4 left-4 h-8 w-8 text-primary/30"
+                                />
+                                <div class="relative z-10 pt-4">
+                                    <p class="mb-4 text-lg leading-relaxed text-foreground">
+                                        "{quote.text}"
+                                    </p>
+                                    <p class="text-sm font-medium text-primary">
+                                        - {quote.author}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="developer" class="bg-card/30 py-20">
+        <div class="container mx-auto px-4">
+            <div class="mx-auto max-w-4xl">
+                <div class="mb-12 text-center">
+                    <div
+                        class="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2"
+                    >
+                        <THYIcon name="user" class="h-4 w-4 text-secondary" />
+                        <span class="text-sm font-medium text-foreground"
+                            >Meet the Creator</span
+                        >
+                    </div>
+                    <h2
+                        class="mb-4 font-display text-4xl font-bold text-foreground md:text-5xl"
+                    >
+                        Made by Tykenn
+                    </h2>
+                    <p class="text-xl font-bold text-secondary">
+                        One Guy, One Angry Forest
+                    </p>
+                </div>
+
+                <div
+                    class="rounded-3xl border border-border bg-card/80 p-8 backdrop-blur-sm md:p-12"
+                >
+                    <div
+                        class="grid grid-cols-1 items-center gap-8 md:grid-cols-2"
+                    >
+                        <div class="flex justify-center">
+                            <div class="relative">
+                                <div
+                                    class="flex h-48 w-48 items-center justify-center rounded-full bg-primary/20 md:h-64 md:w-64"
+                                >
+                                    <span
+                                        class="font-display text-6xl text-primary md:text-8xl"
+                                        >T</span
+                                    >
+                                </div>
+                                <div
+                                    class="absolute -top-2 -right-2 h-8 w-8 rounded-full bg-secondary animate-bounce"
+                                >
+                                </div>
+                                <div
+                                    class="absolute -bottom-2 -left-2 h-6 w-6 rounded-full bg-accent animate-bounce [animation-delay:200ms]"
+                                >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p
+                                class="mb-6 text-lg leading-relaxed text-foreground"
+                            >
+                                Solo developer <span
+                                    class="font-bold text-primary">Tykenn</span
+                                > started Trees Hate You in June 2025 as a tiny joke
+                                project. A single TikTok clip went mega-viral in November
+                                2025 and turned it into a full Steam release planned
+                                for 2026.
+                            </p>
+
+                            <p
+                                class="mb-8 text-lg leading-relaxed text-foreground"
+                            >
+                                Now the game has multiple biomes, character
+                                creation, collectibles, and the most evil trees
+                                in indie gaming history.
+                            </p>
+
+                            <div class="space-y-4">
+                                {
+                                    milestones.map((milestone) => (
+                                        <div class="flex items-center gap-3">
+                                            <div class="rounded-lg bg-primary/20 p-2">
+                                                <THYIcon
+                                                    name={milestone.icon}
+                                                    class="h-4 w-4 text-primary"
+                                                />
+                                            </div>
+                                            <span class="text-muted-foreground">
+                                                {milestone.text}
+                                            </span>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="mt-10 flex flex-wrap items-center justify-center gap-4 border-t border-border pt-8"
+                    >
+                        <a
+                            href="https://www.tiktok.com/@tykenn"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class={`${buttonBase} rounded-full border-2 border-primary px-4 py-2 font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground`}
+                        >
+                            Follow @tykenn on TikTok
+                        </a>
+
+                        <a
+                            href="https://discord.gg/zteGwprHT5"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class={`${buttonBase} rounded-full border-2 border-secondary px-4 py-2 font-bold text-secondary transition-colors hover:bg-secondary hover:text-secondary-foreground`}
+                        >
+                            Join Official Discord
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="mx-auto max-w-3xl">
+                <div class="mb-12 text-center">
+                    <div
+                        class="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2"
+                    >
+                        <THYIcon name="help" class="h-4 w-4 text-accent" />
+                        <span class="text-sm font-medium text-foreground"
+                            >FAQ</span
+                        >
+                    </div>
+                    <h2
+                        class="mb-4 font-display text-4xl font-bold text-foreground md:text-5xl"
+                    >
+                        Trees Hate You FAQ
+                    </h2>
+                    <p class="text-lg text-muted-foreground">
+                        Everything You Need to Know
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    {
+                        faqs.map((faq) => (
+                            <details class="group rounded-2xl border border-border bg-card/50 px-6 backdrop-blur-sm open:border-primary/50">
+                                <summary class="flex cursor-pointer list-none items-center justify-between py-6 text-left font-display text-lg font-bold text-foreground hover:text-primary">
+                                    <span>{faq.question}</span>
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+                                        aria-hidden="true"
+                                    >
+                                        <path d="m6 9 6 6 6-6" />
+                                    </svg>
+                                </summary>
+                                <p class="pb-6 leading-relaxed text-muted-foreground">
+                                    {faq.answer}
+                                </p>
+                            </details>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative overflow-hidden bg-card/30 py-20">
+        <div class="pointer-events-none absolute inset-0">
+            <div
+                class="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-primary/10 blur-3xl"
+            >
+            </div>
+            <div
+                class="absolute right-1/4 bottom-0 h-64 w-64 rounded-full bg-secondary/10 blur-3xl"
+            >
+            </div>
+        </div>
+
+        <div class="container relative z-10 mx-auto px-4">
+            <div class="mx-auto max-w-3xl text-center">
+                <div class="mb-6 inline-flex rounded-full bg-primary/20 p-4">
+                    <THYIcon name="tree" class="h-12 w-12 text-primary" />
+                </div>
+
+                <h2
+                    class="mb-4 font-display text-4xl font-bold text-foreground md:text-5xl"
+                >
+                    The Forest is Waiting…
+                </h2>
+
+                <p class="mb-8 text-xl text-muted-foreground">
+                    Join 10,000+ players who already hate these trees
+                </p>
+
+                <div
+                    class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+                >
+                    <a
+                        href="#play"
+                        class={`${buttonBase} ${buttonLg} rounded-full bg-primary px-10 py-6 text-lg font-bold text-primary-foreground shadow-lg shadow-primary/30 transition-all hover:scale-105 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40`}
+                    >
+                        <THYIcon name="gamepad" class="mr-2 h-5 w-5" />
+                        START HIKING
+                    </a>
+
+                    <a
+                        href="https://discord.gg/zteGwprHT5"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class={`${buttonBase} ${buttonLg} rounded-full border-2 border-secondary px-10 py-6 text-lg font-bold text-secondary transition-all hover:scale-105 hover:bg-secondary hover:text-secondary-foreground`}
+                    >
+                        Join Discord
+                    </a>
+                </div>
+
+                <div
+                    class="mt-10 flex items-center justify-center gap-6 text-muted-foreground"
+                >
+                    <a
+                        href="https://discord.gg/zteGwprHT5"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="transition-colors hover:text-primary"
+                    >
+                        Discord
+                    </a>
+                    <span class="text-border">•</span>
+                    <a
+                        href="https://www.tiktok.com/@tykenn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="transition-colors hover:text-primary"
+                    >
+                        TikTok
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-border bg-card">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
+                <div class="md:col-span-2">
+                    <div class="mb-4 flex items-center gap-2">
+                        <THYIcon name="tree" class="h-6 w-6 text-primary" />
+                        <span
+                            class="font-display text-lg font-bold text-foreground"
+                            >TREES HATE YOU</span
+                        >
+                    </div>
+                    <p class="mb-4 text-muted-foreground max-w-md">
+                        The funniest rage game where the entire forest is out to
+                        get you. Don't trust the trees.
+                    </p>
+                    <p class="text-sm text-muted-foreground">
+                        Fan Hub • Not affiliated with Tykenn (but we love his
+                        game)
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="mb-4 font-bold text-foreground">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a
+                                href="#play"
+                                class="text-muted-foreground transition-colors hover:text-primary"
+                                >Play Demo</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://store.steampowered.com/app/4171850/Trees_Hate_You/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-muted-foreground transition-colors hover:text-primary"
+                            >
+                                Steam Wishlist
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#gameplay"
+                                class="text-muted-foreground transition-colors hover:text-primary"
+                                >Gameplay</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="#faq"
+                                class="text-muted-foreground transition-colors hover:text-primary"
+                                >FAQ</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="mb-4 font-bold text-foreground">Follow</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a
+                                href="https://www.tiktok.com/@tykenn"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-muted-foreground transition-colors hover:text-primary"
+                                >TikTok</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.youtube.com/results?search_query=trees+hate+you+game"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-muted-foreground transition-colors hover:text-primary"
+                                >YouTube</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                href="https://discord.gg/zteGwprHT5"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-muted-foreground transition-colors hover:text-primary"
+                                >Discord</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-10 border-t border-border pt-8">
+                <div
+                    class="flex flex-col items-center justify-between gap-4 md:flex-row"
+                >
+                    <p class="text-sm text-muted-foreground">
+                        © 2026 Trees Hate You Fan Hub
+                    </p>
+                    <p class="text-xs text-muted-foreground/50">
+                        Trees Hate You | Trees Hate You game | Trees Hate You
+                        demo | Tykenn | Rage comedy game 2026
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
+
+<script is:inline>
+    const mobileToggle = document.getElementById("thy-mobile-toggle");
+    const mobileMenu = document.getElementById("thy-mobile-menu");
+    const gameIframe = document.getElementById("game-iframe");
+    const fullscreenButton = document.getElementById("thy-fullscreen-button");
+
+    if (mobileToggle && mobileMenu) {
+        const icons = mobileToggle.querySelectorAll("svg");
+        const closeMenu = () => {
+            mobileMenu.classList.add("hidden");
+            mobileToggle.setAttribute("aria-expanded", "false");
+            icons[0]?.classList.remove("hidden");
+            icons[1]?.classList.add("hidden");
+        };
+
+        mobileToggle.addEventListener("click", () => {
+            const isHidden = mobileMenu.classList.toggle("hidden");
+            mobileToggle.setAttribute("aria-expanded", String(!isHidden));
+            icons[0]?.classList.toggle("hidden", !isHidden);
+            icons[1]?.classList.toggle("hidden", isHidden);
+        });
+
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
+    }
+
+    if (fullscreenButton && gameIframe) {
+        fullscreenButton.addEventListener("click", async () => {
+            if (document.fullscreenElement) {
+                await document.exitFullscreen();
+                return;
+            }
+
+            if (gameIframe.requestFullscreen) {
+                await gameIframe.requestFullscreen();
+            }
+        });
+    }
+</script>

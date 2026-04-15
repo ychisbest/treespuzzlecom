@@ -1,0 +1,108 @@
+---
+import "../../styles/trees-hate-you.css";
+import TreesHateYouPage from "../../components/TreesHateYouPage.astro";
+import { adsensePublisherId, shareImageUrl } from "../../data/site-shell";
+import { toAbsoluteUrl } from "../../data/seo";
+
+const pagePath = "/trees-hate-you/";
+const canonicalUrl = toAbsoluteUrl(pagePath);
+const title = "Trees Hate You | Rage Comedy Game by Tykenn";
+const description =
+	"Trees Hate You is a rage-comedy trap game where the entire forest is out to get you. Play the demo, watch the viral clips, and jump to the Steam wishlist.";
+const schema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		name: title,
+		url: canonicalUrl,
+		description,
+		inLanguage: "en",
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoGame",
+		name: "Trees Hate You",
+		description,
+		url: canonicalUrl,
+		genre: ["Comedy", "Trap Game", "Platformer"],
+		gamePlatform: ["Windows", "Web Browser"],
+		author: {
+			"@type": "Person",
+			name: "Tykenn",
+		},
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: [
+			{
+				"@type": "Question",
+				name: "Is Trees Hate You free?",
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: "The demo is free to play on itch.io and through the embedded build on this page.",
+				},
+			},
+			{
+				"@type": "Question",
+				name: "When does Trees Hate You release?",
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: "The original landing page positions the full release in 2026 and points players to the Steam wishlist for updates.",
+				},
+			},
+			{
+				"@type": "Question",
+				name: "What kind of game is Trees Hate You?",
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: "It is a rage-comedy trap game built around misdirection, fast retries, and spectator-friendly deaths.",
+				},
+			},
+		],
+	},
+]);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@300..900&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#0d1710" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content="Trees Puzzle" />
+		<meta property="og:image" content={shareImageUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={shareImageUrl} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
+		<script
+			async
+			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}
+			crossorigin="anonymous"
+		></script>
+		<script type="application/ld+json" set:html={schema}></script>
+	</head>
+	<body class="thy-astro-body">
+		<TreesHateYouPage />
+	</body>
+</html>
