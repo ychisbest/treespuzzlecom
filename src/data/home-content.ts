@@ -196,6 +196,12 @@ export const homeContent: Record<Locale, HomeContent> = {
 				alt: 'HER TREES : PUZZLE DREAM 游戏截图',
 				copy: '目前体量最大的一作，在保持系列安静直观风格的同时，把体验扩展成包含 40 多个谜题的梦境旅程。',
 			},
+			{
+				title: 'Trees Hate You',
+				meta: 'Windows / Web Demo · Rage Comedy Game',
+				alt: 'Trees Hate You 游戏截图',
+				copy: '一款风格完全不同的恶搞陷阱游戏：森林会主动针对玩家，靠高速重开、恶意路标和直播效果制造连续的挫败与笑点。',
+			},
 		],
 		highlights: [
 			{
@@ -360,6 +366,12 @@ export const homeContent: Record<Locale, HomeContent> = {
 				meta: 'Steam / itch.io Demo · Released February 10, 2026 · 1.5 to 3 hours',
 				alt: 'Screenshot from HER TREES : PUZZLE DREAM',
 				copy: 'The largest entry so far, expanding the series into a dreamlike journey with more than 40 puzzles while keeping its quiet and intuitive design.',
+			},
+			{
+				title: 'Trees Hate You',
+				meta: 'Windows / Web Demo · Rage Comedy Game',
+				alt: 'Screenshot from Trees Hate You',
+				copy: 'A very different pick from the HER TREES series pages: a fast-restart comedy trap game where the forest itself is the joke, the threat, and the punchline.',
 			},
 		],
 		highlights: [
@@ -526,6 +538,12 @@ export const homeContent: Record<Locale, HomeContent> = {
 				alt: 'HER TREES : PUZZLE DREAM のスクリーンショット',
 				copy: '現時点で最も大きな作品で、静かで直感的な魅力を保ちながら、40以上の謎を含む夢の旅へと広がっています。',
 			},
+			{
+				title: 'Trees Hate You',
+				meta: 'Windows / Web Demo · Rage Comedy Game',
+				alt: 'Trees Hate You のスクリーンショット',
+				copy: '雰囲気はまったく異なりますが、こちらは森そのものがプレイヤーを罠にかける高速リトライ型のコメディトラップゲームです。',
+			},
 		],
 		highlights: [
 			{
@@ -690,6 +708,12 @@ export const homeContent: Record<Locale, HomeContent> = {
 				meta: 'Steam / itch.io Demo · Phát hành ngày 10 tháng 2, 2026 · 1.5 đến 3 giờ',
 				alt: 'Ảnh chụp màn hình HER TREES : PUZZLE DREAM',
 				copy: 'Đây là phần lớn nhất cho đến nay, mở rộng trải nghiệm thành một hành trình trong mơ với hơn 40 câu đố mà vẫn giữ nhịp điệu yên tĩnh và trực quan của series.',
+			},
+			{
+				title: 'Trees Hate You',
+				meta: 'Windows / Web Demo · Rage Comedy Game',
+				alt: 'Ảnh chụp màn hình Trees Hate You',
+				copy: 'Một game hoàn toàn khác về nhịp chơi: khu rừng liên tục gài bẫy người chơi, tạo nên kiểu hài hước ức chế rất hợp với video và stream.',
 			},
 		],
 		highlights: [
