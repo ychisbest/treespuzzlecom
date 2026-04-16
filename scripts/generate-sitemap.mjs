@@ -36,6 +36,7 @@ const standaloneUrls = [
 	"/links/",
 	"/privacy-policy/",
 	"/terms/",
+	"/trees-hate-you/",
 ];
 
 const hreflangByLocale = {
