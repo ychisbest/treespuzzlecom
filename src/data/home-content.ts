@@ -1,4 +1,4 @@
-export type Locale = 'zh-cn' | 'en' | 'fa' | 'ja' | 'vi';
+export type Locale = 'zh-cn' | 'en' | 'fa' | 'id' | 'ja' | 'vi';
 
 export type HomeContent = {
 	lang: string;
@@ -70,12 +70,13 @@ export type HomeContent = {
 	}>;
 };
 
-export const localeOrder: Locale[] = ['en', 'zh-cn', 'fa', 'ja', 'vi'];
+export const localeOrder: Locale[] = ['en', 'zh-cn', 'fa', 'id', 'ja', 'vi'];
 
 export const languageLabels: Record<Locale, string> = {
 	'zh-cn': '中文',
 	en: 'English',
 	fa: 'فارسی',
+	id: 'Bahasa Indonesia',
 	ja: '日本語',
 	vi: 'Tiếng Việt',
 };
@@ -591,6 +592,177 @@ export const homeContent: Record<Locale, HomeContent> = {
 			},
 		],
 		languageSwitchLabel: 'زبان',
+	},
+	id: {
+		lang: 'id',
+		path: '/id/',
+		guidePath: '/id/guide/',
+		siteName: 'Her Trees Puzzle Game',
+		pageTitle: 'Her Trees Puzzle Game',
+		pageDescription:
+			'Jelajahi HER TREES, seri puzzle hitam-putih bergambar tangan karya Stone yang berfokus pada observasi, kombinasi objek, dan suasana surealis yang tenang.',
+		guidePageTitle: 'Video Panduan HER TREES',
+		guidePageDescription: 'Tonton video panduan HER TREES yang disematkan langsung di halaman ini.',
+		headerIntro:
+			'Seri game puzzle unik di mana Anda memecahkan misteri dengan memindahkan dan menggabungkan objek di dalam ruangan aneh.',
+		playHeading: 'Mainkan HER TREES : First Puzzle Online',
+		playButton: 'Mulai Game',
+		guideButton: 'Lihat Panduan',
+		iframeTitle: 'Demo online HER TREES : First Puzzle',
+		guideIframeTitle: 'Video panduan HER TREES',
+		gameIntro:
+			'Caranya sederhana: seret objek dengan mouse, perhatikan hubungan antara mereka, lalu klik kode yang sesuai di sebelah kanan untuk memecahkan ruangan.',
+		fullscreenButton: 'Layar Penuh',
+		rotateHint:
+			'Jika game tidak berputar otomatis ke mode lanskap, aktifkan rotasi otomatis atau putar ponsel Anda secara manual.',
+		backHomeLabel: 'Kembali ke Beranda',
+		introHeading: 'Apa Itu HER TREES',
+		introParagraphs: [
+			'HER TREES adalah seri game puzzle oleh pengembang independen Stone. Interaksi utamanya bukan pengumpulan item tradisional atau manajemen inventaris yang rumit, melainkan memecahkan ruangan dengan memindahkan, menyusun, dan menggabungkan objek yang ada di dalam scene.',
+			'Sepanjang seri, identitasnya tetap konsisten: gambar tangan hitam-putih, presentasi teks rendah atau tanpa teks, atmosfer surealis seperti mimpi, dan desain puzzle yang dibangun di sekitar observasi, hubungan spasial, dan intuisi alih-alih perhitungan rumit.',
+		],
+		positioningHeading: 'Bagaimana Pengalaman Seri Ini',
+		positioningPoints: [
+			'Desain puzzle point-and-click yang digerakkan oleh observasi, berpusat pada bentuk, simbol, dan hubungan spasial.',
+			'Ruangan dan scene berfungsi sebagai struktur puzzle itu sendiri, jawaban tersembunyi dalam penempatan, urutan, dan kedekatan.',
+			'Gesekan rendah tetapi tetap mampu menghadirkan momen aha yang nyata, tanpa memerlukan matematika sulit atau catatan panjang.',
+			'Secara keseluruhan terasa lebih seperti buku gambar hitam-putih interaktif daripada game puzzle konvensional yang bising.',
+		],
+		startHeading: 'Dari Mana Pemain Baru Harus Memulai',
+		startItems: [
+			{
+				title: 'Jika ingin mencoba gratis terlebih dahulu',
+				copy: 'Mulai dengan HER TREES : First Puzzle. Ini adalah titik masuk seri, cukup pendek untuk diselesaikan dalam satu sesi, dan pengenalan paling jelas untuk logika puzzle berbasis pemindahan dan penggabungan.',
+			},
+			{
+				title: 'Jika ingin langsung bermain game yang lebih lengkap',
+				copy: 'Mulai dengan HER TREES : THE PUZZLE HOUSE atau HER TREES : PUZZLE DREAM. Keduanya cocok untuk pemain baru bahkan jika belum pernah memainkan game sebelumnya.',
+			},
+			{
+				title: 'Jika paling peduli pada skala konten',
+				copy: 'THE PUZZLE HOUSE bekerja baik sebagai entri pendek yang representatif, sementara PUZZLE DREAM adalah game terbesar sejauh ini dan juga menawarkan jalur demo.',
+			},
+		],
+		seriesHeading: 'Play More Game',
+		compareHeading: 'Perbandingan Cepat Tiga Game',
+		compareColumns: {
+			game: 'Game',
+			platform: 'Platform',
+			playtime: 'Waktu Main',
+			access: 'Akses',
+			bestFor: 'Cocok Untuk Memulai',
+		},
+		comparisonRows: [
+			{
+				game: 'HER TREES : First Puzzle',
+				platform: 'HTML5 / Windows',
+				playtime: 'Sekitar 1 jam',
+				access: 'Gratis dan bisa dimainkan di browser',
+				bestFor: 'Yang ingin titik masuk paling mudah',
+			},
+			{
+				game: 'HER TREES : THE PUZZLE HOUSE',
+				platform: 'Steam',
+				playtime: 'Sekitar 1 jam',
+				access: 'Rilis penuh dengan petunjuk dan jawaban',
+				bestFor: 'Yang ingin memainkan game kompak representatif terlebih dahulu',
+			},
+			{
+				game: 'HER TREES : PUZZLE DREAM',
+				platform: 'Steam / itch.io Demo',
+				playtime: '1,5 hingga 3 jam',
+				access: 'Entri terbesar dengan 40+ puzzle dan demo',
+				bestFor: 'Yang ingin versi paling lengkap dari formula ini',
+			},
+		],
+		whyHeading: 'Mengapa Seri Ini Layak Dimainkan',
+		sellingPointsHeading: 'Kekuatan Utama',
+		videoLabel: 'Demo animasi puzzle HER TREES',
+		analysisStrong: 'Amati dulu, pahami setelahnya.',
+		analysisBody:
+			'HER TREES memperlakukan seluruh layar sebagai bagian dari aturan. Bentuk, penempatan, urutan, dan kedekatan lebih penting daripada dialog, sehingga setiap solusi terasa ditemukan alih-alih diinstruksikan.',
+		audienceHeading: 'Siapa yang Paling Cocok Dengan Seri Ini',
+		audienceItems: [
+			'Pemain yang menikmati observasi, pengenalan pola, dan logika puzzle spasial.',
+			'Orang yang mencari game indie pendek dengan rasa penyelesaian yang kuat.',
+			'Siapa pun yang tertarik pada desain visual hitam-putih, surealis, dan tenang.',
+			'Pemain yang tidak ingin tutorial panjang atau dinding teks.',
+			'Orang yang mencari game puzzle yang tidak bergantung pada pengenalan warna atau petunjuk audio.',
+			'Penggemar Rusty Lake, Cube Escape, atau game puzzle ruangan yang menginginkan sesuatu yang lebih tenang dan abstrak.',
+		],
+		faqHeading: 'FAQ',
+		footerCopy: 'Halaman landing independen dan ringkasan yang bisa dimainkan untuk seri HER TREES.',
+		games: [
+			{
+				title: 'HER TREES : First Puzzle',
+				meta: 'HTML5 / Windows · Sekitar 1 jam · Gratis',
+				alt: 'Screenshot dari HER TREES : First Puzzle',
+				copy: 'Game pertama menentukan nada seri: puzzle skala ruangan, scene gambar tangan hitam-putih, dan solusi yang dibangun dari memindahkan dan menggabungkan objek.',
+			},
+			{
+				title: 'HER TREES : THE PUZZLE HOUSE',
+				meta: 'Steam · Dirilis 29 Februari 2024 · Sekitar 1 jam',
+				alt: 'Screenshot dari HER TREES : THE PUZZLE HOUSE',
+				copy: 'Rumah puzzle surealis yang ringkas namun lengkap yang menggantikan teks berat dan sistem rumit dengan simbol, logika spasial, dan observasi cermat.',
+			},
+			{
+				title: 'HER TREES : PUZZLE DREAM',
+				meta: 'Steam / itch.io Demo · Dirilis 10 Februari 2026 · 1,5 hingga 3 jam',
+				alt: 'Screenshot dari HER TREES : PUZZLE DREAM',
+				copy: 'Entri terbesar sejauh ini, memperluas seri menjadi perjalanan surealis dengan lebih dari 40 puzzle sambil mempertahankan desain tenang dan intuitifnya.',
+			},
+			{
+				title: 'Trees Hate You',
+				meta: 'Windows / Web Demo · Game Komedi Kemarahan',
+				alt: 'Screenshot dari Trees Hate You',
+				copy: 'Game yang sangat berbeda: hutan sendiri yang menargetkan pemain, menciptakan kekecewaan dan tawa berkelanjutan dengan restart cepat, tanda jebakan, dan efek streaming.',
+			},
+		],
+		highlights: [
+			{
+				title: 'Logika puzzle berbasis pemindahan dan penggabungan',
+				copy: 'Daya tarik HER TREES bukan pada manajemen item tradisional. Ia berasal dari menyusun ulang elemen hingga aturan tersembunyi terungkap dengan sendirinya.',
+			},
+			{
+				title: 'Teks sedikit, gesekan rendah',
+				copy: 'Seri ini berkomunikasi terutama melalui gambar, bentuk, dan hubungan spasial alih-alih teks panjang, ketergantungan warna, atau petunjuk audio.',
+			},
+			{
+				title: 'Pendek tapi lengkap',
+				copy: 'Sebagian besar entri dapat diselesaikan dalam satu sesi terfokus, memberikan lengkungan penuh tanpa meminta komitmen waktu yang besar.',
+			},
+			{
+				title: 'Dibangun di sekitar intuisi, bukan perhitungan',
+				copy: 'Deskripsi publik berulang kali membingkai seri sebagai desain puzzle observasi-pertama, jadi bukan jenis game yang mengharapkan aritmetika berat atau catatan konstan.',
+			},
+			{
+				title: 'Non-verbal berdasarkan desain',
+				copy: 'Entri selanjutnya secara eksplisit menggambarkan diri mereka sebagai non-verbal, dan game pertama juga mempresentasikan diri sebagai teks-ringan, yang membuat seri lebih mudah diakses lintas bahasa.',
+			},
+			{
+				title: 'Keunggulan aksesibilitas yang jelas',
+				copy: 'Fitur yang terdaftar secara publik mencatat bahwa game tidak bergantung pada pengenalan warna atau pemecahan puzzle berbasis audio, dan game pertama ditandai sebagai color-blind friendly, one-button, dan textless.',
+			},
+		],
+		faqs: [
+			{
+				question: 'Game seperti apa HER TREES itu?',
+				answer: 'HER TREES adalah seri puzzle gambar tangan yang berfokus pada observasi, pergerakan objek, dan kombinasi visual, berada di antara room escape, point-and-click, dan desain puzzle seni surealis.',
+			},
+			{
+				question: 'Apakah saya perlu memainkan game secara berurutan?',
+				answer: 'Tidak. Entri selanjutnya tetap mudah diakses untuk pemain baru, dan Anda selalu bisa kembali ke game sebelumnya jika ingin melihat bagaimana seri berkembang.',
+			},
+			{
+				question: 'Apakah ada banyak teks untuk dibaca?',
+				answer: 'Tidak terlalu. Seri ini sengaja menjaga bahasa seminimal mungkin, sehingga kemajuan datang terutama dari memperhatikan hubungan dalam scene alih-alih membaca instruksi.',
+			},
+			{
+				question: 'Seri ini untuk siapa?',
+				answer: 'Cocok untuk pemain yang menyukai puzzle atmosfer pendek, kurva kesulitan yang lembut, dan memecahkan masalah melalui observasi alih-alih tutorial eksplisit.',
+			},
+		],
+		languageSwitchLabel: 'Bahasa',
 	},
 	ja: {
 		lang: 'ja',

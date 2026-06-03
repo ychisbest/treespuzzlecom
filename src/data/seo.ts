@@ -17,6 +17,7 @@ const hreflangByLocale: Record<Locale, string> = {
 	en: "en",
 	"zh-cn": "zh-CN",
 	fa: "fa",
+	id: "id",
 	ja: "ja",
 	vi: "vi",
 };
@@ -25,6 +26,7 @@ const ogLocaleByLocale: Record<Locale, string> = {
 	en: "en_US",
 	"zh-cn": "zh_CN",
 	fa: "fa_IR",
+	id: "id_ID",
 	ja: "ja_JP",
 	vi: "vi_VN",
 };
@@ -64,6 +66,7 @@ export const homeAlternateLinks = (locale: Locale) =>
 			en: homeContent.en.path,
 			"zh-cn": homeContent["zh-cn"].path,
 			fa: homeContent.fa.path,
+			id: homeContent.id.path,
 			ja: homeContent.ja.path,
 			vi: homeContent.vi.path,
 		},
@@ -76,6 +79,7 @@ export const guideAlternateLinks = (locale: Locale) =>
 			en: homeContent.en.guidePath,
 			"zh-cn": homeContent["zh-cn"].guidePath,
 			fa: homeContent.fa.guidePath,
+			id: homeContent.id.guidePath,
 			ja: homeContent.ja.guidePath,
 			vi: homeContent.vi.guidePath,
 		},

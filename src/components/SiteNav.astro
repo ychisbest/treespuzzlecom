@@ -14,7 +14,7 @@ const isPuzzleHouse = currentPath.includes("puzzle-house");
 const isPuzzleDream = currentPath.includes("puzzle-dream");
 
 const resolvedLinks = links.map((link) => {
-	if (link.label === "Guide" || link.label === "攻略" || link.label === "راهنما") {
+	if (link.label === "Guide" || link.label === "攻略" || link.label === "راهنما" || link.label === "Panduan" || link.label === "Huong dan") {
 		if (isPuzzleHouse) {
 			const guidePath = locale === "en" ? "/play/puzzle-house/guide/" : `/${locale}/play/puzzle-house/guide/`;
 			return { ...link, href: guidePath, openInNewTab: false };
