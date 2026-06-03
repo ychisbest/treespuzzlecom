@@ -136,6 +136,29 @@ a:hover {
 	color: #fff;
 }
 
+.game-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 14px;
+}
+
+.game-tags a {
+	border: 1px solid var(--border-color);
+	background: #fff;
+	padding: 0.55rem 0.85rem;
+	font-size: 0.82rem;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.game-tags a:hover {
+	border-color: #111;
+	background: #111;
+	color: #fff;
+	text-decoration: none;
+}
+
 .content-section,
 .hero-section {
 	margin-bottom: 80px;

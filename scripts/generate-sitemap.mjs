@@ -11,18 +11,21 @@ const localeAlternates = {
 	home: {
 		en: "/",
 		"zh-cn": "/zh-cn/",
+		fa: "/fa/",
 		ja: "/ja/",
 		vi: "/vi/",
 	},
 	guide: {
 		en: "/guide/",
 		"zh-cn": "/zh-cn/guide/",
+		fa: "/fa/guide/",
 		ja: "/ja/guide/",
 		vi: "/vi/guide/",
 	},
 	analysis: {
 		en: "/analysis/puzzle-design/",
 		"zh-cn": "/zh-cn/analysis/puzzle-design/",
+		fa: "/fa/analysis/puzzle-design/",
 		ja: "/ja/analysis/puzzle-design/",
 		vi: "/vi/analysis/puzzle-design/",
 	},
@@ -42,6 +45,7 @@ const standaloneUrls = [
 const hreflangByLocale = {
 	en: "en",
 	"zh-cn": "zh-CN",
+	fa: "fa",
 	ja: "ja",
 	vi: "vi",
 };

@@ -16,6 +16,7 @@ export type AlternateLink = {
 const hreflangByLocale: Record<Locale, string> = {
 	en: "en",
 	"zh-cn": "zh-CN",
+	fa: "fa",
 	ja: "ja",
 	vi: "vi",
 };
@@ -23,6 +24,7 @@ const hreflangByLocale: Record<Locale, string> = {
 const ogLocaleByLocale: Record<Locale, string> = {
 	en: "en_US",
 	"zh-cn": "zh_CN",
+	fa: "fa_IR",
 	ja: "ja_JP",
 	vi: "vi_VN",
 };
@@ -61,6 +63,7 @@ export const homeAlternateLinks = (locale: Locale) =>
 		{
 			en: homeContent.en.path,
 			"zh-cn": homeContent["zh-cn"].path,
+			fa: homeContent.fa.path,
 			ja: homeContent.ja.path,
 			vi: homeContent.vi.path,
 		},
@@ -72,6 +75,7 @@ export const guideAlternateLinks = (locale: Locale) =>
 		{
 			en: homeContent.en.guidePath,
 			"zh-cn": homeContent["zh-cn"].guidePath,
+			fa: homeContent.fa.guidePath,
 			ja: homeContent.ja.guidePath,
 			vi: homeContent.vi.guidePath,
 		},

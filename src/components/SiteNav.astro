@@ -9,11 +9,28 @@ type Props = {
 
 const { locale, currentPath = "" } = Astro.props;
 const links = siteLinksForLocale(locale);
+
+const isPuzzleHouse = currentPath.includes("puzzle-house");
+const isPuzzleDream = currentPath.includes("puzzle-dream");
+
+const resolvedLinks = links.map((link) => {
+	if (link.label === "Guide" || link.label === "攻略" || link.label === "راهنما") {
+		if (isPuzzleHouse) {
+			const guidePath = locale === "en" ? "/play/puzzle-house/guide/" : `/${locale}/play/puzzle-house/guide/`;
+			return { ...link, href: guidePath, openInNewTab: false };
+		}
+		if (isPuzzleDream) {
+			const guidePath = locale === "en" ? "/play/puzzle-dream/guide/" : `/${locale}/play/puzzle-dream/guide/`;
+			return { ...link, href: guidePath, openInNewTab: false };
+		}
+	}
+	return link;
+});
 ---
 
 <nav class="site-nav" aria-label="Primary">
 	{
-		links.map((link) => (
+		resolvedLinks.map((link) => (
 			<a
 				href={link.href}
 				target={link.openInNewTab ? "_blank" : undefined}
