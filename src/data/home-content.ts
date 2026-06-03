@@ -87,9 +87,9 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/zh-cn/',
 		guidePath: '/zh-cn/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'Her Trees Puzzle Game',
+		pageTitle: 'HER TREES - 免费在线树木解谜游戏 | 玩 Puzzle Dream 和 Puzzle House',
 		pageDescription:
-			'了解 HER TREES 这个由 Stone 创作的黑白手绘解谜系列，体验以观察、物件组合与安静超现实氛围为核心的解谜过程。',
+			'玩 HER TREES，手绘独立解谜游戏系列。在超现实的黑白房间中通过移动和组合物体来解开谜题。免费浏览器游戏 + Steam 版本。95% 好评。',
 		guidePageTitle: 'HER TREES 攻略视频',
 		guidePageDescription: '查看 HER TREES 攻略视频，页面内直接播放 YouTube 攻略内容。',
 		headerIntro:
@@ -248,6 +248,14 @@ export const homeContent: Record<Locale, HomeContent> = {
 				question: '这系列适合什么玩家？',
 				answer: '适合喜欢短篇氛围解谜、难度曲线平缓、并享受通过观察而不是讲解来理解规则的玩家。',
 			},
+			{
+				question: 'HER TREES 可以免费玩吗？',
+				answer: '可以！HER TREES : First Puzzle 可以在 treespuzzle.com 上免费在线游玩。完整版游戏（Puzzle House 和 Puzzle Dream）在 Steam 上发售。',
+			},
+			{
+				question: '通关 HER TREES 需要多长时间？',
+				answer: 'HER TREES : First Puzzle 大约 1 小时。THE PUZZLE HOUSE 大约 1 小时。PUZZLE DREAM 有 40 多个谜题，大约 1.5 到 3 小时。',
+			},
 		],
 		languageSwitchLabel: '切换语言',
 	},
@@ -256,11 +264,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/',
 		guidePath: '/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'Her Trees Puzzle Game',
+		pageTitle: 'HER TREES - Free Tree Puzzle Game Online | Play Puzzle Dream & Puzzle House',
 		pageDescription:
-			'Explore HER TREES, Stone’s black-and-white hand-drawn puzzle series built around observation, object combinations, and quiet surreal atmosphere.',
-		guidePageTitle: 'HER TREES Guide Video',
-		guidePageDescription: 'Watch a HER TREES guide video embedded directly on this page.',
+			'Play HER TREES, the hand-drawn indie puzzle game series. Solve mysteries by moving and combining objects in surreal black-and-white rooms. Free browser game + Steam releases. 95% positive reviews.',
+		guidePageTitle: 'HER TREES Walkthrough & Video Guide - All Puzzles Solved',
+		guidePageDescription: 'Stuck on a HER TREES puzzle? Watch the complete video walkthrough for HER TREES : First Puzzle. Step-by-step solutions for every room, with tips for beginners.',
 		headerIntro:
 			'An unusual puzzle game series where you solve mysteries by moving and combining objects inside strange, hand-drawn rooms.',
 		playHeading: 'Play HER TREES : First Puzzle Online',
@@ -419,6 +427,14 @@ export const homeContent: Record<Locale, HomeContent> = {
 				question: 'Who is this series for?',
 				answer: 'It works well for players who like short atmospheric puzzles, gentle difficulty curves, and figuring things out through observation rather than explicit tutorials.',
 			},
+			{
+				question: 'Can I play HER TREES for free?',
+				answer: 'Yes! HER TREES : First Puzzle is free to play in your browser on treespuzzle.com. The full games (Puzzle House and Puzzle Dream) are available on Steam.',
+			},
+			{
+				question: 'How long does it take to complete HER TREES?',
+				answer: 'HER TREES : First Puzzle takes about 1 hour. THE PUZZLE HOUSE takes about 1 hour. PUZZLE DREAM takes 1.5-3 hours with 40+ puzzles.',
+			},
 		],
 		languageSwitchLabel: 'Language',
 	},
@@ -427,11 +443,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/fa/',
 		guidePath: '/fa/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'Her Trees Puzzle Game',
+		pageTitle: 'HER TREES - بازی پازل درختی رایگان آنلاین | بازی Puzzle Dream و Puzzle House',
 		pageDescription:
-			'با سری بازی‌های پازلی HER TREES اثر Stone آشنا شوید؛ مجموعه‌ای با طراحی دستی سیاه‌وسفید، مبتنی بر مشاهده، ترکیب اشیاء و فضای سورئال آرام.',
-		guidePageTitle: 'ویدیوی راهنمای HER TREES',
-		guidePageDescription: 'ویدیوی راهنمای HER TREES را مستقیماً در این صفحه تماشا کنید.',
+			'HER TREES را بازی کنید، مجموعه بازی پازلی مستقل با طراحی دستی. در اتاق‌های سورئال سیاه‌وسفید معماها را حل کنید. بازی رایگان مرورگر + Steam. ۹۵٪ مثبت.',
+		guidePageTitle: 'راهنما و ویدیوی HER TREES - حل تمام معماها',
+		guidePageDescription: 'در پازل HER TREES گیر کرده‌اید؟ ویدیوی کامل حل معماها را تماشا کنید. راهنمای گام‌به‌گام برای هر اتاق، با نکات برای مبتدیان.',
 		headerIntro:
 			'مجموعه‌ای از بازی‌های پازلی غیرمعمول که در آن معماها را با جابجایی و ترکیب اشیاء در اتاق‌های عجیب حل می‌کنید.',
 		playHeading: 'بازی آنلاین HER TREES : First Puzzle',
@@ -590,6 +606,14 @@ export const homeContent: Record<Locale, HomeContent> = {
 				question: 'این مجموعه برای چه کسانی مناسب است؟',
 				answer: 'برای بازیکنانی مناسب است که پازل‌های کوتاه اتمسفریک، منحنی سختی ملایم و کشف قوانین از طریق مشاهده به جای آموزش صریح را دوست دارند.',
 			},
+			{
+				question: 'آیا می‌توانم HER TREES را رایگان بازی کنم؟',
+				answer: 'بله! HER TREES : First Puzzle به صورت رایگان در مرورگر شما در treespuzzle.com قابل بازی است. بازی‌های کامل (Puzzle House و Puzzle Dream) در Steam موجود هستند.',
+			},
+			{
+				question: 'تمام کردن HER TREES چقدر طول می‌کشد؟',
+				answer: 'HER TREES : First Puzzle حدود ۱ ساعت طول می‌کشد. THE PUZZLE HOUSE حدود ۱ ساعت. PUZZLE DREAM با بیش از ۴۰ پازل ۱.۵ تا ۳ ساعت.',
+			},
 		],
 		languageSwitchLabel: 'زبان',
 	},
@@ -598,11 +622,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/id/',
 		guidePath: '/id/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'Her Trees Puzzle Game',
+		pageTitle: 'HER TREES - Game Puzzle Pohon Gratis Online | Main Puzzle Dream & Puzzle House',
 		pageDescription:
-			'Jelajahi HER TREES, seri puzzle hitam-putih bergambar tangan karya Stone yang berfokus pada observasi, kombinasi objek, dan suasana surealis yang tenang.',
-		guidePageTitle: 'Video Panduan HER TREES',
-		guidePageDescription: 'Tonton video panduan HER TREES yang disematkan langsung di halaman ini.',
+			'Mainkan HER TREES, seri game puzzle indie bergambar tangan. Pecahkan misteri dengan memindahkan objek di ruangan surealis hitam-putih. Game browser gratis + Steam. 95% positif.',
+		guidePageTitle: 'Panduan & Video HER TREES - Semua Puzzle Terpecahkan',
+		guidePageDescription: 'Terjebak di puzzle HER TREES? Tonton video panduan lengkap untuk HER TREES : First Puzzle. Solusi langkah demi langkah untuk setiap ruangan, dengan tips untuk pemula.',
 		headerIntro:
 			'Seri game puzzle unik di mana Anda memecahkan misteri dengan memindahkan dan menggabungkan objek di dalam ruangan aneh.',
 		playHeading: 'Mainkan HER TREES : First Puzzle Online',
@@ -761,6 +785,14 @@ export const homeContent: Record<Locale, HomeContent> = {
 				question: 'Seri ini untuk siapa?',
 				answer: 'Cocok untuk pemain yang menyukai puzzle atmosfer pendek, kurva kesulitan yang lembut, dan memecahkan masalah melalui observasi alih-alih tutorial eksplisit.',
 			},
+			{
+				question: 'Bisakah saya bermain HER TREES secara gratis?',
+				answer: 'Ya! HER TREES : First Puzzle bisa dimainkan gratis di browser Anda di treespuzzle.com. Game lengkap (Puzzle House dan Puzzle Dream) tersedia di Steam.',
+			},
+			{
+				question: 'Berapa lama waktu untuk menyelesaikan HER TREES?',
+				answer: 'HER TREES : First Puzzle membutuhkan waktu sekitar 1 jam. THE PUZZLE HOUSE sekitar 1 jam. PUZZLE DREAM 1,5-3 jam dengan 40+ puzzle.',
+			},
 		],
 		languageSwitchLabel: 'Bahasa',
 	},
@@ -769,11 +801,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/ja/',
 		guidePath: '/ja/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'Her Trees Puzzle Game',
+		pageTitle: 'HER TREES - 無料で遊べるパズルゲーム | Puzzle Dream & Puzzle House',
 		pageDescription:
-			'Stone による白黒手描きパズルシリーズ HER TREES を紹介。観察、オブジェクトの組み合わせ、静かな幻想性を中心にした体験を楽しめます。',
-		guidePageTitle: 'HER TREES 攻略動画',
-		guidePageDescription: 'YouTube の HER TREES 攻略動画をこのページ内で視聴できます。',
+			'HER TREES は白黒手描きのインディーパズルゲームシリーズ。シュールな部屋でオブジェクトを動かして組み合わせて謎を解こう。ブラウザ無料 + Steam 発売中。95% 評価。',
+		guidePageTitle: 'HER TREES 攻略＆ビデオガイド - 全パズル解法',
+		guidePageDescription: 'HER TREES で詰まった方はこちら。全パズルのステップバイステップ解法動画付き。初心者向けのヒントも掲載。',
 		headerIntro:
 			'物を動かして組み合わせながら謎を解いていく、独特なパズルゲームシリーズです。不思議な部屋に隠された仕組みを見つけてください。',
 		playHeading: 'HER TREES : First Puzzle をブラウザで遊ぶ',
@@ -932,6 +964,14 @@ export const homeContent: Record<Locale, HomeContent> = {
 				question: 'どんな人に向いていますか？',
 				answer: '短編の雰囲気系パズル、穏やかな難易度、そして丁寧な観察から法則を見つける遊びが好きな人に向いています。',
 			},
+			{
+				question: 'HER TREES を無料で遊べますか？',
+				answer: 'はい！HER TREES : First Puzzle は treespuzzle.com でブラウザから無料で遊べます。フルゲーム（Puzzle House と Puzzle Dream）は Steam で発売中です。',
+			},
+			{
+				question: 'HER TREES をクリアするのにどのくらいかかりますか？',
+				answer: 'HER TREES : First Puzzle は約1時間。THE PUZZLE HOUSE は約1時間。PUZZLE DREAM は40以上の謎で1.5〜3時間です。',
+			},
 		],
 		languageSwitchLabel: '言語',
 	},
@@ -940,11 +980,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/vi/',
 		guidePath: '/vi/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'Her Trees Puzzle Game',
+		pageTitle: 'HER TREES - Game Giải Đố Cây Miễn Phí | Chơi Puzzle Dream & Puzzle House',
 		pageDescription:
-			'Khám phá HER TREES, loạt game giải đố vẽ tay đen trắng của Stone, tập trung vào quan sát, kết hợp đồ vật và bầu không khí siêu thực yên tĩnh.',
-		guidePageTitle: 'Video huong dan HER TREES',
-		guidePageDescription: 'Xem video huong dan HER TREES duoc nhung truc tiep tren trang nay.',
+			'Chơi HER TREES, series game giải đố indie vẽ tay. Giải mã bằng cách di chuyển đồ vật trong phòng siêu thực đen trắng. Chơi miễn phí trên trình duyệt + Steam. 95% đánh giá tích cực.',
+		guidePageTitle: 'HER TREES Hướng Dẫn & Video - Giải Pháp Tất Cả Câu Đố',
+		guidePageDescription: 'Bị mắc kẹt trong HER TREES? Xem video hướng dẫn hoàn chỉnh cho HER TREES : First Puzzle. Giải pháp từng bước cho mọi phòng, kèm mẹo cho người mới.',
 		headerIntro:
 			'Đây là một series game giải đố khác lạ, nơi bạn giải mật mã bằng cách di chuyển và kết hợp đồ vật trong những căn phòng kỳ quái.',
 		playHeading: 'Chơi HER TREES : First Puzzle Trực Tuyến',
@@ -1102,6 +1142,14 @@ export const homeContent: Record<Locale, HomeContent> = {
 			{
 				question: 'Series này phù hợp với ai?',
 				answer: 'Nó hợp với người thích game giải đố ngắn giàu không khí, độ khó tăng vừa phải, và thích tự quan sát để hiểu quy luật thay vì được giải thích trực tiếp.',
+			},
+			{
+				question: 'Tôi có thể chơi HER TREES miễn phí không?',
+				answer: 'Có! HER TREES : First Puzzle chơi miễn phí trên trình duyệt tại treespuzzle.com. Các bản đầy đủ (Puzzle House và Puzzle Dream) có trên Steam.',
+			},
+			{
+				question: 'Hoàn thành HER TREES mất bao lâu?',
+				answer: 'HER TREES : First Puzzle mất khoảng 1 giờ. THE PUZZLE HOUSE khoảng 1 giờ. PUZZLE DREAM 1,5-3 giờ với hơn 40 câu đố.',
 			},
 		],
 		languageSwitchLabel: 'Ngôn ngữ',
