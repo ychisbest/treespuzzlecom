@@ -101,6 +101,26 @@ export const shellContent: Record<Locale, ShellCopy> = {
 			"این وب‌سایت شامل یادداشت‌های تحریریه اصلی، راهنمای گیم‌پلی، صفحات سیاستی و لینک‌های مستقیم برای کمک به بازدیدکنندگان قبل از بازی است.",
 		breadcrumbHome: "خانه",
 	},
+	fr: {
+		homeLabel: "Accueil",
+		guideLabel: "Guide",
+		analysisLabel: "Analyse",
+		aboutLabel: "À Propos",
+		contactLabel: "Contact",
+		editorialLabel: "Politique Éditoriale",
+		linksLabel: "Liens Partenaires",
+		privacyLabel: "Politique de Confidentialité",
+		termsLabel: "Conditions d'Utilisation",
+		disclaimerLabel: "Avertissement",
+		siteLinksHeading: "Liens du Site",
+		legalLinksHeading: "Politiques",
+		independentLabel: "Site éditorial indépendant",
+		independentNote:
+			"treespuzzle.com est un site d'information indépendant couvrant la série de puzzles HER TREES et n'est pas le site web officiel de l'éditeur.",
+		footerNotice:
+			"Ce site web combine des notes éditoriales originales, des explications de gameplay, des pages de politique et des liens directs pour aider les visiteurs à comprendre la série avant de jouer.",
+		breadcrumbHome: "Accueil",
+	},
 	id: {
 		homeLabel: "Beranda",
 		guideLabel: "Panduan",

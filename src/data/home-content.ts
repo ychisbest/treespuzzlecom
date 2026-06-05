@@ -1,4 +1,4 @@
-export type Locale = 'zh-cn' | 'en' | 'fa' | 'id' | 'ja' | 'vi';
+export type Locale = 'zh-cn' | 'en' | 'fa' | 'fr' | 'id' | 'ja' | 'vi';
 
 export type HomeContent = {
 	lang: string;
@@ -70,12 +70,13 @@ export type HomeContent = {
 	}>;
 };
 
-export const localeOrder: Locale[] = ['en', 'zh-cn', 'fa', 'id', 'ja', 'vi'];
+export const localeOrder: Locale[] = ['en', 'zh-cn', 'fa', 'fr', 'id', 'ja', 'vi'];
 
 export const languageLabels: Record<Locale, string> = {
 	'zh-cn': '中文',
 	en: 'English',
 	fa: 'فارسی',
+	fr: 'Français',
 	id: 'Bahasa Indonesia',
 	ja: '日本語',
 	vi: 'Tiếng Việt',
@@ -616,6 +617,185 @@ export const homeContent: Record<Locale, HomeContent> = {
 			},
 		],
 		languageSwitchLabel: 'زبان',
+	},
+	fr: {
+		lang: 'fr',
+		path: '/fr/',
+		guidePath: '/fr/guide/',
+		siteName: 'Her Trees Puzzle Game',
+		pageTitle: 'HER TREES - Jeu de Puzzle en Arbre Gratuit en Ligne | Jouez à Puzzle Dream et Puzzle House',
+		pageDescription:
+			'Jouez à HER TREES, la série de jeux de puzzle indépendants dessinés à la main. Résolvez des mystères en déplaçant et combinant des objets dans des pièces surréalistes en noir et blanc. Jeu de navigateur gratuit + sorties Steam. 95% de critiques positives.',
+		guidePageTitle: 'HER TREES Guide Vidéo et Walkthrough - Tous les Puzzles Résolus',
+		guidePageDescription: 'Bloqué sur un puzzle HER TREES ? Regardez le guide vidéo complet pour HER TREES : First Puzzle. Solutions étape par étape pour chaque pièce, avec des conseils pour les débutants.',
+		headerIntro:
+			'Une série de jeux de puzzle inhabituelle où vous résolvez des mystères en déplaçant et combinant des objets dans des pièces étranges dessinées à la main.',
+		playHeading: 'Jouez à HER TREES : First Puzzle en Ligne',
+		playButton: 'Lancer le Jeu',
+		guideButton: 'Voir le Guide',
+		iframeTitle: 'Démo en ligne de HER TREES : First Puzzle',
+		guideIframeTitle: 'Vidéo guide de HER TREES',
+		gameIntro:
+			'Le principe est simple : glissez les objets avec votre souris, observez comment ils se rapportent les uns aux autres, puis cliquez sur le code correspondant à droite pour résoudre la pièce.',
+		fullscreenButton: 'Plein Écran',
+		rotateHint:
+			'Le jeu ne passe pas automatiquement en mode paysage ? Activez la rotation automatique ou tournez votre téléphone manuellement.',
+		backHomeLabel: "Retour à l'Accueil",
+		introHeading: 'Qu\'est-ce que HER TREES',
+		introParagraphs: [
+			'HER TREES est une série de jeux de puzzle créée par le développeur indépendant Stone. Son interaction principale n\'est pas la collecte d\'objets traditionnelle ni la gestion d\'inventaire complexe, mais la résolution de pièces en déplaçant, disposant et combinant les objets déjà présents dans la scène.',
+			'Tout au long de la série, l\'identité reste cohérente : dessin à la main en noir et blanc, présentation à texte réduit ou sans texte, atmosphère onirique et surréaliste, et conception de puzzles basée sur l\'observation, les relations spatiales et l\'intuition plutôt que sur des calculs complexes.',
+		],
+		positioningHeading: 'Ce que Ressent cette Série en Jouant',
+		positioningPoints: [
+			'Conception de puzzles point-and-click axée sur l\'observation, centrée sur les formes, les symboles et les relations spatiales.',
+			'Les pièces et les scènes fonctionnent comme des structures de puzzle en soi, avec des réponses cachées dans le placement, l\'ordre et la proximité.',
+			'Début facile mais capable de vrais moments d\'épiphanie, sans nécessiter de calculs difficiles ni de pages de notes.',
+			'Le ton général ressemble davantage à un livre d\'images interactif en noir et blanc qu\'à un jeu de puzzle conventionnel bruyant.',
+		],
+		startHeading: 'Par où les Nouveaux Joueurs Doivent-ils Commencer',
+		startItems: [
+			{
+				title: 'Si vous voulez un premier aperçu gratuit',
+				copy: 'Commencez par HER TREES : First Puzzle. C\'est le point d\'entrée de la série, assez court pour être terminé en une session, et l\'introduction la plus claire à la logique de puzzle basée sur le déplacement et la combinaison.',
+			},
+			{
+				title: 'Si vous voulez un jeu complet plus abouti',
+				copy: 'Commencez par HER TREES : THE PUZZLE HOUSE ou HER TREES : PUZZLE DREAM. Les deux derniers opus sont accessibles même si vous n\'avez jamais joué aux précédents.',
+			},
+			{
+				title: 'Si vous privilégiez le contenu',
+				copy: 'THE PUZZLE HOUSE fonctionne bien comme entrée courte et représentative, tandis que PUZZLE DREAM est le plus grand jeu à ce jour et propose également une démo pour les joueurs prudents.',
+			},
+		],
+		seriesHeading: 'Play More Game',
+		compareHeading: 'Comparaison Rapide des Trois Jeux',
+		compareColumns: {
+			game: 'Jeu',
+			platform: 'Plateforme',
+			playtime: 'Durée',
+			access: 'Accès',
+			bestFor: 'Idéal Pour Commencer',
+		},
+		comparisonRows: [
+			{
+				game: 'HER TREES : First Puzzle',
+				platform: 'HTML5 / Windows',
+				playtime: 'Environ 1 heure',
+				access: 'Gratuit et jouable dans le navigateur',
+				bestFor: 'Joueurs cherchant le point d\'entrée le plus accessible',
+			},
+			{
+				game: 'HER TREES : THE PUZZLE HOUSE',
+				platform: 'Steam',
+				playtime: 'Environ 1 heure',
+				access: 'Version complète avec indices et réponses',
+				bestFor: 'Joueurs cherchant le jeu compact le plus représentatif',
+			},
+			{
+				game: 'HER TREES : PUZZLE DREAM',
+				platform: 'Steam / itch.io Demo',
+				playtime: '1h30 à 3 heures',
+				access: 'Le plus grand opus avec plus de 40 puzzles et une démo',
+				bestFor: 'Joueurs cherchant la version la plus complète de la formule',
+			},
+		],
+		whyHeading: 'Pourquoi cette Série vaut la Peine d\'être Jouée',
+		sellingPointsHeading: 'Forces Principales',
+		videoLabel: 'Démonstration de l\'animation de puzzle HER TREES',
+		analysisStrong: 'Observer d\'abord, comprendre ensuite.',
+		analysisBody:
+			'HER TREES considère l\'ensemble de l\'écran comme faisant partie des règles. Les formes, le placement, la séquence et la proximité comptent plus que les dialogues, donc chaque solution semble découverte plutôt qu\'instructée.',
+		audienceHeading: 'À qui cette Série convient le Mieux',
+		audienceItems: [
+			'Les joueurs qui aiment l\'observation, la reconnaissance de motifs et la logique spatiale.',
+			'Les personnes cherchant des jeux indépendants courts avec un fort sentiment d\'accomplissement.',
+			'Toute personne attirée par le design visuel en noir et blanc, onirique, surréaliste et calme.',
+			'Les joueurs qui ne veulent pas de tutoriels longs ou de murs de texte.',
+			'Les personnes cherchant des jeux de puzzle qui ne dépendent pas de la reconnaissance des couleurs ou des indices audio.',
+			'Les fans de Rusty Lake, Cube Escape ou des jeux d\'énigmes de pièces qui veulent quelque chose de plus calme et abstrait.',
+		],
+		faqHeading: 'FAQ',
+		footerCopy: 'Page d\'atterrissage indépendante et aperçu jouable pour la série HER TREES.',
+		games: [
+			{
+				title: 'HER TREES : First Puzzle',
+				meta: 'HTML5 / Windows · Environ 1 heure · Gratuit',
+				alt: 'Capture d\'écran de HER TREES : First Puzzle',
+				copy: 'Le premier jeu définit le ton de la série : puzzles à l\'échelle d\'une pièce, scènes dessinées à la main en noir et blanc, et solutions basées sur le déplacement et la combinaison d\'objets.',
+			},
+			{
+				title: 'HER TREES : THE PUZZLE HOUSE',
+				meta: 'Steam · Sorti le 29 février 2024 · Environ 1 heure',
+				alt: 'Capture d\'écran de HER TREES : THE PUZZLE HOUSE',
+				copy: 'Une maison de puzzle surréaliste compacte mais complète qui remplace le texte dense et les systèmes complexes par des symboles, une logique spatiale et une observation minutieuse.',
+			},
+			{
+				title: 'HER TREES : PUZZLE DREAM',
+				meta: 'Steam / itch.io Demo · Sorti le 10 février 2026 · 1h30 à 3 heures',
+				alt: 'Capture d\'écran de HER TREES : PUZZLE DREAM',
+				copy: 'Le plus grand opus à ce jour, étendant la série en un voyage onirique avec plus de 40 puzzles tout en conservant son design calme et intuitif.',
+			},
+			{
+				title: 'Trees Hate You',
+				meta: 'Windows / Web Demo · Jeu de comédie de rage',
+				alt: 'Capture d\'écran de Trees Hate You',
+				copy: 'Un choix très différent de la série HER TREES : un jeu de pièges comique à redémarrage rapide où la forêt elle-même est la blague, la menace et la chute.',
+			},
+		],
+		highlights: [
+			{
+				title: 'Logique de puzzle basée sur le mouvement et les combinaisons',
+				copy: 'L\'attrait de HER TREES ne réside pas dans la gestion d\'inventaire. Il vient du réarrangement des éléments jusqu\'à ce que la règle cachée se révèle.',
+			},
+			{
+				title: 'Peu de texte, peu de friction',
+				copy: 'Cette série communique principalement par les images, les formes et les relations spatiales plutôt que par un long texte, une dépendance aux couleurs ou des indices audio.',
+			},
+			{
+				title: 'Court, mais complet',
+				copy: 'La plupart des opus peuvent être terminés en une session concentrée, vous offrant un arc complet sans exiger un engagement temporel énorme.',
+			},
+			{
+				title: 'Construit autour de l\'intuition, pas du calcul',
+				copy: 'Les descriptions publiques cadrent à plusieurs reprises la série comme une conception de puzzle axée sur l\'observation, ce n\'est donc pas le type de jeu qui attend une arithmétique lourde ou la prise de notes constante.',
+			},
+			{
+				title: 'Non-verbal par conception',
+				copy: 'Les opus ultérieurs se décrivent explicitement comme non-verbaux, et le premier jeu se présente également comme léger en texte, ce qui rend la série plus facile à aborder quelle que soit la langue.',
+			},
+			{
+				title: 'Avantages clairs en accessibilité',
+				copy: 'Les caractéristiques listées publiquement notent que les jeux ne dépendent pas de la reconnaissance des couleurs ou de la résolution de puzzles audio, et le premier jeu est marqué comme adapté aux daltoniens, à un bouton et sans texte.',
+			},
+		],
+		faqs: [
+			{
+				question: 'Quel type de jeu est HER TREES ?',
+				answer: 'HER TREES est une série de puzzles dessinés à la main axée sur l\'observation, le déplacement d\'objets et les combinaisons visuelles, entre l\'escape room, le point-and-click et la conception de puzzle artistique surréaliste.',
+			},
+			{
+				question: 'Dois-je jouer aux jeux dans l\'ordre ?',
+				answer: 'Non. Les opus ultérieurs restent accessibles aux nouveaux joueurs, et vous pouvez toujours revenir aux jeux précédents si vous voulez voir comment la série a évolué.',
+			},
+			{
+				question: 'Y a-t-il beaucoup de texte à lire ?',
+				answer: 'Pas vraiment. La série garde délibérément le langage au minimum, donc la progression vient principalement de la remarque des relations dans la scène plutôt que de la lecture d\'instructions.',
+			},
+			{
+				question: 'À qui cette série s\'adresse-t-elle ?',
+				answer: 'Elle convient bien aux joueurs qui aiment les puzzles atmosphériques courts, les courbes de difficulté douces et la compréhension par l\'observation plutôt que par des tutoriels explicites.',
+			},
+			{
+				question: 'Puis-je jouer à HER TREES gratuitement ?',
+				answer: 'Oui ! HER TREES : First Puzzle est gratuit dans votre navigateur sur treespuzzle.com. Les jeux complets (Puzzle House et Puzzle Dream) sont disponibles sur Steam.',
+			},
+			{
+				question: 'Combien de temps faut-il pour terminer HER TREES ?',
+				answer: 'HER TREES : First Puzzle prend environ 1 heure. THE PUZZLE HOUSE prend environ 1 heure. PUZZLE DREAM prend 1h30 à 3 heures avec plus de 40 puzzles.',
+			},
+		],
+		languageSwitchLabel: 'Langue',
 	},
 	id: {
 		lang: 'id',
