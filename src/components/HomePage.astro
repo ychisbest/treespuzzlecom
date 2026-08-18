@@ -122,6 +122,10 @@ const supportContent: Record<
 		contactTitle: string;
 		contactBody: string;
 		updatedLabel: string;
+		morePlayHeading: string;
+		morePlayBody: string;
+		houseCta: string;
+		dreamCta: string;
 	}
 > = {
 		"zh-cn": {
@@ -140,6 +144,10 @@ const supportContent: Record<
 		contactTitle: "联系",
 		contactBody: "用于纠错、版权沟通、页面问题反馈和站点行政联系。",
 		updatedLabel: "最近更新",
+		morePlayHeading: "接着在浏览器里玩",
+		morePlayBody: "这两部也能在本站直接玩，不用下载。",
+		houseCta: "打开 Puzzle House",
+		dreamCta: "打开 Puzzle Dream",
 	},
 		en: {
 			editorialHeading: "Editorial Note",
@@ -161,6 +169,10 @@ const supportContent: Record<
 		contactBody:
 			"Use the site contact page for corrections, rights requests, or technical issues.",
 		updatedLabel: "Last updated",
+		morePlayHeading: "Also play in your browser",
+		morePlayBody: "Puzzle House and Puzzle Dream run here with no download.",
+		houseCta: "Play Puzzle House",
+		dreamCta: "Play Puzzle Dream",
 	},
 		fa: {
 			editorialHeading: "یادداشت تحریریه",
@@ -178,6 +190,10 @@ const supportContent: Record<
 		contactTitle: "تماس",
 		contactBody: "از صفحه تماس سایت برای اصلاحات، درخواست‌های حقوقی یا مشکلات فنی استفاده کنید.",
 		updatedLabel: "آخرین به‌روزرسانی",
+		morePlayHeading: "همین‌جا در مرورگر بازی کنید",
+		morePlayBody: "Puzzle House و Puzzle Dream هم بدون دانلود در این سایت اجرا می‌شوند.",
+		houseCta: "باز کردن Puzzle House",
+		dreamCta: "باز کردن Puzzle Dream",
 	},
 		fr: {
 			editorialHeading: "Note Éditoriale",
@@ -195,6 +211,10 @@ const supportContent: Record<
 		contactTitle: "Contact",
 		contactBody: "Utilisez la page de contact du site pour les corrections, les demandes de droits ou les problèmes techniques.",
 		updatedLabel: "Dernière mise à jour",
+		morePlayHeading: "Jouez aussi dans le navigateur",
+		morePlayBody: "Puzzle House et Puzzle Dream se lancent ici, sans téléchargement.",
+		houseCta: "Ouvrir Puzzle House",
+		dreamCta: "Ouvrir Puzzle Dream",
 	},
 		id: {
 			editorialHeading: "Catatan Editorial",
@@ -212,6 +232,10 @@ const supportContent: Record<
 		contactTitle: "Kontak",
 		contactBody: "Gunakan halaman kontak situs untuk koreksi, permintaan hak, atau masalah teknis.",
 		updatedLabel: "Terakhir diperbarui",
+		morePlayHeading: "Main juga di browser",
+		morePlayBody: "Puzzle House dan Puzzle Dream bisa dimainkan di sini tanpa unduhan.",
+		houseCta: "Buka Puzzle House",
+		dreamCta: "Buka Puzzle Dream",
 	},
 		ja: {
 			editorialHeading: "編集メモ",
@@ -229,6 +253,10 @@ const supportContent: Record<
 		contactTitle: "お問い合わせ",
 		contactBody: "誤記修正、権利対応、技術的な問題の連絡窓口です。",
 		updatedLabel: "最終更新",
+		morePlayHeading: "ブラウザでも続けて遊ぶ",
+		morePlayBody: "Puzzle House と Puzzle Dream もこのサイトでダウンロードなしで遊べます。",
+		houseCta: "Puzzle House を開く",
+		dreamCta: "Puzzle Dream を開く",
 	},
 		vi: {
 			editorialHeading: "Ghi chu bien tap",
@@ -246,6 +274,10 @@ const supportContent: Record<
 		contactTitle: "Lien he",
 		contactBody: "Dung cho yeu cau chinh sua, van de ban quyen, hoac loi ky thuat.",
 		updatedLabel: "Cap nhat",
+		morePlayHeading: "Choi tiep tren trinh duyet",
+		morePlayBody: "Puzzle House va Puzzle Dream cung choi duoc o day, khong can tai.",
+		houseCta: "Mo Puzzle House",
+		dreamCta: "Mo Puzzle Dream",
 	},
 };
 
@@ -494,6 +526,21 @@ const homeSchema = JSON.stringify([
 						</div>
 					</section>
 
+				<section class="content-section" id="more-play">
+					<h2>{support.morePlayHeading}</h2>
+					<p class="section-intro">{support.morePlayBody}</p>
+					<div class="more-play-grid">
+						<a class="more-play-card" href={puzzleHousePagePath}>
+							<strong>{support.houseCta}</strong>
+							<span>HER TREES : THE PUZZLE HOUSE</span>
+						</a>
+						<a class="more-play-card" href={puzzleDreamPagePath}>
+							<strong>{support.dreamCta}</strong>
+							<span>HER TREES : PUZZLE DREAM</span>
+						</a>
+					</div>
+				</section>
+
 				<section class="content-section" id="series">
 					<h2>{content.seriesHeading}</h2>
 					<div class="games-grid">
@@ -559,12 +606,20 @@ const homeSchema = JSON.stringify([
 					<h2>{content.startHeading}</h2>
 					<div class="start-grid">
 						{
-							content.startItems.map((item) => (
-								<article class="note-card">
-									<h3>{item.title}</h3>
-									<p>{item.copy}</p>
-								</article>
-							))
+							content.startItems.map((item, index) => {
+								const href =
+									index === 1
+										? puzzleHousePagePath
+										: index === 2
+											? puzzleDreamPagePath
+											: `${content.path}#play`;
+								return (
+									<a class="note-card start-card-link" href={href}>
+										<h3>{item.title}</h3>
+										<p>{item.copy}</p>
+									</a>
+								);
+							})
 						}
 					</div>
 				</section>
@@ -584,15 +639,25 @@ const homeSchema = JSON.stringify([
 							</thead>
 							<tbody>
 								{
-									content.comparisonRows.map((row) => (
-										<tr>
-											<td>{row.game}</td>
-											<td>{row.platform}</td>
-											<td>{row.playtime}</td>
-											<td>{row.access}</td>
-											<td>{row.bestFor}</td>
-										</tr>
-									))
+									content.comparisonRows.map((row, index) => {
+										const href =
+											index === 1
+												? puzzleHousePagePath
+												: index === 2
+													? puzzleDreamPagePath
+													: `${content.path}#play`;
+										return (
+											<tr>
+												<td>
+													<a href={href}>{row.game}</a>
+												</td>
+												<td>{row.platform}</td>
+												<td>{row.playtime}</td>
+												<td>{row.access}</td>
+												<td>{row.bestFor}</td>
+											</tr>
+										);
+									})
 								}
 							</tbody>
 						</table>

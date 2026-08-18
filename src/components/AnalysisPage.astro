@@ -1,5 +1,6 @@
 ---
 import StaticPageLayout from "../layouts/StaticPageLayout.astro";
+import AdUnit from "./AdUnit.astro";
 import type { Locale } from "../data/home-content";
 import {
 	analysisPathForLocale,
@@ -70,7 +71,7 @@ const content: Record<
 			"One reason the series works well for newcomers is that it does not demand a lot of setup overhead. You are not memorizing a long control sheet or absorbing a large body of lore before play starts. Instead, the rules emerge through interaction. That makes the games easier to sample, especially for players who want something atmospheric but do not want a puzzle game that feels like work.",
 			"The tradeoff is that some players initially misread the intent. Because the games are quiet and minimal, they can look simpler than they really are. The real challenge is not mechanical difficulty. It is learning to trust observation and sequence instead of hunting for explicit instructions.",
 			"HER TREES tends to fit players who enjoy short-form, self-contained puzzle experiences with a strong visual identity. It is also well suited to people who do not want dense dialogue or systems that rely on audio and color cues. Fans of surreal room puzzles often recognize the appeal quickly, but the series also works for players who simply want a one-sitting game with a distinct mood.",
-			"If you want the shortest route into that experience, start with the first browser-playable title on the <a href=\"/\">homepage</a>. If you are already stuck, open the <a href=\"/guide/\">guide page</a> for the embedded spoiler video.",
+			"If you want the shortest route into that experience, start with the first browser-playable title on the <a href=\"/\">homepage</a>, or open <a href=\"/play/puzzle-dream/\">Puzzle Dream</a> and <a href=\"/play/puzzle-house/\">Puzzle House</a> in your browser. If you are already stuck on First Puzzle, open the <a href=\"/guide/\">First Puzzle guide</a>.",
 		],
 	},
 	fa: {
@@ -259,4 +260,5 @@ const schema = [
 			<p set:html={paragraph}></p>
 		))
 	}
+	<AdUnit />
 </StaticPageLayout>

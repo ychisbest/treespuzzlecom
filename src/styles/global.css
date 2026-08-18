@@ -479,6 +479,66 @@ a:hover {
 	line-height: 1.7;
 }
 
+.browser-hint {
+	margin: 8px 0 0;
+	color: var(--accent-color);
+	font-size: 0.88rem;
+	line-height: 1.6;
+}
+
+.more-play-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.more-play-card,
+.start-card-link {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+}
+
+.more-play-card {
+	padding: 18px 20px;
+	border: 1px solid var(--border-color);
+	background: #fff;
+}
+
+.more-play-card strong {
+	display: block;
+	margin-bottom: 6px;
+}
+
+.more-play-card span {
+	color: var(--accent-color);
+	font-size: 0.9rem;
+}
+
+.download-card-secondary {
+	border-style: dashed;
+	background: #fafafa;
+}
+
+.download-card-secondary .download-button {
+	padding: 0.55rem 0.9rem;
+	box-shadow: none;
+	background: #fff;
+	color: #111;
+}
+
+.download-card-secondary .download-button:hover {
+	transform: none;
+	background: #f3f3f3;
+	color: #111;
+}
+
+.guide-scope-note {
+	margin: 12px 0 0;
+	color: var(--accent-color);
+	font-size: 0.95rem;
+}
+
 .guide-note {
 	margin: 0;
 	color: var(--accent-color);
@@ -1110,6 +1170,10 @@ a:hover {
 }
 
 @media (max-width: 760px) {
+	.more-play-grid {
+		grid-template-columns: 1fr;
+	}
+
 	.container-shell {
 		padding: 0 20px 40px;
 	}

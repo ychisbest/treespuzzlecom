@@ -88,11 +88,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/zh-cn/',
 		guidePath: '/zh-cn/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'HER TREES - 免费在线树木解谜游戏 | 玩 Puzzle Dream 和 Puzzle House',
+		pageTitle: 'HER TREES - 浏览器免费玩树木解谜 | Puzzle Dream 和 Puzzle House',
 		pageDescription:
-			'玩 HER TREES，手绘独立解谜游戏系列。在超现实的黑白房间中通过移动和组合物体来解开谜题。免费浏览器游戏 + Steam 版本。95% 好评。',
-		guidePageTitle: 'HER TREES 攻略视频',
-		guidePageDescription: '查看 HER TREES 攻略视频，页面内直接播放 YouTube 攻略内容。',
+			'在浏览器里免费玩 HER TREES，不用下载。在超现实的黑白房间中移动和组合物体来解谜。也可在本站玩 Puzzle Dream 和 Puzzle House；Steam 是另一份付费版本。',
+		guidePageTitle: 'HER TREES : First Puzzle 攻略视频',
+		guidePageDescription: '本页只覆盖 HER TREES : First Puzzle 的完整视频攻略。Puzzle Dream 和 Puzzle House 请走各自的攻略页。',
 		headerIntro:
 			'是一款独特的解谜游戏系列，玩家通过移动和组合物品来解谜。揭开这间奇特房间的奥秘。',
 		playHeading: '在线游玩 HER TREES : First Puzzle',
@@ -251,7 +251,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 			},
 			{
 				question: 'HER TREES 可以免费玩吗？',
-				answer: '可以！HER TREES : First Puzzle 可以在 treespuzzle.com 上免费在线游玩。完整版游戏（Puzzle House 和 Puzzle Dream）在 Steam 上发售。',
+				answer: '可以。First Puzzle、Puzzle House 和 Puzzle Dream 都能在本站浏览器里免费玩，不用下载。Steam 上的是另一份付费版本。',
+			},
+			{
+				question: 'hertrees 或 her tree 是同一款游戏吗？',
+				answer: '是的。有人会搜 hertrees、her tree、her trees game，指的都是本站的 HER TREES 系列。',
 			},
 			{
 				question: '通关 HER TREES 需要多长时间？',
@@ -265,11 +269,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/',
 		guidePath: '/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'HER TREES - Free Tree Puzzle Game Online | Play Puzzle Dream & Puzzle House',
+		pageTitle: 'HER TREES - Play Free in Browser | Puzzle Dream & Puzzle House',
 		pageDescription:
-			'Play HER TREES, the hand-drawn indie puzzle game series. Solve mysteries by moving and combining objects in surreal black-and-white rooms. Free browser game + Steam releases. 95% positive reviews.',
-		guidePageTitle: 'HER TREES Walkthrough & Video Guide - All Puzzles Solved',
-		guidePageDescription: 'Stuck on a HER TREES puzzle? Watch the complete video walkthrough for HER TREES : First Puzzle. Step-by-step solutions for every room, with tips for beginners.',
+			'Play HER TREES free in your browser, no download. Move and combine objects in surreal black-and-white rooms. Play Puzzle Dream and Puzzle House online here; Steam is a separate paid release.',
+		guidePageTitle: 'HER TREES : First Puzzle Walkthrough Video',
+		guidePageDescription: 'This page is only the HER TREES : First Puzzle video walkthrough. For Puzzle Dream and Puzzle House, open those dedicated guide pages.',
 		headerIntro:
 			'An unusual puzzle game series where you solve mysteries by moving and combining objects inside strange, hand-drawn rooms.',
 		playHeading: 'Play HER TREES : First Puzzle Online',
@@ -368,15 +372,15 @@ export const homeContent: Record<Locale, HomeContent> = {
 			},
 			{
 				title: 'HER TREES : THE PUZZLE HOUSE',
-				meta: 'Steam · Released February 29, 2024 · About 1 hour',
+				meta: 'HTML5 / Steam · About 1 hour · Play free in browser',
 				alt: 'Screenshot from HER TREES : THE PUZZLE HOUSE',
-				copy: 'A compact but complete surreal puzzle house that replaces heavy text and complex systems with symbols, spatial logic, and careful observation.',
+				copy: 'Play HER TREES : THE PUZZLE HOUSE free in your browser — no download. A compact surreal puzzle house built on symbols, spatial logic, and observation.',
 			},
 			{
 				title: 'HER TREES : PUZZLE DREAM',
-				meta: 'Steam / itch.io Demo · Released February 10, 2026 · 1.5 to 3 hours',
+				meta: 'HTML5 / Steam · 1.5 to 3 hours · Play free in browser',
 				alt: 'Screenshot from HER TREES : PUZZLE DREAM',
-				copy: 'The largest entry so far, expanding the series into a dreamlike journey with more than 40 puzzles while keeping its quiet and intuitive design.',
+				copy: 'Play HER TREES : PUZZLE DREAM free in your browser — no download. 40+ hand-drawn puzzles in the largest entry of the series.',
 			},
 			{
 				title: 'Trees Hate You',
@@ -430,7 +434,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 			},
 			{
 				question: 'Can I play HER TREES for free?',
-				answer: 'Yes! HER TREES : First Puzzle is free to play in your browser on treespuzzle.com. The full games (Puzzle House and Puzzle Dream) are available on Steam.',
+				answer: 'Yes. First Puzzle, Puzzle House, and Puzzle Dream all play free in your browser on this site. No download. Steam sells separate paid builds of the later games.',
+			},
+			{
+				question: 'Is hertrees or her tree the same game?',
+				answer: 'Yes. People also search hertrees, her tree, and her trees game. They all refer to the HER TREES series on this site.',
 			},
 			{
 				question: 'How long does it take to complete HER TREES?',
@@ -447,8 +455,8 @@ export const homeContent: Record<Locale, HomeContent> = {
 		pageTitle: 'HER TREES - بازی پازل درختی رایگان آنلاین | بازی Puzzle Dream و Puzzle House',
 		pageDescription:
 			'HER TREES را بازی کنید، مجموعه بازی پازلی مستقل با طراحی دستی. در اتاق‌های سورئال سیاه‌وسفید معماها را حل کنید. بازی رایگان مرورگر + Steam. ۹۵٪ مثبت.',
-		guidePageTitle: 'راهنما و ویدیوی HER TREES - حل تمام معماها',
-		guidePageDescription: 'در پازل HER TREES گیر کرده‌اید؟ ویدیوی کامل حل معماها را تماشا کنید. راهنمای گام‌به‌گام برای هر اتاق، با نکات برای مبتدیان.',
+		guidePageTitle: 'ویدیوی راهنمای HER TREES : First Puzzle',
+		guidePageDescription: 'این صفحه فقط راهنمای ویدیویی HER TREES : First Puzzle است. برای Puzzle Dream و Puzzle House صفحات راهنمای جداگانه را باز کنید.',
 		headerIntro:
 			'مجموعه‌ای از بازی‌های پازلی غیرمعمول که در آن معماها را با جابجایی و ترکیب اشیاء در اتاق‌های عجیب حل می‌کنید.',
 		playHeading: 'بازی آنلاین HER TREES : First Puzzle',
@@ -623,11 +631,11 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/fr/',
 		guidePath: '/fr/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'HER TREES - Jeu de Puzzle en Arbre Gratuit en Ligne | Jouez à Puzzle Dream et Puzzle House',
+		pageTitle: 'HER TREES - Jouez gratuitement dans le navigateur | Puzzle Dream & Puzzle House',
 		pageDescription:
-			'Jouez à HER TREES, la série de jeux de puzzle indépendants dessinés à la main. Résolvez des mystères en déplaçant et combinant des objets dans des pièces surréalistes en noir et blanc. Jeu de navigateur gratuit + sorties Steam. 95% de critiques positives.',
-		guidePageTitle: 'HER TREES Guide Vidéo et Walkthrough - Tous les Puzzles Résolus',
-		guidePageDescription: 'Bloqué sur un puzzle HER TREES ? Regardez le guide vidéo complet pour HER TREES : First Puzzle. Solutions étape par étape pour chaque pièce, avec des conseils pour les débutants.',
+			'Jouez à HER TREES gratuitement dans votre navigateur, sans téléchargement. Déplacez et combinez des objets dans des pièces surréalistes en noir et blanc. Puzzle Dream et Puzzle House se jouent aussi ici ; Steam est une version payante séparée.',
+		guidePageTitle: 'HER TREES : First Puzzle - Guide Vidéo',
+		guidePageDescription: 'Cette page couvre uniquement la vidéo de HER TREES : First Puzzle. Pour Puzzle Dream et Puzzle House, ouvrez leurs pages de guide.',
 		headerIntro:
 			'Une série de jeux de puzzle inhabituelle où vous résolvez des mystères en déplaçant et combinant des objets dans des pièces étranges dessinées à la main.',
 		playHeading: 'Jouez à HER TREES : First Puzzle en Ligne',
@@ -805,8 +813,8 @@ export const homeContent: Record<Locale, HomeContent> = {
 		pageTitle: 'HER TREES - Game Puzzle Pohon Gratis Online | Main Puzzle Dream & Puzzle House',
 		pageDescription:
 			'Mainkan HER TREES, seri game puzzle indie bergambar tangan. Pecahkan misteri dengan memindahkan objek di ruangan surealis hitam-putih. Game browser gratis + Steam. 95% positif.',
-		guidePageTitle: 'Panduan & Video HER TREES - Semua Puzzle Terpecahkan',
-		guidePageDescription: 'Terjebak di puzzle HER TREES? Tonton video panduan lengkap untuk HER TREES : First Puzzle. Solusi langkah demi langkah untuk setiap ruangan, dengan tips untuk pemula.',
+		guidePageTitle: 'Video Panduan HER TREES : First Puzzle',
+		guidePageDescription: 'Halaman ini hanya video walkthrough HER TREES : First Puzzle. Untuk Puzzle Dream dan Puzzle House, buka halaman panduan masing-masing.',
 		headerIntro:
 			'Seri game puzzle unik di mana Anda memecahkan misteri dengan memindahkan dan menggabungkan objek di dalam ruangan aneh.',
 		playHeading: 'Mainkan HER TREES : First Puzzle Online',
@@ -984,8 +992,8 @@ export const homeContent: Record<Locale, HomeContent> = {
 		pageTitle: 'HER TREES - 無料で遊べるパズルゲーム | Puzzle Dream & Puzzle House',
 		pageDescription:
 			'HER TREES は白黒手描きのインディーパズルゲームシリーズ。シュールな部屋でオブジェクトを動かして組み合わせて謎を解こう。ブラウザ無料 + Steam 発売中。95% 評価。',
-		guidePageTitle: 'HER TREES 攻略＆ビデオガイド - 全パズル解法',
-		guidePageDescription: 'HER TREES で詰まった方はこちら。全パズルのステップバイステップ解法動画付き。初心者向けのヒントも掲載。',
+		guidePageTitle: 'HER TREES : First Puzzle 攻略動画',
+		guidePageDescription: 'このページは HER TREES : First Puzzle の攻略動画だけです。Puzzle Dream と Puzzle House はそれぞれの攻略ページを開いてください。',
 		headerIntro:
 			'物を動かして組み合わせながら謎を解いていく、独特なパズルゲームシリーズです。不思議な部屋に隠された仕組みを見つけてください。',
 		playHeading: 'HER TREES : First Puzzle をブラウザで遊ぶ',
@@ -1163,8 +1171,8 @@ export const homeContent: Record<Locale, HomeContent> = {
 		pageTitle: 'HER TREES - Game Giải Đố Cây Miễn Phí | Chơi Puzzle Dream & Puzzle House',
 		pageDescription:
 			'Chơi HER TREES, series game giải đố indie vẽ tay. Giải mã bằng cách di chuyển đồ vật trong phòng siêu thực đen trắng. Chơi miễn phí trên trình duyệt + Steam. 95% đánh giá tích cực.',
-		guidePageTitle: 'HER TREES Hướng Dẫn & Video - Giải Pháp Tất Cả Câu Đố',
-		guidePageDescription: 'Bị mắc kẹt trong HER TREES? Xem video hướng dẫn hoàn chỉnh cho HER TREES : First Puzzle. Giải pháp từng bước cho mọi phòng, kèm mẹo cho người mới.',
+		guidePageTitle: 'Video huong dan HER TREES : First Puzzle',
+		guidePageDescription: 'Trang nay chi la video HER TREES : First Puzzle. Puzzle Dream va Puzzle House co trang huong dan rieng.',
 		headerIntro:
 			'Đây là một series game giải đố khác lạ, nơi bạn giải mật mã bằng cách di chuyển và kết hợp đồ vật trong những căn phòng kỳ quái.',
 		playHeading: 'Chơi HER TREES : First Puzzle Trực Tuyến',
