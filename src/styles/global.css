@@ -539,6 +539,10 @@ a:hover {
 	font-size: 0.95rem;
 }
 
+.page-intro-block .more-play-grid {
+	margin-top: 20px;
+}
+
 .guide-note {
 	margin: 0;
 	color: var(--accent-color);

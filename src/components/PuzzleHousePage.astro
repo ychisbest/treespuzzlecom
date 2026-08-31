@@ -94,10 +94,12 @@ const pageCopy: Record<
 		overviewBody: string;
 		tipsHeading: string;
 		tips: string[];
+		faqHeading: string;
+		faqs: Array<{ question: string; answer: string }>;
 	}
 > = {
 	"zh-cn": {
-		title: "HER TREES : THE PUZZLE HOUSE — 浏览器免费玩（无需下载）",
+		title: "HER TREES : THE PUZZLE HOUSE - 浏览器免费玩（无需下载）",
 		description:
 			"免费在浏览器里玩 her trees the puzzle house，不用下载、不用登录 Steam。HER TREES : THE PUZZLE HOUSE 是紧凑的手绘谜题屋。Steam 商店页是另一份付费版本。",
 		breadcrumbLabel: "Puzzle House",
@@ -116,9 +118,25 @@ const pageCopy: Record<
 			"手机上建议横屏体验；进入全屏时页面会尽量请求横屏锁定。",
 			"如果你想先从最短体验开始，仍然可以回首页游玩 First Puzzle。",
 		],
+		faqHeading: "常见问题",
+		faqs: [
+			{
+				question: "her trees the puzzle house 和 HER TREES : THE PUZZLE HOUSE 是一款游戏吗？",
+				answer:
+					"是的。her trees the puzzle house、her trees: the puzzle house 和 HER TREES : THE PUZZLE HOUSE 都指这一页的免费浏览器版。",
+			},
+			{
+				question: "玩 Puzzle House 需要下载或 Steam 吗？",
+				answer: "不需要。本页点开始即可在浏览器里玩。Steam 上是另一份付费版本。",
+			},
+			{
+				question: "Puzzle House 攻略在哪？",
+				answer: "请打开本站的 Puzzle House 独立攻略页。总攻略页 /guide/ 只覆盖 First Puzzle。",
+			},
+		],
 	},
 	en: {
-		title: "HER TREES : THE PUZZLE HOUSE — Play Free in Browser (No Download)",
+		title: "HER TREES : THE PUZZLE HOUSE - Play Free in Browser (No Download)",
 		description:
 			"Play her trees the puzzle house free in your browser. No download, no Steam login. HER TREES : THE PUZZLE HOUSE is a compact hand-drawn puzzle house. The Steam store page is a different, paid release.",
 		breadcrumbLabel: "Puzzle House",
@@ -130,16 +148,34 @@ const pageCopy: Record<
 		browserHint: "Free browser version · click Start, no account",
 		overviewHeading: "What this page is for",
 		overviewBody:
-			"This is a dedicated entry for the second game in the series, useful when you want a fuller standalone room before moving on to Puzzle Dream.",
+			"This page is the free browser version of her trees the puzzle house, also searched as HER TREES : THE PUZZLE HOUSE and her trees: the puzzle house. It is the dedicated entry for the second game: a compact hand-drawn puzzle house, no download.",
 		tipsHeading: "Play notes",
 		tips: [
 			"The first launch may take a moment while the WebGL files load.",
 			"Landscape works best on phones; fullscreen will try to lock orientation.",
 			"If you want the shortest starting point first, go back to the homepage and start with First Puzzle.",
 		],
+		faqHeading: "FAQ",
+		faqs: [
+			{
+				question: "Is this her trees the puzzle house or HER TREES : THE PUZZLE HOUSE?",
+				answer:
+					"Yes. Searches for her trees the puzzle house, her trees: the puzzle house, and HER TREES : THE PUZZLE HOUSE all point to this game. Play it free in your browser here.",
+			},
+			{
+				question: "Do I need Steam or a download to play Puzzle House?",
+				answer:
+					"No. Click Start on this page to play in your browser. Steam sells a separate paid build.",
+			},
+			{
+				question: "Where is the Puzzle House walkthrough?",
+				answer:
+					"Open the dedicated Puzzle House guide on this site. The main /guide/ page is only for First Puzzle.",
+			},
+		],
 	},
 	fa: {
-		title: "HER TREES : THE PUZZLE HOUSE — بازی رایگان در مرورگر (بدون دانلود)",
+		title: "HER TREES : THE PUZZLE HOUSE - بازی رایگان در مرورگر (بدون دانلود)",
 		description:
 			"her trees the puzzle house را رایگان در مرورگر بازی کنید. بدون دانلود و بدون ورود به Steam. HER TREES : THE PUZZLE HOUSE یک خانه پازل فشرده با هنر دستی است. صفحه Steam نسخه پولی جداگانه‌ای است.",
 		breadcrumbLabel: "Puzzle House",
@@ -158,9 +194,25 @@ const pageCopy: Record<
 			"در گوشی حالت افقی بهتر عمل می‌کند؛ تمام صفحه سعی می‌کند جهت را قفل کند.",
 			"اگر می‌خواهید ابتدا کوتاه‌ترین نقطه شروع را امتحان کنید، به صفحه اصلی برگردید و با First Puzzle شروع کنید.",
 		],
+		faqHeading: "سؤالات متداول",
+		faqs: [
+			{
+				question: "آیا her trees the puzzle house همان HER TREES : THE PUZZLE HOUSE است؟",
+				answer:
+					"بله. her trees the puzzle house، her trees: the puzzle house و HER TREES : THE PUZZLE HOUSE همه به همین بازی اشاره دارند. نسخه رایگان مرورگر اینجاست.",
+			},
+			{
+				question: "برای Puzzle House به Steam یا دانلود نیاز دارم؟",
+				answer: "خیر. روی شروع بزنید و در مرورگر بازی کنید. Steam نسخه پولی جداگانه‌ای است.",
+			},
+			{
+				question: "راهنمای Puzzle House کجاست؟",
+				answer: "صفحه راهنمای مستقل Puzzle House را باز کنید. /guide/ فقط First Puzzle است.",
+			},
+		],
 	},
 	fr: {
-		title: "HER TREES : THE PUZZLE HOUSE — Jouer gratuitement dans le navigateur",
+		title: "HER TREES : THE PUZZLE HOUSE - Jouer gratuitement dans le navigateur",
 		description:
 			"Jouez à her trees the puzzle house gratuitement dans votre navigateur. Pas de téléchargement, pas de connexion Steam. HER TREES : THE PUZZLE HOUSE est une maison de puzzle compacte dessinée à la main. La page Steam est une version payante séparée.",
 		breadcrumbLabel: "Puzzle House",
@@ -179,9 +231,25 @@ const pageCopy: Record<
 			"Le mode paysage fonctionne mieux sur téléphone ; le plein écran essaiera de verrouiller l'orientation.",
 			"Si vous voulez d'abord le point de départ le plus court, retournez à la page d'accueil et commencez par First Puzzle.",
 		],
+		faqHeading: "FAQ",
+		faqs: [
+			{
+				question: "her trees the puzzle house et HER TREES : THE PUZZLE HOUSE, c'est le même jeu ?",
+				answer:
+					"Oui. her trees the puzzle house, her trees: the puzzle house et HER TREES : THE PUZZLE HOUSE désignent ce jeu. Version navigateur gratuite ici.",
+			},
+			{
+				question: "Faut-il Steam ou un téléchargement pour Puzzle House ?",
+				answer: "Non. Cliquez sur Lancer pour jouer dans le navigateur. Steam vend une version payante séparée.",
+			},
+			{
+				question: "Où est le walkthrough de Puzzle House ?",
+				answer: "Ouvrez le guide dédié Puzzle House. La page /guide/ ne couvre que First Puzzle.",
+			},
+		],
 	},
 	id: {
-		title: "HER TREES : THE PUZZLE HOUSE — Main Gratis di Browser (Tanpa Unduh)",
+		title: "HER TREES : THE PUZZLE HOUSE - Main Gratis di Browser (Tanpa Unduh)",
 		description:
 			"Mainkan her trees the puzzle house gratis di browser. Tanpa unduhan, tanpa login Steam. HER TREES : THE PUZZLE HOUSE adalah rumah puzzle ringkas bergambar tangan. Halaman Steam adalah rilis berbayar yang berbeda.",
 		breadcrumbLabel: "Puzzle House",
@@ -200,9 +268,25 @@ const pageCopy: Record<
 			"Mode lanskap paling nyaman di ponsel; layar penuh akan mencoba mengunci orientasi.",
 			"Jika ingin memulai dari pengalaman terpendek, kembali ke beranda dan mainkan First Puzzle.",
 		],
+		faqHeading: "FAQ",
+		faqs: [
+			{
+				question: "Apakah her trees the puzzle house sama dengan HER TREES : THE PUZZLE HOUSE?",
+				answer:
+					"Ya. her trees the puzzle house, her trees: the puzzle house, dan HER TREES : THE PUZZLE HOUSE merujuk ke game ini. Versi browser gratis ada di halaman ini.",
+			},
+			{
+				question: "Perlu Steam atau unduhan untuk Puzzle House?",
+				answer: "Tidak. Klik Mulai untuk main di browser. Steam menjual rilis berbayar terpisah.",
+			},
+			{
+				question: "Di mana walkthrough Puzzle House?",
+				answer: "Buka halaman panduan khusus Puzzle House. /guide/ hanya untuk First Puzzle.",
+			},
+		],
 	},
 	ja: {
-		title: "HER TREES : THE PUZZLE HOUSE — ブラウザで無料プレイ（ダウンロード不要）",
+		title: "HER TREES : THE PUZZLE HOUSE - ブラウザで無料プレイ（ダウンロード不要）",
 		description:
 			"her trees the puzzle house をブラウザで無料プレイ。ダウンロードも Steam ログインも不要。HER TREES : THE PUZZLE HOUSE はコンパクトな手描きパズルハウス。Steam ストアは別の有料版です。",
 		breadcrumbLabel: "Puzzle House",
@@ -221,9 +305,25 @@ const pageCopy: Record<
 			"スマートフォンでは横画面が向いています。全画面時は横向き固定を試みます。",
 			"まず最短の導入から入りたい場合は、トップページの First Puzzle が適しています。",
 		],
+		faqHeading: "よくある質問",
+		faqs: [
+			{
+				question: "her trees the puzzle house と HER TREES : THE PUZZLE HOUSE は同じ？",
+				answer:
+					"はい。her trees the puzzle house、her trees: the puzzle house、HER TREES : THE PUZZLE HOUSE は同じ作品です。このページが無料ブラウザ版です。",
+			},
+			{
+				question: "Puzzle House に Steam やダウンロードは必要？",
+				answer: "不要です。開始をクリックしてブラウザで遊べます。Steam は別の有料版です。",
+			},
+			{
+				question: "Puzzle House の攻略はどこ？",
+				answer: "専用の Puzzle House 攻略ページを開いてください。/guide/ は First Puzzle のみです。",
+			},
+		],
 	},
 	vi: {
-		title: "HER TREES : THE PUZZLE HOUSE — Choi mien phi tren trinh duyet",
+		title: "HER TREES : THE PUZZLE HOUSE - Choi mien phi tren trinh duyet",
 		description:
 			"Choi her trees the puzzle house mien phi tren trinh duyet. Khong can tai, khong can dang nhap Steam. HER TREES : THE PUZZLE HOUSE la ngoi nha puzzle gon ve tay. Trang Steam la ban tra phi khac.",
 		breadcrumbLabel: "Puzzle House",
@@ -241,6 +341,22 @@ const pageCopy: Record<
 			"Lan mo dau tien co the can doi trong luc tai tep WebGL.",
 			"Dien thoai nen choi ngang man hinh; fullscreen se co gang khoa huong ngang.",
 			"Neu ban muon bat dau bang trai nghiem ngan nhat, hay quay ve trang chu va choi First Puzzle.",
+		],
+		faqHeading: "FAQ",
+		faqs: [
+			{
+				question: "her trees the puzzle house va HER TREES : THE PUZZLE HOUSE la mot game?",
+				answer:
+					"Dung. her trees the puzzle house, her trees: the puzzle house va HER TREES : THE PUZZLE HOUSE deu chi game nay. Ban trinh duyet mien phi o day.",
+			},
+			{
+				question: "Puzzle House can Steam hay tai ve khong?",
+				answer: "Khong. Bam Bat dau de choi tren trinh duyet. Steam la ban tra phi rieng.",
+			},
+			{
+				question: "Walkthrough Puzzle House o dau?",
+				answer: "Mo trang huong dan rieng Puzzle House. /guide/ chi la First Puzzle.",
+			},
 		],
 	},
 };
@@ -556,6 +672,20 @@ const puzzleHouseSchema = JSON.stringify([
 								<article class="bullet-card">
 									<p>{item}</p>
 								</article>
+							))
+						}
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.faqHeading}</h2>
+					<div class="faq-list">
+						{
+							copy.faqs.map((faq) => (
+								<details class="faq-item">
+									<summary>{faq.question}</summary>
+									<p>{faq.answer}</p>
+								</details>
 							))
 						}
 					</div>

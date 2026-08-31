@@ -314,6 +314,16 @@ const guideSchema = JSON.stringify([
 					<h1>{content.guidePageTitle}</h1>
 					<p>{content.guidePageDescription}</p>
 					<p class="guide-scope-note">{guideNotes.scopeNote}</p>
+					<div class="more-play-grid">
+						<a class="more-play-card" href={puzzleDreamGuidePath}>
+							<strong>{guideNotes.dreamGuideLabel}</strong>
+							<span>HER TREES : PUZZLE DREAM</span>
+						</a>
+						<a class="more-play-card" href={puzzleHouseGuidePath}>
+							<strong>{guideNotes.houseGuideLabel}</strong>
+							<span>HER TREES : THE PUZZLE HOUSE</span>
+						</a>
+					</div>
 				</section>
 
 				<section class="guide-frame-shell">

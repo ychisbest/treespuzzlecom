@@ -269,9 +269,9 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/',
 		guidePath: '/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'HER TREES - Play Free in Browser | Puzzle Dream & Puzzle House',
+		pageTitle: 'HER TREES - Free Tree Puzzle Game in Browser | Puzzle Dream',
 		pageDescription:
-			'Play HER TREES free in your browser, no download. Move and combine objects in surreal black-and-white rooms. Play Puzzle Dream and Puzzle House online here; Steam is a separate paid release.',
+			'Play HER TREES, a free tree puzzle game in your browser — no download. Move and combine objects in black-and-white rooms. Play Puzzle Dream and Puzzle House online here.',
 		guidePageTitle: 'HER TREES : First Puzzle Walkthrough Video',
 		guidePageDescription: 'This page is only the HER TREES : First Puzzle video walkthrough. For Puzzle Dream and Puzzle House, open those dedicated guide pages.',
 		headerIntro:
@@ -631,9 +631,9 @@ export const homeContent: Record<Locale, HomeContent> = {
 		path: '/fr/',
 		guidePath: '/fr/guide/',
 		siteName: 'Her Trees Puzzle Game',
-		pageTitle: 'HER TREES - Jouez gratuitement dans le navigateur | Puzzle Dream & Puzzle House',
+		pageTitle: 'HER TREES : Puzzle Dream - Gratuit dans le navigateur',
 		pageDescription:
-			'Jouez à HER TREES gratuitement dans votre navigateur, sans téléchargement. Déplacez et combinez des objets dans des pièces surréalistes en noir et blanc. Puzzle Dream et Puzzle House se jouent aussi ici ; Steam est une version payante séparée.',
+			'Jouez à HER TREES gratuitement dans le navigateur, sans téléchargement. Puzzle Dream et Puzzle House se jouent ici. Steam est une version payante séparée.',
 		guidePageTitle: 'HER TREES : First Puzzle - Guide Vidéo',
 		guidePageDescription: 'Cette page couvre uniquement la vidéo de HER TREES : First Puzzle. Pour Puzzle Dream et Puzzle House, ouvrez leurs pages de guide.',
 		headerIntro:

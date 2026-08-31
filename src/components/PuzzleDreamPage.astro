@@ -94,10 +94,12 @@ const pageCopy: Record<
 		overviewBody: string;
 		tipsHeading: string;
 		tips: string[];
+		faqHeading: string;
+		faqs: Array<{ question: string; answer: string }>;
 	}
 > = {
 	"zh-cn": {
-		title: "HER TREES : PUZZLE DREAM — 浏览器免费玩（无需下载）",
+		title: "HER TREES : PUZZLE DREAM - 浏览器免费玩（无需下载）",
 		description:
 			"免费在浏览器里玩 her trees puzzle dream，不用下载、不用登录 Steam。HER TREES : PUZZLE DREAM 有 40 多个手绘谜题。Steam 商店页是另一份付费版本。",
 		breadcrumbLabel: "Puzzle Dream",
@@ -116,9 +118,25 @@ const pageCopy: Record<
 			"手机上建议横屏体验；进入全屏时页面会尽量请求横屏锁定。",
 			"如果你只是想先快速感受系列风格，仍然可以回首页先玩 First Puzzle。",
 		],
+		faqHeading: "常见问题",
+		faqs: [
+			{
+				question: "her trees puzzle dream 和 HER TREES : PUZZLE DREAM 是一款游戏吗？",
+				answer:
+					"是的。her trees puzzle dream、her trees: puzzle dream 和 HER TREES : PUZZLE DREAM 都指这一页的免费浏览器版。",
+			},
+			{
+				question: "玩 Puzzle Dream 需要下载或 Steam 吗？",
+				answer: "不需要。本页点开始即可在浏览器里玩。Steam 上是另一份付费版本。",
+			},
+			{
+				question: "Puzzle Dream 攻略在哪？",
+				answer: "请打开本站的 Puzzle Dream 独立攻略页。总攻略页 /guide/ 只覆盖 First Puzzle。",
+			},
+		],
 	},
 	en: {
-		title: "HER TREES : PUZZLE DREAM — Play Free in Browser (No Download)",
+		title: "HER TREES : PUZZLE DREAM - Play Free in Browser (No Download)",
 		description:
 			"Play her trees puzzle dream free in your browser. No download, no Steam login. HER TREES : PUZZLE DREAM has 40+ hand-drawn puzzles. The Steam store page is a different, paid release.",
 		breadcrumbLabel: "Puzzle Dream",
@@ -130,16 +148,34 @@ const pageCopy: Record<
 		browserHint: "Free browser version · click Start, no account",
 		overviewHeading: "What this page is for",
 		overviewBody:
-			"Unlike the homepage embed for First Puzzle, this is a dedicated entry for the third game in the series, intended for players who want the larger dreamlike puzzle set right away.",
+			"This page is the free browser version of her trees puzzle dream, also searched as HER TREES : PUZZLE DREAM and her trees: puzzle dream. Unlike the homepage embed for First Puzzle, this is the dedicated entry for the third game, with 40+ hand-drawn puzzles and no download.",
 		tipsHeading: "Play notes",
 		tips: [
 			"The first launch may take a moment while the WebGL files load.",
 			"Landscape works best on phones; fullscreen will try to lock orientation.",
 			"If you want a shorter introduction first, go back to the homepage and start with First Puzzle.",
 		],
+		faqHeading: "FAQ",
+		faqs: [
+			{
+				question: "Is this her trees puzzle dream or HER TREES : PUZZLE DREAM?",
+				answer:
+					"Yes. Searches for her trees puzzle dream, her trees: puzzle dream, and HER TREES : PUZZLE DREAM all point to this game. This page is the free in-browser version.",
+			},
+			{
+				question: "Do I need Steam or a download to play Puzzle Dream?",
+				answer:
+					"No. Click Start on this page to play in your browser. Steam sells a separate paid build.",
+			},
+			{
+				question: "Where is the Puzzle Dream walkthrough?",
+				answer:
+					"Open the dedicated Puzzle Dream guide on this site. The main /guide/ page is only for First Puzzle.",
+			},
+		],
 	},
 	fa: {
-		title: "HER TREES : PUZZLE DREAM — بازی رایگان در مرورگر (بدون دانلود)",
+		title: "HER TREES : PUZZLE DREAM - بازی رایگان در مرورگر (بدون دانلود)",
 		description:
 			"her trees puzzle dream را رایگان در مرورگر بازی کنید. بدون دانلود و بدون ورود به Steam. HER TREES : PUZZLE DREAM بیش از ۴۰ پازل دستی دارد. صفحه فروشگاه Steam نسخه پولی جداگانه‌ای است.",
 		breadcrumbLabel: "Puzzle Dream",
@@ -158,9 +194,25 @@ const pageCopy: Record<
 			"در گوشی حالت افقی بهتر عمل می‌کند؛ تمام صفحه سعی می‌کند جهت را قفل کند.",
 			"اگر ابتدا معرفی کوتاه‌تری می‌خواهید، به صفحه اصلی برگردید و با First Puzzle شروع کنید.",
 		],
+		faqHeading: "سؤالات متداول",
+		faqs: [
+			{
+				question: "آیا her trees puzzle dream همان HER TREES : PUZZLE DREAM است؟",
+				answer:
+					"بله. her trees puzzle dream، her trees: puzzle dream و HER TREES : PUZZLE DREAM همه به همین بازی اشاره دارند. نسخه رایگان مرورگر اینجاست.",
+			},
+			{
+				question: "برای Puzzle Dream به Steam یا دانلود نیاز دارم؟",
+				answer: "خیر. روی شروع بزنید و در مرورگر بازی کنید. Steam نسخه پولی جداگانه‌ای است.",
+			},
+			{
+				question: "راهنمای Puzzle Dream کجاست؟",
+				answer: "صفحه راهنمای مستقل Puzzle Dream را باز کنید. /guide/ فقط First Puzzle است.",
+			},
+		],
 	},
 	fr: {
-		title: "HER TREES : PUZZLE DREAM — Jouer gratuitement dans le navigateur",
+		title: "HER TREES : PUZZLE DREAM - Jouer gratuitement dans le navigateur",
 		description:
 			"Jouez à her trees puzzle dream gratuitement dans votre navigateur. Pas de téléchargement, pas de connexion Steam. HER TREES : PUZZLE DREAM compte plus de 40 puzzles dessinés à la main. La page Steam est une version payante séparée.",
 		breadcrumbLabel: "Puzzle Dream",
@@ -179,9 +231,25 @@ const pageCopy: Record<
 			"Le mode paysage fonctionne mieux sur téléphone ; le plein écran essaiera de verrouiller l'orientation.",
 			"Si vous voulez d'abord une introduction plus courte, retournez à la page d'accueil et commencez par First Puzzle.",
 		],
+		faqHeading: "FAQ",
+		faqs: [
+			{
+				question: "her trees puzzle dream et HER TREES : PUZZLE DREAM, c'est le même jeu ?",
+				answer:
+					"Oui. her trees puzzle dream, her trees: puzzle dream et HER TREES : PUZZLE DREAM désignent ce jeu. Version navigateur gratuite ici.",
+			},
+			{
+				question: "Faut-il Steam ou un téléchargement pour Puzzle Dream ?",
+				answer: "Non. Cliquez sur Lancer pour jouer dans le navigateur. Steam vend une version payante séparée.",
+			},
+			{
+				question: "Où est le walkthrough de Puzzle Dream ?",
+				answer: "Ouvrez le guide dédié Puzzle Dream. La page /guide/ ne couvre que First Puzzle.",
+			},
+		],
 	},
 	id: {
-		title: "HER TREES : PUZZLE DREAM — Main Gratis di Browser (Tanpa Unduh)",
+		title: "HER TREES : PUZZLE DREAM - Main Gratis di Browser (Tanpa Unduh)",
 		description:
 			"Mainkan her trees puzzle dream gratis di browser. Tanpa unduhan, tanpa login Steam. HER TREES : PUZZLE DREAM punya 40+ puzzle bergambar tangan. Halaman Steam adalah rilis berbayar yang berbeda.",
 		breadcrumbLabel: "Puzzle Dream",
@@ -200,9 +268,25 @@ const pageCopy: Record<
 			"Mode lanskap paling nyaman di ponsel; layar penuh akan mencoba mengunci orientasi.",
 			"Jika ingin pengenalan yang lebih singkat dulu, kembali ke beranda dan mainkan First Puzzle.",
 		],
+		faqHeading: "FAQ",
+		faqs: [
+			{
+				question: "Apakah her trees puzzle dream sama dengan HER TREES : PUZZLE DREAM?",
+				answer:
+					"Ya. her trees puzzle dream, her trees: puzzle dream, dan HER TREES : PUZZLE DREAM merujuk ke game ini. Versi browser gratis ada di halaman ini.",
+			},
+			{
+				question: "Perlu Steam atau unduhan untuk Puzzle Dream?",
+				answer: "Tidak. Klik Mulai untuk main di browser. Steam menjual rilis berbayar terpisah.",
+			},
+			{
+				question: "Di mana walkthrough Puzzle Dream?",
+				answer: "Buka halaman panduan khusus Puzzle Dream. /guide/ hanya untuk First Puzzle.",
+			},
+		],
 	},
 	ja: {
-		title: "HER TREES : PUZZLE DREAM — ブラウザで無料プレイ（ダウンロード不要）",
+		title: "HER TREES : PUZZLE DREAM - ブラウザで無料プレイ（ダウンロード不要）",
 		description:
 			"her trees puzzle dream をブラウザで無料プレイ。ダウンロードも Steam ログインも不要。HER TREES : PUZZLE DREAM は 40 以上の手描きパズル。Steam ストアは別の有料版です。",
 		breadcrumbLabel: "Puzzle Dream",
@@ -221,9 +305,25 @@ const pageCopy: Record<
 			"スマートフォンでは横画面が向いています。全画面時は横向き固定を試みます。",
 			"まず短くシリーズの雰囲気を見たい場合は、トップページの First Puzzle から入るのが適しています。",
 		],
+		faqHeading: "よくある質問",
+		faqs: [
+			{
+				question: "her trees puzzle dream と HER TREES : PUZZLE DREAM は同じ？",
+				answer:
+					"はい。her trees puzzle dream、her trees: puzzle dream、HER TREES : PUZZLE DREAM は同じ作品です。このページが無料ブラウザ版です。",
+			},
+			{
+				question: "Puzzle Dream に Steam やダウンロードは必要？",
+				answer: "不要です。開始をクリックしてブラウザで遊べます。Steam は別の有料版です。",
+			},
+			{
+				question: "Puzzle Dream の攻略はどこ？",
+				answer: "専用の Puzzle Dream 攻略ページを開いてください。/guide/ は First Puzzle のみです。",
+			},
+		],
 	},
 	vi: {
-		title: "HER TREES : PUZZLE DREAM — Choi mien phi tren trinh duyet",
+		title: "HER TREES : PUZZLE DREAM - Choi mien phi tren trinh duyet",
 		description:
 			"Choi her trees puzzle dream mien phi tren trinh duyet. Khong can tai, khong can dang nhap Steam. HER TREES : PUZZLE DREAM co hon 40 cau do ve tay. Trang Steam la ban tra phi khac.",
 		breadcrumbLabel: "Puzzle Dream",
@@ -241,6 +341,22 @@ const pageCopy: Record<
 			"Lan mo dau tien co the can doi trong luc tai tep WebGL.",
 			"Dien thoai nen choi ngang man hinh; fullscreen se co gang khoa huong ngang.",
 			"Neu ban muon thu nhanh phong cach cua series truoc, hay quay ve trang chu va choi First Puzzle.",
+		],
+		faqHeading: "FAQ",
+		faqs: [
+			{
+				question: "her trees puzzle dream va HER TREES : PUZZLE DREAM la mot game?",
+				answer:
+					"Dung. her trees puzzle dream, her trees: puzzle dream va HER TREES : PUZZLE DREAM deu chi game nay. Ban trinh duyet mien phi o day.",
+			},
+			{
+				question: "Puzzle Dream can Steam hay tai ve khong?",
+				answer: "Khong. Bam Bat dau de choi tren trinh duyet. Steam la ban tra phi rieng.",
+			},
+			{
+				question: "Walkthrough Puzzle Dream o dau?",
+				answer: "Mo trang huong dan rieng Puzzle Dream. /guide/ chi la First Puzzle.",
+			},
 		],
 	},
 };
@@ -556,6 +672,20 @@ const puzzleDreamSchema = JSON.stringify([
 								<article class="bullet-card">
 									<p>{item}</p>
 								</article>
+							))
+						}
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.faqHeading}</h2>
+					<div class="faq-list">
+						{
+							copy.faqs.map((faq) => (
+								<details class="faq-item">
+									<summary>{faq.question}</summary>
+									<p>{faq.answer}</p>
+								</details>
 							))
 						}
 					</div>
