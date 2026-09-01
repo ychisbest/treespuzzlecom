@@ -67,7 +67,7 @@ const xmlEscape = (value) =>
 		.replaceAll("'", "&apos;");
 
 const toAbsoluteUrl = (routePath) =>
-	`${siteUrl}${routePath === "/" ? "" : routePath}`;
+	`${siteUrl}${!routePath || routePath === "/" ? "/" : routePath}`;
 
 const routePathToHtmlFile = (routePath) => {
 	const normalized = routePath === "/" ? "" : routePath.replace(/^\/|\/$/g, "");

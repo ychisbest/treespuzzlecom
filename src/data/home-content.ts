@@ -10,6 +10,7 @@ export type HomeContent = {
 	guidePageTitle: string;
 	guidePageDescription: string;
 	headerIntro: string;
+	heroH1: string;
 	playHeading: string;
 	playButton: string;
 	guideButton: string;
@@ -95,6 +96,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		guidePageDescription: '本页只覆盖 HER TREES : First Puzzle 的完整视频攻略。Puzzle Dream 和 Puzzle House 请走各自的攻略页。',
 		headerIntro:
 			'是一款独特的解谜游戏系列，玩家通过移动和组合物品来解谜。揭开这间奇特房间的奥秘。',
+		heroH1: 'HER TREES — 浏览器免费树木解谜游戏',
 		playHeading: '在线游玩 HER TREES : First Puzzle',
 		playButton: '开始游戏',
 		guideButton: '点击查看攻略',
@@ -276,6 +278,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		guidePageDescription: 'This page is only the HER TREES : First Puzzle video walkthrough. For Puzzle Dream and Puzzle House, open those dedicated guide pages.',
 		headerIntro:
 			'An unusual puzzle game series where you solve mysteries by moving and combining objects inside strange, hand-drawn rooms.',
+		heroH1: 'HER TREES — Free Tree Puzzle Game in Your Browser',
 		playHeading: 'Play HER TREES : First Puzzle Online',
 		playButton: 'Start Game',
 		guideButton: 'View Guide',
@@ -459,6 +462,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		guidePageDescription: 'این صفحه فقط راهنمای ویدیویی HER TREES : First Puzzle است. برای Puzzle Dream و Puzzle House صفحات راهنمای جداگانه را باز کنید.',
 		headerIntro:
 			'مجموعه‌ای از بازی‌های پازلی غیرمعمول که در آن معماها را با جابجایی و ترکیب اشیاء در اتاق‌های عجیب حل می‌کنید.',
+		heroH1: 'HER TREES — بازی پازل درختی رایگان در مرورگر',
 		playHeading: 'بازی آنلاین HER TREES : First Puzzle',
 		playButton: 'شروع بازی',
 		guideButton: 'مشاهده راهنما',
@@ -638,6 +642,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		guidePageDescription: 'Cette page couvre uniquement la vidéo de HER TREES : First Puzzle. Pour Puzzle Dream et Puzzle House, ouvrez leurs pages de guide.',
 		headerIntro:
 			'Une série de jeux de puzzle inhabituelle où vous résolvez des mystères en déplaçant et combinant des objets dans des pièces étranges dessinées à la main.',
+		heroH1: 'HER TREES — Jeu de puzzle d’arbres gratuit dans le navigateur',
 		playHeading: 'Jouez à HER TREES : First Puzzle en Ligne',
 		playButton: 'Lancer le Jeu',
 		guideButton: 'Voir le Guide',
@@ -817,6 +822,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		guidePageDescription: 'Halaman ini hanya video walkthrough HER TREES : First Puzzle. Untuk Puzzle Dream dan Puzzle House, buka halaman panduan masing-masing.',
 		headerIntro:
 			'Seri game puzzle unik di mana Anda memecahkan misteri dengan memindahkan dan menggabungkan objek di dalam ruangan aneh.',
+		heroH1: 'HER TREES — Game Puzzle Pohon Gratis di Browser',
 		playHeading: 'Mainkan HER TREES : First Puzzle Online',
 		playButton: 'Mulai Game',
 		guideButton: 'Lihat Panduan',
@@ -996,6 +1002,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		guidePageDescription: 'このページは HER TREES : First Puzzle の攻略動画だけです。Puzzle Dream と Puzzle House はそれぞれの攻略ページを開いてください。',
 		headerIntro:
 			'物を動かして組み合わせながら謎を解いていく、独特なパズルゲームシリーズです。不思議な部屋に隠された仕組みを見つけてください。',
+		heroH1: 'HER TREES — ブラウザで無料の樹木パズル',
 		playHeading: 'HER TREES : First Puzzle をブラウザで遊ぶ',
 		playButton: 'ゲーム開始',
 		guideButton: '攻略を見る',
@@ -1175,6 +1182,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		guidePageDescription: 'Trang nay chi la video HER TREES : First Puzzle. Puzzle Dream va Puzzle House co trang huong dan rieng.',
 		headerIntro:
 			'Đây là một series game giải đố khác lạ, nơi bạn giải mật mã bằng cách di chuyển và kết hợp đồ vật trong những căn phòng kỳ quái.',
+		heroH1: 'HER TREES — Game Giải Đố Cây Miễn Phí Trên Trình Duyệt',
 		playHeading: 'Chơi HER TREES : First Puzzle Trực Tuyến',
 		playButton: 'Bắt đầu chơi',
 		guideButton: 'Xem huong dan',

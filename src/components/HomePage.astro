@@ -331,6 +331,7 @@ const homeSchema = JSON.stringify([
 		"@type": "Organization",
 		name: "treespuzzle.com",
 		url: siteUrl,
+		logo: `${siteUrl}/icon-512.png`,
 		email: contactEmail,
 		description:
 			"Independent editorial website covering the HER TREES puzzle series.",
@@ -424,6 +425,9 @@ const homeSchema = JSON.stringify([
 
 			<main>
 				<section class="hero-section" id="play">
+					<div class="page-intro-block hero-h1-block">
+						<h1>{content.heroH1}</h1>
+					</div>
 					<div class="feature-panel">
 						<div class="panel-header">
 							<h2>{content.playHeading}</h2>

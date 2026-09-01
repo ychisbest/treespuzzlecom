@@ -1,0 +1,36 @@
+---
+import StaticPageLayout from "../layouts/StaticPageLayout.astro";
+import { siteUrl } from "../data/site-shell";
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "WebPage",
+	name: "Page not found",
+	url: `${siteUrl}/404`,
+	description: "This page does not exist on treespuzzle.com.",
+};
+---
+
+<StaticPageLayout
+	title="Page not found — HER TREES"
+	description="This URL is not a page on treespuzzle.com. Open the homepage to play HER TREES in your browser."
+	canonicalPath="/404"
+	pageHeading="Page not found"
+	pageIntro="This path is not a real page. The homepage, guides, and game pages are linked below."
+	breadcrumbLabel="404"
+	robots="noindex, follow"
+	schema={schema}
+>
+	<div class="article-prose">
+		<p>
+			Unknown URLs on this site return a real 404 so they are not treated as copies of the homepage.
+		</p>
+		<p>
+			<a href="/">Play HER TREES on the homepage</a>
+			{" · "}
+			<a href="/guide/">First Puzzle guide</a>
+			{" · "}
+			<a href="/about/">About</a>
+		</p>
+	</div>
+</StaticPageLayout>

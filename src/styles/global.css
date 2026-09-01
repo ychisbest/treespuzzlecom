@@ -221,6 +221,11 @@ a:hover {
 	display: block;
 }
 
+.hero-h1-block {
+	margin-bottom: 28px;
+	padding-bottom: 16px;
+}
+
 .feature-panel {
 	border: 1px solid var(--border-color);
 	padding: 30px;

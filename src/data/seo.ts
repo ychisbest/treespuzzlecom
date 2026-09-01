@@ -33,8 +33,12 @@ const ogLocaleByLocale: Record<Locale, string> = {
 	vi: "vi_VN",
 };
 
-export const toAbsoluteUrl = (path: string) =>
-	`${siteUrl}${path === "/" ? "" : path}`;
+export const toAbsoluteUrl = (path: string) => {
+	if (!path || path === "/") {
+		return `${siteUrl}/`;
+	}
+	return `${siteUrl}${path}`;
+};
 
 export const localeToHreflang = (locale: Locale) => hreflangByLocale[locale];
 
