@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
 Sitemap: https://treespuzzle.com/sitemap.xml
+Sitemap: https://treespuzzle.com/sitemap-index.xml

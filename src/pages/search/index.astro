@@ -1,0 +1,135 @@
+---
+import StaticPageLayout from "../../layouts/StaticPageLayout.astro";
+import { siteUrl } from "../../data/site-shell";
+
+const results = [
+	{
+		href: "/play/puzzle-dream/",
+		title: "Her Trees Puzzle Dream",
+		copy: "Play the third game free in your browser. 40+ puzzles, no download.",
+	},
+	{
+		href: "/play/puzzle-dream/guide/",
+		title: "Her Trees Puzzle Dream walkthrough",
+		copy: "Every keypad code in order, then the video.",
+	},
+	{
+		href: "/play/puzzle-dream/android/",
+		title: "Her Trees Puzzle Dream Android",
+		copy: "No official APK. Play in a phone browser, landscape.",
+	},
+	{
+		href: "/play/puzzle-house/",
+		title: "Her Trees The Puzzle House",
+		copy: "Play the second game free in your browser.",
+	},
+	{
+		href: "/play/puzzle-house/guide/",
+		title: "Puzzle House walkthrough",
+		copy: "Every keypad code for The Puzzle House.",
+	},
+	{
+		href: "/play/first-puzzle/",
+		title: "Her Trees First Puzzle",
+		copy: "The shortest room. Dedicated play page, not the homepage hero.",
+	},
+	{
+		href: "/",
+		title: "Her Trees Puzzle Dream homepage",
+		copy: "Homepage hero is Puzzle Dream. Start playing immediately.",
+	},
+];
+
+const schema = [
+	{
+		"@context": "https://schema.org",
+		"@type": "SearchResultsPage",
+		name: "Search Her Trees Puzzle Dream",
+		url: `${siteUrl}/search/`,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "ItemList",
+		itemListElement: results.map((item, index) => ({
+			"@type": "ListItem",
+			position: index + 1,
+			url: `${siteUrl}${item.href}`,
+			name: item.title,
+		})),
+	},
+];
+---
+
+<StaticPageLayout
+	title="Search Her Trees Puzzle Dream - Play and Walkthroughs"
+	description="Find Her Trees Puzzle Dream play pages, keypad walkthroughs, Puzzle House, First Puzzle, and Android browser play."
+	canonicalPath="/search/"
+	pageHeading="Search Her Trees Puzzle Dream"
+	pageIntro="Use the box below or open a play/walkthrough page directly. The homepage hero is Puzzle Dream."
+	breadcrumbLabel="Search"
+	schema={schema}
+>
+	<form class="site-search" method="get" action="/search/" role="search">
+		<label for="q">Search</label>
+		<input id="q" name="q" type="search" placeholder="her trees puzzle dream" />
+		<button type="submit">Search</button>
+	</form>
+	<ul class="search-result-list" data-search-results>
+		{
+			results.map((item) => (
+				<li data-search-item={item.title.toLowerCase()}>
+					<a href={item.href}>{item.title}</a>
+					<p>{item.copy}</p>
+				</li>
+			))
+		}
+	</ul>
+</StaticPageLayout>
+
+<script is:inline>
+	const params = new URLSearchParams(window.location.search);
+	const query = (params.get("q") || "").trim().toLowerCase();
+	if (query) {
+		document.querySelectorAll("[data-search-item]").forEach((item) => {
+			const haystack = `${item.getAttribute("data-search-item") || ""} ${item.textContent || ""}`.toLowerCase();
+			item.hidden = !haystack.includes(query);
+		});
+	}
+</script>
+
+<style>
+	.site-search {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		align-items: center;
+		margin: 0 0 24px;
+	}
+	.site-search input {
+		min-width: 240px;
+		flex: 1;
+		padding: 10px 12px;
+		border: 1px solid var(--border-color);
+		border-radius: 8px;
+	}
+	.site-search button {
+		padding: 10px 16px;
+		border: 1px solid var(--text-color);
+		background: #fff;
+		border-radius: 8px;
+		cursor: pointer;
+	}
+	.site-search button:hover {
+		border-color: var(--hover-color);
+	}
+	.search-result-list {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		display: grid;
+		gap: 16px;
+	}
+	.search-result-list a {
+		font-weight: 600;
+	}
+</style>

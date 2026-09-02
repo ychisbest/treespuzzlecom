@@ -339,6 +339,39 @@ const homeSchema = JSON.stringify([
 		name: "Her Trees Puzzle Game",
 		url: canonicalUrl,
 		description: content.pageDescription,
+		potentialAction: {
+			"@type": "SearchAction",
+			target: {
+				"@type": "EntryPoint",
+				urlTemplate: `${siteUrl}/search/?q={search_term_string}`,
+			},
+			"query-input": "required name=search_term_string",
+		},
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "ItemList",
+		name: "HER TREES games on this site",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				url: `${siteUrl}/play/puzzle-dream/`,
+				name: "Her Trees Puzzle Dream",
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				url: `${siteUrl}/play/puzzle-house/`,
+				name: "Her Trees The Puzzle House",
+			},
+			{
+				"@type": "ListItem",
+				position: 3,
+				url: `${siteUrl}/play/first-puzzle/`,
+				name: "Her Trees First Puzzle",
+			},
+		],
 	},
 	{
 		"@context": "https://schema.org",

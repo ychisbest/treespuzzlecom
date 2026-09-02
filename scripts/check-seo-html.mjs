@@ -213,6 +213,24 @@ if (homeHtml && !homeHtml.includes("/play/puzzle-dream/guide/")) {
 	failures.push("homepage missing dream guide href");
 }
 
+const homeSchemaHtml = read("index.html");
+if (homeSchemaHtml && !/SearchAction/.test(homeSchemaHtml)) {
+	failures.push("homepage missing SearchAction");
+}
+if (homeSchemaHtml && !homeSchemaHtml.includes("/search/?q={search_term_string}")) {
+	failures.push("homepage SearchAction missing /search/ target");
+}
+
+const searchHtml = read("search/index.html");
+if (searchHtml) {
+	if (!searchHtml.includes("/play/puzzle-dream/")) {
+		failures.push("search page missing Dream play href");
+	}
+	if (!searchHtml.includes("/play/puzzle-dream/guide/")) {
+		failures.push("search page missing Dream guide href");
+	}
+}
+
 const aboutHtml = read("about/index.html");
 if (aboutHtml) {
 	if (!aboutHtml.includes("/play/puzzle-dream/")) {
