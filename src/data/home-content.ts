@@ -649,7 +649,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Dream - Jouer gratuitement (sans téléchargement)',
 		pageDescription:
-			'Jouez à HER TREES gratuitement dans le navigateur, sans téléchargement. Puzzle Dream et Puzzle House se jouent ici. Steam est une version payante séparée.',
+			'Jouez à Her Trees Puzzle Dream gratuitement dans le navigateur — sans téléchargement. 40+ puzzles, walkthrough clavier, et version mobile navigateur. Puzzle House et First Puzzle aussi.',
 		guidePageTitle: 'HER TREES : First Puzzle - Guide Vidéo',
 		guidePageDescription: 'Cette page couvre uniquement la vidéo de HER TREES : First Puzzle. Pour Puzzle Dream et Puzzle House, ouvrez leurs pages de guide.',
 		headerIntro:
@@ -829,7 +829,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Dream - Main Gratis di Browser (Tanpa Unduh)',
 		pageDescription:
-			'Mainkan HER TREES, seri game puzzle indie bergambar tangan. Pecahkan misteri dengan memindahkan objek di ruangan surealis hitam-putih. Game browser gratis + Steam. 95% positif.',
+			'Mainkan Her Trees Puzzle Dream gratis di browser — tanpa unduhan. 40+ puzzle, tabel kode keypad, dan mode landscape di HP. Puzzle House dan First Puzzle juga di sini.',
 		guidePageTitle: 'Video Panduan HER TREES : First Puzzle',
 		guidePageDescription: 'Halaman ini hanya video walkthrough HER TREES : First Puzzle. Untuk Puzzle Dream dan Puzzle House, buka halaman panduan masing-masing.',
 		headerIntro:
@@ -1013,7 +1013,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Dream - ブラウザで無料プレイ（ダウンロード不要）',
 		pageDescription:
-			'HER TREES は白黒手描きのインディーパズルゲームシリーズ。シュールな部屋でオブジェクトを動かして組み合わせて謎を解こう。ブラウザ無料 + Steam 発売中。95% 評価。',
+			'Her Trees Puzzle Dream をブラウザで無料プレイ。ダウンロード不要。40以上のパズル、キーパッド攻略、スマホ横画面にも対応。Puzzle House と First Puzzle もあります。',
 		guidePageTitle: 'HER TREES : First Puzzle 攻略動画',
 		guidePageDescription: 'このページは HER TREES : First Puzzle の攻略動画だけです。Puzzle Dream と Puzzle House はそれぞれの攻略ページを開いてください。',
 		headerIntro:
@@ -1193,7 +1193,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Dream - Choi mien phi tren trinh duyet',
 		pageDescription:
-			'Chơi HER TREES, series game giải đố indie vẽ tay. Giải mã bằng cách di chuyển đồ vật trong phòng siêu thực đen trắng. Chơi miễn phí trên trình duyệt + Steam. 95% đánh giá tích cực.',
+			'Choi Her Trees Puzzle Dream mien phi tren trinh duyet — khong can tai. Hon 40 cau do, bang ma keypad, choi tren dien thoai. Puzzle House va First Puzzle cung o day.',
 		guidePageTitle: 'Video huong dan HER TREES : First Puzzle',
 		guidePageDescription: 'Trang nay chi la video HER TREES : First Puzzle. Puzzle Dream va Puzzle House co trang huong dan rieng.',
 		headerIntro:

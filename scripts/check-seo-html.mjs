@@ -261,6 +261,19 @@ if (aboutHtml) {
 	}
 }
 
+const idHome = read("id/index.html");
+if (idHome && !/her trees puzzle dream/i.test(titleOf(idHome) + " " + (idHome.match(/name="description" content="([^"]*)"/i)?.[1] || ""))) {
+	failures.push("id homepage missing Her Trees Puzzle Dream in title/description");
+}
+const viHome = read("vi/index.html");
+if (viHome && !/her trees puzzle dream/i.test(titleOf(viHome) + " " + (viHome.match(/name="description" content="([^"]*)"/i)?.[1] || ""))) {
+	failures.push("vi homepage missing Her Trees Puzzle Dream in title/description");
+}
+const zhGuide = read("zh-cn/play/puzzle-dream/guide/index.html");
+if (zhGuide && !/^Her Trees Puzzle Dream/i.test(titleOf(zhGuide))) {
+	failures.push(`zh-cn dream guide title should start with Her Trees Puzzle Dream: ${titleOf(zhGuide)}`);
+}
+
 const analysisHtml = read("analysis/puzzle-design/index.html");
 if (analysisHtml) {
 	if (!/href="\/play\/puzzle-dream\/"/.test(analysisHtml)) {
