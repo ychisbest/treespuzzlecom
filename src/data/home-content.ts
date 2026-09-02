@@ -273,7 +273,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Dream - Play Free Online (No Download)',
 		pageDescription:
-			'Play Her Trees Puzzle Dream free in your browser — no download, no Steam. 40+ hand-drawn puzzles. Puzzle House and First Puzzle are on this site too.',
+			'Play Her Trees Puzzle Dream free in your browser — no download. 40+ puzzles, keypad walkthrough, and Android browser play. Puzzle House and First Puzzle are here too.',
 		guidePageTitle: 'Her Trees First Puzzle Walkthrough',
 		guidePageDescription: 'Video walkthrough for Her Trees First Puzzle. Keypad answers for Her Trees Puzzle Dream and Puzzle House are on their own guide pages.',
 		headerIntro:

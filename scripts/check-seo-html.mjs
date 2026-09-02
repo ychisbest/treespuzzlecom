@@ -133,6 +133,18 @@ for (const [file, codes] of guidePages) {
 			failures.push(`${file}: missing keypad code ${code}`);
 		}
 	}
+	if (
+		file.includes("puzzle-dream/guide") &&
+		!/href="(?:\/[a-z0-9-]+)?\/play\/puzzle-dream\/"/.test(html)
+	) {
+		failures.push(`${file}: missing play Her Trees Puzzle Dream href`);
+	}
+	if (file.includes("puzzle-dream/guide") && !/play\/puzzle-house\/guide\//.test(html)) {
+		failures.push(`${file}: missing cross-link to house guide`);
+	}
+	if (file.includes("puzzle-house/guide") && !/play\/puzzle-dream\/guide\//.test(html)) {
+		failures.push(`${file}: missing cross-link to dream guide`);
+	}
 }
 
 const walkHtml = (dir, found = []) => {
