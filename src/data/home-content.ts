@@ -91,7 +91,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Dream - 浏览器免费玩（无需下载）',
 		pageDescription:
-			'免费在浏览器玩 Her Trees Puzzle Dream，不用下载。40 多个黑白手绘谜题，移动和组合物体即可。Puzzle House 和 First Puzzle 也在本站。',
+			'免费在浏览器玩 Her Trees Puzzle Dream，不用下载。40 多个谜题、键盘攻略、手机浏览器也能玩。Puzzle House 和 First Puzzle 也在本站。',
 		guidePageTitle: 'Her Trees First Puzzle Walkthrough',
 		guidePageDescription: '本页是 First Puzzle 视频攻略。Her Trees Puzzle Dream 和 Puzzle House 的键盘答案在各自攻略页。',
 		headerIntro:
@@ -465,7 +465,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		siteName: 'Her Trees Puzzle Game',
 		pageTitle: 'Her Trees Puzzle Dream - بازی رایگان در مرورگر (بدون دانلود)',
 		pageDescription:
-			'HER TREES را بازی کنید، مجموعه بازی پازلی مستقل با طراحی دستی. در اتاق‌های سورئال سیاه‌وسفید معماها را حل کنید. بازی رایگان مرورگر + Steam. ۹۵٪ مثبت.',
+			'Her Trees Puzzle Dream را رایگان در مرورگر بازی کنید — بدون دانلود. بیش از ۴۰ پازل، جدول رمز، و بازی در مرورگر موبایل. Puzzle House و First Puzzle هم اینجاست.',
 		guidePageTitle: 'ویدیوی راهنمای HER TREES : First Puzzle',
 		guidePageDescription: 'این صفحه فقط راهنمای ویدیویی HER TREES : First Puzzle است. برای Puzzle Dream و Puzzle House صفحات راهنمای جداگانه را باز کنید.',
 		headerIntro:

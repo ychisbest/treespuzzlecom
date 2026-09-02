@@ -97,6 +97,12 @@ for (const file of playPages) {
 	if (isDream && !/puzzle dream/i.test(h1)) {
 		failures.push(`${file}: h1 does not name Puzzle Dream: ${h1}`);
 	}
+	if (
+		file === "play/puzzle-dream/index.html" &&
+		!/^Her Trees Puzzle Dream/i.test(h1)
+	) {
+		failures.push(`${file}: English h1 should start with Her Trees Puzzle Dream: ${h1}`);
+	}
 	if (!isDream && !/puzzle house/i.test(h1)) {
 		failures.push(`${file}: h1 does not name Puzzle House: ${h1}`);
 	}
