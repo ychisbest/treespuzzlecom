@@ -360,6 +360,9 @@ const homeSchema = JSON.stringify([
 		gamePlatform: "Web Browser",
 		playMode: "SinglePlayer",
 		genre: ["Puzzle", "Point-and-click", "Adventure"],
+		sameAs: [
+			"https://store.steampowered.com/app/3300800/HER_TREES__PUZZLE_DREAM/",
+		],
 	},
 	{
 		"@context": "https://schema.org",
@@ -566,6 +569,14 @@ const homeSchema = JSON.stringify([
 						<a class="more-play-card" href={puzzleHousePagePath}>
 							<strong>{support.houseCta}</strong>
 							<span>HER TREES : THE PUZZLE HOUSE</span>
+						</a>
+						<a class="more-play-card" href={puzzleDreamGuidePath}>
+							<strong>Her Trees Puzzle Dream walkthrough</strong>
+							<span>All keypad answers</span>
+						</a>
+						<a class="more-play-card" href={locale === "en" ? "/play/puzzle-house/guide/" : `/${locale}/play/puzzle-house/guide/`}>
+							<strong>Her Trees The Puzzle House walkthrough</strong>
+							<span>All keypad answers</span>
 						</a>
 					</div>
 				</section>

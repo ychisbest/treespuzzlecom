@@ -106,6 +106,9 @@ for (const file of playPages) {
 	if (isDream && !/play\/puzzle-dream\/guide\//.test(html)) {
 		failures.push(`${file}: missing internal link to dream guide`);
 	}
+	if (!isDream && !/play\/puzzle-house\/guide\//.test(html)) {
+		failures.push(`${file}: missing internal link to house guide`);
+	}
 }
 
 const guidePages = [

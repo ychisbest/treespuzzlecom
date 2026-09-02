@@ -38,7 +38,7 @@ const puzzleHouseGuidePath =
 	locale === "en"
 		? "/play/puzzle-house/guide/"
 		: `/${locale}/play/puzzle-house/guide/`;
-const firstPuzzlePagePath = `${content.path}#play`;
+const firstPuzzlePagePath = "/her-trees-first-puzzle/";
 const puzzleDreamPath =
 	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
 const treesHateYouPath = "/trees-hate-you/";
@@ -99,7 +99,7 @@ const pageCopy: Record<
 	}
 > = {
 	"zh-cn": {
-		title: "HER TREES : THE PUZZLE HOUSE - 浏览器免费玩（无需下载）",
+		title: "Her Trees The Puzzle House - 浏览器免费玩（无需下载）",
 		description:
 			"免费在浏览器里玩 her trees the puzzle house，不用下载、不用登录 Steam。HER TREES : THE PUZZLE HOUSE 是紧凑的手绘谜题屋。Steam 商店页是另一份付费版本。",
 		breadcrumbLabel: "Puzzle House",
@@ -175,7 +175,7 @@ const pageCopy: Record<
 		],
 	},
 	fa: {
-		title: "HER TREES : THE PUZZLE HOUSE - بازی رایگان در مرورگر (بدون دانلود)",
+		title: "Her Trees The Puzzle House - بازی رایگان در مرورگر (بدون دانلود)",
 		description:
 			"her trees the puzzle house را رایگان در مرورگر بازی کنید. بدون دانلود و بدون ورود به Steam. HER TREES : THE PUZZLE HOUSE یک خانه پازل فشرده با هنر دستی است. صفحه Steam نسخه پولی جداگانه‌ای است.",
 		breadcrumbLabel: "Puzzle House",
@@ -212,7 +212,7 @@ const pageCopy: Record<
 		],
 	},
 	fr: {
-		title: "HER TREES : THE PUZZLE HOUSE - Jouer gratuitement dans le navigateur",
+		title: "Her Trees The Puzzle House - Jouer gratuitement dans le navigateur",
 		description:
 			"Jouez à her trees the puzzle house gratuitement dans votre navigateur. Pas de téléchargement, pas de connexion Steam. HER TREES : THE PUZZLE HOUSE est une maison de puzzle compacte dessinée à la main. La page Steam est une version payante séparée.",
 		breadcrumbLabel: "Puzzle House",
@@ -249,7 +249,7 @@ const pageCopy: Record<
 		],
 	},
 	id: {
-		title: "HER TREES : THE PUZZLE HOUSE - Main Gratis di Browser (Tanpa Unduh)",
+		title: "Her Trees The Puzzle House - Main Gratis di Browser (Tanpa Unduh)",
 		description:
 			"Mainkan her trees the puzzle house gratis di browser. Tanpa unduhan, tanpa login Steam. HER TREES : THE PUZZLE HOUSE adalah rumah puzzle ringkas bergambar tangan. Halaman Steam adalah rilis berbayar yang berbeda.",
 		breadcrumbLabel: "Puzzle House",
@@ -286,7 +286,7 @@ const pageCopy: Record<
 		],
 	},
 	ja: {
-		title: "HER TREES : THE PUZZLE HOUSE - ブラウザで無料プレイ（ダウンロード不要）",
+		title: "Her Trees The Puzzle House - ブラウザで無料プレイ（ダウンロード不要）",
 		description:
 			"her trees the puzzle house をブラウザで無料プレイ。ダウンロードも Steam ログインも不要。HER TREES : THE PUZZLE HOUSE はコンパクトな手描きパズルハウス。Steam ストアは別の有料版です。",
 		breadcrumbLabel: "Puzzle House",
@@ -323,7 +323,7 @@ const pageCopy: Record<
 		],
 	},
 	vi: {
-		title: "HER TREES : THE PUZZLE HOUSE - Choi mien phi tren trinh duyet",
+		title: "Her Trees The Puzzle House - Choi mien phi tren trinh duyet",
 		description:
 			"Choi her trees the puzzle house mien phi tren trinh duyet. Khong can tai, khong can dang nhap Steam. HER TREES : THE PUZZLE HOUSE la ngoi nha puzzle gon ve tay. Trang Steam la ban tra phi khac.",
 		breadcrumbLabel: "Puzzle House",
@@ -676,6 +676,11 @@ const puzzleHouseSchema = JSON.stringify([
 					<h2>{copy.overviewHeading}</h2>
 					<div class="prose-block">
 						<p>{copy.overviewBody}</p>
+						<p>
+							<a href={puzzleHouseGuidePath}>Her Trees The Puzzle House walkthrough</a>
+							{" · "}
+							<a href={puzzleDreamPath}>Her Trees Puzzle Dream</a>
+						</p>
 					</div>
 				</section>
 
