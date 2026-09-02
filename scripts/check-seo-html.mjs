@@ -213,6 +213,16 @@ if (homeHtml && !homeHtml.includes("/play/puzzle-dream/guide/")) {
 	failures.push("homepage missing dream guide href");
 }
 
+const analysisHtml = read("analysis/puzzle-design/index.html");
+if (analysisHtml) {
+	if (!/href="\/play\/puzzle-dream\/"/.test(analysisHtml)) {
+		failures.push("analysis page missing Dream play href");
+	}
+	if (!analysisHtml.includes("/play/puzzle-dream/guide/")) {
+		failures.push("analysis page missing Dream guide href");
+	}
+}
+
 if (failures.length) {
 	console.error("SEO HTML check failed:");
 	for (const failure of failures) console.error(`- ${failure}`);
