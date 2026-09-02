@@ -106,6 +106,14 @@ for (const file of playPages) {
 	if (isDream && !/play\/puzzle-dream\/guide\//.test(html)) {
 		failures.push(`${file}: missing internal link to dream guide`);
 	}
+	if (
+		isDream &&
+		!/<details class="faq-item"[\s\S]*?<a href="(?:\/[a-z0-9-]+)?\/play\/puzzle-dream\/guide\//.test(
+			html,
+		)
+	) {
+		failures.push(`${file}: FAQ missing Dream guide href`);
+	}
 	if (!isDream && !/play\/puzzle-house\/guide\//.test(html)) {
 		failures.push(`${file}: missing internal link to house guide`);
 	}

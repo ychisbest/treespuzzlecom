@@ -45,6 +45,11 @@ const puzzleDreamPath =
 const treesHateYouPath = "/trees-hate-you/";
 const puzzleHouseDownloadUrl =
 	"https://game.doritosscript.com/HER.TREES.THE.PUZZLE.HOUSE.zip";
+const linkifyFaq = (text: string) =>
+	text.replace(
+		/(\/(?:[a-z]{2,3}(?:-[a-z]+)?\/)?play\/[a-z0-9/-]+\/)/g,
+		'<a href="$1">$1</a>',
+	);
 const shareImage = new URL(puzzleHouseImage.src, siteUrl).toString();
 const gameImages = [
 	firstPuzzleImage,
@@ -171,7 +176,7 @@ const pageCopy: Record<
 			{
 				question: "Where is the Puzzle House walkthrough?",
 				answer:
-					"Open the dedicated Puzzle House guide on this site. The main /guide/ page is only for First Puzzle.",
+					"Open the dedicated Puzzle House guide at /play/puzzle-house/guide/. Then play Her Trees Puzzle Dream at /play/puzzle-dream/. The main /guide/ page is only for First Puzzle.",
 			},
 		],
 	},
@@ -705,7 +710,7 @@ const puzzleHouseSchema = JSON.stringify([
 							copy.faqs.map((faq) => (
 								<details class="faq-item">
 									<summary>{faq.question}</summary>
-									<p>{faq.answer}</p>
+									<p set:html={linkifyFaq(faq.answer)} />
 								</details>
 							))
 						}

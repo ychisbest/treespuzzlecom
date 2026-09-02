@@ -49,6 +49,11 @@ const puzzleHousePath =
 const treesHateYouPath = "/trees-hate-you/";
 const puzzleDreamDownloadUrl =
 	"https://game.doritosscript.com/HerTreesPuzzleDream.zip";
+const linkifyFaq = (text: string) =>
+	text.replace(
+		/(\/(?:[a-z]{2,3}(?:-[a-z]+)?\/)?play\/[a-z0-9/-]+\/)/g,
+		'<a href="$1">$1</a>',
+	);
 const shareImage = new URL(puzzleDreamImage.src, siteUrl).toString();
 const gameImages = [
 	firstPuzzleImage,
@@ -136,7 +141,7 @@ const pageCopy: Record<
 			},
 			{
 				question: "Puzzle Dream 攻略在哪？",
-				answer: "请打开本站的 Puzzle Dream 独立攻略页。总攻略页 /guide/ 只覆盖 First Puzzle。",
+				answer: "请打开 /zh-cn/play/puzzle-dream/guide/。总攻略页 /guide/ 只覆盖 First Puzzle。",
 			},
 		],
 	},
@@ -175,12 +180,12 @@ const pageCopy: Record<
 			{
 				question: "Where is the Puzzle Dream walkthrough?",
 				answer:
-					"Open the dedicated Puzzle Dream guide on this site. It lists every keypad code, then the video. The main /guide/ page is only for First Puzzle.",
+					"Open the dedicated Puzzle Dream guide on this site at /play/puzzle-dream/guide/. It lists every keypad code, then the video. The main /guide/ page is only for First Puzzle.",
 			},
 			{
 				question: "Can I play Her Trees Puzzle Dream on Android?",
 				answer:
-					"There is no official APK. Play in a phone browser in landscape. See the Android page on this site.",
+					"There is no official APK. Play in a phone browser in landscape. Details: /play/puzzle-dream/android/.",
 			},
 		],
 	},
@@ -217,7 +222,7 @@ const pageCopy: Record<
 			},
 			{
 				question: "راهنمای Puzzle Dream کجاست؟",
-				answer: "صفحه راهنمای مستقل Puzzle Dream را باز کنید. /guide/ فقط First Puzzle است.",
+				answer: "صفحه راهنما: /fa/play/puzzle-dream/guide/ . /guide/ فقط First Puzzle است.",
 			},
 		],
 	},
@@ -254,7 +259,7 @@ const pageCopy: Record<
 			},
 			{
 				question: "Où est le walkthrough de Puzzle Dream ?",
-				answer: "Ouvrez le guide dédié Puzzle Dream. La page /guide/ ne couvre que First Puzzle.",
+				answer: "Ouvrez /fr/play/puzzle-dream/guide/. La page /guide/ ne couvre que First Puzzle.",
 			},
 		],
 	},
@@ -291,7 +296,7 @@ const pageCopy: Record<
 			},
 			{
 				question: "Di mana walkthrough Puzzle Dream?",
-				answer: "Buka halaman panduan khusus Puzzle Dream. /guide/ hanya untuk First Puzzle.",
+				answer: "Buka /id/play/puzzle-dream/guide/. /guide/ hanya untuk First Puzzle.",
 			},
 		],
 	},
@@ -328,7 +333,7 @@ const pageCopy: Record<
 			},
 			{
 				question: "Puzzle Dream の攻略はどこ？",
-				answer: "専用の Puzzle Dream 攻略ページを開いてください。/guide/ は First Puzzle のみです。",
+				answer: "攻略は /ja/play/puzzle-dream/guide/ です。/guide/ は First Puzzle のみです。",
 			},
 		],
 	},
@@ -365,7 +370,7 @@ const pageCopy: Record<
 			},
 			{
 				question: "Walkthrough Puzzle Dream o dau?",
-				answer: "Mo trang huong dan rieng Puzzle Dream. /guide/ chi la First Puzzle.",
+				answer: "Mo /vi/play/puzzle-dream/guide/. /guide/ chi la First Puzzle.",
 			},
 		],
 	},
@@ -717,7 +722,7 @@ const puzzleDreamSchema = JSON.stringify([
 							copy.faqs.map((faq) => (
 								<details class="faq-item">
 									<summary>{faq.question}</summary>
-									<p>{faq.answer}</p>
+									<p set:html={linkifyFaq(faq.answer)} />
 								</details>
 							))
 						}
