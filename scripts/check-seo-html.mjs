@@ -103,6 +103,9 @@ for (const file of playPages) {
 	if (!hasVideoGame(html)) {
 		failures.push(`${file}: missing JSON-LD VideoGame`);
 	}
+	if (isDream && !/play\/puzzle-dream\/guide\//.test(html)) {
+		failures.push(`${file}: missing internal link to dream guide`);
+	}
 }
 
 const guidePages = [
