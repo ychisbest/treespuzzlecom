@@ -97,7 +97,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		headerIntro:
 			'是一款独特的解谜游戏系列，玩家通过移动和组合物品来解谜。揭开这间奇特房间的奥秘。',
 		heroH1: 'Her Trees Puzzle Dream — 浏览器免费树木解谜',
-		playHeading: '在线游玩 HER TREES : PUZZLE DREAM',
+		playHeading: '在线游玩 Her Trees Puzzle Dream',
 		playButton: '开始 Puzzle Dream',
 		guideButton: '点击查看攻略',
 		iframeTitle: 'HER TREES : PUZZLE DREAM 在线试玩',
@@ -279,7 +279,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		headerIntro:
 			'An unusual puzzle game series where you solve mysteries by moving and combining objects inside strange, hand-drawn rooms.',
 		heroH1: 'Her Trees Puzzle Dream — Play Free Online',
-		playHeading: 'Play HER TREES : PUZZLE DREAM Online',
+		playHeading: 'Play Her Trees Puzzle Dream Online',
 		playButton: 'Start Puzzle Dream',
 		guideButton: 'View Guide',
 		iframeTitle: 'HER TREES : PUZZLE DREAM online',
@@ -471,7 +471,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		headerIntro:
 			'مجموعه‌ای از بازی‌های پازلی غیرمعمول که در آن معماها را با جابجایی و ترکیب اشیاء در اتاق‌های عجیب حل می‌کنید.',
 		heroH1: 'Her Trees Puzzle Dream — بازی رایگان در مرورگر',
-		playHeading: 'بازی آنلاین HER TREES : PUZZLE DREAM',
+		playHeading: 'بازی آنلاین Her Trees Puzzle Dream',
 		playButton: 'شروع بازی',
 		guideButton: 'مشاهده راهنما',
 		iframeTitle: 'نسخه آنلاین HER TREES : PUZZLE DREAM',
@@ -655,7 +655,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		headerIntro:
 			'Une série de jeux de puzzle inhabituelle où vous résolvez des mystères en déplaçant et combinant des objets dans des pièces étranges dessinées à la main.',
 		heroH1: 'Her Trees Puzzle Dream — Jouer gratuitement dans le navigateur',
-		playHeading: 'Jouez à HER TREES : PUZZLE DREAM en ligne',
+		playHeading: 'Jouez à Her Trees Puzzle Dream en ligne',
 		playButton: 'Lancer le Jeu',
 		guideButton: 'Voir le Guide',
 		iframeTitle: 'HER TREES : PUZZLE DREAM en ligne',
@@ -835,7 +835,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		headerIntro:
 			'Seri game puzzle unik di mana Anda memecahkan misteri dengan memindahkan dan menggabungkan objek di dalam ruangan aneh.',
 		heroH1: 'Her Trees Puzzle Dream — Main gratis di browser',
-		playHeading: 'Mainkan HER TREES : PUZZLE DREAM Online',
+		playHeading: 'Mainkan Her Trees Puzzle Dream Online',
 		playButton: 'Mulai Game',
 		guideButton: 'Lihat Panduan',
 		iframeTitle: 'HER TREES : PUZZLE DREAM online',
@@ -1019,7 +1019,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		headerIntro:
 			'物を動かして組み合わせながら謎を解いていく、独特なパズルゲームシリーズです。不思議な部屋に隠された仕組みを見つけてください。',
 		heroH1: 'Her Trees Puzzle Dream — ブラウザで無料プレイ',
-		playHeading: 'HER TREES : PUZZLE DREAM をブラウザで遊ぶ',
+		playHeading: 'Her Trees Puzzle Dream をブラウザで遊ぶ',
 		playButton: 'ゲーム開始',
 		guideButton: '攻略を見る',
 		iframeTitle: 'HER TREES : PUZZLE DREAM ブラウザ版',
@@ -1199,7 +1199,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		headerIntro:
 			'Đây là một series game giải đố khác lạ, nơi bạn giải mật mã bằng cách di chuyển và kết hợp đồ vật trong những căn phòng kỳ quái.',
 		heroH1: 'Her Trees Puzzle Dream — Choi mien phi tren trinh duyet',
-		playHeading: 'Choi HER TREES : PUZZLE DREAM truc tuyen',
+		playHeading: 'Choi Her Trees Puzzle Dream truc tuyen',
 		playButton: 'Bắt đầu chơi',
 		guideButton: 'Xem huong dan',
 		iframeTitle: 'HER TREES : PUZZLE DREAM tren trinh duyet',

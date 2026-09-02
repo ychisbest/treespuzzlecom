@@ -226,6 +226,12 @@ const homeHtml = read("index.html");
 if (homeHtml && !homeHtml.includes("/play/puzzle-dream/guide/")) {
 	failures.push("homepage missing dream guide href");
 }
+if (homeHtml && !/dateModified/.test(homeHtml)) {
+	failures.push("homepage missing dateModified");
+}
+if (homeHtml && !/>Play Her Trees Puzzle Dream Online</.test(homeHtml)) {
+	failures.push("homepage missing Play Her Trees Puzzle Dream Online heading");
+}
 if (
 	homeHtml &&
 	!/<details class="faq-item"[\s\S]*?<a href="\/play\/puzzle-dream\//.test(homeHtml)
