@@ -11,18 +11,17 @@ const { locale, currentPath = "" } = Astro.props;
 const links = siteLinksForLocale(locale);
 
 const isPuzzleHouse = currentPath.includes("puzzle-house");
-const isPuzzleDream = currentPath.includes("puzzle-dream");
+const dreamGuidePath =
+	locale === "en" ? "/play/puzzle-dream/guide/" : `/${locale}/play/puzzle-dream/guide/`;
+const houseGuidePath =
+	locale === "en" ? "/play/puzzle-house/guide/" : `/${locale}/play/puzzle-house/guide/`;
 
 const resolvedLinks = links.map((link) => {
-	if (link.label === "Guide" || link.label === "攻略" || link.label === "راهنما" || link.label === "Panduan" || link.label === "Huong dan") {
+	if (link.label === "Guide" || link.label === "攻略" || link.label === "راهنما" || link.label === "Panduan" || link.label === "Huong dan" || link.label === "ガイド") {
 		if (isPuzzleHouse) {
-			const guidePath = locale === "en" ? "/play/puzzle-house/guide/" : `/${locale}/play/puzzle-house/guide/`;
-			return { ...link, href: guidePath, openInNewTab: false };
+			return { ...link, href: houseGuidePath, openInNewTab: false };
 		}
-		if (isPuzzleDream) {
-			const guidePath = locale === "en" ? "/play/puzzle-dream/guide/" : `/${locale}/play/puzzle-dream/guide/`;
-			return { ...link, href: guidePath, openInNewTab: false };
-		}
+		return { ...link, href: dreamGuidePath, openInNewTab: false };
 	}
 	return link;
 });

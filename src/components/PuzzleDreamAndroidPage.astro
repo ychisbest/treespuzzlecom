@@ -1,0 +1,269 @@
+---
+import "../styles/global.css";
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
+import { homeContent, type Locale } from "../data/home-content";
+import { adsensePublisherId } from "../data/site-shell";
+import {
+	buildAlternateLinks,
+	buildOgLocaleAlternates,
+	localeToHreflang,
+	localeToOgLocale,
+	toAbsoluteUrl,
+} from "../data/seo";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const pagePath =
+	locale === "en"
+		? "/play/puzzle-dream/android/"
+		: `/${locale}/play/puzzle-dream/android/`;
+const playPath =
+	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const guidePath =
+	locale === "en"
+		? "/play/puzzle-dream/guide/"
+		: `/${locale}/play/puzzle-dream/guide/`;
+
+const copyByLocale: Record<
+	Locale,
+	{
+		title: string;
+		description: string;
+		h1: string;
+		intro: string;
+		playLabel: string;
+		guideLabel: string;
+		facts: string[];
+	}
+> = {
+	en: {
+		title: "Her Trees Puzzle Dream Android - Play in Browser (No APK)",
+		description:
+			"There is no official Her Trees Puzzle Dream Android app. Play the free browser version on your phone in landscape. No APK, no Steam login.",
+		h1: "Her Trees Puzzle Dream Android",
+		intro:
+			"Stone has said HER TREES has no smartphone build. Searches for her trees puzzle dream android still want a way to play on a phone. Use Chrome or Firefox, rotate to landscape, and start the browser version on this site.",
+		playLabel: "Play Her Trees Puzzle Dream",
+		guideLabel: "Open keypad answers",
+		facts: [
+			"No official APK or Google Play listing from the developer.",
+			"The browser version on this page is the same Puzzle Dream session as the desktop play page.",
+			"Landscape mode and a stable network help the WebGL files load on the first launch.",
+			"If a puzzle blocks you, the keypad answer table is on the walkthrough page.",
+		],
+	},
+	"zh-cn": {
+		title: "Her Trees Puzzle Dream Android - 浏览器玩（无 APK）",
+		description:
+			"没有官方 Her Trees Puzzle Dream Android 应用。用手机浏览器横屏免费玩，不用 APK，不用登录 Steam。",
+		h1: "Her Trees Puzzle Dream Android",
+		intro:
+			"开发者说明 HER TREES 没有官方手机版。想在 Android 上玩，用浏览器打开本站横屏即可。",
+		playLabel: "开始玩 Her Trees Puzzle Dream",
+		guideLabel: "打开键盘答案",
+		facts: [
+			"没有开发者发布的官方 APK。",
+			"手机浏览器版和电脑可玩页是同一套 Puzzle Dream。",
+			"首次加载 WebGL 需要横屏和较稳的网络。",
+			"卡关请打开攻略页的键盘答案表。",
+		],
+	},
+	fa: {
+		title: "Her Trees Puzzle Dream Android - بازی در مرورگر (بدون APK)",
+		description:
+			"نسخه رسمی اندروید وجود ندارد. Her Trees Puzzle Dream را رایگان در مرورگر گوشی، در حالت افقی بازی کنید.",
+		h1: "Her Trees Puzzle Dream Android",
+		intro:
+			"سازنده گفته HER TREES نسخه موبایل رسمی ندارد. برای اندروید، مرورگر را افقی کنید و نسخه مرورگر همین سایت را باز کنید.",
+		playLabel: "بازی Her Trees Puzzle Dream",
+		guideLabel: "پاسخ‌های صفحه کلید",
+		facts: [
+			"APK رسمی از سازنده وجود ندارد.",
+			"نسخه مرورگر موبایل همان Puzzle Dream صفحه دسکتاپ است.",
+			"حالت افقی و اینترنت پایدار برای بارگذاری WebGL لازم است.",
+			"اگر گیر کردید جدول رمزها در صفحه راهنما است.",
+		],
+	},
+	fr: {
+		title: "Her Trees Puzzle Dream Android - Jouer dans le navigateur",
+		description:
+			"Pas d’appli Android officielle. Jouez à Her Trees Puzzle Dream dans le navigateur, en paysage, sans APK.",
+		h1: "Her Trees Puzzle Dream Android",
+		intro:
+			"Le créateur indique qu’il n’existe pas de version smartphone officielle. Sur Android, ouvrez la version navigateur de ce site en mode paysage.",
+		playLabel: "Jouer à Her Trees Puzzle Dream",
+		guideLabel: "Codes du clavier",
+		facts: [
+			"Aucun APK officiel.",
+			"La version mobile est la même session Puzzle Dream que sur ordinateur.",
+			"Le mode paysage aide le chargement WebGL.",
+			"La table des codes est sur la page walkthrough.",
+		],
+	},
+	id: {
+		title: "Her Trees Puzzle Dream Android - Main di Browser (Tanpa APK)",
+		description:
+			"Tidak ada aplikasi Android resmi. Mainkan Her Trees Puzzle Dream gratis di browser HP, mode landscape, tanpa APK.",
+		h1: "Her Trees Puzzle Dream Android",
+		intro:
+			"Pengembang menyatakan HER TREES tidak punya versi smartphone resmi. Di Android, putar layar dan buka versi browser di situs ini.",
+		playLabel: "Main Her Trees Puzzle Dream",
+		guideLabel: "Buka jawaban keypad",
+		facts: [
+			"Tidak ada APK resmi dari developer.",
+			"Versi browser HP sama dengan halaman Puzzle Dream di desktop.",
+			"Mode landscape membantu file WebGL dimuat.",
+			"Jika macet, tabel kode ada di halaman panduan.",
+		],
+	},
+	ja: {
+		title: "Her Trees Puzzle Dream Android - ブラウザで遊ぶ",
+		description:
+			"公式 Android アプリはありません。スマホのブラウザを横向きにして Her Trees Puzzle Dream を無料で遊べます。",
+		h1: "Her Trees Puzzle Dream Android",
+		intro:
+			"作者は公式スマホ版がないと説明しています。Android ではブラウザを横向きにして本サイトのブラウザ版を開いてください。",
+		playLabel: "Her Trees Puzzle Dream を遊ぶ",
+		guideLabel: "キーパッド解答",
+		facts: [
+			"公式 APK はありません。",
+			"スマホのブラウザ版はデスクトップと同じ Puzzle Dream です。",
+			"初回の WebGL 読み込みには横向きが向いています。",
+			"詰まったら攻略ページの解答表を見てください。",
+		],
+	},
+	vi: {
+		title: "Her Trees Puzzle Dream Android - Choi tren trinh duyet (khong APK)",
+		description:
+			"Khong co ung dung Android chinh thuc. Choi Her Trees Puzzle Dream mien phi tren trinh duyet dien thoai, xoay ngang, khong can APK.",
+		h1: "Her Trees Puzzle Dream Android",
+		intro:
+			"Nha phat trien noi HER TREES khong co ban smartphone chinh thuc. Tren Android hay xoay ngang va mo ban trinh duyet tren site nay.",
+		playLabel: "Choi Her Trees Puzzle Dream",
+		guideLabel: "Mo ma keypad",
+		facts: [
+			"Khong co APK chinh thuc.",
+			"Ban trinh duyet dien thoai giong trang Puzzle Dream tren may tinh.",
+			"Che do ngang giup tai WebGL on dinh hon.",
+			"Neu mac, bang ma nam o trang huong dan.",
+		],
+	},
+};
+
+const copy = copyByLocale[locale];
+const languageLinks = buildAlternateLinks(
+	{
+		en: "/play/puzzle-dream/android/",
+		"zh-cn": "/zh-cn/play/puzzle-dream/android/",
+		fa: "/fa/play/puzzle-dream/android/",
+		fr: "/fr/play/puzzle-dream/android/",
+		id: "/id/play/puzzle-dream/android/",
+		ja: "/ja/play/puzzle-dream/android/",
+		vi: "/vi/play/puzzle-dream/android/",
+	},
+	locale,
+);
+const canonicalUrl = toAbsoluteUrl(pagePath);
+const schema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		name: copy.h1,
+		url: canonicalUrl,
+		description: copy.description,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: [
+			{
+				"@type": "Question",
+				name: "Is there a Her Trees Puzzle Dream Android app?",
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: "No official Android app. Play the browser version on this site in landscape.",
+				},
+			},
+		],
+	},
+]);
+---
+
+<html lang={content.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{copy.title}</title>
+		<meta name="description" content={copy.description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={copy.title} />
+		<meta property="og:description" content={copy.description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:type" content="article" />
+		<meta property="og:locale" content={localeToOgLocale(locale)} />
+		{
+			buildOgLocaleAlternates(locale).map((item) => (
+				<meta property="og:locale:alternate" content={item} />
+			))
+		}
+		{
+			languageLinks.map((link) => (
+				<link
+					rel="alternate"
+					hreflang={localeToHreflang(link.locale)}
+					href={toAbsoluteUrl(link.href)}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/play/puzzle-dream/android/")} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
+		<script type="application/ld+json" set:html={schema}></script>
+	</head>
+	<body>
+		<div class="container-shell">
+			<SiteHeader
+				locale={locale}
+				currentPath={pagePath}
+				tagline={copy.description}
+				languageSwitchLabel={content.languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
+			<main>
+				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
+					<a href={playPath}>{copy.playLabel}</a>
+					<span>/</span>
+					<span aria-current="page">Android</span>
+				</nav>
+				<section class="page-intro-block">
+					<h1>{copy.h1}</h1>
+					<p>{copy.intro}</p>
+				</section>
+				<section class="content-section">
+					<ul class="audience-list">
+						{
+							copy.facts.map((fact) => (
+								<li class="audience-item">
+									<p>{fact}</p>
+								</li>
+							))
+						}
+					</ul>
+					<p class="section-intro">
+						<a href={playPath}>{copy.playLabel}</a>
+						{" · "}
+						<a href={guidePath}>{copy.guideLabel}</a>
+					</p>
+				</section>
+			</main>
+			<SiteFooter locale={locale} />
+		</div>
+	</body>
+</html>

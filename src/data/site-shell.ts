@@ -186,12 +186,23 @@ export const shellContent: Record<Locale, ShellCopy> = {
 export const siteLinksForLocale = (locale: Locale) => {
 	const shell = shellContent[locale];
 
+	const dreamPath =
+		locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+	const housePath =
+		locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
+	const dreamGuidePath =
+		locale === "en"
+			? "/play/puzzle-dream/guide/"
+			: `/${locale}/play/puzzle-dream/guide/`;
+
 	return [
 		{ label: shell.homeLabel, href: homeContent[locale].path },
+		{ label: "Puzzle Dream", href: dreamPath },
+		{ label: "Puzzle House", href: housePath },
 		{
 			label: shell.guideLabel,
-			href: homeContent[locale].guidePath,
-			openInNewTab: true,
+			href: dreamGuidePath,
+			openInNewTab: false,
 		},
 		{ label: shell.analysisLabel, href: analysisPathForLocale(locale) },
 		{ label: shell.aboutLabel, href: globalPaths.about },

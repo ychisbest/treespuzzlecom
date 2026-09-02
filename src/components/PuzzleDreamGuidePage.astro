@@ -22,6 +22,7 @@ import {
 	localeToOgLocale,
 	toAbsoluteUrl,
 } from "../data/seo";
+import { dreamAnswers } from "../data/guide-answers";
 
 type Props = {
 	locale: Locale;
@@ -89,9 +90,9 @@ const guideCopy: Record<
 		analysisLabel: "玩法解析",
 	},
 	en: {
-		title: "HER TREES : PUZZLE DREAM Walkthrough",
+		title: "Her Trees Puzzle Dream Walkthrough - All Keypad Answers",
 		description:
-			"Walkthrough for her trees puzzle dream, also searched as HER TREES : PUZZLE DREAM and her trees: puzzle dream. Embedded video for the free browser version on this site.",
+			"Every keypad code for her trees puzzle dream, also searched as HER TREES : PUZZLE DREAM. Answer table first, then the full video for the free browser version.",
 		breadcrumbLabel: "Puzzle Dream Guide",
 		beforeHeading: "Before you watch",
 		beforeBody:
@@ -209,6 +210,18 @@ const canonicalUrl = toAbsoluteUrl(guidePath);
 const ogLocale = localeToOgLocale(locale);
 const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 const guideSchema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "HowTo",
+		name: copy.title,
+		description: copy.description,
+		step: dreamAnswers.map((row, index) => ({
+			"@type": "HowToStep",
+			position: index + 1,
+			name: row.puzzle[locale],
+			text: row.answer,
+		})),
+	},
 	{
 		"@context": "https://schema.org",
 		"@type": "VideoObject",

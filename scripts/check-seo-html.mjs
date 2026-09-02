@@ -154,6 +154,26 @@ if (fs.existsSync(distDir)) {
 	}
 }
 
+const redirectsPath = path.join(distDir, "_redirects");
+if (!fs.existsSync(redirectsPath)) {
+	failures.push("missing dist/_redirects");
+} else {
+	const redirects = fs.readFileSync(redirectsPath, "utf8");
+	for (const rule of [
+		"/her-trees-puzzle-dream/ /play/puzzle-dream/ 301",
+		"/her-trees-the-puzzle-house/ /play/puzzle-house/ 301",
+	]) {
+		if (!redirects.includes(rule)) {
+			failures.push(`_redirects missing rule: ${rule}`);
+		}
+	}
+}
+
+const androidHtml = read("play/puzzle-dream/android/index.html");
+if (androidHtml && !/android/i.test(h1Of(androidHtml))) {
+	failures.push("android page h1 missing Android");
+}
+
 if (failures.length) {
 	console.error("SEO HTML check failed:");
 	for (const failure of failures) console.error(`- ${failure}`);

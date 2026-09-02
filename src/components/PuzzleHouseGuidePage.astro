@@ -22,6 +22,7 @@ import {
 	localeToOgLocale,
 	toAbsoluteUrl,
 } from "../data/seo";
+import { houseAnswers } from "../data/guide-answers";
 
 type Props = {
 	locale: Locale;
@@ -89,9 +90,9 @@ const guideCopy: Record<
 		analysisLabel: "玩法解析",
 	},
 	en: {
-		title: "HER TREES : THE PUZZLE HOUSE Walkthrough",
+		title: "Her Trees The Puzzle House Walkthrough - All Keypad Answers",
 		description:
-			"Walkthrough for her trees the puzzle house, also searched as HER TREES : THE PUZZLE HOUSE and her trees: the puzzle house. Embedded video for the free browser version on this site.",
+			"Every keypad code for her trees the puzzle house, also searched as HER TREES : THE PUZZLE HOUSE. Answer table first, then the full video for the free browser version.",
 		breadcrumbLabel: "Puzzle House Guide",
 		beforeHeading: "Before you watch",
 		beforeBody:
@@ -210,6 +211,18 @@ const playUrl = toAbsoluteUrl(playPath);
 const ogLocale = localeToOgLocale(locale);
 const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 const guideSchema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "HowTo",
+		name: copy.title,
+		description: copy.description,
+		step: houseAnswers.map((row, index) => ({
+			"@type": "HowToStep",
+			position: index + 1,
+			name: row.puzzle[locale],
+			text: row.answer,
+		})),
+	},
 	{
 		"@context": "https://schema.org",
 		"@type": "VideoObject",

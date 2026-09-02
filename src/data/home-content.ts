@@ -447,6 +447,14 @@ export const homeContent: Record<Locale, HomeContent> = {
 				question: 'How long does it take to complete HER TREES?',
 				answer: 'HER TREES : First Puzzle takes about 1 hour. THE PUZZLE HOUSE takes about 1 hour. PUZZLE DREAM takes 1.5-3 hours with 40+ puzzles.',
 			},
+			{
+				question: 'Where can I play Her Trees Puzzle Dream online?',
+				answer: 'Play Her Trees Puzzle Dream free in the browser on this homepage. No download. The dedicated play page is /play/puzzle-dream/ and the keypad answers are on /play/puzzle-dream/guide/.',
+			},
+			{
+				question: 'Is there a Her Trees Puzzle Dream Android app?',
+				answer: 'No official Android app. Play in your phone browser in landscape. Details: /play/puzzle-dream/android/.',
+			},
 		],
 		languageSwitchLabel: 'Language',
 	},
@@ -626,6 +634,10 @@ export const homeContent: Record<Locale, HomeContent> = {
 			{
 				question: 'تمام کردن HER TREES چقدر طول می‌کشد؟',
 				answer: 'HER TREES : First Puzzle حدود ۱ ساعت طول می‌کشد. THE PUZZLE HOUSE حدود ۱ ساعت. PUZZLE DREAM با بیش از ۴۰ پازل ۱.۵ تا ۳ ساعت.',
+			},
+			{
+				question: 'آیا Her Trees Puzzle Dream برای اندروید هست؟',
+				answer: 'نسخه رسمی اندروید نیست. در مرورگر گوشی و حالت افقی بازی کنید: /fa/play/puzzle-dream/android/',
 			},
 		],
 		languageSwitchLabel: 'زبان',
@@ -987,6 +999,10 @@ export const homeContent: Record<Locale, HomeContent> = {
 				question: 'Berapa lama waktu untuk menyelesaikan HER TREES?',
 				answer: 'HER TREES : First Puzzle membutuhkan waktu sekitar 1 jam. THE PUZZLE HOUSE sekitar 1 jam. PUZZLE DREAM 1,5-3 jam dengan 40+ puzzle.',
 			},
+			{
+				question: 'Apakah ada Her Trees Puzzle Dream Android?',
+				answer: 'Tidak ada aplikasi resmi. Main di browser HP mode landscape: /id/play/puzzle-dream/android/.',
+			},
 		],
 		languageSwitchLabel: 'Bahasa',
 	},
@@ -1346,6 +1362,10 @@ export const homeContent: Record<Locale, HomeContent> = {
 			{
 				question: 'Hoàn thành HER TREES mất bao lâu?',
 				answer: 'HER TREES : First Puzzle mất khoảng 1 giờ. THE PUZZLE HOUSE khoảng 1 giờ. PUZZLE DREAM 1,5-3 giờ với hơn 40 câu đố.',
+			},
+			{
+				question: 'Co Her Trees Puzzle Dream Android khong?',
+				answer: 'Khong co app chinh thuc. Choi tren trinh duyet dien thoai: /vi/play/puzzle-dream/android/.',
 			},
 		],
 		languageSwitchLabel: 'Ngôn ngữ',
