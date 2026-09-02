@@ -278,7 +278,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		guidePageDescription: 'Video walkthrough for Her Trees First Puzzle. Keypad answers for Her Trees Puzzle Dream and Puzzle House are on their own guide pages.',
 		headerIntro:
 			'An unusual puzzle game series where you solve mysteries by moving and combining objects inside strange, hand-drawn rooms.',
-		heroH1: 'Her Trees Puzzle Dream — Play Free in Your Browser',
+		heroH1: 'Her Trees Puzzle Dream — Play Free Online',
 		playHeading: 'Play HER TREES : PUZZLE DREAM Online',
 		playButton: 'Start Puzzle Dream',
 		guideButton: 'View Guide',

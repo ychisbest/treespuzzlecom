@@ -212,6 +212,12 @@ const homeHtml = read("index.html");
 if (homeHtml && !homeHtml.includes("/play/puzzle-dream/guide/")) {
 	failures.push("homepage missing dream guide href");
 }
+if (
+	homeHtml &&
+	!/<details class="faq-item"[\s\S]*?<a href="\/play\/puzzle-dream\//.test(homeHtml)
+) {
+	failures.push("homepage FAQ missing Dream play href");
+}
 
 const homeSchemaHtml = read("index.html");
 if (homeSchemaHtml && !/SearchAction/.test(homeSchemaHtml)) {
