@@ -34,17 +34,22 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const firstPuzzleEmbedUrl = "/her-trees-first-puzzle/index.html";
-const firstPuzzlePagePath = `${content.path}#play`;
+const puzzleDreamEmbedUrl =
+	"https://game.doritosscript.com/puzzle-dream/index.html";
+const firstPuzzlePagePath = "/her-trees-first-puzzle/";
 const puzzleHousePagePath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
 const puzzleDreamPagePath =
 	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const puzzleDreamGuidePath =
+	locale === "en"
+		? "/play/puzzle-dream/guide/"
+		: `/${locale}/play/puzzle-dream/guide/`;
 const treesHateYouPagePath = "/trees-hate-you/";
-const firstPuzzleDownloadUrl =
-	"https://game.doritosscript.com/HerTreesFirstPuzzle.zip";
-const shareImage = new URL(firstPuzzleImage.src, siteUrl).toString();
-const lastUpdated = "2026-03-18";
+const puzzleDreamDownloadUrl =
+	"https://game.doritosscript.com/HerTreesPuzzleDream.zip";
+const shareImage = new URL(puzzleDreamImage.src, siteUrl).toString();
+const lastUpdated = "2026-09-02";
 const gameImages = [
 	firstPuzzleImage,
 	puzzleHouseImage,
@@ -63,7 +68,7 @@ const localizedGames = content.games.map((game, index) => ({
 	image: gameImages[index],
 	href: gameHrefs[index],
 }));
-const relatedGames = localizedGames.filter((_, index) => index !== 0);
+const relatedGames = localizedGames.filter((_, index) => index !== 2);
 const guideNoteCopy: Record<
 	Locale,
 	{
@@ -125,6 +130,7 @@ const supportContent: Record<
 		morePlayHeading: string;
 		morePlayBody: string;
 		houseCta: string;
+		firstPuzzleCta: string;
 		dreamCta: string;
 	}
 > = {
@@ -145,8 +151,9 @@ const supportContent: Record<
 		contactBody: "用于纠错、版权沟通、页面问题反馈和站点行政联系。",
 		updatedLabel: "最近更新",
 		morePlayHeading: "接着在浏览器里玩",
-		morePlayBody: "这两部也能在本站直接玩，不用下载。",
+		morePlayBody: "First Puzzle 和 Puzzle House 也能在本站直接玩，不用下载。",
 		houseCta: "打开 Puzzle House",
+		firstPuzzleCta: "打开 First Puzzle",
 		dreamCta: "打开 Puzzle Dream",
 	},
 		en: {
@@ -170,8 +177,9 @@ const supportContent: Record<
 			"Use the site contact page for corrections, rights requests, or technical issues.",
 		updatedLabel: "Last updated",
 		morePlayHeading: "Also play in your browser",
-		morePlayBody: "Puzzle House and Puzzle Dream run here with no download.",
+		morePlayBody: "First Puzzle and Puzzle House run here with no download.",
 		houseCta: "Play Puzzle House",
+		firstPuzzleCta: "Play First Puzzle",
 		dreamCta: "Play Puzzle Dream",
 	},
 		fa: {
@@ -191,8 +199,9 @@ const supportContent: Record<
 		contactBody: "از صفحه تماس سایت برای اصلاحات، درخواست‌های حقوقی یا مشکلات فنی استفاده کنید.",
 		updatedLabel: "آخرین به‌روزرسانی",
 		morePlayHeading: "همین‌جا در مرورگر بازی کنید",
-		morePlayBody: "Puzzle House و Puzzle Dream هم بدون دانلود در این سایت اجرا می‌شوند.",
+		morePlayBody: "First Puzzle و Puzzle House هم بدون دانلود در این سایت اجرا می‌شوند.",
 		houseCta: "باز کردن Puzzle House",
+		firstPuzzleCta: "باز کردن First Puzzle",
 		dreamCta: "باز کردن Puzzle Dream",
 	},
 		fr: {
@@ -212,8 +221,9 @@ const supportContent: Record<
 		contactBody: "Utilisez la page de contact du site pour les corrections, les demandes de droits ou les problèmes techniques.",
 		updatedLabel: "Dernière mise à jour",
 		morePlayHeading: "Jouez aussi dans le navigateur",
-		morePlayBody: "Puzzle House et Puzzle Dream se lancent ici, sans téléchargement.",
+		morePlayBody: "First Puzzle et Puzzle House se lancent ici, sans téléchargement.",
 		houseCta: "Ouvrir Puzzle House",
+		firstPuzzleCta: "Ouvrir First Puzzle",
 		dreamCta: "Ouvrir Puzzle Dream",
 	},
 		id: {
@@ -233,8 +243,9 @@ const supportContent: Record<
 		contactBody: "Gunakan halaman kontak situs untuk koreksi, permintaan hak, atau masalah teknis.",
 		updatedLabel: "Terakhir diperbarui",
 		morePlayHeading: "Main juga di browser",
-		morePlayBody: "Puzzle House dan Puzzle Dream bisa dimainkan di sini tanpa unduhan.",
+		morePlayBody: "First Puzzle dan Puzzle House bisa dimainkan di sini tanpa unduhan.",
 		houseCta: "Buka Puzzle House",
+		firstPuzzleCta: "Buka First Puzzle",
 		dreamCta: "Buka Puzzle Dream",
 	},
 		ja: {
@@ -254,8 +265,9 @@ const supportContent: Record<
 		contactBody: "誤記修正、権利対応、技術的な問題の連絡窓口です。",
 		updatedLabel: "最終更新",
 		morePlayHeading: "ブラウザでも続けて遊ぶ",
-		morePlayBody: "Puzzle House と Puzzle Dream もこのサイトでダウンロードなしで遊べます。",
+		morePlayBody: "First Puzzle と Puzzle House もこのサイトでダウンロードなしで遊べます。",
 		houseCta: "Puzzle House を開く",
+		firstPuzzleCta: "First Puzzle を開く",
 		dreamCta: "Puzzle Dream を開く",
 	},
 		vi: {
@@ -275,8 +287,9 @@ const supportContent: Record<
 		contactBody: "Dung cho yeu cau chinh sua, van de ban quyen, hoac loi ky thuat.",
 		updatedLabel: "Cap nhat",
 		morePlayHeading: "Choi tiep tren trinh duyet",
-		morePlayBody: "Puzzle House va Puzzle Dream cung choi duoc o day, khong can tai.",
+		morePlayBody: "First Puzzle va Puzzle House cung choi duoc o day, khong can tai.",
 		houseCta: "Mo Puzzle House",
+		firstPuzzleCta: "Mo First Puzzle",
 		dreamCta: "Mo Puzzle Dream",
 	},
 };
@@ -335,6 +348,18 @@ const homeSchema = JSON.stringify([
 		email: contactEmail,
 		description:
 			"Independent editorial website covering the HER TREES puzzle series.",
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoGame",
+		name: "HER TREES : PUZZLE DREAM",
+		alternateName: "Her Trees Puzzle Dream",
+		url: canonicalUrl,
+		description: content.pageDescription,
+		image: shareImage,
+		gamePlatform: "Web Browser",
+		playMode: "SinglePlayer",
+		genre: ["Puzzle", "Point-and-click", "Adventure"],
 	},
 	{
 		"@context": "https://schema.org",
@@ -441,20 +466,20 @@ const homeSchema = JSON.stringify([
 								class="embed-launch"
 								data-game-launch
 								data-zoom-surface
-								data-embed-src={firstPuzzleEmbedUrl}
-								data-target-id="her-trees-first-puzzle"
-								aria-controls="her-trees-first-puzzle"
-								style={`--launch-image: url(${firstPuzzleImage.src})`}
+								data-embed-src={puzzleDreamEmbedUrl}
+								data-target-id="her-trees-puzzle-dream"
+								aria-controls="her-trees-puzzle-dream"
+								style={`--launch-image: url(${puzzleDreamImage.src})`}
 							>
 								<span class="embed-launch-image" aria-hidden="true"></span>
 								<span class="embed-launch-overlay" aria-hidden="true"></span>
 								<span class="embed-launch-content">
-									<span class="embed-kicker">HER TREES : First Puzzle</span>
+									<span class="embed-kicker">HER TREES : Puzzle Dream</span>
 									<strong>{content.playButton}</strong>
 								</span>
 							</button>
 							<iframe
-								id="her-trees-first-puzzle"
+								id="her-trees-puzzle-dream"
 								class="game-embed"
 								title={content.iframeTitle}
 								loading="lazy"
@@ -471,8 +496,8 @@ const homeSchema = JSON.stringify([
 									type="button"
 									class="fullscreen-button"
 									data-game-fullscreen
-									data-target-id="her-trees-first-puzzle"
-									aria-controls="her-trees-first-puzzle"
+									data-target-id="her-trees-puzzle-dream"
+									aria-controls="her-trees-puzzle-dream"
 								>
 									<span class="fullscreen-button-icon" aria-hidden="true">
 										<svg viewBox="0 0 24 24">
@@ -494,7 +519,7 @@ const homeSchema = JSON.stringify([
 						<div class="guide-card">
 							<p class="guide-note">
 								{guideNoteCopy[locale].prefix}
-								<a href={content.guidePath} class="guide-inline-link">
+								<a href={puzzleDreamGuidePath} class="guide-inline-link">
 									{guideNoteCopy[locale].linkLabel}
 								</a>
 							</p>
@@ -502,7 +527,7 @@ const homeSchema = JSON.stringify([
 						<div class="download-card">
 							<p class="download-note">
 								<a
-									href={firstPuzzleDownloadUrl}
+									href={puzzleDreamDownloadUrl}
 									class="download-link download-button"
 									target="_blank"
 									rel="noreferrer"
@@ -534,13 +559,13 @@ const homeSchema = JSON.stringify([
 					<h2>{support.morePlayHeading}</h2>
 					<p class="section-intro">{support.morePlayBody}</p>
 					<div class="more-play-grid">
+						<a class="more-play-card" href={firstPuzzlePagePath}>
+							<strong>{support.firstPuzzleCta}</strong>
+							<span>HER TREES : First Puzzle</span>
+						</a>
 						<a class="more-play-card" href={puzzleHousePagePath}>
 							<strong>{support.houseCta}</strong>
 							<span>HER TREES : THE PUZZLE HOUSE</span>
-						</a>
-						<a class="more-play-card" href={puzzleDreamPagePath}>
-							<strong>{support.dreamCta}</strong>
-							<span>HER TREES : PUZZLE DREAM</span>
 						</a>
 					</div>
 				</section>
@@ -747,7 +772,7 @@ const homeSchema = JSON.stringify([
 					<div class="resource-grid">
 						<article class="resource-card">
 							<h3>
-								<a href={content.guidePath}>{support.guideTitle}</a>
+								<a href={puzzleDreamGuidePath}>{support.guideTitle}</a>
 							</h3>
 							<p>{support.guideBody}</p>
 						</article>

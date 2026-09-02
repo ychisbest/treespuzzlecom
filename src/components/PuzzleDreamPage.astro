@@ -111,7 +111,7 @@ const pageCopy: Record<
 		browserHint: "浏览器免费版 · 点开始即可，不用注册",
 		overviewHeading: "这一页提供什么",
 		overviewBody:
-			"相较于首页嵌入的 First Puzzle，这里对应的是系列第三作的独立入口，适合想直接体验更完整谜题量和更长流程的玩家。",
+			"首页也直接玩 Puzzle Dream。这一页是系列第三作的独立入口，适合想单独打开更完整谜题量和更长流程的玩家。",
 		tipsHeading: "游玩提示",
 		tips: [
 			"首次进入会按需加载 WebGL 资源，开始前可能需要短暂等待。",
@@ -148,7 +148,7 @@ const pageCopy: Record<
 		browserHint: "Free browser version · click Start, no account",
 		overviewHeading: "What this page is for",
 		overviewBody:
-			"This page is the free browser version of her trees puzzle dream, also searched as HER TREES : PUZZLE DREAM and her trees: puzzle dream. Unlike the homepage embed for First Puzzle, this is the dedicated entry for the third game, with 40+ hand-drawn puzzles and no download.",
+			"This page is the free browser version of her trees puzzle dream, also searched as HER TREES : PUZZLE DREAM and her trees: puzzle dream. The homepage also plays Puzzle Dream. This dedicated URL keeps the third game as its own indexed play page, with 40+ hand-drawn puzzles and no download.",
 		tipsHeading: "Play notes",
 		tips: [
 			"The first launch may take a moment while the WebGL files load.",
@@ -442,10 +442,25 @@ const puzzleDreamSchema = JSON.stringify([
 		"@context": "https://schema.org",
 		"@type": "VideoGame",
 		name: "HER TREES : PUZZLE DREAM",
+		alternateName: ["Her Trees Puzzle Dream", "her trees puzzle dream"],
 		url: canonicalUrl,
 		description: copy.description,
 		image: shareImage,
 		gamePlatform: "Web Browser",
+		playMode: "SinglePlayer",
+		genre: ["Puzzle", "Point-and-click", "Adventure"],
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: copy.faqs.map((faq) => ({
+			"@type": "Question",
+			name: faq.question,
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: faq.answer,
+			},
+		})),
 	},
 	{
 		"@context": "https://schema.org",
@@ -536,7 +551,7 @@ const puzzleDreamSchema = JSON.stringify([
 				<section class="hero-section">
 					<div class="feature-panel">
 						<div class="panel-header">
-							<h2>{copy.playHeading}</h2>
+							<h1>{copy.playHeading}</h1>
 						</div>
 						<div class="feature-box game-embed-shell">
 							<button

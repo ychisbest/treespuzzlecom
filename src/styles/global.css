@@ -703,6 +703,16 @@ a:hover {
 	min-width: 760px;
 }
 
+.answer-table {
+	min-width: 0;
+}
+
+.answer-code {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	letter-spacing: 0.08em;
+	font-weight: 600;
+}
+
 .comparison-table th,
 .comparison-table td {
 	padding: 16px 18px;

@@ -2,6 +2,7 @@
 import puzzleHouseImage from "../assets/puzzle_house.jpg";
 import "../styles/global.css";
 import AdUnit from "./AdUnit.astro";
+import AnswerTable from "./AnswerTable.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
 import {
@@ -309,6 +310,8 @@ const guideSchema = JSON.stringify([
 					<h1>{copy.title}</h1>
 					<p>{copy.description}</p>
 				</section>
+
+				<AnswerTable locale={locale} game="house" />
 
 				<section class="guide-frame-shell">
 					<iframe

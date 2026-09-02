@@ -442,10 +442,25 @@ const puzzleHouseSchema = JSON.stringify([
 		"@context": "https://schema.org",
 		"@type": "VideoGame",
 		name: "HER TREES : THE PUZZLE HOUSE",
+		alternateName: ["Her Trees The Puzzle House", "her trees the puzzle house"],
 		url: canonicalUrl,
 		description: copy.description,
 		image: shareImage,
 		gamePlatform: "Web Browser",
+		playMode: "SinglePlayer",
+		genre: ["Puzzle", "Point-and-click", "Adventure"],
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: copy.faqs.map((faq) => ({
+			"@type": "Question",
+			name: faq.question,
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: faq.answer,
+			},
+		})),
 	},
 	{
 		"@context": "https://schema.org",
@@ -536,7 +551,7 @@ const puzzleHouseSchema = JSON.stringify([
 				<section class="hero-section">
 					<div class="feature-panel">
 						<div class="panel-header">
-							<h2>{copy.playHeading}</h2>
+							<h1>{copy.playHeading}</h1>
 						</div>
 						<div class="feature-box game-embed-shell">
 							<button

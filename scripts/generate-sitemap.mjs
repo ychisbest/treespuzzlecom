@@ -35,6 +35,42 @@ const localeAlternates = {
 		ja: "/ja/analysis/puzzle-design/",
 		vi: "/vi/analysis/puzzle-design/",
 	},
+	puzzleDream: {
+		en: "/play/puzzle-dream/",
+		"zh-cn": "/zh-cn/play/puzzle-dream/",
+		fa: "/fa/play/puzzle-dream/",
+		fr: "/fr/play/puzzle-dream/",
+		id: "/id/play/puzzle-dream/",
+		ja: "/ja/play/puzzle-dream/",
+		vi: "/vi/play/puzzle-dream/",
+	},
+	puzzleHouse: {
+		en: "/play/puzzle-house/",
+		"zh-cn": "/zh-cn/play/puzzle-house/",
+		fa: "/fa/play/puzzle-house/",
+		fr: "/fr/play/puzzle-house/",
+		id: "/id/play/puzzle-house/",
+		ja: "/ja/play/puzzle-house/",
+		vi: "/vi/play/puzzle-house/",
+	},
+	puzzleDreamGuide: {
+		en: "/play/puzzle-dream/guide/",
+		"zh-cn": "/zh-cn/play/puzzle-dream/guide/",
+		fa: "/fa/play/puzzle-dream/guide/",
+		fr: "/fr/play/puzzle-dream/guide/",
+		id: "/id/play/puzzle-dream/guide/",
+		ja: "/ja/play/puzzle-dream/guide/",
+		vi: "/vi/play/puzzle-dream/guide/",
+	},
+	puzzleHouseGuide: {
+		en: "/play/puzzle-house/guide/",
+		"zh-cn": "/zh-cn/play/puzzle-house/guide/",
+		fa: "/fa/play/puzzle-house/guide/",
+		fr: "/fr/play/puzzle-house/guide/",
+		id: "/id/play/puzzle-house/guide/",
+		ja: "/ja/play/puzzle-house/guide/",
+		vi: "/vi/play/puzzle-house/guide/",
+	},
 };
 
 const standaloneUrls = [

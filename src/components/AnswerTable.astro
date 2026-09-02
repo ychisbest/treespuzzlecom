@@ -1,0 +1,47 @@
+---
+import type { Locale } from "../data/home-content";
+import {
+	answerTableCopy,
+	dreamAnswers,
+	houseAnswers,
+	type AnswerRow,
+} from "../data/guide-answers";
+
+type Props = {
+	locale: Locale;
+	game: "house" | "dream";
+};
+
+const { locale, game } = Astro.props;
+const copy = answerTableCopy[locale];
+const rows: AnswerRow[] = game === "house" ? houseAnswers : dreamAnswers;
+---
+
+<section class="content-section" id="answers">
+	<h2>{copy.heading}</h2>
+	<p class="section-intro">{copy.intro}</p>
+	<div class="comparison-table-shell">
+		<table class="comparison-table answer-table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>{copy.puzzle}</th>
+					<th>{copy.answer}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{
+					rows.map((row) => (
+						<tr>
+							<td>{row.id}</td>
+							<td>{row.puzzle[locale]}</td>
+							<td>
+								<strong class="answer-code">{row.answer}</strong>
+							</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</div>
+</section>
