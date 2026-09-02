@@ -35,6 +35,15 @@ const localeAlternates = {
 		ja: "/ja/analysis/puzzle-design/",
 		vi: "/vi/analysis/puzzle-design/",
 	},
+	firstPuzzle: {
+		en: "/play/first-puzzle/",
+		"zh-cn": "/zh-cn/play/first-puzzle/",
+		fa: "/fa/play/first-puzzle/",
+		fr: "/fr/play/first-puzzle/",
+		id: "/id/play/first-puzzle/",
+		ja: "/ja/play/first-puzzle/",
+		vi: "/vi/play/first-puzzle/",
+	},
 	puzzleDream: {
 		en: "/play/puzzle-dream/",
 		"zh-cn": "/zh-cn/play/puzzle-dream/",

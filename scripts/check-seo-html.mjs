@@ -180,6 +180,27 @@ if (androidHtml && !/android/i.test(h1Of(androidHtml))) {
 	failures.push("android page h1 missing Android");
 }
 
+const firstPuzzleHtml = read("play/first-puzzle/index.html");
+if (firstPuzzleHtml) {
+	if (countH1(firstPuzzleHtml) !== 1) {
+		failures.push("first-puzzle: expected 1 h1");
+	}
+	if (!/first puzzle/i.test(h1Of(firstPuzzleHtml))) {
+		failures.push(`first-puzzle h1: ${h1Of(firstPuzzleHtml)}`);
+	}
+	if (!hasVideoGame(firstPuzzleHtml)) {
+		failures.push("first-puzzle: missing VideoGame");
+	}
+	if (!firstPuzzleHtml.includes("/her-trees-first-puzzle/index.html")) {
+		failures.push("first-puzzle: missing local First Puzzle embed");
+	}
+}
+
+const homeHtml = read("index.html");
+if (homeHtml && !homeHtml.includes("/play/puzzle-dream/guide/")) {
+	failures.push("homepage missing dream guide href");
+}
+
 if (failures.length) {
 	console.error("SEO HTML check failed:");
 	for (const failure of failures) console.error(`- ${failure}`);

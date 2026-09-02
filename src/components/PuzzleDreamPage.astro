@@ -42,7 +42,8 @@ const androidPath =
 	locale === "en"
 		? "/play/puzzle-dream/android/"
 		: `/${locale}/play/puzzle-dream/android/`;
-const firstPuzzlePagePath = `${content.path}#play`;
+const firstPuzzlePagePath =
+	locale === "en" ? "/play/first-puzzle/" : `/${locale}/play/first-puzzle/`;
 const puzzleHousePath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
 const treesHateYouPath = "/trees-hate-you/";

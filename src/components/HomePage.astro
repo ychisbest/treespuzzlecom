@@ -36,7 +36,8 @@ const { locale } = Astro.props;
 const content = homeContent[locale];
 const puzzleDreamEmbedUrl =
 	"https://game.doritosscript.com/puzzle-dream/index.html";
-const firstPuzzlePagePath = "/her-trees-first-puzzle/";
+const firstPuzzlePagePath =
+	locale === "en" ? "/play/first-puzzle/" : `/${locale}/play/first-puzzle/`;
 const puzzleHousePagePath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
 const puzzleDreamPagePath =
@@ -810,6 +811,17 @@ const homeSchema = JSON.stringify([
 
 				<section class="content-section">
 					<h2>{content.faqHeading}</h2>
+					<p class="section-intro">
+						<a href={puzzleDreamPagePath}>Her Trees Puzzle Dream</a>
+						{" · "}
+						<a href={puzzleDreamGuidePath}>Dream walkthrough</a>
+						{" · "}
+						<a href={puzzleHousePagePath}>Puzzle House</a>
+						{" · "}
+						<a href={firstPuzzlePagePath}>First Puzzle</a>
+						{" · "}
+						<a href={locale === "en" ? "/play/puzzle-dream/android/" : `/${locale}/play/puzzle-dream/android/`}>Android</a>
+					</p>
 					<div class="faq-list">
 						{
 							content.faqs.map((faq) => (

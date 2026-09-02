@@ -1,0 +1,248 @@
+---
+import firstPuzzleImage from "../assets/first_puzzle.png";
+import "../styles/global.css";
+import AdUnit from "./AdUnit.astro";
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
+import { homeContent, type Locale } from "../data/home-content";
+import { adsensePublisherId, siteUrl } from "../data/site-shell";
+import {
+	buildAlternateLinks,
+	buildOgLocaleAlternates,
+	localeToHreflang,
+	localeToOgLocale,
+	toAbsoluteUrl,
+} from "../data/seo";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const pagePath =
+	locale === "en" ? "/play/first-puzzle/" : `/${locale}/play/first-puzzle/`;
+const guidePath = content.guidePath;
+const dreamPath =
+	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const housePath =
+	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
+const embedUrl = "/her-trees-first-puzzle/index.html";
+const shareImage = new URL(firstPuzzleImage.src, siteUrl).toString();
+
+const copyByLocale: Record<
+	Locale,
+	{ title: string; description: string; h1: string; intro: string; play: string }
+> = {
+	en: {
+		title: "Her Trees First Puzzle - Play Free in Browser",
+		description:
+			"Play Her Trees First Puzzle free in your browser. Short black-and-white room puzzle, no download. Then continue to Puzzle House and Her Trees Puzzle Dream.",
+		h1: "Play Her Trees First Puzzle",
+		intro:
+			"First Puzzle is the shortest HER TREES entry. Move and combine objects in one room, then enter letters on the A–I grid. The homepage now plays Puzzle Dream; this page keeps the first game as its own URL.",
+		play: "Start First Puzzle",
+	},
+	"zh-cn": {
+		title: "Her Trees First Puzzle - 浏览器免费玩",
+		description:
+			"免费在浏览器玩 Her Trees First Puzzle。最短的黑白房间解谜，不用下载。玩完可继续 Puzzle House 和 Puzzle Dream。",
+		h1: "游玩 Her Trees First Puzzle",
+		intro:
+			"First Puzzle 是系列最短的一作。首页现在直接玩 Puzzle Dream；这一页保留第一作的独立入口。",
+		play: "开始 First Puzzle",
+	},
+	fa: {
+		title: "Her Trees First Puzzle - بازی رایگان در مرورگر",
+		description:
+			"Her Trees First Puzzle را رایگان در مرورگر بازی کنید. پازل کوتاه سیاه‌وسفید، بدون دانلود.",
+		h1: "بازی Her Trees First Puzzle",
+		intro:
+			"First Puzzle کوتاه‌ترین اثر مجموعه است. صفحه اصلی اکنون Puzzle Dream را پخش می‌کند؛ این صفحه ورودی مستقل بازی اول است.",
+		play: "شروع First Puzzle",
+	},
+	fr: {
+		title: "Her Trees First Puzzle - Jouer gratuitement",
+		description:
+			"Jouez à Her Trees First Puzzle dans le navigateur, sans téléchargement.",
+		h1: "Jouer à Her Trees First Puzzle",
+		intro:
+			"First Puzzle est l’entrée la plus courte. L’accueil joue Puzzle Dream ; cette page garde le premier jeu.",
+		play: "Lancer First Puzzle",
+	},
+	id: {
+		title: "Her Trees First Puzzle - Main Gratis di Browser",
+		description:
+			"Mainkan Her Trees First Puzzle gratis di browser. Puzzle ruangan pendek, tanpa unduhan.",
+		h1: "Mainkan Her Trees First Puzzle",
+		intro:
+			"First Puzzle adalah entri terpendek. Beranda sekarang memainkan Puzzle Dream; halaman ini tetap untuk game pertama.",
+		play: "Mulai First Puzzle",
+	},
+	ja: {
+		title: "Her Trees First Puzzle - ブラウザで無料プレイ",
+		description:
+			"Her Trees First Puzzle をブラウザで無料プレイ。短い部屋パズル、ダウンロード不要。",
+		h1: "Her Trees First Puzzle を遊ぶ",
+		intro:
+			"First Puzzle は最短の一作です。トップは Puzzle Dream、このページが第1作の専用入口です。",
+		play: "First Puzzle を始める",
+	},
+	vi: {
+		title: "Her Trees First Puzzle - Choi mien phi tren trinh duyet",
+		description:
+			"Choi Her Trees First Puzzle mien phi tren trinh duyet. Cau do phong ngan, khong can tai.",
+		h1: "Choi Her Trees First Puzzle",
+		intro:
+			"First Puzzle la phan ngan nhat. Trang chu choi Puzzle Dream; trang nay giu phan dau nhu URL rieng.",
+		play: "Bat dau First Puzzle",
+	},
+};
+
+const copy = copyByLocale[locale];
+const languageLinks = buildAlternateLinks(
+	{
+		en: "/play/first-puzzle/",
+		"zh-cn": "/zh-cn/play/first-puzzle/",
+		fa: "/fa/play/first-puzzle/",
+		fr: "/fr/play/first-puzzle/",
+		id: "/id/play/first-puzzle/",
+		ja: "/ja/play/first-puzzle/",
+		vi: "/vi/play/first-puzzle/",
+	},
+	locale,
+);
+const canonicalUrl = toAbsoluteUrl(pagePath);
+const schema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "VideoGame",
+		name: "HER TREES : First Puzzle",
+		alternateName: ["Her Trees First Puzzle", "her trees first puzzle"],
+		url: canonicalUrl,
+		description: copy.description,
+		image: shareImage,
+		gamePlatform: "Web Browser",
+		playMode: "SinglePlayer",
+		genre: ["Puzzle", "Point-and-click"],
+	},
+]);
+---
+
+<html lang={content.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{copy.title}</title>
+		<meta name="description" content={copy.description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={copy.title} />
+		<meta property="og:description" content={copy.description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={shareImage} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={localeToOgLocale(locale)} />
+		{
+			buildOgLocaleAlternates(locale).map((item) => (
+				<meta property="og:locale:alternate" content={item} />
+			))
+		}
+		{
+			languageLinks.map((link) => (
+				<link
+					rel="alternate"
+					hreflang={localeToHreflang(link.locale)}
+					href={toAbsoluteUrl(link.href)}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/play/first-puzzle/")} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
+		<script
+			async
+			src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisherId}`}
+			crossorigin="anonymous"
+		></script>
+		<script type="application/ld+json" set:html={schema}></script>
+	</head>
+	<body>
+		<div class="container-shell">
+			<SiteHeader
+				locale={locale}
+				currentPath={pagePath}
+				tagline={copy.description}
+				languageSwitchLabel={content.languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
+			<main>
+				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
+					<a href={content.path}>{content.backHomeLabel}</a>
+					<span>/</span>
+					<span aria-current="page">First Puzzle</span>
+				</nav>
+				<section class="hero-section">
+					<div class="feature-panel">
+						<div class="panel-header">
+							<h1>{copy.h1}</h1>
+						</div>
+						<div class="feature-box game-embed-shell">
+							<button
+								type="button"
+								class="embed-launch"
+								data-game-launch
+								data-zoom-surface
+								data-embed-src={embedUrl}
+								data-target-id="first-puzzle-game"
+								aria-controls="first-puzzle-game"
+								style={`--launch-image: url(${firstPuzzleImage.src})`}
+							>
+								<span class="embed-launch-image" aria-hidden="true"></span>
+								<span class="embed-launch-overlay" aria-hidden="true"></span>
+								<span class="embed-launch-content">
+									<span class="embed-kicker">HER TREES : First Puzzle</span>
+									<strong>{copy.play}</strong>
+								</span>
+							</button>
+							<iframe
+								id="first-puzzle-game"
+								class="game-embed"
+								title={copy.h1}
+								loading="lazy"
+								allow="fullscreen; autoplay"
+								referrerpolicy="strict-origin-when-cross-origin"
+							></iframe>
+						</div>
+						<p class="game-intro">{copy.intro}</p>
+						<p>
+							<a href={guidePath}>First Puzzle walkthrough</a>
+							{" · "}
+							<a href={dreamPath}>Her Trees Puzzle Dream</a>
+							{" · "}
+							<a href={housePath}>Her Trees The Puzzle House</a>
+						</p>
+						<AdUnit />
+					</div>
+				</section>
+			</main>
+			<SiteFooter locale={locale} />
+		</div>
+		<script is:inline>
+			document.querySelectorAll("[data-game-launch]").forEach((button) => {
+				button.addEventListener("click", () => {
+					const targetId = button.getAttribute("data-target-id");
+					const src = button.getAttribute("data-embed-src");
+					const iframe = targetId ? document.getElementById(targetId) : null;
+					if (!src || !(iframe instanceof HTMLIFrameElement)) return;
+					if (iframe.dataset.loaded !== "true") {
+						iframe.src = src;
+						iframe.dataset.loaded = "true";
+					}
+					iframe.classList.add("is-visible");
+					button.classList.add("is-hidden");
+				});
+			});
+		</script>
+	</body>
+</html>
