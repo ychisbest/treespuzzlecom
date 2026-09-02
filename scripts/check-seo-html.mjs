@@ -213,6 +213,16 @@ if (homeHtml && !homeHtml.includes("/play/puzzle-dream/guide/")) {
 	failures.push("homepage missing dream guide href");
 }
 
+const aboutHtml = read("about/index.html");
+if (aboutHtml) {
+	if (!aboutHtml.includes("/play/puzzle-dream/")) {
+		failures.push("about page missing Dream play href");
+	}
+	if (!aboutHtml.includes("/play/puzzle-dream/guide/")) {
+		failures.push("about page missing Dream guide href");
+	}
+}
+
 const analysisHtml = read("analysis/puzzle-design/index.html");
 if (analysisHtml) {
 	if (!/href="\/play\/puzzle-dream\/"/.test(analysisHtml)) {

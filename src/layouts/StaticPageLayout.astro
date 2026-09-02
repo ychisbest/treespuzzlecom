@@ -48,6 +48,14 @@ const {
 
 const shell = shellContent[locale];
 const canonicalUrl = toAbsoluteUrl(canonicalPath);
+const prefix = locale === "en" ? "" : `/${locale}`;
+const relatedPlay = [
+	{ href: `${prefix}/play/puzzle-dream/`, label: "Her Trees Puzzle Dream" },
+	{ href: `${prefix}/play/puzzle-dream/guide/`, label: "Dream walkthrough" },
+	{ href: `${prefix}/play/puzzle-house/`, label: "Puzzle House" },
+	{ href: `${prefix}/play/puzzle-house/guide/`, label: "House answers" },
+	{ href: `${prefix}/play/first-puzzle/`, label: "First Puzzle" },
+];
 const serializedSchema = schema
 	? JSON.stringify(Array.isArray(schema) ? schema : [schema])
 	: "";
@@ -132,6 +140,16 @@ const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 					<div class="article-prose">
 						<slot />
 					</div>
+					<nav class="more-play-grid" aria-label="Play Her Trees">
+						{
+							relatedPlay.map((item) => (
+								<a class="more-play-card" href={item.href}>
+									<strong>{item.label}</strong>
+									<span>Play or open answers</span>
+								</a>
+							))
+						}
+					</nav>
 				</article>
 			</main>
 
