@@ -25,6 +25,10 @@ const pagePath =
 const guidePath = content.guidePath;
 const dreamPath =
 	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const dreamGuidePath =
+	locale === "en"
+		? "/play/puzzle-dream/guide/"
+		: `/${locale}/play/puzzle-dream/guide/`;
 const housePath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
 const embedUrl = "/her-trees-first-puzzle/index.html";
@@ -219,6 +223,8 @@ const schema = JSON.stringify([
 							<a href={guidePath}>First Puzzle walkthrough</a>
 							{" · "}
 							<a href={dreamPath}>Her Trees Puzzle Dream</a>
+							{" · "}
+							<a href={dreamGuidePath}>Her Trees Puzzle Dream walkthrough</a>
 							{" · "}
 							<a href={housePath}>Her Trees The Puzzle House</a>
 						</p>

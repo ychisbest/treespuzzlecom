@@ -466,7 +466,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		pageTitle: 'Her Trees Puzzle Dream - بازی رایگان در مرورگر (بدون دانلود)',
 		pageDescription:
 			'Her Trees Puzzle Dream را رایگان در مرورگر بازی کنید — بدون دانلود. بیش از ۴۰ پازل، جدول رمز، و بازی در مرورگر موبایل. Puzzle House و First Puzzle هم اینجاست.',
-		guidePageTitle: 'ویدیوی راهنمای HER TREES : First Puzzle',
+		guidePageTitle: 'Her Trees First Puzzle Walkthrough',
 		guidePageDescription: 'این صفحه فقط راهنمای ویدیویی HER TREES : First Puzzle است. برای Puzzle Dream و Puzzle House صفحات راهنمای جداگانه را باز کنید.',
 		headerIntro:
 			'مجموعه‌ای از بازی‌های پازلی غیرمعمول که در آن معماها را با جابجایی و ترکیب اشیاء در اتاق‌های عجیب حل می‌کنید.',
@@ -650,7 +650,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		pageTitle: 'Her Trees Puzzle Dream - Jouer gratuitement (sans téléchargement)',
 		pageDescription:
 			'Jouez à Her Trees Puzzle Dream gratuitement dans le navigateur — sans téléchargement. 40+ puzzles, walkthrough clavier, et version mobile navigateur. Puzzle House et First Puzzle aussi.',
-		guidePageTitle: 'HER TREES : First Puzzle - Guide Vidéo',
+		guidePageTitle: 'Her Trees First Puzzle Walkthrough',
 		guidePageDescription: 'Cette page couvre uniquement la vidéo de HER TREES : First Puzzle. Pour Puzzle Dream et Puzzle House, ouvrez leurs pages de guide.',
 		headerIntro:
 			'Une série de jeux de puzzle inhabituelle où vous résolvez des mystères en déplaçant et combinant des objets dans des pièces étranges dessinées à la main.',
@@ -830,7 +830,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		pageTitle: 'Her Trees Puzzle Dream - Main Gratis di Browser (Tanpa Unduh)',
 		pageDescription:
 			'Mainkan Her Trees Puzzle Dream gratis di browser — tanpa unduhan. 40+ puzzle, tabel kode keypad, dan mode landscape di HP. Puzzle House dan First Puzzle juga di sini.',
-		guidePageTitle: 'Video Panduan HER TREES : First Puzzle',
+		guidePageTitle: 'Her Trees First Puzzle Walkthrough',
 		guidePageDescription: 'Halaman ini hanya video walkthrough HER TREES : First Puzzle. Untuk Puzzle Dream dan Puzzle House, buka halaman panduan masing-masing.',
 		headerIntro:
 			'Seri game puzzle unik di mana Anda memecahkan misteri dengan memindahkan dan menggabungkan objek di dalam ruangan aneh.',
@@ -1014,7 +1014,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		pageTitle: 'Her Trees Puzzle Dream - ブラウザで無料プレイ（ダウンロード不要）',
 		pageDescription:
 			'Her Trees Puzzle Dream をブラウザで無料プレイ。ダウンロード不要。40以上のパズル、キーパッド攻略、スマホ横画面にも対応。Puzzle House と First Puzzle もあります。',
-		guidePageTitle: 'HER TREES : First Puzzle 攻略動画',
+		guidePageTitle: 'Her Trees First Puzzle Walkthrough',
 		guidePageDescription: 'このページは HER TREES : First Puzzle の攻略動画だけです。Puzzle Dream と Puzzle House はそれぞれの攻略ページを開いてください。',
 		headerIntro:
 			'物を動かして組み合わせながら謎を解いていく、独特なパズルゲームシリーズです。不思議な部屋に隠された仕組みを見つけてください。',
@@ -1194,7 +1194,7 @@ export const homeContent: Record<Locale, HomeContent> = {
 		pageTitle: 'Her Trees Puzzle Dream - Choi mien phi tren trinh duyet',
 		pageDescription:
 			'Choi Her Trees Puzzle Dream mien phi tren trinh duyet — khong can tai. Hon 40 cau do, bang ma keypad, choi tren dien thoai. Puzzle House va First Puzzle cung o day.',
-		guidePageTitle: 'Video huong dan HER TREES : First Puzzle',
+		guidePageTitle: 'Her Trees First Puzzle Walkthrough',
 		guidePageDescription: 'Trang nay chi la video HER TREES : First Puzzle. Puzzle Dream va Puzzle House co trang huong dan rieng.',
 		headerIntro:
 			'Đây là một series game giải đố khác lạ, nơi bạn giải mật mã bằng cách di chuyển và kết hợp đồ vật trong những căn phòng kỳ quái.',

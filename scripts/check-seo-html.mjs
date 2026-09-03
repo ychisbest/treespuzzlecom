@@ -220,6 +220,18 @@ if (firstPuzzleHtml) {
 	if (!firstPuzzleHtml.includes("/her-trees-first-puzzle/index.html")) {
 		failures.push("first-puzzle: missing local First Puzzle embed");
 	}
+	if (!firstPuzzleHtml.includes("/play/puzzle-dream/guide/")) {
+		failures.push("first-puzzle: missing Dream walkthrough href");
+	}
+}
+
+const faGuideTitle = titleOf(read("fa/guide/index.html"));
+if (faGuideTitle && !/^Her Trees First Puzzle/i.test(faGuideTitle)) {
+	failures.push(`fa first-puzzle guide title: ${faGuideTitle}`);
+}
+const idGuideTitle = titleOf(read("id/guide/index.html"));
+if (idGuideTitle && !/^Her Trees First Puzzle/i.test(idGuideTitle)) {
+	failures.push(`id first-puzzle guide title: ${idGuideTitle}`);
 }
 
 const homeHtml = read("index.html");
