@@ -1,9 +1,46 @@
 ---
-const adScriptSrc =
-	"https://pl29101840.profitablecpmratenetwork.com/a8d5a3218c986bebe7c26991d605271c/invoke.js";
 ---
 
-<div class="ad-unit">
-	<script async="async" data-cfasync="false" src={adScriptSrc}></script>
-	<div id="container-a8d5a3218c986bebe7c26991d605271c"></div>
-</div>
+<aside class="ad-unit" data-ad-unit aria-label="Advertisement">
+	<div class="ad-unit-box"></div>
+</aside>
+<script is:inline>
+	(function () {
+		var root = document.currentScript && document.currentScript.previousElementSibling;
+		if (!root || !root.hasAttribute("data-ad-unit")) return;
+		if (window.__treesAdUnitLoaded) {
+			root.hidden = true;
+			root.style.display = "none";
+			return;
+		}
+		window.__treesAdUnitLoaded = true;
+		var box = root.querySelector(".ad-unit-box");
+		if (!box) return;
+		box.id = "container-a8d5a3218c986bebe7c26991d605271c";
+		var s = document.createElement("script");
+		s.async = true;
+		s.setAttribute("data-cfasync", "false");
+		s.src =
+			"https://pl29101840.profitablecpmratenetwork.com/a8d5a3218c986bebe7c26991d605271c/invoke.js";
+		root.appendChild(s);
+	})();
+</script>
+<style>
+	.ad-unit {
+		margin: 20px 0;
+		padding: 12px 0;
+		min-height: 120px;
+		width: 100%;
+		overflow: hidden;
+		position: relative;
+		z-index: 1;
+		isolation: isolate;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.ad-unit-box {
+		width: 100%;
+		min-height: 90px;
+	}
+</style>

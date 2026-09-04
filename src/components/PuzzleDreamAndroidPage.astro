@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
+import AdUnit from "./AdUnit.astro";
 import { homeContent, type Locale } from "../data/home-content";
 import { adsensePublisherId } from "../data/site-shell";
 import {
@@ -246,6 +247,7 @@ const schema = JSON.stringify([
 					<h1>{copy.h1}</h1>
 					<p>{copy.intro}</p>
 				</section>
+				<AdUnit />
 				<section class="content-section">
 					<ul class="audience-list">
 						{

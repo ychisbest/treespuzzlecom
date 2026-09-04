@@ -419,9 +419,16 @@ a:hover {
 
 .ad-unit {
 	margin: 20px 0;
-	padding: 18px 20px;
-	border: 1px solid var(--border-color);
-	background: #fff;
+	padding: 12px 0;
+	min-height: 120px;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+	isolation: isolate;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: transparent;
 }
 
 .download-note {

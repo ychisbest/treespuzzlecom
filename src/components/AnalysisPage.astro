@@ -1,6 +1,5 @@
 ---
 import StaticPageLayout from "../layouts/StaticPageLayout.astro";
-import AdUnit from "./AdUnit.astro";
 import type { Locale } from "../data/home-content";
 import {
 	analysisPathForLocale,
@@ -261,5 +260,4 @@ const schema = [
 			<p set:html={paragraph}></p>
 		))
 	}
-	<AdUnit />
 </StaticPageLayout>

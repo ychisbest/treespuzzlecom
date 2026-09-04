@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import AdUnit from "../components/AdUnit.astro";
 import {
 	adsensePublisherId,
 	shellContent,
@@ -137,6 +138,7 @@ const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 						<h1>{pageHeading}</h1>
 						<p>{pageIntro}</p>
 					</header>
+					<AdUnit />
 					<div class="article-prose">
 						<slot />
 					</div>
