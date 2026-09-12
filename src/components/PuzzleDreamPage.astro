@@ -42,6 +42,10 @@ const androidPath =
 	locale === "en"
 		? "/play/puzzle-dream/android/"
 		: `/${locale}/play/puzzle-dream/android/`;
+const switchPath =
+	locale === "en"
+		? "/play/puzzle-dream/switch/"
+		: `/${locale}/play/puzzle-dream/switch/`;
 const firstPuzzlePagePath =
 	locale === "en" ? "/play/first-puzzle/" : `/${locale}/play/first-puzzle/`;
 const puzzleHousePath =
@@ -698,6 +702,8 @@ const puzzleDreamSchema = JSON.stringify([
 							<a href={puzzleDreamGuidePath}>Her Trees Puzzle Dream walkthrough</a>
 							{" · "}
 							<a href={androidPath}>Her Trees Puzzle Dream Android</a>
+							{" · "}
+							<a href={switchPath}>Her Trees Puzzle Dream Switch</a>
 						</p>
 					</div>
 				</section>

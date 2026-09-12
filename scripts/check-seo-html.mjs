@@ -206,6 +206,30 @@ if (androidHtml && !/android/i.test(h1Of(androidHtml))) {
 	failures.push("android page h1 missing Android");
 }
 
+const switchHtml = read("play/puzzle-dream/switch/index.html");
+if (switchHtml) {
+	if (countH1(switchHtml) !== 1) {
+		failures.push(`switch page: expected 1 h1, found ${countH1(switchHtml)}`);
+	}
+	const switchH1 = h1Of(switchHtml);
+	if (!/puzzle dream/i.test(switchH1) || !/switch/i.test(switchH1)) {
+		failures.push(`switch page h1 missing Puzzle Dream or Switch: ${switchH1}`);
+	}
+	const switchTitle = titleOf(switchHtml);
+	if (!switchTitle) {
+		failures.push("switch page title empty");
+	}
+	const homeTitle = titleOf(read("index.html"));
+	if (switchTitle && homeTitle && switchTitle === homeTitle) {
+		failures.push("switch page title equals homepage title");
+	}
+}
+
+const sitemapHtml = read("sitemap.xml");
+if (sitemapHtml && !sitemapHtml.includes("https://treespuzzle.com/play/puzzle-dream/switch/")) {
+	failures.push("sitemap missing https://treespuzzle.com/play/puzzle-dream/switch/");
+}
+
 const firstPuzzleHtml = read("play/first-puzzle/index.html");
 if (firstPuzzleHtml) {
 	if (countH1(firstPuzzleHtml) !== 1) {
@@ -235,6 +259,13 @@ if (idGuideTitle && !/^Her Trees First Puzzle/i.test(idGuideTitle)) {
 }
 
 const homeHtml = read("index.html");
+if (switchHtml && homeHtml) {
+	const switchTitle = titleOf(switchHtml);
+	const homeTitle = titleOf(homeHtml);
+	if (switchTitle && homeTitle && switchTitle === homeTitle) {
+		failures.push("switch page title equals homepage title");
+	}
+}
 if (homeHtml && !homeHtml.includes("/play/puzzle-dream/guide/")) {
 	failures.push("homepage missing dream guide href");
 }
@@ -266,6 +297,9 @@ if (searchHtml) {
 	}
 	if (!searchHtml.includes("/play/puzzle-dream/guide/")) {
 		failures.push("search page missing Dream guide href");
+	}
+	if (!searchHtml.includes("/play/puzzle-dream/switch/")) {
+		failures.push("search page missing Switch href");
 	}
 }
 

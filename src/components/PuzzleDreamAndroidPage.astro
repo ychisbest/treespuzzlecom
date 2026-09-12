@@ -29,6 +29,10 @@ const guidePath =
 	locale === "en"
 		? "/play/puzzle-dream/guide/"
 		: `/${locale}/play/puzzle-dream/guide/`;
+const switchPath =
+	locale === "en"
+		? "/play/puzzle-dream/switch/"
+		: `/${locale}/play/puzzle-dream/switch/`;
 
 const copyByLocale: Record<
 	Locale,
@@ -39,6 +43,7 @@ const copyByLocale: Record<
 		intro: string;
 		playLabel: string;
 		guideLabel: string;
+		switchLabel: string;
 		facts: string[];
 	}
 > = {
@@ -51,6 +56,7 @@ const copyByLocale: Record<
 			"Stone has said HER TREES has no smartphone build. Searches for her trees puzzle dream android still want a way to play on a phone. Use Chrome or Firefox, rotate to landscape, and start the browser version on this site.",
 		playLabel: "Play Her Trees Puzzle Dream",
 		guideLabel: "Open keypad answers",
+		switchLabel: "Switch (not on Nintendo)",
 		facts: [
 			"No official APK or Google Play listing from the developer.",
 			"The browser version on this page is the same Puzzle Dream session as the desktop play page.",
@@ -67,6 +73,7 @@ const copyByLocale: Record<
 			"开发者说明 HER TREES 没有官方手机版。想在 Android 上玩，用浏览器打开本站横屏即可。",
 		playLabel: "开始玩 Her Trees Puzzle Dream",
 		guideLabel: "打开键盘答案",
+		switchLabel: "Switch（不在 Nintendo）",
 		facts: [
 			"没有开发者发布的官方 APK。",
 			"手机浏览器版和电脑可玩页是同一套 Puzzle Dream。",
@@ -83,6 +90,7 @@ const copyByLocale: Record<
 			"سازنده گفته HER TREES نسخه موبایل رسمی ندارد. برای اندروید، مرورگر را افقی کنید و نسخه مرورگر همین سایت را باز کنید.",
 		playLabel: "بازی Her Trees Puzzle Dream",
 		guideLabel: "پاسخ‌های صفحه کلید",
+		switchLabel: "سوییچ (نه در نینتندو)",
 		facts: [
 			"APK رسمی از سازنده وجود ندارد.",
 			"نسخه مرورگر موبایل همان Puzzle Dream صفحه دسکتاپ است.",
@@ -99,6 +107,7 @@ const copyByLocale: Record<
 			"Le créateur indique qu’il n’existe pas de version smartphone officielle. Sur Android, ouvrez la version navigateur de ce site en mode paysage.",
 		playLabel: "Jouer à Her Trees Puzzle Dream",
 		guideLabel: "Codes du clavier",
+		switchLabel: "Switch (pas sur Nintendo)",
 		facts: [
 			"Aucun APK officiel.",
 			"La version mobile est la même session Puzzle Dream que sur ordinateur.",
@@ -115,6 +124,7 @@ const copyByLocale: Record<
 			"Pengembang menyatakan HER TREES tidak punya versi smartphone resmi. Di Android, putar layar dan buka versi browser di situs ini.",
 		playLabel: "Main Her Trees Puzzle Dream",
 		guideLabel: "Buka jawaban keypad",
+		switchLabel: "Switch (bukan di Nintendo)",
 		facts: [
 			"Tidak ada APK resmi dari developer.",
 			"Versi browser HP sama dengan halaman Puzzle Dream di desktop.",
@@ -131,6 +141,7 @@ const copyByLocale: Record<
 			"作者は公式スマホ版がないと説明しています。Android ではブラウザを横向きにして本サイトのブラウザ版を開いてください。",
 		playLabel: "Her Trees Puzzle Dream を遊ぶ",
 		guideLabel: "キーパッド解答",
+		switchLabel: "Switch（Nintendo 非対応）",
 		facts: [
 			"公式 APK はありません。",
 			"スマホのブラウザ版はデスクトップと同じ Puzzle Dream です。",
@@ -147,6 +158,7 @@ const copyByLocale: Record<
 			"Nha phat trien noi HER TREES khong co ban smartphone chinh thuc. Tren Android hay xoay ngang va mo ban trinh duyet tren site nay.",
 		playLabel: "Choi Her Trees Puzzle Dream",
 		guideLabel: "Mo ma keypad",
+		switchLabel: "Switch (khong co Nintendo)",
 		facts: [
 			"Khong co APK chinh thuc.",
 			"Ban trinh duyet dien thoai giong trang Puzzle Dream tren may tinh.",
@@ -262,6 +274,8 @@ const schema = JSON.stringify([
 						<a href={playPath}>{copy.playLabel}</a>
 						{" · "}
 						<a href={guidePath}>{copy.guideLabel}</a>
+						{" · "}
+						<a href={switchPath}>{copy.switchLabel}</a>
 					</p>
 				</section>
 			</main>

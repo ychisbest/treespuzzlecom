@@ -89,6 +89,15 @@ const localeAlternates = {
 		ja: "/ja/play/puzzle-dream/android/",
 		vi: "/vi/play/puzzle-dream/android/",
 	},
+	puzzleDreamSwitch: {
+		en: "/play/puzzle-dream/switch/",
+		"zh-cn": "/zh-cn/play/puzzle-dream/switch/",
+		fa: "/fa/play/puzzle-dream/switch/",
+		fr: "/fr/play/puzzle-dream/switch/",
+		id: "/id/play/puzzle-dream/switch/",
+		ja: "/ja/play/puzzle-dream/switch/",
+		vi: "/vi/play/puzzle-dream/switch/",
+	},
 };
 
 const standaloneUrls = [

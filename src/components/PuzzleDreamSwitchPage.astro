@@ -1,0 +1,290 @@
+---
+import "../styles/global.css";
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
+import { homeContent, type Locale } from "../data/home-content";
+import { adsensePublisherId } from "../data/site-shell";
+import {
+	buildAlternateLinks,
+	buildOgLocaleAlternates,
+	localeToHreflang,
+	localeToOgLocale,
+	toAbsoluteUrl,
+} from "../data/seo";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const pagePath =
+	locale === "en"
+		? "/play/puzzle-dream/switch/"
+		: `/${locale}/play/puzzle-dream/switch/`;
+const playPath =
+	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const guidePath =
+	locale === "en"
+		? "/play/puzzle-dream/guide/"
+		: `/${locale}/play/puzzle-dream/guide/`;
+const androidPath =
+	locale === "en"
+		? "/play/puzzle-dream/android/"
+		: `/${locale}/play/puzzle-dream/android/`;
+
+const copyByLocale: Record<
+	Locale,
+	{
+		title: string;
+		description: string;
+		h1: string;
+		intro: string;
+		playLabel: string;
+		guideLabel: string;
+		androidLabel: string;
+		facts: string[];
+	}
+> = {
+	en: {
+		title: "Her Trees Puzzle Dream Switch - Play in Browser (Not on Nintendo)",
+		description:
+			"Not on Nintendo Switch. Play Her Trees Puzzle Dream free in the browser, or the Steam PC build.",
+		h1: "Her Trees Puzzle Dream Switch",
+		intro:
+			"Puzzle Dream is not on Nintendo Switch. There is no eShop listing. Play the free browser version on this site, or buy the separate Steam Windows/PC build.",
+		playLabel: "Play Her Trees Puzzle Dream",
+		guideLabel: "Open keypad answers",
+		androidLabel: "Android browser play",
+		facts: [
+			"No official Nintendo Switch version or Nintendo eShop listing from the developer.",
+			"Play the free browser version on this site. It is the same Puzzle Dream session as the desktop play page.",
+			"Steam sells a separate paid Windows/PC release. That is not a Switch port.",
+			"On a phone, use the existing Android browser page in landscape. There is still no official APK.",
+			"If a puzzle blocks you, the keypad answer table is on the walkthrough page.",
+		],
+	},
+	"zh-cn": {
+		title: "Her Trees Puzzle Dream Switch - 浏览器玩（不在 Nintendo）",
+		description:
+			"没有 Nintendo Switch 版本。在本站浏览器免费玩 Her Trees Puzzle Dream，或购买 Steam 的 Windows/PC 版。",
+		h1: "Her Trees Puzzle Dream Switch",
+		intro:
+			"没有官方 Nintendo Switch / eShop 上架。想玩 Puzzle Dream，请在本站浏览器打开，或购买 Steam 的 Windows/PC 版。",
+		playLabel: "开始玩 Her Trees Puzzle Dream",
+		guideLabel: "打开键盘答案",
+		androidLabel: "Android 浏览器玩",
+		facts: [
+			"没有开发者发布的官方 Nintendo Switch 或 eShop 上架。",
+			"本站浏览器版可免费玩，与电脑可玩页是同一套 Puzzle Dream。",
+			"Steam 是单独的付费 Windows/PC 版，不是 Switch 移植。",
+			"手机请用现有 Android 浏览器页横屏玩，仍无官方 APK。",
+			"卡关请打开攻略页的键盘答案表。",
+		],
+	},
+	fa: {
+		title: "Her Trees Puzzle Dream Switch - بازی در مرورگر (نه در نینتندو)",
+		description:
+			"نسخه نینتندو سوییچ وجود ندارد. Her Trees Puzzle Dream را رایگان در مرورگر بازی کنید یا نسخه Steam ویندوز را بخرید.",
+		h1: "Her Trees Puzzle Dream Switch",
+		intro:
+			"فهرست رسمی Nintendo Switch یا eShop وجود ندارد. نسخه مرورگر همین سایت را باز کنید یا نسخه پولی Steam برای ویندوز/PC را بخرید.",
+		playLabel: "بازی Her Trees Puzzle Dream",
+		guideLabel: "پاسخ‌های صفحه کلید",
+		androidLabel: "بازی در مرورگر اندروید",
+		facts: [
+			"نسخه رسمی Nintendo Switch یا فروشگاه eShop وجود ندارد.",
+			"نسخه رایگان مرورگر همین سایت همان Puzzle Dream صفحه دسکتاپ است.",
+			"Steam یک نسخه پولی جداگانه برای Windows/PC است، نه پورت سوییچ.",
+			"روی گوشی صفحه مرورگر اندروید را در حالت افقی باز کنید.",
+			"اگر گیر کردید جدول رمزها در صفحه راهنما است.",
+		],
+	},
+	fr: {
+		title: "Her Trees Puzzle Dream Switch - Jouer dans le navigateur (pas sur Nintendo)",
+		description:
+			"Pas sur Nintendo Switch. Jouez à Her Trees Puzzle Dream gratuitement dans le navigateur, ou achetez la version Steam PC.",
+		h1: "Her Trees Puzzle Dream Switch",
+		intro:
+			"Il n’existe pas de version Nintendo Switch ni de fiche eShop. Jouez dans le navigateur de ce site, ou achetez la version Windows/PC sur Steam.",
+		playLabel: "Jouer à Her Trees Puzzle Dream",
+		guideLabel: "Codes du clavier",
+		androidLabel: "Jouer sur Android (navigateur)",
+		facts: [
+			"Aucune version Nintendo Switch officielle, aucune fiche eShop.",
+			"La version navigateur de ce site est la même session Puzzle Dream que sur ordinateur.",
+			"Steam vend une version Windows/PC payante séparée, ce n’est pas un port Switch.",
+			"Sur téléphone, utilisez la page Android du navigateur en mode paysage.",
+			"La table des codes est sur la page walkthrough.",
+		],
+	},
+	id: {
+		title: "Her Trees Puzzle Dream Switch - Main di Browser (Bukan di Nintendo)",
+		description:
+			"Tidak ada di Nintendo Switch. Mainkan Her Trees Puzzle Dream gratis di browser, atau beli rilis Steam PC.",
+		h1: "Her Trees Puzzle Dream Switch",
+		intro:
+			"Tidak ada listing resmi Nintendo Switch atau eShop. Mainkan versi browser di situs ini, atau beli rilis berbayar Steam untuk Windows/PC.",
+		playLabel: "Main Her Trees Puzzle Dream",
+		guideLabel: "Buka jawaban keypad",
+		androidLabel: "Main di browser Android",
+		facts: [
+			"Tidak ada rilis resmi Nintendo Switch atau eShop.",
+			"Versi browser di situs ini sama dengan halaman Puzzle Dream di desktop.",
+			"Steam adalah rilis Windows/PC berbayar terpisah, bukan port Switch.",
+			"Di HP, buka halaman browser Android dalam mode landscape.",
+			"Jika macet, tabel kode ada di halaman panduan.",
+		],
+	},
+	ja: {
+		title: "Her Trees Puzzle Dream Switch - ブラウザで遊ぶ（Nintendo 非対応）",
+		description:
+			"Nintendo Switch 版はありません。Her Trees Puzzle Dream をブラウザで無料プレイするか、Steam の PC 版を購入してください。",
+		h1: "Her Trees Puzzle Dream Switch",
+		intro:
+			"公式の Nintendo Switch / eShop 配信はありません。本サイトのブラウザ版で遊ぶか、Steam の Windows/PC 版を購入してください。",
+		playLabel: "Her Trees Puzzle Dream を遊ぶ",
+		guideLabel: "キーパッド解答",
+		androidLabel: "Android ブラウザで遊ぶ",
+		facts: [
+			"公式の Nintendo Switch / eShop 配信はありません。",
+			"本サイトのブラウザ版はデスクトップと同じ Puzzle Dream です。",
+			"Steam は別売りの有料 Windows/PC 版で、Switch 移植ではありません。",
+			"スマホでは Android ブラウザページを横向きで開いてください。",
+			"詰まったら攻略ページの解答表を見てください。",
+		],
+	},
+	vi: {
+		title: "Her Trees Puzzle Dream Switch - Choi tren trinh duyet (khong co Nintendo)",
+		description:
+			"Khong co tren Nintendo Switch. Choi Her Trees Puzzle Dream mien phi tren trinh duyet, hoac mua ban Steam PC.",
+		h1: "Her Trees Puzzle Dream Switch",
+		intro:
+			"Khong co phien ban Nintendo Switch hay eShop chinh thuc. Choi ban trinh duyet tren site nay, hoac mua ban Steam Windows/PC.",
+		playLabel: "Choi Her Trees Puzzle Dream",
+		guideLabel: "Mo ma keypad",
+		androidLabel: "Choi tren trinh duyet Android",
+		facts: [
+			"Khong co phien ban Nintendo Switch / eShop chinh thuc.",
+			"Ban trinh duyet tren site nay giong trang Puzzle Dream tren may tinh.",
+			"Steam la ban Windows/PC tra phi rieng, khong phai port Switch.",
+			"Tren dien thoai, dung trang Android trinh duyet o che do ngang.",
+			"Neu mac, bang ma nam o trang huong dan.",
+		],
+	},
+};
+
+const copy = copyByLocale[locale];
+const languageLinks = buildAlternateLinks(
+	{
+		en: "/play/puzzle-dream/switch/",
+		"zh-cn": "/zh-cn/play/puzzle-dream/switch/",
+		fa: "/fa/play/puzzle-dream/switch/",
+		fr: "/fr/play/puzzle-dream/switch/",
+		id: "/id/play/puzzle-dream/switch/",
+		ja: "/ja/play/puzzle-dream/switch/",
+		vi: "/vi/play/puzzle-dream/switch/",
+	},
+	locale,
+);
+const canonicalUrl = toAbsoluteUrl(pagePath);
+const schema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		name: copy.h1,
+		url: canonicalUrl,
+		description: copy.description,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: [
+			{
+				"@type": "Question",
+				name: "Is Her Trees Puzzle Dream on Nintendo Switch?",
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: "No official Nintendo Switch or eShop listing. Play the free browser version on this site, or buy the Steam Windows/PC build.",
+				},
+			},
+		],
+	},
+]);
+---
+
+<html lang={content.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{copy.title}</title>
+		<meta name="description" content={copy.description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={copy.title} />
+		<meta property="og:description" content={copy.description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:type" content="article" />
+		<meta property="og:locale" content={localeToOgLocale(locale)} />
+		{
+			buildOgLocaleAlternates(locale).map((item) => (
+				<meta property="og:locale:alternate" content={item} />
+			))
+		}
+		{
+			languageLinks.map((link) => (
+				<link
+					rel="alternate"
+					hreflang={localeToHreflang(link.locale)}
+					href={toAbsoluteUrl(link.href)}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/play/puzzle-dream/switch/")} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
+		<script type="application/ld+json" set:html={schema}></script>
+	</head>
+	<body>
+		<div class="container-shell">
+			<SiteHeader
+				locale={locale}
+				currentPath={pagePath}
+				tagline={copy.description}
+				languageSwitchLabel={content.languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
+			<main>
+				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
+					<a href={playPath}>{copy.playLabel}</a>
+					<span>/</span>
+					<span aria-current="page">Switch</span>
+				</nav>
+				<section class="page-intro-block">
+					<h1>{copy.h1}</h1>
+					<p>{copy.intro}</p>
+				</section>
+				<section class="content-section">
+					<ul class="audience-list">
+						{
+							copy.facts.map((fact) => (
+								<li class="audience-item">
+									<p>{fact}</p>
+								</li>
+							))
+						}
+					</ul>
+					<p class="section-intro">
+						<a href={playPath}>{copy.playLabel}</a>
+						{" · "}
+						<a href={androidPath}>{copy.androidLabel}</a>
+						{" · "}
+						<a href={guidePath}>{copy.guideLabel}</a>
+					</p>
+				</section>
+			</main>
+			<SiteFooter locale={locale} />
+		</div>
+	</body>
+</html>

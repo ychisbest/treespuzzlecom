@@ -45,6 +45,10 @@ const androidPath =
 	locale === "en"
 		? "/play/puzzle-dream/android/"
 		: `/${locale}/play/puzzle-dream/android/`;
+const switchPath =
+	locale === "en"
+		? "/play/puzzle-dream/switch/"
+		: `/${locale}/play/puzzle-dream/switch/`;
 const shareImage = new URL(puzzleDreamImage.src, siteUrl).toString();
 
 const languageLinks = buildAlternateLinks(
@@ -335,6 +339,8 @@ const guideSchema = JSON.stringify([
 						<a href={houseGuidePath}>Puzzle House walkthrough</a>
 						{" · "}
 						<a href={androidPath}>Android browser play</a>
+						{" · "}
+						<a href={switchPath}>Switch (not on Nintendo)</a>
 					</p>
 				</section>
 
