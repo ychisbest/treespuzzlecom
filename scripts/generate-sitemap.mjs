@@ -35,69 +35,6 @@ const localeAlternates = {
 		ja: "/ja/analysis/puzzle-design/",
 		vi: "/vi/analysis/puzzle-design/",
 	},
-	firstPuzzle: {
-		en: "/play/first-puzzle/",
-		"zh-cn": "/zh-cn/play/first-puzzle/",
-		fa: "/fa/play/first-puzzle/",
-		fr: "/fr/play/first-puzzle/",
-		id: "/id/play/first-puzzle/",
-		ja: "/ja/play/first-puzzle/",
-		vi: "/vi/play/first-puzzle/",
-	},
-	puzzleDream: {
-		en: "/play/puzzle-dream/",
-		"zh-cn": "/zh-cn/play/puzzle-dream/",
-		fa: "/fa/play/puzzle-dream/",
-		fr: "/fr/play/puzzle-dream/",
-		id: "/id/play/puzzle-dream/",
-		ja: "/ja/play/puzzle-dream/",
-		vi: "/vi/play/puzzle-dream/",
-	},
-	puzzleHouse: {
-		en: "/play/puzzle-house/",
-		"zh-cn": "/zh-cn/play/puzzle-house/",
-		fa: "/fa/play/puzzle-house/",
-		fr: "/fr/play/puzzle-house/",
-		id: "/id/play/puzzle-house/",
-		ja: "/ja/play/puzzle-house/",
-		vi: "/vi/play/puzzle-house/",
-	},
-	puzzleDreamGuide: {
-		en: "/play/puzzle-dream/guide/",
-		"zh-cn": "/zh-cn/play/puzzle-dream/guide/",
-		fa: "/fa/play/puzzle-dream/guide/",
-		fr: "/fr/play/puzzle-dream/guide/",
-		id: "/id/play/puzzle-dream/guide/",
-		ja: "/ja/play/puzzle-dream/guide/",
-		vi: "/vi/play/puzzle-dream/guide/",
-	},
-	puzzleHouseGuide: {
-		en: "/play/puzzle-house/guide/",
-		"zh-cn": "/zh-cn/play/puzzle-house/guide/",
-		fa: "/fa/play/puzzle-house/guide/",
-		fr: "/fr/play/puzzle-house/guide/",
-		id: "/id/play/puzzle-house/guide/",
-		ja: "/ja/play/puzzle-house/guide/",
-		vi: "/vi/play/puzzle-house/guide/",
-	},
-	puzzleDreamAndroid: {
-		en: "/play/puzzle-dream/android/",
-		"zh-cn": "/zh-cn/play/puzzle-dream/android/",
-		fa: "/fa/play/puzzle-dream/android/",
-		fr: "/fr/play/puzzle-dream/android/",
-		id: "/id/play/puzzle-dream/android/",
-		ja: "/ja/play/puzzle-dream/android/",
-		vi: "/vi/play/puzzle-dream/android/",
-	},
-	puzzleDreamSwitch: {
-		en: "/play/puzzle-dream/switch/",
-		"zh-cn": "/zh-cn/play/puzzle-dream/switch/",
-		fa: "/fa/play/puzzle-dream/switch/",
-		fr: "/fr/play/puzzle-dream/switch/",
-		id: "/id/play/puzzle-dream/switch/",
-		ja: "/ja/play/puzzle-dream/switch/",
-		vi: "/vi/play/puzzle-dream/switch/",
-	},
 };
 
 const standaloneUrls = [
@@ -109,7 +46,6 @@ const standaloneUrls = [
 	"/privacy-policy/",
 	"/terms/",
 	"/trees-hate-you/",
-	"/search/",
 ];
 
 const hreflangByLocale = {
@@ -131,7 +67,7 @@ const xmlEscape = (value) =>
 		.replaceAll("'", "&apos;");
 
 const toAbsoluteUrl = (routePath) =>
-	`${siteUrl}${!routePath || routePath === "/" ? "/" : routePath}`;
+	`${siteUrl}${routePath === "/" ? "" : routePath}`;
 
 const routePathToHtmlFile = (routePath) => {
 	const normalized = routePath === "/" ? "" : routePath.replace(/^\/|\/$/g, "");

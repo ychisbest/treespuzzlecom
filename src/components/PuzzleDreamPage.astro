@@ -38,26 +38,12 @@ const puzzleDreamGuidePath =
 	locale === "en"
 		? "/play/puzzle-dream/guide/"
 		: `/${locale}/play/puzzle-dream/guide/`;
-const androidPath =
-	locale === "en"
-		? "/play/puzzle-dream/android/"
-		: `/${locale}/play/puzzle-dream/android/`;
-const switchPath =
-	locale === "en"
-		? "/play/puzzle-dream/switch/"
-		: `/${locale}/play/puzzle-dream/switch/`;
-const firstPuzzlePagePath =
-	locale === "en" ? "/play/first-puzzle/" : `/${locale}/play/first-puzzle/`;
+const firstPuzzlePagePath = `${content.path}#play`;
 const puzzleHousePath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
 const treesHateYouPath = "/trees-hate-you/";
 const puzzleDreamDownloadUrl =
 	"https://game.doritosscript.com/HerTreesPuzzleDream.zip";
-const linkifyFaq = (text: string) =>
-	text.replace(
-		/(\/(?:[a-z]{2,3}(?:-[a-z]+)?\/)?play\/[a-z0-9/-]+\/)/g,
-		'<a href="$1">$1</a>',
-	);
 const shareImage = new URL(puzzleDreamImage.src, siteUrl).toString();
 const gameImages = [
 	firstPuzzleImage,
@@ -103,279 +89,150 @@ const pageCopy: Record<
 		iframeTitle: string;
 		playButton: string;
 		intro: string;
-		browserHint: string;
 		overviewHeading: string;
 		overviewBody: string;
 		tipsHeading: string;
 		tips: string[];
-		faqHeading: string;
-		faqs: Array<{ question: string; answer: string }>;
 	}
 > = {
 	"zh-cn": {
-		title: "HER TREES : PUZZLE DREAM - 浏览器免费玩（无需下载）",
+		title: "HER TREES : PUZZLE DREAM - 免费在线玩 | 40+ 谜题",
 		description:
-			"免费在浏览器里玩 her trees puzzle dream，不用下载、不用登录 Steam。HER TREES : PUZZLE DREAM 有 40 多个手绘谜题。Steam 商店页是另一份付费版本。",
+			"免费在线玩 HER TREES : PUZZLE DREAM。系列中最大的作品，包含 40 多个手绘谜题。Steam 和 itch.io Demo 均可体验。95% 好评。",
 		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "Her Trees Puzzle Dream — 浏览器免费玩",
+		playHeading: "游玩 HER TREES : PUZZLE DREAM",
 		iframeTitle: "HER TREES : PUZZLE DREAM 在线试玩",
 		playButton: "开始 Puzzle Dream",
 		intro:
-			"这是 Puzzle Dream 的免费浏览器版。点开始就能玩，不需要 Steam，也不需要下载。",
-		browserHint: "浏览器免费版 · 点开始即可，不用注册",
+			"这个页面直接加载 public 目录中的 Puzzle Dream 游戏资源，进入后可以像首页一样点击开始并切换全屏游玩。",
 		overviewHeading: "这一页提供什么",
 		overviewBody:
-			"首页也直接玩 Puzzle Dream。这一页是系列第三作的独立入口，适合想单独打开更完整谜题量和更长流程的玩家。",
+			"相较于首页嵌入的 First Puzzle，这里对应的是系列第三作的独立入口，适合想直接体验更完整谜题量和更长流程的玩家。",
 		tipsHeading: "游玩提示",
 		tips: [
 			"首次进入会按需加载 WebGL 资源，开始前可能需要短暂等待。",
 			"手机上建议横屏体验；进入全屏时页面会尽量请求横屏锁定。",
-			"First Puzzle 更短，适合先热身；本页和首页都直接玩 Puzzle Dream。",
-		],
-		faqHeading: "常见问题",
-		faqs: [
-			{
-				question: "her trees puzzle dream 和 HER TREES : PUZZLE DREAM 是一款游戏吗？",
-				answer:
-					"是的。her trees puzzle dream、her trees: puzzle dream 和 HER TREES : PUZZLE DREAM 都指这一页的免费浏览器版。",
-			},
-			{
-				question: "玩 Puzzle Dream 需要下载或 Steam 吗？",
-				answer: "不需要。本页点开始即可在浏览器里玩。Steam 上是另一份付费版本。",
-			},
-			{
-				question: "Puzzle Dream 攻略在哪？",
-				answer: "请打开 /zh-cn/play/puzzle-dream/guide/。总攻略页 /guide/ 只覆盖 First Puzzle。",
-			},
+			"如果你只是想先快速感受系列风格，仍然可以回首页先玩 First Puzzle。",
 		],
 	},
 	en: {
-		title: "Her Trees Puzzle Dream - Play Free in Browser (No Download)",
+		title: "HER TREES : PUZZLE DREAM - Play Online Free | 40+ Puzzles",
 		description:
-			"Play Her Trees Puzzle Dream free in your browser. No download, no Steam login. HER TREES : PUZZLE DREAM has 40+ hand-drawn puzzles. The Steam store page is a different, paid release.",
+			"Play HER TREES : PUZZLE DREAM online for free. The largest entry in the series with 40+ hand-drawn puzzles. Available on Steam and itch.io Demo. 95% positive reviews.",
 		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "Her Trees Puzzle Dream — Play Free",
+		playHeading: "Play HER TREES : PUZZLE DREAM",
 		iframeTitle: "HER TREES : PUZZLE DREAM online",
 		playButton: "Start Puzzle Dream",
 		intro:
-			"This is the free in-browser version of Puzzle Dream. Click Start to play now — you do not need Steam or a download.",
-		browserHint: "Free browser version · click Start, no account",
+			"This page loads the Puzzle Dream build from the public directory and keeps the same click-to-launch and fullscreen flow used on the homepage.",
 		overviewHeading: "What this page is for",
 		overviewBody:
-			"This page is the free browser version of her trees puzzle dream, also searched as HER TREES : PUZZLE DREAM and her trees: puzzle dream. The homepage also plays Puzzle Dream. This dedicated URL keeps the third game as its own indexed play page, with 40+ hand-drawn puzzles and no download.",
+			"Unlike the homepage embed for First Puzzle, this is a dedicated entry for the third game in the series, intended for players who want the larger dreamlike puzzle set right away.",
 		tipsHeading: "Play notes",
 		tips: [
 			"The first launch may take a moment while the WebGL files load.",
 			"Landscape works best on phones; fullscreen will try to lock orientation.",
-			"First Puzzle is the shorter warmup. This page and the homepage both play Her Trees Puzzle Dream.",
-		],
-		faqHeading: "FAQ",
-		faqs: [
-			{
-				question: "Is this her trees puzzle dream or HER TREES : PUZZLE DREAM?",
-				answer:
-					"Yes. Searches for her trees puzzle dream, her trees: puzzle dream, and HER TREES : PUZZLE DREAM all point to this game. This page is the free in-browser version.",
-			},
-			{
-				question: "Do I need Steam or a download to play Puzzle Dream?",
-				answer:
-					"No. Click Start on this page to play in your browser. Steam sells a separate paid build.",
-			},
-			{
-				question: "Where is the Puzzle Dream walkthrough?",
-				answer:
-					"Open the dedicated Puzzle Dream guide on this site at /play/puzzle-dream/guide/. It lists every keypad code, then the video. The main /guide/ page is only for First Puzzle.",
-			},
-			{
-				question: "Can I play Her Trees Puzzle Dream on Android?",
-				answer:
-					"There is no official APK. Play in a phone browser in landscape. Details: /play/puzzle-dream/android/.",
-			},
+			"If you want a shorter introduction first, go back to the homepage and start with First Puzzle.",
 		],
 	},
 	fa: {
-		title: "Her Trees Puzzle Dream - بازی رایگان در مرورگر (بدون دانلود)",
+		title: "HER TREES : PUZZLE DREAM - بازی آنلاین رایگان | بیش از ۴۰ پازل",
 		description:
-			"her trees puzzle dream را رایگان در مرورگر بازی کنید. بدون دانلود و بدون ورود به Steam. HER TREES : PUZZLE DREAM بیش از ۴۰ پازل دستی دارد. صفحه فروشگاه Steam نسخه پولی جداگانه‌ای است.",
+			"HER TREES : PUZZLE DREAM را آنلاین و رایگان بازی کنید. بزرگ‌ترین نسخه مجموعه با بیش از ۴۰ پازل دستی. در Steam و itch.io Demo موجود است.",
 		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "Her Trees Puzzle Dream — بازی رایگان",
+		playHeading: "بازی HER TREES : PUZZLE DREAM",
 		iframeTitle: "HER TREES : PUZZLE DREAM آنلاین",
 		playButton: "شروع Puzzle Dream",
 		intro:
-			"این نسخه رایگان مرورگر Puzzle Dream است. روی شروع بزنید؛ به Steam یا دانلود نیاز ندارید.",
-		browserHint: "نسخه رایگان مرورگر · شروع کنید، بدون حساب",
+			"این صفحه نسخه Puzzle Dream را از پوشه public بارگذاری می‌کند و همان جریان کلیک‌برای‌شروع و تمام‌صفحه صفحه اصلی را حفظ می‌کند.",
 		overviewHeading: "این صفحه برای چیست",
 		overviewBody:
-			"صفحه اصلی هم Puzzle Dream را پخش می‌کند. این URL اختصاصی بازی سوم است، با بیش از ۴۰ پازل و بدون دانلود.",
+			"برخلاف First Puzzle جاسازی‌شده در صفحه اصلی، این ورودی اختصاصی برای بازی سوم مجموعه است، برای بازیکنانی که مجموعه پازل‌های رویایی بزرگ‌تر را فوراً می‌خواهند.",
 		tipsHeading: "نکات بازی",
 		tips: [
 			"اولین راه‌اندازی ممکن است لحظه‌ای طول بکشد تا فایل‌های WebGL بارگذاری شوند.",
 			"در گوشی حالت افقی بهتر عمل می‌کند؛ تمام صفحه سعی می‌کند جهت را قفل کند.",
-			"First Puzzle کوتاه‌تر است. این صفحه و صفحه اصلی هر دو Her Trees Puzzle Dream را اجرا می‌کنند.",
-		],
-		faqHeading: "سؤالات متداول",
-		faqs: [
-			{
-				question: "آیا her trees puzzle dream همان HER TREES : PUZZLE DREAM است؟",
-				answer:
-					"بله. her trees puzzle dream، her trees: puzzle dream و HER TREES : PUZZLE DREAM همه به همین بازی اشاره دارند. نسخه رایگان مرورگر اینجاست.",
-			},
-			{
-				question: "برای Puzzle Dream به Steam یا دانلود نیاز دارم؟",
-				answer: "خیر. روی شروع بزنید و در مرورگر بازی کنید. Steam نسخه پولی جداگانه‌ای است.",
-			},
-			{
-				question: "راهنمای Puzzle Dream کجاست؟",
-				answer: "صفحه راهنما: /fa/play/puzzle-dream/guide/ . /guide/ فقط First Puzzle است.",
-			},
+			"اگر ابتدا معرفی کوتاه‌تری می‌خواهید، به صفحه اصلی برگردید و با First Puzzle شروع کنید.",
 		],
 	},
 	fr: {
-		title: "Her Trees Puzzle Dream - Jouer gratuitement dans le navigateur",
+		title: "HER TREES : PUZZLE DREAM - Jouer en Ligne Gratuit | 40+ Puzzles",
 		description:
-			"Jouez à her trees puzzle dream gratuitement dans votre navigateur. Pas de téléchargement, pas de connexion Steam. HER TREES : PUZZLE DREAM compte plus de 40 puzzles dessinés à la main. La page Steam est une version payante séparée.",
+			"Jouez à HER TREES : PUZZLE DREAM en ligne gratuitement. Le plus grand opus de la série avec plus de 40 puzzles dessinés à la main. Disponible sur Steam et itch.io Demo.",
 		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "Her Trees Puzzle Dream — Jouer gratuitement",
+		playHeading: "Jouer à HER TREES : PUZZLE DREAM",
 		iframeTitle: "HER TREES : PUZZLE DREAM en ligne",
 		playButton: "Lancer Puzzle Dream",
 		intro:
-			"Voici la version navigateur gratuite de Puzzle Dream. Cliquez sur Lancer — pas besoin de Steam ni de téléchargement.",
-		browserHint: "Version navigateur gratuite · cliquez pour jouer, sans compte",
+			"Cette page charge la version Puzzle Dream depuis le dossier public et conserve le même flux de clic-pour-lancer et plein écran que la page d'accueil.",
 		overviewHeading: "À quoi sert cette page",
 		overviewBody:
-			"La page d'accueil joue aussi Puzzle Dream. Cette URL dédiée est le troisième jeu, avec plus de 40 puzzles, sans téléchargement.",
+			"Contrairement à l'intégration First Puzzle sur la page d'accueil, c'est une entrée dédiée au troisième jeu de la série, destinée aux joueurs qui veulent immédiatement le plus grand ensemble de puzzles oniriques.",
 		tipsHeading: "Notes de jeu",
 		tips: [
 			"Le premier lancement peut prendre un moment pendant le chargement des fichiers WebGL.",
 			"Le mode paysage fonctionne mieux sur téléphone ; le plein écran essaiera de verrouiller l'orientation.",
-			"First Puzzle est plus court. Cette page et l'accueil lancent tous les deux Her Trees Puzzle Dream.",
-		],
-		faqHeading: "FAQ",
-		faqs: [
-			{
-				question: "her trees puzzle dream et HER TREES : PUZZLE DREAM, c'est le même jeu ?",
-				answer:
-					"Oui. her trees puzzle dream, her trees: puzzle dream et HER TREES : PUZZLE DREAM désignent ce jeu. Version navigateur gratuite ici.",
-			},
-			{
-				question: "Faut-il Steam ou un téléchargement pour Puzzle Dream ?",
-				answer: "Non. Cliquez sur Lancer pour jouer dans le navigateur. Steam vend une version payante séparée.",
-			},
-			{
-				question: "Où est le walkthrough de Puzzle Dream ?",
-				answer: "Ouvrez /fr/play/puzzle-dream/guide/. La page /guide/ ne couvre que First Puzzle.",
-			},
+			"Si vous voulez d'abord une introduction plus courte, retournez à la page d'accueil et commencez par First Puzzle.",
 		],
 	},
 	id: {
-		title: "Her Trees Puzzle Dream - Main Gratis di Browser (Tanpa Unduh)",
+		title: "HER TREES : PUZZLE DREAM - Main Online Gratis | 40+ Puzzle",
 		description:
-			"Mainkan her trees puzzle dream gratis di browser. Tanpa unduhan, tanpa login Steam. HER TREES : PUZZLE DREAM punya 40+ puzzle bergambar tangan. Halaman Steam adalah rilis berbayar yang berbeda.",
+			"Mainkan HER TREES : PUZZLE DREAM online gratis. Entri terbesar dalam seri dengan 40+ puzzle bergambar tangan. Tersedia di Steam dan itch.io Demo.",
 		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "Her Trees Puzzle Dream — Main Gratis",
+		playHeading: "Mainkan HER TREES : PUZZLE DREAM",
 		iframeTitle: "HER TREES : PUZZLE DREAM online",
 		playButton: "Mulai Puzzle Dream",
 		intro:
-			"Ini versi browser gratis Puzzle Dream. Klik Mulai untuk langsung main — tidak perlu Steam atau unduhan.",
-		browserHint: "Versi browser gratis · klik Mulai, tanpa akun",
+			"Halaman ini memuat build Puzzle Dream dari direktori public dan tetap menggunakan alur klik-untuk-memainkan serta layar penuh yang sama seperti di beranda.",
 		overviewHeading: "Fungsi halaman ini",
 		overviewBody:
-			"Beranda juga memainkan Puzzle Dream. URL ini adalah pintu masuk khusus game ketiga, 40+ puzzle, tanpa unduhan.",
+			"Berbeda dari First Puzzle yang tertanam di beranda, ini adalah pintu masuk khusus untuk game ketiga dalam seri, ditujukan bagi pemain yang langsung ingin mencoba kumpulan puzzle bergaya mimpi yang lebih besar.",
 		tipsHeading: "Catatan bermain",
 		tips: [
 			"Peluncuran pertama mungkin perlu beberapa saat saat file WebGL dimuat.",
 			"Mode lanskap paling nyaman di ponsel; layar penuh akan mencoba mengunci orientasi.",
-			"First Puzzle lebih singkat. Halaman ini dan beranda sama-sama menjalankan Her Trees Puzzle Dream.",
-		],
-		faqHeading: "FAQ",
-		faqs: [
-			{
-				question: "Apakah her trees puzzle dream sama dengan HER TREES : PUZZLE DREAM?",
-				answer:
-					"Ya. her trees puzzle dream, her trees: puzzle dream, dan HER TREES : PUZZLE DREAM merujuk ke game ini. Versi browser gratis ada di halaman ini.",
-			},
-			{
-				question: "Perlu Steam atau unduhan untuk Puzzle Dream?",
-				answer: "Tidak. Klik Mulai untuk main di browser. Steam menjual rilis berbayar terpisah.",
-			},
-			{
-				question: "Di mana walkthrough Puzzle Dream?",
-				answer: "Buka /id/play/puzzle-dream/guide/. /guide/ hanya untuk First Puzzle.",
-			},
+			"Jika ingin pengenalan yang lebih singkat dulu, kembali ke beranda dan mainkan First Puzzle.",
 		],
 	},
 	ja: {
-		title: "Her Trees Puzzle Dream - ブラウザで無料プレイ（ダウンロード不要）",
+		title: "HER TREES : PUZZLE DREAM - 無料オンライン | 40以上の謎",
 		description:
-			"her trees puzzle dream をブラウザで無料プレイ。ダウンロードも Steam ログインも不要。HER TREES : PUZZLE DREAM は 40 以上の手描きパズル。Steam ストアは別の有料版です。",
+			"HER TREES : PUZZLE DREAM を無料でオンラインプレイ。40以上の手描きパズルを含む最大規模の作品。Steam と itch.io Demo で利用可能。",
 		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "Her Trees Puzzle Dream — 無料プレイ",
+		playHeading: "HER TREES : PUZZLE DREAM を遊ぶ",
 		iframeTitle: "HER TREES : PUZZLE DREAM ブラウザ版",
 		playButton: "Puzzle Dream を始める",
 		intro:
-			"これは Puzzle Dream の無料ブラウザ版です。開始を押せばすぐ遊べます。Steam もダウンロードも不要です。",
-		browserHint: "ブラウザ無料版 · アカウント不要、開始をクリック",
+			"このページでは public ディレクトリ内の Puzzle Dream ビルドを読み込み、トップページと同じようにクリックして起動し、全画面でも遊べます。",
 		overviewHeading: "このページの役割",
 		overviewBody:
-			"トップページでも Puzzle Dream を遊べます。この URL は第3作専用入口で、40以上のパズルをダウンロードなしで遊べます。",
+			"トップページの First Puzzle 埋め込みとは別に、シリーズ第3作へ直接入るための専用ページです。よりボリュームのある夢的な謎解きを遊びたい人向けです。",
 		tipsHeading: "プレイのヒント",
 		tips: [
 			"初回起動では WebGL ファイルの読み込みに少し時間がかかる場合があります。",
 			"スマートフォンでは横画面が向いています。全画面時は横向き固定を試みます。",
-			"First Puzzle の方が短い導入です。このページとトップはどちらも Her Trees Puzzle Dream です。",
-		],
-		faqHeading: "よくある質問",
-		faqs: [
-			{
-				question: "her trees puzzle dream と HER TREES : PUZZLE DREAM は同じ？",
-				answer:
-					"はい。her trees puzzle dream、her trees: puzzle dream、HER TREES : PUZZLE DREAM は同じ作品です。このページが無料ブラウザ版です。",
-			},
-			{
-				question: "Puzzle Dream に Steam やダウンロードは必要？",
-				answer: "不要です。開始をクリックしてブラウザで遊べます。Steam は別の有料版です。",
-			},
-			{
-				question: "Puzzle Dream の攻略はどこ？",
-				answer: "攻略は /ja/play/puzzle-dream/guide/ です。/guide/ は First Puzzle のみです。",
-			},
+			"まず短くシリーズの雰囲気を見たい場合は、トップページの First Puzzle から入るのが適しています。",
 		],
 	},
 	vi: {
-		title: "Her Trees Puzzle Dream - Choi mien phi tren trinh duyet",
+		title: "HER TREES : PUZZLE DREAM - Chơi Online Miễn Phí | 40+ Câu Đố",
 		description:
-			"Choi her trees puzzle dream mien phi tren trinh duyet. Khong can tai, khong can dang nhap Steam. HER TREES : PUZZLE DREAM co hon 40 cau do ve tay. Trang Steam la ban tra phi khac.",
+			"Chơi HER TREES : PUZZLE DREAM online miễn phí. Phần lớn nhất series với hơn 40 câu đố vẽ tay. Có trên Steam và itch.io Demo.",
 		breadcrumbLabel: "Puzzle Dream",
-		playHeading: "Her Trees Puzzle Dream — Choi mien phi",
+		playHeading: "Choi HER TREES : PUZZLE DREAM",
 		iframeTitle: "HER TREES : PUZZLE DREAM tren trinh duyet",
 		playButton: "Bat dau Puzzle Dream",
 		intro:
-			"Day la ban trinh duyet mien phi cua Puzzle Dream. Bam Bat dau de choi ngay — khong can Steam hay tai ve.",
-		browserHint: "Ban trinh duyet mien phi · bam Bat dau, khong can tai khoan",
+			"Trang nay tai ban Puzzle Dream nam trong thu muc public, giu cung cach bam de mo game va choi fullscreen giong trang chu.",
 		overviewHeading: "Trang nay dung de lam gi",
 		overviewBody:
-			"Trang chu cung choi Puzzle Dream. URL nay la loi vao rieng phan 3, hon 40 cau do, khong can tai.",
+			"Khac voi First Puzzle duoc nhung o trang chu, day la loi vao rieng cho phan thu ba trong series, hop voi nguoi muon choi ngay ban co noi dung dai hon.",
 		tipsHeading: "Luu y khi choi",
 		tips: [
 			"Lan mo dau tien co the can doi trong luc tai tep WebGL.",
 			"Dien thoai nen choi ngang man hinh; fullscreen se co gang khoa huong ngang.",
-			"First Puzzle ngan hon. Trang nay va trang chu deu choi Her Trees Puzzle Dream.",
-		],
-		faqHeading: "FAQ",
-		faqs: [
-			{
-				question: "her trees puzzle dream va HER TREES : PUZZLE DREAM la mot game?",
-				answer:
-					"Dung. her trees puzzle dream, her trees: puzzle dream va HER TREES : PUZZLE DREAM deu chi game nay. Ban trinh duyet mien phi o day.",
-			},
-			{
-				question: "Puzzle Dream can Steam hay tai ve khong?",
-				answer: "Khong. Bam Bat dau de choi tren trinh duyet. Steam la ban tra phi rieng.",
-			},
-			{
-				question: "Walkthrough Puzzle Dream o dau?",
-				answer: "Mo /vi/play/puzzle-dream/guide/. /guide/ chi la First Puzzle.",
-			},
+			"Neu ban muon thu nhanh phong cach cua series truoc, hay quay ve trang chu va choi First Puzzle.",
 		],
 	},
 };
@@ -429,8 +286,8 @@ const downloadCopy: Record<
 		note: "Windows 平台可直接游玩",
 	},
 	en: {
-		label: "Want the Windows / Steam version instead?",
-		note: "Optional download. You can play in the browser above without installing anything.",
+		label: "Download Full Game",
+		note: "Windows version, playable directly after download",
 	},
 	fa: {
 		label: "دانلود نسخه کامل",
@@ -461,28 +318,10 @@ const puzzleDreamSchema = JSON.stringify([
 		"@context": "https://schema.org",
 		"@type": "VideoGame",
 		name: "HER TREES : PUZZLE DREAM",
-		alternateName: ["Her Trees Puzzle Dream", "her trees puzzle dream"],
 		url: canonicalUrl,
 		description: copy.description,
 		image: shareImage,
 		gamePlatform: "Web Browser",
-		playMode: "SinglePlayer",
-		genre: ["Puzzle", "Point-and-click", "Adventure"],
-		sameAs: [
-			"https://store.steampowered.com/app/3300800/HER_TREES__PUZZLE_DREAM/",
-		],
-	},
-	{
-		"@context": "https://schema.org",
-		"@type": "FAQPage",
-		mainEntity: copy.faqs.map((faq) => ({
-			"@type": "Question",
-			name: faq.question,
-			acceptedAnswer: {
-				"@type": "Answer",
-				text: faq.answer,
-			},
-		})),
 	},
 	{
 		"@context": "https://schema.org",
@@ -573,9 +412,8 @@ const puzzleDreamSchema = JSON.stringify([
 				<section class="hero-section">
 					<div class="feature-panel">
 						<div class="panel-header">
-							<h1>{copy.playHeading}</h1>
+							<h2>{copy.playHeading}</h2>
 						</div>
-						<AdUnit />
 						<div class="feature-box game-embed-shell">
 							<button
 								type="button"
@@ -630,8 +468,7 @@ const puzzleDreamSchema = JSON.stringify([
 									<span>{content.fullscreenButton}</span>
 								</button>
 							</div>
-							<p class="game-intro">{copy.intro}</p>
-							<p class="browser-hint">{copy.browserHint}</p>
+							<p class="game-intro">{copy.overviewBody}</p>
 						</div>
 						<div class="guide-card">
 							<p class="guide-note">
@@ -641,7 +478,7 @@ const puzzleDreamSchema = JSON.stringify([
 								</a>
 							</p>
 						</div>
-						<div class="download-card download-card-secondary">
+						<div class="download-card">
 							<p class="download-note">
 								<a
 									href={puzzleDreamDownloadUrl}
@@ -668,6 +505,7 @@ const puzzleDreamSchema = JSON.stringify([
 								<span>{downloadCopy[locale].note}</span>
 							</p>
 						</div>
+						<AdUnit />
 						</div>
 					</section>
 
@@ -698,13 +536,6 @@ const puzzleDreamSchema = JSON.stringify([
 					<h2>{copy.overviewHeading}</h2>
 					<div class="prose-block">
 						<p>{copy.overviewBody}</p>
-						<p>
-							<a href={puzzleDreamGuidePath}>Her Trees Puzzle Dream walkthrough</a>
-							{" · "}
-							<a href={androidPath}>Her Trees Puzzle Dream Android</a>
-							{" · "}
-							<a href={switchPath}>Her Trees Puzzle Dream Switch</a>
-						</p>
 					</div>
 				</section>
 
@@ -716,20 +547,6 @@ const puzzleDreamSchema = JSON.stringify([
 								<article class="bullet-card">
 									<p>{item}</p>
 								</article>
-							))
-						}
-					</div>
-				</section>
-
-				<section class="content-section">
-					<h2>{copy.faqHeading}</h2>
-					<div class="faq-list">
-						{
-							copy.faqs.map((faq) => (
-								<details class="faq-item">
-									<summary>{faq.question}</summary>
-									<p set:html={linkifyFaq(faq.answer)} />
-								</details>
 							))
 						}
 					</div>

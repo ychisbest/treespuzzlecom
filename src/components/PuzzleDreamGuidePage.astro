@@ -2,7 +2,6 @@
 import puzzleDreamImage from "../assets/puzzle_dream.png";
 import "../styles/global.css";
 import AdUnit from "./AdUnit.astro";
-import AnswerTable from "./AnswerTable.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
 import {
@@ -22,7 +21,6 @@ import {
 	localeToOgLocale,
 	toAbsoluteUrl,
 } from "../data/seo";
-import { dreamAnswers } from "../data/guide-answers";
 
 type Props = {
 	locale: Locale;
@@ -37,18 +35,6 @@ const guidePath =
 		: `/${locale}/play/puzzle-dream/guide/`;
 const playPath =
 	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
-const houseGuidePath =
-	locale === "en"
-		? "/play/puzzle-house/guide/"
-		: `/${locale}/play/puzzle-house/guide/`;
-const androidPath =
-	locale === "en"
-		? "/play/puzzle-dream/android/"
-		: `/${locale}/play/puzzle-dream/android/`;
-const switchPath =
-	locale === "en"
-		? "/play/puzzle-dream/switch/"
-		: `/${locale}/play/puzzle-dream/switch/`;
 const shareImage = new URL(puzzleDreamImage.src, siteUrl).toString();
 
 const languageLinks = buildAlternateLinks(
@@ -83,9 +69,9 @@ const guideCopy: Record<
 	}
 > = {
 	"zh-cn": {
-		title: "Her Trees Puzzle Dream 攻略 - 全部键盘答案",
+		title: "HER TREES : PUZZLE DREAM 攻略视频",
 		description:
-			"her trees puzzle dream / HER TREES : PUZZLE DREAM 的完整攻略视频，对应本站免费浏览器版。",
+			"查看 HER TREES : PUZZLE DREAM 的嵌入式攻略视频，直接对应站内浏览器版游戏流程。",
 		breadcrumbLabel: "Puzzle Dream 攻略",
 		beforeHeading: "看视频前先做什么",
 		beforeBody:
@@ -102,9 +88,9 @@ const guideCopy: Record<
 		analysisLabel: "玩法解析",
 	},
 	en: {
-		title: "Her Trees Puzzle Dream Walkthrough - All Keypad Answers",
+		title: "HER TREES : PUZZLE DREAM Guide Video",
 		description:
-			"Every keypad code for her trees puzzle dream, also searched as HER TREES : PUZZLE DREAM. Answer table first, then the full video for the free browser version.",
+			"Watch an embedded walkthrough for HER TREES : PUZZLE DREAM, matched to the browser version on this site.",
 		breadcrumbLabel: "Puzzle Dream Guide",
 		beforeHeading: "Before you watch",
 		beforeBody:
@@ -121,7 +107,7 @@ const guideCopy: Record<
 		analysisLabel: "Puzzle Design Analysis",
 	},
 	fa: {
-		title: "Her Trees Puzzle Dream - راهنمای کامل و جدول رمز",
+		title: "ویدیوی راهنمای HER TREES : PUZZLE DREAM",
 		description:
 			"ویدیوی راهنمای HER TREES : PUZZLE DREAM را تماشا کنید، مطابق با نسخه مرورگر در این سایت.",
 		breadcrumbLabel: "راهنمای Puzzle Dream",
@@ -140,9 +126,9 @@ const guideCopy: Record<
 		analysisLabel: "تحلیل طراحی پازل",
 	},
 	fr: {
-		title: "Her Trees Puzzle Dream Walkthrough - Toutes les reponses",
+		title: "HER TREES : PUZZLE DREAM Guide Vidéo",
 		description:
-			"Walkthrough de her trees puzzle dream / HER TREES : PUZZLE DREAM. Vidéo pour la version navigateur gratuite.",
+			"Regardez un walkthrough intégré pour HER TREES : PUZZLE DREAM, adapté à la version navigateur de ce site.",
 		breadcrumbLabel: "Guide Puzzle Dream",
 		beforeHeading: "Avant de regarder",
 		beforeBody:
@@ -159,7 +145,7 @@ const guideCopy: Record<
 		analysisLabel: "Analyse de la Conception des Puzzles",
 	},
 	id: {
-		title: "Her Trees Puzzle Dream Walkthrough - Semua Jawaban Keypad",
+		title: "Video Panduan HER TREES : PUZZLE DREAM",
 		description:
 			"Tonton panduan walkthrough HER TREES : PUZZLE DREAM yang tertanam di halaman ini, sesuai dengan versi browser di situs ini.",
 		breadcrumbLabel: "Panduan Puzzle Dream",
@@ -178,7 +164,7 @@ const guideCopy: Record<
 		analysisLabel: "Analisis Desain Puzzle",
 	},
 	ja: {
-		title: "Her Trees Puzzle Dream 攻略 - キーパッド全解答",
+		title: "HER TREES : PUZZLE DREAM 攻略動画",
 		description:
 			"HER TREES : PUZZLE DREAM の攻略動画をページ内で確認できます。サイト内のブラウザ版に対応しています。",
 		breadcrumbLabel: "Puzzle Dream 攻略",
@@ -197,7 +183,7 @@ const guideCopy: Record<
 		analysisLabel: "分析記事",
 	},
 	vi: {
-		title: "Her Trees Puzzle Dream Walkthrough - Tat ca ma keypad",
+		title: "Video huong dan HER TREES : PUZZLE DREAM",
 		description:
 			"Xem video huong dan nhung san cho HER TREES : PUZZLE DREAM, phu hop voi ban browser tren website.",
 		breadcrumbLabel: "Huong dan Puzzle Dream",
@@ -222,18 +208,6 @@ const canonicalUrl = toAbsoluteUrl(guidePath);
 const ogLocale = localeToOgLocale(locale);
 const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 const guideSchema = JSON.stringify([
-	{
-		"@context": "https://schema.org",
-		"@type": "HowTo",
-		name: copy.title,
-		description: copy.description,
-		step: dreamAnswers.map((row, index) => ({
-			"@type": "HowToStep",
-			position: index + 1,
-			name: row.puzzle[locale],
-			text: row.answer,
-		})),
-	},
 	{
 		"@context": "https://schema.org",
 		"@type": "VideoObject",
@@ -333,20 +307,7 @@ const guideSchema = JSON.stringify([
 				<section class="page-intro-block">
 					<h1>{copy.title}</h1>
 					<p>{copy.description}</p>
-					<p>
-						<a href={playPath}>Play Her Trees Puzzle Dream</a>
-						{" · "}
-						<a href={houseGuidePath}>Puzzle House walkthrough</a>
-						{" · "}
-						<a href={androidPath}>Android browser play</a>
-						{" · "}
-						<a href={switchPath}>Switch (not on Nintendo)</a>
-					</p>
 				</section>
-
-				<AdUnit />
-
-				<AnswerTable locale={locale} game="dream" />
 
 				<section class="guide-frame-shell">
 					<iframe
@@ -359,6 +320,8 @@ const guideSchema = JSON.stringify([
 						allowfullscreen
 					></iframe>
 				</section>
+
+				<AdUnit />
 
 				<section class="content-section">
 					<h2>{copy.beforeHeading}</h2>

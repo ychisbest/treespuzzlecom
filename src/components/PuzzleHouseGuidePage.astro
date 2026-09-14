@@ -2,7 +2,6 @@
 import puzzleHouseImage from "../assets/puzzle_house.jpg";
 import "../styles/global.css";
 import AdUnit from "./AdUnit.astro";
-import AnswerTable from "./AnswerTable.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
 import {
@@ -22,7 +21,6 @@ import {
 	localeToOgLocale,
 	toAbsoluteUrl,
 } from "../data/seo";
-import { houseAnswers } from "../data/guide-answers";
 
 type Props = {
 	locale: Locale;
@@ -37,12 +35,6 @@ const guidePath =
 		: `/${locale}/play/puzzle-house/guide/`;
 const playPath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
-const dreamGuidePath =
-	locale === "en"
-		? "/play/puzzle-dream/guide/"
-		: `/${locale}/play/puzzle-dream/guide/`;
-const dreamPlayPath =
-	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
 const shareImage = new URL(puzzleHouseImage.src, siteUrl).toString();
 
 const languageLinks = buildAlternateLinks(
@@ -77,9 +69,9 @@ const guideCopy: Record<
 	}
 > = {
 	"zh-cn": {
-		title: "Her Trees The Puzzle House 攻略 - 全部键盘答案",
+		title: "HER TREES : THE PUZZLE HOUSE 攻略视频",
 		description:
-			"her trees the puzzle house / HER TREES : THE PUZZLE HOUSE 的完整攻略视频，对应本站免费浏览器版。",
+			"查看 HER TREES : THE PUZZLE HOUSE 的嵌入式攻略视频，直接对应浏览器版游戏流程。",
 		breadcrumbLabel: "Puzzle House 攻略",
 		beforeHeading: "看视频前先做什么",
 		beforeBody:
@@ -96,9 +88,9 @@ const guideCopy: Record<
 		analysisLabel: "玩法解析",
 	},
 	en: {
-		title: "Her Trees The Puzzle House Walkthrough - All Keypad Answers",
+		title: "HER TREES : THE PUZZLE HOUSE Guide Video",
 		description:
-			"Every keypad code for her trees the puzzle house, also searched as HER TREES : THE PUZZLE HOUSE. Answer table first, then the full video for the free browser version.",
+			"Watch an embedded walkthrough for HER TREES : THE PUZZLE HOUSE, matched to the browser version on this site.",
 		breadcrumbLabel: "Puzzle House Guide",
 		beforeHeading: "Before you watch",
 		beforeBody:
@@ -115,7 +107,7 @@ const guideCopy: Record<
 		analysisLabel: "Puzzle Design Analysis",
 	},
 	fa: {
-		title: "Her Trees The Puzzle House - راهنمای کامل و جدول رمز",
+		title: "ویدیوی راهنمای HER TREES : THE PUZZLE HOUSE",
 		description:
 			"ویدیوی راهنمای HER TREES : THE PUZZLE HOUSE را تماشا کنید، مطابق با نسخه مرورگر در این سایت.",
 		breadcrumbLabel: "راهنمای Puzzle House",
@@ -134,9 +126,9 @@ const guideCopy: Record<
 		analysisLabel: "تحلیل طراحی پازل",
 	},
 	fr: {
-		title: "Her Trees The Puzzle House Walkthrough - Toutes les reponses",
+		title: "HER TREES : THE PUZZLE HOUSE Guide Vidéo",
 		description:
-			"Walkthrough de her trees the puzzle house / HER TREES : THE PUZZLE HOUSE. Vidéo pour la version navigateur gratuite.",
+			"Regardez un walkthrough intégré pour HER TREES : THE PUZZLE HOUSE, adapté à la version navigateur de ce site.",
 		breadcrumbLabel: "Guide Puzzle House",
 		beforeHeading: "Avant de regarder",
 		beforeBody:
@@ -153,7 +145,7 @@ const guideCopy: Record<
 		analysisLabel: "Analyse de la Conception des Puzzles",
 	},
 	id: {
-		title: "Her Trees The Puzzle House Walkthrough - Semua Jawaban Keypad",
+		title: "Video Panduan HER TREES : THE PUZZLE HOUSE",
 		description:
 			"Tonton panduan walkthrough HER TREES : THE PUZZLE HOUSE yang tertanam di halaman ini, sesuai dengan versi browser di situs ini.",
 		breadcrumbLabel: "Panduan Puzzle House",
@@ -172,7 +164,7 @@ const guideCopy: Record<
 		analysisLabel: "Analisis Desain Puzzle",
 	},
 	ja: {
-		title: "Her Trees The Puzzle House 攻略 - キーパッド全解答",
+		title: "HER TREES : THE PUZZLE HOUSE 攻略動画",
 		description:
 			"HER TREES : THE PUZZLE HOUSE の攻略動画をページ内で確認できます。サイト内のブラウザ版に対応しています。",
 		breadcrumbLabel: "Puzzle House 攻略",
@@ -191,7 +183,7 @@ const guideCopy: Record<
 		analysisLabel: "分析記事",
 	},
 	vi: {
-		title: "Her Trees The Puzzle House Walkthrough - Tat ca ma keypad",
+		title: "Video huong dan HER TREES : THE PUZZLE HOUSE",
 		description:
 			"Xem video huong dan nhung san cho HER TREES : THE PUZZLE HOUSE, phu hop voi ban browser tren website.",
 		breadcrumbLabel: "Huong dan Puzzle House",
@@ -217,18 +209,6 @@ const playUrl = toAbsoluteUrl(playPath);
 const ogLocale = localeToOgLocale(locale);
 const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 const guideSchema = JSON.stringify([
-	{
-		"@context": "https://schema.org",
-		"@type": "HowTo",
-		name: copy.title,
-		description: copy.description,
-		step: houseAnswers.map((row, index) => ({
-			"@type": "HowToStep",
-			position: index + 1,
-			name: row.puzzle[locale],
-			text: row.answer,
-		})),
-	},
 	{
 		"@context": "https://schema.org",
 		"@type": "VideoObject",
@@ -328,18 +308,7 @@ const guideSchema = JSON.stringify([
 				<section class="page-intro-block">
 					<h1>{copy.title}</h1>
 					<p>{copy.description}</p>
-					<p>
-						<a href={playPath}>Play Her Trees The Puzzle House</a>
-						{" · "}
-						<a href={dreamPlayPath}>Play Her Trees Puzzle Dream</a>
-						{" · "}
-						<a href={dreamGuidePath}>Dream walkthrough</a>
-					</p>
 				</section>
-
-				<AdUnit />
-
-				<AnswerTable locale={locale} game="house" />
 
 				<section class="guide-frame-shell">
 					<iframe
@@ -352,6 +321,8 @@ const guideSchema = JSON.stringify([
 						allowfullscreen
 					></iframe>
 				</section>
+
+				<AdUnit />
 
 				<section class="content-section">
 					<h2>{copy.beforeHeading}</h2>

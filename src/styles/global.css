@@ -221,11 +221,6 @@ a:hover {
 	display: block;
 }
 
-.hero-h1-block {
-	margin-bottom: 28px;
-	padding-bottom: 16px;
-}
-
 .feature-panel {
 	border: 1px solid var(--border-color);
 	padding: 30px;
@@ -419,16 +414,9 @@ a:hover {
 
 .ad-unit {
 	margin: 20px 0;
-	padding: 12px 0;
-	min-height: 120px;
-	overflow: hidden;
-	position: relative;
-	z-index: 1;
-	isolation: isolate;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background: transparent;
+	padding: 18px 20px;
+	border: 1px solid var(--border-color);
+	background: #fff;
 }
 
 .download-note {
@@ -489,70 +477,6 @@ a:hover {
 	color: var(--accent-color);
 	font-size: 0.92rem;
 	line-height: 1.7;
-}
-
-.browser-hint {
-	margin: 8px 0 0;
-	color: var(--accent-color);
-	font-size: 0.88rem;
-	line-height: 1.6;
-}
-
-.more-play-grid {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 16px;
-}
-
-.more-play-card,
-.start-card-link {
-	display: block;
-	text-decoration: none;
-	color: inherit;
-}
-
-.more-play-card {
-	padding: 18px 20px;
-	border: 1px solid var(--border-color);
-	background: #fff;
-}
-
-.more-play-card strong {
-	display: block;
-	margin-bottom: 6px;
-}
-
-.more-play-card span {
-	color: var(--accent-color);
-	font-size: 0.9rem;
-}
-
-.download-card-secondary {
-	border-style: dashed;
-	background: #fafafa;
-}
-
-.download-card-secondary .download-button {
-	padding: 0.55rem 0.9rem;
-	box-shadow: none;
-	background: #fff;
-	color: #111;
-}
-
-.download-card-secondary .download-button:hover {
-	transform: none;
-	background: #f3f3f3;
-	color: #111;
-}
-
-.guide-scope-note {
-	margin: 12px 0 0;
-	color: var(--accent-color);
-	font-size: 0.95rem;
-}
-
-.page-intro-block .more-play-grid {
-	margin-top: 20px;
 }
 
 .guide-note {
@@ -708,16 +632,6 @@ a:hover {
 	width: 100%;
 	border-collapse: collapse;
 	min-width: 760px;
-}
-
-.answer-table {
-	min-width: 0;
-}
-
-.answer-code {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-	letter-spacing: 0.08em;
-	font-weight: 600;
 }
 
 .comparison-table th,
@@ -1196,10 +1110,6 @@ a:hover {
 }
 
 @media (max-width: 760px) {
-	.more-play-grid {
-		grid-template-columns: 1fr;
-	}
-
 	.container-shell {
 		padding: 0 20px 40px;
 	}

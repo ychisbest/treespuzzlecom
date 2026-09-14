@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import AdUnit from "../components/AdUnit.astro";
 import {
 	adsensePublisherId,
 	shellContent,
@@ -29,7 +28,6 @@ type Props = {
 	languageSwitchLabel?: string;
 	languageLinks?: AlternateLink[];
 	xDefaultHref?: string;
-	robots?: string;
 };
 
 const {
@@ -44,19 +42,10 @@ const {
 	languageSwitchLabel,
 	languageLinks = [],
 	xDefaultHref,
-	robots = "index, follow",
 } = Astro.props;
 
 const shell = shellContent[locale];
 const canonicalUrl = toAbsoluteUrl(canonicalPath);
-const prefix = locale === "en" ? "" : `/${locale}`;
-const relatedPlay = [
-	{ href: `${prefix}/play/puzzle-dream/`, label: "Her Trees Puzzle Dream" },
-	{ href: `${prefix}/play/puzzle-dream/guide/`, label: "Dream walkthrough" },
-	{ href: `${prefix}/play/puzzle-house/`, label: "Puzzle House" },
-	{ href: `${prefix}/play/puzzle-house/guide/`, label: "House answers" },
-	{ href: `${prefix}/play/first-puzzle/`, label: "First Puzzle" },
-];
 const serializedSchema = schema
 	? JSON.stringify(Array.isArray(schema) ? schema : [schema])
 	: "";
@@ -77,7 +66,7 @@ const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<meta name="robots" content={robots} />
+		<meta name="robots" content="index, follow" />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
@@ -138,20 +127,9 @@ const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 						<h1>{pageHeading}</h1>
 						<p>{pageIntro}</p>
 					</header>
-					<AdUnit />
 					<div class="article-prose">
 						<slot />
 					</div>
-					<nav class="more-play-grid" aria-label="Play Her Trees">
-						{
-							relatedPlay.map((item) => (
-								<a class="more-play-card" href={item.href}>
-									<strong>{item.label}</strong>
-									<span>Play or open answers</span>
-								</a>
-							))
-						}
-					</nav>
 				</article>
 			</main>
 

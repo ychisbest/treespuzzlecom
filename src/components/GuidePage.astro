@@ -28,14 +28,6 @@ type Props = {
 const { locale } = Astro.props;
 const content = homeContent[locale];
 const guideEmbedUrl = "https://www.youtube.com/embed/yzNEcdAW-cU";
-const puzzleDreamGuidePath =
-	locale === "en"
-		? "/play/puzzle-dream/guide/"
-		: `/${locale}/play/puzzle-dream/guide/`;
-const puzzleHouseGuidePath =
-	locale === "en"
-		? "/play/puzzle-house/guide/"
-		: `/${locale}/play/puzzle-house/guide/`;
 
 const languageLinks = guideAlternateLinks(locale);
 
@@ -52,11 +44,6 @@ const guideSupport: Record<
 		nextHeading: string;
 		nextBody: string;
 		analysisLabel: string;
-		scopeNote: string;
-		dreamGuideLabel: string;
-		houseGuideLabel: string;
-		dreamGuideBody: string;
-		houseGuideBody: string;
 	}
 > = {
 	"zh-cn": {
@@ -73,11 +60,6 @@ const guideSupport: Record<
 		nextHeading: "继续阅读",
 		nextBody: "如果你还想看系列定位和玩法判断，可以继续查看分析页面。",
 		analysisLabel: "玩法解析",
-		scopeNote: "本页只覆盖 First Puzzle。Dream 和 House 请打开各自的攻略页。",
-		dreamGuideLabel: "Her Trees Puzzle Dream 攻略",
-		houseGuideLabel: "Her Trees The Puzzle House 攻略",
-		dreamGuideBody: "打开 Puzzle Dream 键盘答案表和视频。",
-		houseGuideBody: "打开 Puzzle House 键盘答案表和视频。",
 	},
 	en: {
 		breadcrumbLabel: "Guide",
@@ -94,12 +76,6 @@ const guideSupport: Record<
 		nextBody:
 			"If you want series analysis in addition to the video, continue with the page below.",
 		analysisLabel: "Puzzle Design Analysis",
-		scopeNote:
-			"This page covers First Puzzle only. Open the dedicated guides for Puzzle Dream and Puzzle House.",
-		dreamGuideLabel: "Her Trees Puzzle Dream walkthrough",
-		houseGuideLabel: "Her Trees The Puzzle House walkthrough",
-		dreamGuideBody: "Open every Her Trees Puzzle Dream keypad code, then the video.",
-		houseGuideBody: "Open every Puzzle House keypad code, then the video.",
 	},
 	fa: {
 		breadcrumbLabel: "راهنما",
@@ -115,12 +91,6 @@ const guideSupport: Record<
 		nextHeading: "مطالعه بیشتر",
 		nextBody: "اگر علاوه بر ویدیو تحلیل مجموعه را می‌خواهید، به صفحه زیر ادامه دهید.",
 		analysisLabel: "تحلیل طراحی پازل",
-		scopeNote:
-			"این صفحه فقط First Puzzle را پوشش می‌دهد. برای Dream و House صفحات راهنمای جدا را باز کنید.",
-		dreamGuideLabel: "Her Trees Puzzle Dream راهنما",
-		houseGuideLabel: "راهنمای Puzzle House",
-		dreamGuideBody: "ویدیوی راهنمای مستقل Puzzle Dream را باز کنید.",
-		houseGuideBody: "ویدیوی راهنمای مستقل Puzzle House را باز کنید.",
 	},
 	fr: {
 		breadcrumbLabel: "Guide",
@@ -136,12 +106,6 @@ const guideSupport: Record<
 		nextHeading: "Lire la suite",
 		nextBody: "Si vous souhaitez une analyse de la série en plus de la vidéo, continuez avec la page ci-dessous.",
 		analysisLabel: "Analyse de la Conception des Puzzles",
-		scopeNote:
-			"Cette page couvre uniquement First Puzzle. Ouvrez les guides dédiés pour Puzzle Dream et Puzzle House.",
-		dreamGuideLabel: "Her Trees Puzzle Dream walkthrough",
-		houseGuideLabel: "Guide Puzzle House",
-		dreamGuideBody: "Ouvrir la vidéo de guide dédiée à Puzzle Dream.",
-		houseGuideBody: "Ouvrir la vidéo de guide dédiée à Puzzle House.",
 	},
 	id: {
 		breadcrumbLabel: "Panduan",
@@ -157,12 +121,6 @@ const guideSupport: Record<
 		nextHeading: "Bacaan lanjutan",
 		nextBody: "Jika kamu ingin analisis seri selain video, lanjutkan ke halaman di bawah ini.",
 		analysisLabel: "Analisis Desain Puzzle",
-		scopeNote:
-			"Halaman ini hanya untuk First Puzzle. Buka panduan terpisah untuk Puzzle Dream dan Puzzle House.",
-		dreamGuideLabel: "Her Trees Puzzle Dream walkthrough",
-		houseGuideLabel: "Panduan Puzzle House",
-		dreamGuideBody: "Buka video panduan khusus Puzzle Dream.",
-		houseGuideBody: "Buka video panduan khusus Puzzle House.",
 	},
 	ja: {
 		breadcrumbLabel: "攻略",
@@ -178,12 +136,6 @@ const guideSupport: Record<
 		nextHeading: "関連ページ",
 		nextBody: "分析記事も用意しているので、必要に応じて続けて確認できます。",
 		analysisLabel: "分析記事",
-		scopeNote:
-			"このページは First Puzzle だけです。Dream と House はそれぞれの攻略ページを開いてください。",
-		dreamGuideLabel: "Her Trees Puzzle Dream 攻略",
-		houseGuideLabel: "Her Trees The Puzzle House 攻略",
-		dreamGuideBody: "Puzzle Dream 専用の攻略動画を開く。",
-		houseGuideBody: "Puzzle House 専用の攻略動画を開く。",
 	},
 	vi: {
 		breadcrumbLabel: "Huong dan",
@@ -199,12 +151,6 @@ const guideSupport: Record<
 		nextHeading: "Doc tiep",
 		nextBody: "Neu ban muon doc them ve thiet ke cua dong game, hay mo bai phan tich.",
 		analysisLabel: "Phan tich thiet ke",
-		scopeNote:
-			"Trang nay chi la First Puzzle. Mo trang huong dan rieng cho Puzzle Dream va Puzzle House.",
-		dreamGuideLabel: "Her Trees Puzzle Dream walkthrough",
-		houseGuideLabel: "Huong dan Puzzle House",
-		dreamGuideBody: "Mo video huong dan rieng cua Puzzle Dream.",
-		houseGuideBody: "Mo video huong dan rieng cua Puzzle House.",
 	},
 };
 
@@ -313,20 +259,7 @@ const guideSchema = JSON.stringify([
 				<section class="page-intro-block">
 					<h1>{content.guidePageTitle}</h1>
 					<p>{content.guidePageDescription}</p>
-					<p class="guide-scope-note">{guideNotes.scopeNote}</p>
-					<div class="more-play-grid">
-						<a class="more-play-card" href={puzzleDreamGuidePath}>
-							<strong>{guideNotes.dreamGuideLabel}</strong>
-							<span>Her Trees Puzzle Dream keypad answers</span>
-						</a>
-						<a class="more-play-card" href={puzzleHouseGuidePath}>
-							<strong>{guideNotes.houseGuideLabel}</strong>
-							<span>Her Trees The Puzzle House keypad answers</span>
-						</a>
-					</div>
 				</section>
-
-				<AdUnit />
 
 				<section class="guide-frame-shell">
 					<iframe
@@ -339,6 +272,8 @@ const guideSchema = JSON.stringify([
 						allowfullscreen
 					></iframe>
 				</section>
+
+				<AdUnit />
 
 				<section class="content-section">
 					<h2>{guideNotes.beforeHeading}</h2>
@@ -365,18 +300,6 @@ const guideSchema = JSON.stringify([
 					<h2>{guideNotes.nextHeading}</h2>
 					<p class="section-intro">{guideNotes.nextBody}</p>
 					<div class="resource-grid">
-						<article class="resource-card">
-							<h3>
-								<a href={puzzleDreamGuidePath}>{guideNotes.dreamGuideLabel}</a>
-							</h3>
-							<p>{guideNotes.dreamGuideBody}</p>
-						</article>
-						<article class="resource-card">
-							<h3>
-								<a href={puzzleHouseGuidePath}>{guideNotes.houseGuideLabel}</a>
-							</h3>
-							<p>{guideNotes.houseGuideBody}</p>
-						</article>
 						<article class="resource-card">
 							<h3>
 								<a href={globalPaths.analysis}>{guideNotes.analysisLabel}</a>
