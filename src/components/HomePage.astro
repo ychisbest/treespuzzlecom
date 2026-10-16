@@ -35,12 +35,78 @@ type Props = {
 const { locale } = Astro.props;
 const content = homeContent[locale];
 const firstPuzzleEmbedUrl = "/her-trees-first-puzzle/index.html";
-const firstPuzzlePagePath = `${content.path}#play`;
+const firstPuzzlePagePath =
+	locale === "en" ? "/play/first-puzzle/" : `/${locale}/play/first-puzzle/`;
 const puzzleHousePagePath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
 const puzzleDreamPagePath =
 	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
 const treesHateYouPagePath = "/trees-hate-you/";
+const androidDreamPath =
+	locale === "en"
+		? "/play/puzzle-dream/android/"
+		: `/${locale}/play/puzzle-dream/android/`;
+const hubHeadings: Record<Locale, string> = {
+	en: "Her Trees – Puzzle Series Overview",
+	fa: "بازی Her Trees – معرفی مجموعه",
+	id: "Her Trees – Ringkasan Seri Puzzle",
+	vi: "Her Trees – Tổng quan series",
+	fr: "Her Trees – Présentation de la série",
+	"zh-cn": "Her Trees – 系列导航",
+	ja: "Her Trees – シリーズ概要",
+};
+const hubPrefix: Record<Locale, string> = {
+	en: "Dedicated play pages:",
+	fa: "صفحات بازی:",
+	id: "Halaman main:",
+	vi: "Trang chơi:",
+	fr: "Pages de jeu :",
+	"zh-cn": "专页入口：",
+	ja: "プレイページ:",
+};
+const hubFp: Record<Locale, string> = {
+	en: "Her Trees First Puzzle",
+	fa: "First Puzzle",
+	id: "First Puzzle",
+	vi: "First Puzzle",
+	fr: "First Puzzle",
+	"zh-cn": "First Puzzle",
+	ja: "First Puzzle",
+};
+const hubPh: Record<Locale, string> = {
+	en: "Her Trees The Puzzle House",
+	fa: "Puzzle House",
+	id: "Main Puzzle House",
+	vi: "Chơi Puzzle House",
+	fr: "Jouer à Puzzle House",
+	"zh-cn": "Puzzle House",
+	ja: "Puzzle House",
+};
+const hubPd: Record<Locale, string> = {
+	en: "Her Trees Puzzle Dream",
+	fa: "بازی Puzzle Dream",
+	id: "Main Puzzle Dream",
+	vi: "Chơi Puzzle Dream",
+	fr: "Jouer à Puzzle Dream",
+	"zh-cn": "Puzzle Dream",
+	ja: "Puzzle Dream",
+};
+const hubGuide: Record<Locale, string> = {
+	en: "First Puzzle walkthrough",
+	fa: "راهنما / ویدیوی حل معما",
+	id: "Panduan / walkthrough",
+	vi: "Hướng dẫn / walkthrough",
+	fr: "Guide / walkthrough",
+	"zh-cn": "攻略",
+	ja: "攻略",
+};
+const hubAndroid: Partial<Record<Locale, string>> = {
+	fa: "اندروید / گوشی",
+};
+const seriesHubNote: Partial<Record<Locale, string>> = {
+	en: "Looking for a specific game? Open its play page — this homepage is the series hub, not the ranking page for Puzzle Dream or Puzzle House.",
+	fa: "نسخهٔ رسمی اندروید/گوگل‌پلی وجود ندارد — برای گوشی از صفحهٔ Puzzle Dream یا Android با مرورگر افقی استفاده کنید.",
+};
 const firstPuzzleDownloadUrl =
 	"https://game.doritosscript.com/HerTreesFirstPuzzle.zip";
 const shareImage = new URL(firstPuzzleImage.src, siteUrl).toString();
@@ -394,6 +460,7 @@ const homeSchema = JSON.stringify([
 				<section class="hero-section" id="play">
 					<div class="feature-panel">
 						<div class="panel-header">
+							<h1>{hubHeadings[locale]}</h1>
 							<h2>{content.playHeading}</h2>
 							<p class="section-intro">
 								{support.updatedLabel}: {lastUpdated}
@@ -455,6 +522,24 @@ const homeSchema = JSON.stringify([
 							</div>
 							<p class="game-intro">{content.gameIntro}</p>
 						</div>
+						<p class="hub-links">
+							{hubPrefix[locale]}{" "}
+							<a href={firstPuzzlePagePath}>{hubFp[locale]}</a>
+							{" · "}
+							<a href={puzzleHousePagePath}>{hubPh[locale]}</a>
+							{" · "}
+							<a href={puzzleDreamPagePath}>{hubPd[locale]}</a>
+							{" · "}
+							<a href={content.guidePath}>{hubGuide[locale]}</a>
+							{
+								hubAndroid[locale] ? (
+									<>
+										{" · "}
+										<a href={androidDreamPath}>{hubAndroid[locale]}</a>
+									</>
+								) : null
+							}
+						</p>
 						<div class="guide-card">
 							<p class="guide-note">
 								{guideNoteCopy[locale].prefix}
@@ -496,6 +581,7 @@ const homeSchema = JSON.stringify([
 
 				<section class="content-section" id="series">
 					<h2>{content.seriesHeading}</h2>
+					{seriesHubNote[locale] ? <p class="section-intro">{seriesHubNote[locale]}</p> : null}
 					<div class="games-grid">
 						{
 							relatedGames.map((game) =>

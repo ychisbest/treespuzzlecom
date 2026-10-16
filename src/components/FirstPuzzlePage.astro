@@ -39,12 +39,12 @@ const copyByLocale: Record<
 	{ title: string; description: string; h1: string; intro: string; play: string }
 > = {
 	en: {
-		title: "Her Trees First Puzzle - Play Free in Browser",
+		title: "Her Trees First Puzzle – Play Free in Browser",
 		description:
-			"Play Her Trees First Puzzle free in your browser. Short black-and-white room puzzle, no download. Then continue to Puzzle House and Her Trees Puzzle Dream.",
+			"Play Her Trees First Puzzle free in your browser — the shortest HER TREES room. No download. Stuck? Open the First Puzzle walkthrough, then continue to Puzzle House or Puzzle Dream.",
 		h1: "Play Her Trees First Puzzle",
 		intro:
-			"First Puzzle is the shortest HER TREES entry. Move and combine objects in one room, then enter letters on the A–I grid. The homepage now plays Puzzle Dream; this page keeps the first game as its own URL.",
+			"First Puzzle is the shortest HER TREES entry and the best “her trees first puzzle” landing page. Move and combine objects in one room, then enter letters on the A–I grid. This URL — not the homepage — should own First Puzzle play intent. For solutions, use the walkthrough link below.",
 		play: "Start First Puzzle",
 	},
 	"zh-cn": {
@@ -221,7 +221,7 @@ const schema = JSON.stringify([
 						</div>
 						<p class="game-intro">{copy.intro}</p>
 						<p>
-							<a href={guidePath}>First Puzzle walkthrough</a>
+							<a href={guidePath}>Her Trees First Puzzle walkthrough</a>
 							{" · "}
 							<a href={dreamPath}>Her Trees Puzzle Dream</a>
 							{" · "}
@@ -229,6 +229,14 @@ const schema = JSON.stringify([
 							{" · "}
 							<a href={housePath}>Her Trees The Puzzle House</a>
 						</p>
+						{
+							locale === "en" && (
+								<p>
+									Also see the guide page for{" "}
+									<a href="/guide/#forgotten-house">A Forgotten House walkthrough</a> notes.
+								</p>
+							)
+						}
 					</div>
 				</section>
 			</main>

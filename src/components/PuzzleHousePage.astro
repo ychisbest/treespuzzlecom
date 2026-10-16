@@ -116,23 +116,24 @@ const pageCopy: Record<
 		],
 	},
 	en: {
-		title: "HER TREES : THE PUZZLE HOUSE - Play Online Free | Puzzle Game",
+		title: "Her Trees The Puzzle House – Play Online Free",
 		description:
-			"Play HER TREES : THE PUZZLE HOUSE online for free. A compact surreal puzzle house with hand-drawn art. Available on Steam. 95% positive reviews.",
+			"Play Her Trees The Puzzle House in your browser. Compact hand-drawn surreal rooms — the middle game between First Puzzle and Puzzle Dream. Steam release available.",
 		breadcrumbLabel: "Puzzle House",
-		playHeading: "Play HER TREES : THE PUZZLE HOUSE",
+		playHeading: "Play Her Trees The Puzzle House",
 		iframeTitle: "HER TREES : THE PUZZLE HOUSE online",
 		playButton: "Start Puzzle House",
 		intro:
 			"This page loads the Puzzle House build from the public directory and keeps the same click-to-launch and fullscreen flow used on the homepage.",
 		overviewHeading: "What this page is for",
 		overviewBody:
-			"This is a dedicated entry for the second game in the series, useful when you want a fuller standalone room before moving on to Puzzle Dream.",
+			"Dedicated play page for Her Trees The Puzzle House (series entry 2). Use this URL for “her trees the puzzle house” / “puzzle house” intent. The homepage should only link here — it should not rank as the primary Puzzle House result.",
 		tipsHeading: "Play notes",
 		tips: [
 			"The first launch may take a moment while the WebGL files load.",
 			"Landscape works best on phones; fullscreen will try to lock orientation.",
 			"If you want the shortest starting point first, go back to the homepage and start with First Puzzle.",
+			"For the larger 40+ puzzle game, continue to Puzzle Dream; for the shortest intro, open First Puzzle.",
 		],
 	},
 	fa: {
@@ -156,11 +157,11 @@ const pageCopy: Record<
 		],
 	},
 	fr: {
-		title: "HER TREES : THE PUZZLE HOUSE - Jouer en Ligne Gratuit | Jeu de Puzzle",
+		title: "Puzzle House Her Trees – Jouer en ligne gratuitement",
 		description:
-			"Jouez à HER TREES : THE PUZZLE HOUSE en ligne gratuitement. Une maison de puzzle surréaliste compacte avec de l'art dessiné à la main. Disponible sur Steam.",
+			"Jouez à The Puzzle House (Her Trees) dans le navigateur. L’épisode du milieu avant Puzzle Dream.",
 		breadcrumbLabel: "Puzzle House",
-		playHeading: "Jouer à HER TREES : THE PUZZLE HOUSE",
+		playHeading: "Jouer à Puzzle House – Her Trees",
 		iframeTitle: "HER TREES : THE PUZZLE HOUSE en ligne",
 		playButton: "Lancer Puzzle House",
 		intro:
@@ -176,11 +177,11 @@ const pageCopy: Record<
 		],
 	},
 	id: {
-		title: "HER TREES : THE PUZZLE HOUSE - Main Online Gratis | Game Puzzle",
+		title: "Puzzle House Her Trees – Main Online Gratis",
 		description:
-			"Mainkan HER TREES : THE PUZZLE HOUSE online gratis. Rumah puzzle surealis ringkas dengan seni bergambar tangan. Tersedia di Steam.",
+			"Mainkan The Puzzle House (Her Trees) di browser. Game tengah seri sebelum Puzzle Dream.",
 		breadcrumbLabel: "Puzzle House",
-		playHeading: "Mainkan HER TREES : THE PUZZLE HOUSE",
+		playHeading: "Mainkan Puzzle House – Her Trees",
 		iframeTitle: "HER TREES : THE PUZZLE HOUSE online",
 		playButton: "Mulai Puzzle House",
 		intro:
@@ -216,11 +217,11 @@ const pageCopy: Record<
 		],
 	},
 	vi: {
-		title: "HER TREES : THE PUZZLE HOUSE - Chơi Online Miễn Phí | Game Giải Đố",
+		title: "Chơi Puzzle House Her Trees – Online miễn phí",
 		description:
-			"Chơi HER TREES : THE PUZZLE HOUSE online miễn phí. Ngôi nhà giải đố siêu thực gọn gàng với nghệ thuật vẽ tay. Có trên Steam.",
+			"Chơi The Puzzle House (Her Trees) trên trình duyệt. Phần giữa series trước Puzzle Dream.",
 		breadcrumbLabel: "Puzzle House",
-		playHeading: "Choi HER TREES : THE PUZZLE HOUSE",
+		playHeading: "Chơi Puzzle House – Her Trees",
 		iframeTitle: "HER TREES : THE PUZZLE HOUSE tren trinh duyet",
 		playButton: "Bat dau Puzzle House",
 		intro:
@@ -412,7 +413,7 @@ const puzzleHouseSchema = JSON.stringify([
 				<section class="hero-section">
 					<div class="feature-panel">
 						<div class="panel-header">
-							<h2>{copy.playHeading}</h2>
+							<h1>{copy.playHeading}</h1>
 						</div>
 						<div class="feature-box game-embed-shell">
 							<button
@@ -551,6 +552,41 @@ const puzzleHouseSchema = JSON.stringify([
 						}
 					</div>
 				</section>
+
+				{
+					locale === "en" && (
+						<p>
+							<a href="/play/puzzle-dream/">Her Trees Puzzle Dream</a> ·
+							<a href="/play/first-puzzle/">First Puzzle</a> ·
+							<a href="/">Her Trees series hub</a> ·
+							<a href="/play/puzzle-house/guide/">Puzzle House walkthrough</a>
+						</p>
+					)
+				}
+				{
+					locale === "id" && (
+						<p>
+							<a href="/id/play/puzzle-dream/">Puzzle Dream</a> ·
+							<a href="/id/">Hub Her Trees</a>
+						</p>
+					)
+				}
+				{
+					locale === "vi" && (
+						<p>
+							<a href="/vi/play/puzzle-dream/">Puzzle Dream</a> ·
+							<a href="/vi/">Hub Her Trees</a>
+						</p>
+					)
+				}
+				{
+					locale === "fr" && (
+						<p>
+							<a href="/fr/play/puzzle-dream/">Puzzle Dream</a> ·
+							<a href="/fr/">Hub Her Trees</a>
+						</p>
+					)
+				}
 			</main>
 
 			<SiteFooter locale={locale} />
