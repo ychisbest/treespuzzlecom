@@ -1,7 +1,7 @@
 ---
 // Comment widget (cf-comment-system). Page matching uses the normalized URL.
 const { locale = "en" } = Astro.props;
-const lang = locale === "zh-cn" ? "zh" : locale === "en" ? "en" : "auto";
+const lang = locale === "zh-cn" ? "zh" : locale; // site locale codes match widget codes (en/ja/fr/id/vi)
 ---
 
 <section class="comments-section" aria-label="Comments" style="max-width:48rem;margin:3rem auto;padding:0 1rem;">
