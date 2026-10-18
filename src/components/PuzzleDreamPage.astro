@@ -6,6 +6,7 @@ import puzzleDreamImage from "../assets/puzzle_dream.png";
 import treesHateYouImage from "../assets/trees-hate-you.png";
 import "../styles/global.css";
 import AdUnit from "./AdUnit.astro";
+import Comments from "./Comments.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
 import {
@@ -670,6 +671,8 @@ const puzzleDreamSchema = JSON.stringify([
 					)
 				}
 			</main>
+
+			<Comments locale={locale} />
 
 			<SiteFooter locale={locale} />
 		</div>
