@@ -62,6 +62,15 @@ const localeAlternates = {
 		ja: "/ja/play/puzzle-dream/android/",
 		vi: "/vi/play/puzzle-dream/android/",
 	},
+	playDreamIos: {
+		en: "/play/puzzle-dream/ios/",
+		"zh-cn": "/zh-cn/play/puzzle-dream/ios/",
+		fa: "/fa/play/puzzle-dream/ios/",
+		fr: "/fr/play/puzzle-dream/ios/",
+		id: "/id/play/puzzle-dream/ios/",
+		ja: "/ja/play/puzzle-dream/ios/",
+		vi: "/vi/play/puzzle-dream/ios/",
+	},
 	playDreamSwitch: {
 		en: "/play/puzzle-dream/switch/",
 		"zh-cn": "/zh-cn/play/puzzle-dream/switch/",

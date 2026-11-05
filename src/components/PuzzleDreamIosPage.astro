@@ -1,0 +1,285 @@
+---
+import "../styles/global.css";
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
+import AdUnit from "./AdUnit.astro";
+import { homeContent, type Locale } from "../data/home-content";
+import { adsensePublisherId } from "../data/site-shell";
+import {
+	buildAlternateLinks,
+	buildOgLocaleAlternates,
+	localeToHreflang,
+	localeToOgLocale,
+	toAbsoluteUrl,
+} from "../data/seo";
+
+type Props = {
+	locale: Locale;
+};
+
+const { locale } = Astro.props;
+const content = homeContent[locale];
+const pagePath =
+	locale === "en"
+		? "/play/puzzle-dream/ios/"
+		: `/${locale}/play/puzzle-dream/ios/`;
+const playPath =
+	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const guidePath =
+	locale === "en"
+		? "/play/puzzle-dream/guide/"
+		: `/${locale}/play/puzzle-dream/guide/`;
+const switchPath =
+	locale === "en"
+		? "/play/puzzle-dream/android/"
+		: `/${locale}/play/puzzle-dream/android/`;
+
+const copyByLocale: Record<
+	Locale,
+	{
+		title: string;
+		description: string;
+		h1: string;
+		intro: string;
+		playLabel: string;
+		guideLabel: string;
+		switchLabel: string;
+		facts: string[];
+	}
+> = {
+	en: {
+		title: "Her Trees Puzzle Dream iOS / iPhone - No Official App, Play in Safari",
+		description:
+			"There is no official Her Trees Puzzle Dream iOS app. The developer says HER TREES has no smartphone version; App Store and IPA listings are not from Stone. Play the browser version on iPhone or iPad.",
+		h1: "Her Trees Puzzle Dream iOS (iPhone & iPad)",
+		intro:
+			"Stone's official site says: \"There is no smartphone version of HER TREES. Games not linked on this site are pirated versions.\" You can still play on iPhone or iPad: open this site in Safari, rotate to landscape and start the browser version.",
+		playLabel: "Play Her Trees Puzzle Dream",
+		guideLabel: "Open keypad answers",
+		switchLabel: "Android browser guide",
+		facts: [
+			"No App Store release from Stone. iPhone listings on download sites and IPA stores are not from the developer.",
+			"Official places are Steam (full game) and itch.io (browser demo), both linked from stonegamedev.wordpress.com.",
+			"On iPhone use Safari in landscape; on iPad the bigger screen makes the code keypad easier to tap.",
+			"If a puzzle blocks you, the keypad answer table is on the walkthrough page.",
+		],
+	},
+	"zh-cn": {
+		title: "Her Trees Puzzle Dream iOS / iPhone - 无官方 App，Safari 浏览器玩",
+		description:
+			"Her Trees Puzzle Dream 没有官方 iOS 版。开发者说明 HER TREES 没有手机版，App Store 和 IPA 下载都不是 Stone 发布的。iPhone、iPad 用浏览器玩。",
+		h1: "Her Trees Puzzle Dream iOS（iPhone 与 iPad）",
+		intro:
+			"开发者 Stone 官网写明：“HER TREES 没有手机版，本站没有链接的版本都是盗版。”在 iPhone 或 iPad 上，用 Safari 打开本站并横屏，即可玩浏览器版。",
+		playLabel: "开始玩 Her Trees Puzzle Dream",
+		guideLabel: "打开键盘答案",
+		switchLabel: "Android 浏览器指南",
+		facts: [
+			"Stone 没有在 App Store 发布。下载站和 IPA 商店里的 iPhone 版都不是开发者发布的。",
+			"官方渠道只有 Steam（完整版）和 itch.io（浏览器试玩），都链接自 stonegamedev.wordpress.com。",
+			"iPhone 用 Safari 横屏；iPad 屏幕更大，点密码键盘更方便。",
+			"卡关请打开攻略页的键盘答案表。",
+		],
+	},
+	fa: {
+		title: "بازی Puzzle Dream آیفون / iOS – بدون اپ رسمی، در سافاری",
+		description:
+			"نسخه رسمی iOS برای Her Trees Puzzle Dream وجود ندارد. سازنده می‌گوید HER TREES نسخه موبایل ندارد. در آیفون و آیپد نسخه مرورگر را بازی کنید.",
+		h1: "Her Trees Puzzle Dream برای آیفون و آیپد",
+		intro:
+			"سایت رسمی سازنده (Stone) می‌گوید: «HER TREES نسخه موبایل ندارد؛ بازی‌هایی که در این سایت لینک نشده‌اند نسخه غیرمجاز هستند.» در آیفون یا آیپد، این سایت را در سافاری باز کنید و گوشی را افقی کنید.",
+		playLabel: "بازی Her Trees Puzzle Dream",
+		guideLabel: "پاسخ‌های صفحه کلید",
+		switchLabel: "راهنمای اندروید",
+		facts: [
+			"Stone هیچ نسخه‌ای در App Store منتشر نکرده است.",
+			"منابع رسمی: Steam (نسخه کامل) و itch.io (دموی مرورگر).",
+			"در آیفون از سافاری در حالت افقی استفاده کنید.",
+			"اگر گیر کردید جدول رمزها در صفحه راهنما است.",
+		],
+	},
+	fr: {
+		title: "Her Trees Puzzle Dream iOS / iPhone - Pas d’appli officielle, jouer dans Safari",
+		description:
+			"Il n’existe pas d’appli iOS officielle de Her Trees Puzzle Dream. Le créateur indique qu’il n’y a pas de version smartphone. Jouez à la version navigateur sur iPhone ou iPad.",
+		h1: "Her Trees Puzzle Dream iOS (iPhone et iPad)",
+		intro:
+			"Le site officiel de Stone indique : « Il n’existe pas de version smartphone de HER TREES. Les jeux non liés sur ce site sont des versions piratées. » Sur iPhone ou iPad, ouvrez ce site dans Safari en mode paysage.",
+		playLabel: "Jouer à Her Trees Puzzle Dream",
+		guideLabel: "Codes du clavier",
+		switchLabel: "Guide Android",
+		facts: [
+			"Aucune sortie App Store par Stone.",
+			"Sources officielles : Steam (jeu complet) et itch.io (démo navigateur).",
+			"Sur iPhone, utilisez Safari en mode paysage.",
+			"La table des codes est sur la page walkthrough.",
+		],
+	},
+	id: {
+		title: "Her Trees Puzzle Dream iOS / iPhone - Tanpa Aplikasi Resmi, Main di Safari",
+		description:
+			"Tidak ada aplikasi iOS resmi Her Trees Puzzle Dream. Pengembang menyatakan HER TREES tidak punya versi smartphone. Mainkan versi browser di iPhone atau iPad.",
+		h1: "Her Trees Puzzle Dream iOS (iPhone & iPad)",
+		intro:
+			"Situs resmi Stone menulis: \"Tidak ada versi smartphone HER TREES. Game yang tidak ditautkan di situs ini adalah bajakan.\" Di iPhone atau iPad, buka situs ini di Safari dan putar layar ke landscape.",
+		playLabel: "Main Her Trees Puzzle Dream",
+		guideLabel: "Buka jawaban keypad",
+		switchLabel: "Panduan Android",
+		facts: [
+			"Stone tidak merilis game ini di App Store.",
+			"Sumber resmi: Steam (versi lengkap) dan itch.io (demo browser).",
+			"Di iPhone gunakan Safari dalam mode landscape.",
+			"Jika macet, tabel kode ada di halaman panduan.",
+		],
+	},
+	ja: {
+		title: "Her Trees Puzzle Dream iPhone / iOS – 公式アプリなし、Safari で遊ぶ",
+		description:
+			"Her Trees Puzzle Dream の公式 iOS アプリはありません。作者は HER TREES にスマホ版はないと説明しています。iPhone・iPad はブラウザ版で遊べます。",
+		h1: "Her Trees Puzzle Dream を iPhone / iPad で遊ぶ",
+		intro:
+			"作者 stone の公式サイトには「HER TREESにスマホ版はありません。このサイトからリンクされてないゲームは海賊版です」とあります。iPhone・iPad では Safari で本サイトを開き、横向きにしてブラウザ版を遊んでください。",
+		playLabel: "Her Trees Puzzle Dream を遊ぶ",
+		guideLabel: "キーパッド解答",
+		switchLabel: "Android ブラウザガイド",
+		facts: [
+			"stone は App Store で配信していません。",
+			"公式の入手先は Steam（製品版）と itch.io（ブラウザ体験版）です。",
+			"iPhone は Safari を横向きで使ってください。",
+			"詰まったら攻略ページの解答表を見てください。",
+		],
+	},
+	vi: {
+		title: "Her Trees Puzzle Dream iOS / iPhone - Không có app chính thức, chơi trên Safari",
+		description:
+			"Không có ứng dụng iOS chính thức của Her Trees Puzzle Dream. Nhà phát triển cho biết HER TREES không có bản smartphone. Chơi bản trình duyệt trên iPhone hoặc iPad.",
+		h1: "Her Trees Puzzle Dream iOS (iPhone & iPad)",
+		intro:
+			"Trang chính thức của Stone ghi: \"HER TREES không có bản smartphone. Game không được liên kết trên trang này là bản lậu.\" Trên iPhone hoặc iPad, mở trang này bằng Safari và xoay ngang màn hình.",
+		playLabel: "Chơi Her Trees Puzzle Dream",
+		guideLabel: "Mở mã keypad",
+		switchLabel: "Hướng dẫn Android",
+		facts: [
+			"Stone không phát hành game trên App Store.",
+			"Nguồn chính thức: Steam (bản đầy đủ) và itch.io (bản demo trình duyệt).",
+			"Trên iPhone hãy dùng Safari ở chế độ ngang.",
+			"Nếu bị kẹt, bảng mã nằm ở trang hướng dẫn.",
+		],
+	},
+};
+
+const copy = copyByLocale[locale];
+const languageLinks = buildAlternateLinks(
+	{
+		en: "/play/puzzle-dream/ios/",
+		"zh-cn": "/zh-cn/play/puzzle-dream/ios/",
+		fa: "/fa/play/puzzle-dream/ios/",
+		fr: "/fr/play/puzzle-dream/ios/",
+		id: "/id/play/puzzle-dream/ios/",
+		ja: "/ja/play/puzzle-dream/ios/",
+		vi: "/vi/play/puzzle-dream/ios/",
+	},
+	locale,
+);
+const canonicalUrl = toAbsoluteUrl(pagePath);
+const schema = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		name: copy.h1,
+		url: canonicalUrl,
+		description: copy.description,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: [
+			{
+				"@type": "Question",
+				name: "Is there a Her Trees Puzzle Dream iOS app?",
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: "No. The developer Stone says there is no smartphone version of HER TREES, and App Store or IPA listings are not official. On iPhone or iPad, play the browser version in Safari in landscape.",
+				},
+			},
+		],
+	},
+]);
+---
+
+<html lang={content.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{copy.title}</title>
+		<meta name="description" content={copy.description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta name="robots" content="index, follow" />
+		<meta property="og:title" content={copy.title} />
+		<meta property="og:description" content={copy.description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:type" content="article" />
+		<meta property="og:locale" content={localeToOgLocale(locale)} />
+		{
+			buildOgLocaleAlternates(locale).map((item) => (
+				<meta property="og:locale:alternate" content={item} />
+			))
+		}
+		{
+			languageLinks.map((link) => (
+				<link
+					rel="alternate"
+					hreflang={localeToHreflang(link.locale)}
+					href={toAbsoluteUrl(link.href)}
+				/>
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={toAbsoluteUrl("/play/puzzle-dream/ios/")} />
+		<meta name="google-adsense-account" content={adsensePublisherId} />
+		<script type="application/ld+json" set:html={schema}></script>
+	</head>
+	<body>
+		<div class="container-shell">
+			<SiteHeader
+				locale={locale}
+				currentPath={pagePath}
+				tagline={copy.description}
+				languageSwitchLabel={content.languageSwitchLabel}
+				languageLinks={languageLinks}
+			/>
+			<main>
+				<nav class="breadcrumb-trail" aria-label="Breadcrumb">
+					<a href={playPath}>{copy.playLabel}</a>
+					<span>/</span>
+					<span aria-current="page">iOS</span>
+				</nav>
+				<section class="page-intro-block">
+					<h1>{copy.h1}</h1>
+					<p>{copy.intro}</p>
+				</section>
+				<AdUnit />
+				<section class="content-section">
+					<ul class="audience-list">
+						{
+							copy.facts.map((fact) => (
+								<li class="audience-item">
+									<p>{fact}</p>
+								</li>
+							))
+						}
+					</ul>
+					<p class="section-intro">
+						<a href={playPath}>{copy.playLabel}</a>
+						{" · "}
+						<a href={guidePath}>{copy.guideLabel}</a>
+						{" · "}
+						<a href={switchPath}>{copy.switchLabel}</a>
+					</p>
+				</section>
+			</main>
+			<SiteFooter locale={locale} />
+		</div>
+	</body>
+</html>
