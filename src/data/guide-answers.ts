@@ -6,13 +6,78 @@ export type AnswerRow = {
 	puzzle: Record<Locale, string>;
 };
 
+const jaPuzzleNames: Record<string, string> = {
+	"Tutorial — leaf on the box": "チュートリアル — 箱の上の葉",
+	"Tutorial — broken toy house": "チュートリアル — 壊れたおもちゃの家",
+	"Toy House — clockwork key": "おもちゃの家 — ぜんまいの鍵",
+	"Toy House — stacked towers": "おもちゃの家 — 積み重ねた塔",
+	"Toy House — cat painting jigsaw": "おもちゃの家 — 猫の絵のジグソー",
+	"Toy House — group of toys": "おもちゃの家 — おもちゃの集まり",
+	"Cabinet — torn poster and tracing paper": "キャビネット — 破れたポスターとトレーシングペーパー",
+	"Cabinet — potted plant twigs": "キャビネット — 植木鉢の小枝",
+	"Cabinet — four glass jars": "キャビネット — 四つのガラス瓶",
+	"Cabinet — cat doll": "キャビネット — 猫の人形",
+	"Cabinet — maze on the card": "キャビネット — カードの迷路",
+	"Cabinet — fishbowl bones": "キャビネット — 金魚鉢の骨",
+	"Mousehole — aquarium": "ネズミ穴 — 水槽",
+	"Mousehole — snakes": "ネズミ穴 — ヘビ",
+	"Mousehole — butterfly life cycle": "ネズミ穴 — チョウのライフサイクル",
+	"Laboratory — stacked leaves": "実験室 — 重ねた葉",
+	"Laboratory — tripod and cup": "実験室 — 三脚とカップ",
+	"Laboratory — wavy leaves": "実験室 — 波打つ葉",
+	"Laboratory — cat figurines": "実験室 — 猫の置物",
+	"Ending — crack on the girl's dress": "結末 — 少女のドレスのひび",
+	"Intro — broken door piece in the tree hollow": "導入 — 木のうろの壊れた扉の破片",
+	"Intro — flower inside the light bulb": "導入 — 電球の中の花",
+	"Level 0 — tracing paper over petals (1–9)": "レベル0 — 花びらに重ねたトレーシングペーパー（1–9）",
+	"Level 0 — bookmark on the open book": "レベル0 — 開いた本のしおり",
+	"Level 0 — butterfly portrait path": "レベル0 — チョウの肖像の道筋",
+	"Level 0 — leaf over the broken miniature house": "レベル0 — 壊れたミニチュアハウスに重ねた葉",
+	"Level 0 — opposing animal figures": "レベル0 — 向かい合う動物の置物",
+	"Level 1 — numbered tiles under tracing paper": "レベル1 — トレーシングペーパーの下の番号タイル",
+	"Level 1 — berry sprig white leaves": "レベル1 — ベリーの枝の白い葉",
+	"Level 1 — leaves across cracked slabs": "レベル1 — 割れた石板に渡した葉",
+	"Level 1 — antenna houses on dotted tiles": "レベル1 — 点模様タイルのアンテナ小屋",
+	"Level 1 — leaf cutouts with dotted tags": "レベル1 — 点タグの付いた葉の切り抜き",
+	"Level 1 — twig through dandelion puffs": "レベル1 — たんぽぽの綿毛を通す小枝",
+	"Level 1 — white leaves on the middle branch": "レベル1 — 真ん中の枝の白い葉",
+	"Level 1 — two keys forming letter I (follow arrows after)": "レベル1 — 二つの鍵でできる文字 I（その後矢印に従う）",
+	"Corridor — repaired ladder": "廊下 — 直したはしご",
+	"Level 2 — leaf tips on trunk dots": "レベル2 — 幹の点に合わせる葉先",
+	"Level 2 — cat-emblem keys back to back": "レベル2 — 背中合わせの猫紋章の鍵",
+	"Level 2 — paper cutout maze on the plant": "レベル2 — 植物の上の切り紙迷路",
+	"Level 2 — miniature roofs filling the star": "レベル2 — 星を埋めるミニチュア屋根",
+	"Level 2 — dry plants leveled then F plus arrows": "レベル2 — 乾いた植物をそろえてから F と矢印",
+	"Level 2 — nested curly twigs": "レベル2 — 入れ子の曲がった小枝",
+	"Level 2 — mushroom imprint on wall dots": "レベル2 — 壁の点に重なるキノコの跡",
+	"Level 2 — tracing-paper maze in the leaf pile": "レベル2 — 葉の山のトレーシングペーパー迷路",
+	"Portrait — miniature house on the painted house": "肖像 — 描かれた家に重ねるミニチュアハウス",
+	"Level 3 — two building cutouts aligned": "レベル3 — 揃えた二つの建物の切り抜き",
+	"Level 3 — stilt-house ribbons": "レベル3 — 高床式の家のリボン",
+	"Level 3 — berry sprigs filling taped gaps": "レベル3 — テープの隙間を埋めるベリーの枝",
+	"Level 3 — cat tails forming numbers 1–4": "レベル3 — 1–4 の数字になる猫のしっぽ",
+	"Level 3 — origami house maze pieces": "レベル3 — 折り紙の家の迷路ピース",
+	"Level 3 — candle vines on the large building": "レベル3 — 大きな建物のキャンドルのつる",
+	"Level 3 — pentagon flower surrounded by fans": "レベル3 — 扇に囲まれた五角形の花",
+	"Level 3 — overlapping budded vines": "レベル3 — 重なる蕾のつる",
+	"Mirror — door on the broken mirror (1–3)": "鏡 — 割れた鏡の上の扉（1–3）",
+	"Level 4 — three horse sculptures merged": "レベル4 — 合体した三体の馬の彫刻",
+	"Level 4 — butterfly painting stacked vertically": "レベル4 — 縦に重ねたチョウの絵",
+	"Level 4 — blooming plants forming a tree": "レベル4 — 花開く植物でできた木",
+	"Level 4 — cubes over the octagon paper (1–5)": "レベル4 — 八角形の紙の上の立方体（1–5）",
+	"Level 4 — boat painting next to the fishhook (1–9)": "レベル4 — 魚鉤の横の船の絵（1–9）",
+	"Level 4 — symbols around the three-roof building": "レベル4 — 三つの屋根の建物の周りの記号",
+	"Level 4 — constellation star trail": "レベル4 — 星座の軌跡",
+	"Finale — tree map on the center door": "終幕 — 中央の扉の樹木マップ",
+};
+
 const t = (
 	en: string,
 	zh: string,
 	fa: string,
 	id: string,
 	vi: string,
-	ja = en,
+	ja = jaPuzzleNames[en] ?? en,
 	fr = en,
 ): Record<Locale, string> => ({
 	en,
@@ -714,48 +779,108 @@ export const dreamAnswers: AnswerRow[] = [
 
 export const answerTableCopy: Record<
 	Locale,
-	{ heading: string; puzzle: string; answer: string; intro: string }
+	{
+		heading: string;
+		puzzle: string;
+		answer: string;
+		intro: string;
+		areasHeading: string;
+		areasIntro: string;
+		openAnswers: string;
+		closeAnswers: string;
+	}
 > = {
 	en: {
 		heading: "Every keypad answer",
 		puzzle: "Puzzle",
 		answer: "Code",
-		intro: "Enter these letters on the A–I grid in order. Spoilers for the whole game.",
+		intro: "Enter these letters on the A–I grid in order. The section list above is safer; the codes below spoil the whole game.",
+		areasHeading: "Areas in this game",
+		areasIntro: "Use this list to find where you are stuck. Area names only — no codes yet.",
+		openAnswers: "Show keypad answers for this area",
+		closeAnswers: "Hide answers",
 	},
 	"zh-cn": {
 		heading: "全部键盘答案",
 		puzzle: "谜题",
 		answer: "密码",
-		intro: "按顺序在 A–I 键盘上输入这些字母。全文剧透。",
+		intro: "按顺序在 A–I 键盘上输入这些字母。上面的分区列表较安全；下面的密码是全文剧透。",
+		areasHeading: "本作分区",
+		areasIntro: "用这份列表确认自己卡在哪一区。这里只列区域名，不含密码。",
+		openAnswers: "展开该区键盘答案",
+		closeAnswers: "收起答案",
 	},
 	fa: {
 		heading: "همه پاسخ‌های صفحه کلید",
 		puzzle: "پازل",
 		answer: "رمز",
-		intro: "این حروف را به ترتیب روی شبکه A–I وارد کنید. اسپویلر کامل.",
+		intro: "این حروف را به ترتیب روی شبکه A–I وارد کنید. فهرست بخش‌ها امن‌تر است؛ کدهای زیر اسپویلر کامل‌اند.",
+		areasHeading: "بخش‌های این بازی",
+		areasIntro: "از این فهرست بفهمید کجا گیر کرده‌اید. فقط نام بخش، بدون رمز.",
+		openAnswers: "نمایش پاسخ‌های این بخش",
+		closeAnswers: "پنهان کردن پاسخ‌ها",
 	},
 	fr: {
 		heading: "Toutes les réponses du clavier",
 		puzzle: "Puzzle",
 		answer: "Code",
-		intro: "Entrez ces lettres dans l’ordre sur la grille A–I. Spoilers complets.",
+		intro: "Entrez ces lettres dans l’ordre sur la grille A–I. La liste des zones ci-dessus est plus sûre ; les codes ci-dessous spoilent tout le jeu.",
+		areasHeading: "Zones de ce jeu",
+		areasIntro: "Servez-vous de cette liste pour situer le blocage. Noms de zones seulement, sans codes.",
+		openAnswers: "Afficher les réponses de cette zone",
+		closeAnswers: "Masquer les réponses",
 	},
 	id: {
 		heading: "Semua jawaban keypad",
 		puzzle: "Puzzle",
 		answer: "Kode",
-		intro: "Masukkan huruf ini berurutan pada kisi A–I. Spoiler penuh.",
+		intro: "Masukkan huruf ini berurutan pada kisi A–I. Daftar area di atas lebih aman; kode di bawah adalah spoiler penuh.",
+		areasHeading: "Area dalam game ini",
+		areasIntro: "Gunakan daftar ini untuk mengetahui di mana Anda terjebak. Nama area saja, belum ada kode.",
+		openAnswers: "Tampilkan jawaban area ini",
+		closeAnswers: "Sembunyikan jawaban",
 	},
 	ja: {
 		heading: "キーパッド解答一覧",
 		puzzle: "パズル",
 		answer: "コード",
-		intro: "A–I のキーパッドにこの順で入力します。全文ネタバレです。",
+		intro: "A–I のキーパッドにこの順で入力します。上のエリア一覧のほうが安全で、以下のコードは全文ネタバレです。",
+		areasHeading: "この作品のエリア",
+		areasIntro: "詰まっている場所を確認するための一覧です。エリア名のみで、コードはまだ出しません。",
+		openAnswers: "このエリアの解答を見る",
+		closeAnswers: "解答を隠す",
 	},
 	vi: {
-		heading: "Tat ca ma keypad",
-		puzzle: "Cau do",
-		answer: "Ma",
-		intro: "Nhap cac chu cai theo thu tu tren luoi A–I. Spoiler toan bo.",
+		heading: "Tất cả mã keypad",
+		puzzle: "Câu đố",
+		answer: "Mã",
+		intro: "Nhập các chữ cái theo thứ tự trên lưới A–I. Danh sách khu vực ở trên an toàn hơn; mã bên dưới là spoiler toàn bộ.",
+		areasHeading: "Các khu vực trong game",
+		areasIntro: "Dùng danh sách này để biết bạn đang kẹt ở đâu. Chỉ có tên khu vực, chưa có mã.",
+		openAnswers: "Hiện đáp án khu vực này",
+		closeAnswers: "Ẩn đáp án",
 	},
+};
+
+/** Group keypad rows by the area label before the em dash. */
+export const groupAnswersByArea = (rows: AnswerRow[], locale: Locale) => {
+	const groups: Array<{ area: string; rows: AnswerRow[] }> = [];
+	const indexByArea = new Map<string, number>();
+
+	for (const row of rows) {
+		const label = row.puzzle[locale] || row.puzzle.en;
+		const separator = label.includes("—") ? "—" : label.includes("-") ? "-" : "—";
+		const area = label.includes(separator)
+			? label.split(separator)[0].trim()
+			: label.trim();
+		const existing = indexByArea.get(area);
+		if (existing === undefined) {
+			indexByArea.set(area, groups.length);
+			groups.push({ area, rows: [row] });
+		} else {
+			groups[existing].rows.push(row);
+		}
+	}
+
+	return groups;
 };

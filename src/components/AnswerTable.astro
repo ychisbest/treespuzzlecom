@@ -3,6 +3,7 @@ import type { Locale } from "../data/home-content";
 import {
 	answerTableCopy,
 	dreamAnswers,
+	groupAnswersByArea,
 	houseAnswers,
 	type AnswerRow,
 } from "../data/guide-answers";
@@ -15,33 +16,56 @@ type Props = {
 const { locale, game } = Astro.props;
 const copy = answerTableCopy[locale];
 const rows: AnswerRow[] = game === "house" ? houseAnswers : dreamAnswers;
+const groups = groupAnswersByArea(rows, locale);
 ---
+
+<section class="content-section" id="areas">
+	<h2>{copy.areasHeading}</h2>
+	<p class="section-intro">{copy.areasIntro}</p>
+	<ul class="guide-area-list">
+		{
+			groups.map((group) => (
+				<li>
+					<a href={`#answers-${group.rows[0].id}`}>{group.area}</a>
+					<span class="guide-area-count">({group.rows.length})</span>
+				</li>
+			))
+		}
+	</ul>
+</section>
 
 <section class="content-section" id="answers">
 	<h2>{copy.heading}</h2>
 	<p class="section-intro">{copy.intro}</p>
-	<div class="comparison-table-shell">
-		<table class="comparison-table answer-table">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>{copy.puzzle}</th>
-					<th>{copy.answer}</th>
-				</tr>
-			</thead>
-			<tbody>
-				{
-					rows.map((row) => (
-						<tr>
-							<td>{row.id}</td>
-							<td>{row.puzzle[locale]}</td>
-							<td>
-								<strong class="answer-code">{row.answer}</strong>
-							</td>
-						</tr>
-					))
-				}
-			</tbody>
-		</table>
-	</div>
+	{
+		groups.map((group) => (
+			<details class="faq-item answer-spoiler" id={`answers-${group.rows[0].id}`}>
+				<summary>
+					{copy.openAnswers}: {group.area}
+				</summary>
+				<div class="comparison-table-shell">
+					<table class="comparison-table answer-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>{copy.puzzle}</th>
+								<th>{copy.answer}</th>
+							</tr>
+						</thead>
+						<tbody>
+							{group.rows.map((row) => (
+								<tr>
+									<td>{row.id}</td>
+									<td>{row.puzzle[locale]}</td>
+									<td>
+										<strong class="answer-code">{row.answer}</strong>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			</details>
+		))
+	}
 </section>

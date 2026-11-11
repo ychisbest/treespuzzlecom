@@ -17,10 +17,16 @@ import {
 	siteUrl,
 } from "../data/site-shell";
 import {
-	buildAlternateLinks,
 	buildOgLocaleAlternates,
+	guideDreamPath,
+	guideHousePath,
 	localeToHreflang,
 	localeToOgLocale,
+	playDreamPath,
+	playFirstPath,
+	playHousePath,
+	playHouseAlternateLinks,
+	playHouseSeo,
 	toAbsoluteUrl,
 } from "../data/seo";
 
@@ -30,6 +36,7 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
+const seo = playHouseSeo[locale];
 const puzzleHouseEmbedUrl =
 	"https://game.doritosscript.com/her-trees-puzzle-house/index.html";
 const puzzleHousePath =
@@ -38,7 +45,7 @@ const puzzleHouseGuidePath =
 	locale === "en"
 		? "/play/puzzle-house/guide/"
 		: `/${locale}/play/puzzle-house/guide/`;
-const firstPuzzlePagePath = `${content.path}#play`;
+const firstPuzzlePagePath = playFirstPath(locale);
 const puzzleDreamPath =
 	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
 const treesHateYouPath = "/trees-hate-you/";
@@ -58,18 +65,7 @@ const gameHrefs = [
 	treesHateYouPath,
 ];
 
-const languageLinks = buildAlternateLinks(
-	{
-		en: "/play/puzzle-house/",
-		"zh-cn": "/zh-cn/play/puzzle-house/",
-		fa: "/fa/play/puzzle-house/",
-		fr: "/fr/play/puzzle-house/",
-		id: "/id/play/puzzle-house/",
-		ja: "/ja/play/puzzle-house/",
-		vi: "/vi/play/puzzle-house/",
-	},
-	locale,
-);
+const languageLinks = playHouseAlternateLinks(locale);
 
 const relatedGames = content.games
 	.map((game, index) => ({
@@ -104,15 +100,15 @@ const pageCopy: Record<
 		iframeTitle: "HER TREES : THE PUZZLE HOUSE 在线试玩",
 		playButton: "开始 Puzzle House",
 		intro:
-			"这个页面直接加载 public 目录中的 Puzzle House 游戏资源，进入后可以像首页一样点击开始并切换全屏游玩。",
+			"这是 Her Trees: The Puzzle House 的游玩专页，介于 First Puzzle 与 Puzzle Dream 之间的短篇。在此启动浏览器版。正式版在 Steam 发售，本站不提供官方主机或手机移植。",
 		overviewHeading: "这一页提供什么",
 		overviewBody:
-			"这是系列第二作的独立入口，适合想先体验更完整成品，但又不想一上来就进入第三作更长流程的玩家。",
+			"搜索 The Puzzle House 游玩时应落到本页。首页只做系列导航。",
 		tipsHeading: "游玩提示",
 		tips: [
 			"首次进入会按需加载 WebGL 资源，开始前可能需要短暂等待。",
 			"手机上建议横屏体验；进入全屏时页面会尽量请求横屏锁定。",
-			"如果你想先从最短体验开始，仍然可以回首页游玩 First Puzzle。",
+			"如果你想先从最短体验开始，请打开 First Puzzle 游玩专页。",
 		],
 	},
 	en: {
@@ -124,10 +120,10 @@ const pageCopy: Record<
 		iframeTitle: "HER TREES : THE PUZZLE HOUSE online",
 		playButton: "Start Puzzle House",
 		intro:
-			"This page loads the Puzzle House build from the public directory and keeps the same click-to-launch and fullscreen flow used on the homepage.",
+			"This is the dedicated play page for Her Trees: The Puzzle House, the compact middle game between First Puzzle and Puzzle Dream. Launch the browser build here. The official release is on Steam; this site does not offer an official console or smartphone port.",
 		overviewHeading: "What this page is for",
 		overviewBody:
-			"Dedicated play page for Her Trees The Puzzle House (series entry 2). Use this URL for “her trees the puzzle house” / “puzzle house” intent. The homepage should only link here — it should not rank as the primary Puzzle House result.",
+			"Use this URL for The Puzzle House play intent. The homepage is only the series hub and should not rank as the main Puzzle House result.",
 		tipsHeading: "Play notes",
 		tips: [
 			"The first launch may take a moment while the WebGL files load.",
@@ -145,7 +141,7 @@ const pageCopy: Record<
 		iframeTitle: "HER TREES : THE PUZZLE HOUSE آنلاین",
 		playButton: "شروع Puzzle House",
 		intro:
-			"این صفحه نسخه Puzzle House را از پوشه public بارگذاری می‌کند و همان جریان کلیک‌برای‌شروع و تمام‌صفحه صفحه اصلی را حفظ می‌کند.",
+			"این صفحه اختصاصی بازی The Puzzle House است. ساخت مرورگر را از اینجا اجرا کنید. نسخه رسمی در Steam است.",
 		overviewHeading: "این صفحه برای چیست",
 		overviewBody:
 			"این ورودی اختصاصی برای بازی دوم مجموعه است، مناسب وقتی می‌خواهید ابتدا یک اتاق کامل‌تر و فشرده را تجربه کنید قبل از رفتن به Puzzle Dream.",
@@ -153,7 +149,7 @@ const pageCopy: Record<
 		tips: [
 			"اولین راه‌اندازی ممکن است لحظه‌ای طول بکشد تا فایل‌های WebGL بارگذاری شوند.",
 			"در گوشی حالت افقی بهتر عمل می‌کند؛ تمام صفحه سعی می‌کند جهت را قفل کند.",
-			"اگر می‌خواهید ابتدا کوتاه‌ترین نقطه شروع را امتحان کنید، به صفحه اصلی برگردید و با First Puzzle شروع کنید.",
+			"اگر می‌خواهید ابتدا کوتاه‌ترین نقطه شروع را امتحان کنید، صفحه بازی First Puzzle را باز کنید.",
 		],
 	},
 	fr: {
@@ -173,7 +169,7 @@ const pageCopy: Record<
 		tips: [
 			"Le premier lancement peut prendre un moment pendant le chargement des fichiers WebGL.",
 			"Le mode paysage fonctionne mieux sur téléphone ; le plein écran essaiera de verrouiller l'orientation.",
-			"Si vous voulez d'abord le point de départ le plus court, retournez à la page d'accueil et commencez par First Puzzle.",
+			"Si vous voulez d'abord le point de départ le plus court, ouvrez la page de jeu First Puzzle.",
 		],
 	},
 	id: {
@@ -193,7 +189,7 @@ const pageCopy: Record<
 		tips: [
 			"Peluncuran pertama mungkin perlu beberapa saat saat file WebGL dimuat.",
 			"Mode lanskap paling nyaman di ponsel; layar penuh akan mencoba mengunci orientasi.",
-			"Jika ingin memulai dari pengalaman terpendek, kembali ke beranda dan mainkan First Puzzle.",
+			"Jika ingin memulai dari pengalaman terpendek, buka halaman main First Puzzle.",
 		],
 	},
 	ja: {
@@ -205,15 +201,15 @@ const pageCopy: Record<
 		iframeTitle: "HER TREES : THE PUZZLE HOUSE ブラウザ版",
 		playButton: "Puzzle House を始める",
 		intro:
-			"このページでは public ディレクトリ内の Puzzle House ビルドを読み込み、トップページと同じようにクリックして起動し、全画面でも遊べます。",
+			"ここはハーツリーズ（Her Trees）: The Puzzle House の専用プレイページです。First Puzzle と Puzzle Dream の間にある短編で、このページからブラウザ版を起動できます。公式は Steam 発売で、公式の据え置き機・スマホ版はありません。",
 		overviewHeading: "このページの役割",
 		overviewBody:
-			"シリーズ第2作へ直接入るための専用ページです。Puzzle Dream より前に、よりまとまった短編作品を遊びたい人に向いています。",
+			"The Puzzle House を遊ぶ検索はトップではなくこのURLへ。トップはシリーズ案内だけです。",
 		tipsHeading: "プレイのヒント",
 		tips: [
 			"初回起動では WebGL ファイルの読み込みに少し時間がかかる場合があります。",
 			"スマートフォンでは横画面が向いています。全画面時は横向き固定を試みます。",
-			"まず最短の導入から入りたい場合は、トップページの First Puzzle が適しています。",
+			"まず最短の導入から入りたい場合は、First Puzzle のプレイページを開いてください。",
 		],
 	},
 	vi: {
@@ -233,7 +229,7 @@ const pageCopy: Record<
 		tips: [
 			"Lan mo dau tien co the can doi trong luc tai tep WebGL.",
 			"Dien thoai nen choi ngang man hinh; fullscreen se co gang khoa huong ngang.",
-			"Neu ban muon bat dau bang trai nghiem ngan nhat, hay quay ve trang chu va choi First Puzzle.",
+			"Neu ban muon bat dau bang trai nghiem ngan nhat, hay mo trang choi First Puzzle.",
 		],
 	},
 };
@@ -320,7 +316,7 @@ const puzzleHouseSchema = JSON.stringify([
 		"@type": "VideoGame",
 		name: "HER TREES : THE PUZZLE HOUSE",
 		url: canonicalUrl,
-		description: copy.description,
+		description: seo.description,
 		image: shareImage,
 		gamePlatform: "Web Browser",
 	},
@@ -355,12 +351,12 @@ const puzzleHouseSchema = JSON.stringify([
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#111111" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{copy.title}</title>
-		<meta name="description" content={copy.description} />
+		<title>{seo.title}</title>
+		<meta name="description" content={seo.description} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta name="robots" content="index, follow" />
-		<meta property="og:title" content={copy.title} />
-		<meta property="og:description" content={copy.description} />
+		<meta property="og:title" content={seo.title} />
+		<meta property="og:description" content={seo.description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={content.siteName} />
@@ -372,8 +368,8 @@ const puzzleHouseSchema = JSON.stringify([
 		}
 		<meta property="og:image" content={shareImage} />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={copy.title} />
-		<meta name="twitter:description" content={copy.description} />
+		<meta name="twitter:title" content={seo.title} />
+		<meta name="twitter:description" content={seo.description} />
 		<meta name="twitter:image" content={shareImage} />
 		<meta name="google-adsense-account" content={adsensePublisherId} />
 		{
@@ -398,7 +394,7 @@ const puzzleHouseSchema = JSON.stringify([
 			<SiteHeader
 				locale={locale}
 				currentPath={puzzleHousePath}
-				tagline={copy.description}
+				tagline={seo.description}
 				languageSwitchLabel={content.languageSwitchLabel}
 				languageLinks={languageLinks}
 			/>
@@ -413,7 +409,7 @@ const puzzleHouseSchema = JSON.stringify([
 				<section class="hero-section">
 					<div class="feature-panel">
 						<div class="panel-header">
-							<h1>{copy.playHeading}</h1>
+							<h1>{seo.h1}</h1>
 						</div>
 						<div class="feature-box game-embed-shell">
 							<button
