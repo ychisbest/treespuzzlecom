@@ -13,10 +13,16 @@ import {
 	globalPaths,
 	siteUrl,
 } from "../data/site-shell";
+import AnswerTable from "./AnswerTable.astro";
 import {
-	buildAlternateLinks,
 	buildOgLocaleAlternates,
+	guideDreamAlternateLinks,
 	guideVideoUploadDates,
+	guideDreamSeo,
+	guideHousePath,
+	playDreamPath,
+	playHousePath,
+	playFirstPath,
 	localeToHreflang,
 	localeToOgLocale,
 	toAbsoluteUrl,
@@ -37,18 +43,49 @@ const playPath =
 	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
 const shareImage = new URL(puzzleDreamImage.src, siteUrl).toString();
 
-const languageLinks = buildAlternateLinks(
-	{
-		en: "/play/puzzle-dream/guide/",
-		"zh-cn": "/zh-cn/play/puzzle-dream/guide/",
-		fa: "/fa/play/puzzle-dream/guide/",
-		fr: "/fr/play/puzzle-dream/guide/",
-		id: "/id/play/puzzle-dream/guide/",
-		ja: "/ja/play/puzzle-dream/guide/",
-		vi: "/vi/play/puzzle-dream/guide/",
+const seo = guideDreamSeo[locale];
+const languageLinks = guideDreamAlternateLinks(locale);
+const firstPlayHref = playFirstPath(locale);
+const otherGuideHref = guideHousePath(locale);
+const otherPlayHref = playHousePath(locale);
+
+const crossLinks: Record<Locale, { otherGuide: string; otherPlay: string; firstPlay: string }> = {
+	en: {
+		otherGuide: 'The Puzzle House walkthrough and answers',
+		otherPlay: 'Play The Puzzle House',
+		firstPlay: 'Play First Puzzle',
 	},
-	locale,
-);
+	"zh-cn": {
+		otherGuide: 'The Puzzle House 攻略与答案',
+		otherPlay: '游玩 The Puzzle House',
+		firstPlay: '游玩 First Puzzle',
+	},
+	fa: {
+		otherGuide: 'راهنمای The Puzzle House',
+		otherPlay: 'بازی The Puzzle House',
+		firstPlay: 'بازی First Puzzle',
+	},
+	fr: {
+		otherGuide: 'Guide The Puzzle House',
+		otherPlay: 'Jouer à The Puzzle House',
+		firstPlay: 'Jouer à First Puzzle',
+	},
+	id: {
+		otherGuide: 'Panduan The Puzzle House',
+		otherPlay: 'Mainkan The Puzzle House',
+		firstPlay: 'Mainkan First Puzzle',
+	},
+	ja: {
+		otherGuide: 'The Puzzle House 攻略と答え',
+		otherPlay: 'The Puzzle House を遊ぶ',
+		firstPlay: 'First Puzzle を遊ぶ',
+	},
+	vi: {
+		otherGuide: 'Hướng dẫn The Puzzle House',
+		otherPlay: 'Chơi The Puzzle House',
+		firstPlay: 'Chơi First Puzzle',
+	},
+};
 
 const guideCopy: Record<
 	Locale,
@@ -211,8 +248,8 @@ const guideSchema = JSON.stringify([
 	{
 		"@context": "https://schema.org",
 		"@type": "VideoObject",
-		name: copy.title,
-		description: copy.description,
+		name: seo.title,
+		description: seo.description,
 		embedUrl: guideEmbedUrl,
 		url: canonicalUrl,
 		thumbnailUrl: shareImage,
@@ -249,12 +286,12 @@ const guideSchema = JSON.stringify([
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#111111" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{copy.title}</title>
-		<meta name="description" content={copy.description} />
+		<title>{seo.title}</title>
+		<meta name="description" content={seo.description} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta name="robots" content="index, follow" />
-		<meta property="og:title" content={copy.title} />
-		<meta property="og:description" content={copy.description} />
+		<meta property="og:title" content={seo.title} />
+		<meta property="og:description" content={seo.description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={content.siteName} />
@@ -266,8 +303,8 @@ const guideSchema = JSON.stringify([
 		}
 		<meta property="og:image" content={shareImage} />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={copy.title} />
-		<meta name="twitter:description" content={copy.description} />
+		<meta name="twitter:title" content={seo.title} />
+		<meta name="twitter:description" content={seo.description} />
 		<meta name="twitter:image" content={shareImage} />
 		<meta name="google-adsense-account" content={adsensePublisherId} />
 		{
@@ -292,7 +329,7 @@ const guideSchema = JSON.stringify([
 			<SiteHeader
 				locale={locale}
 				currentPath={guidePath}
-				tagline={copy.description}
+				tagline={seo.description}
 				languageSwitchLabel={content.languageSwitchLabel}
 				languageLinks={languageLinks}
 			/>
@@ -305,15 +342,41 @@ const guideSchema = JSON.stringify([
 				</nav>
 
 				<section class="page-intro-block">
-					<h1>{copy.title}</h1>
-					<p>{copy.description}</p>
+					<h1>{seo.h1}</h1>
+					<p>{seo.description}</p>
+					<p>
+						<a href={playPath}>{copy.playLabel}</a>
+						{" · "}
+						<a href={otherGuideHref}>{crossLinks[locale].otherGuide}</a>
+						{" · "}
+						<a href={otherPlayHref}>{crossLinks[locale].otherPlay}</a>
+						{" · "}
+						<a href={firstPlayHref}>{crossLinks[locale].firstPlay}</a>
+					</p>
+				</section>
+
+				<section class="content-section">
+					<h2>{copy.beforeHeading}</h2>
+					<div class="prose-block">
+						<p>{copy.beforeBody}</p>
+					</div>
+				</section>
+
+				<AnswerTable locale={locale} game="dream" />
+
+				<section class="content-section">
+					<h2>{copy.afterHeading}</h2>
+					<div class="prose-block">
+						<p>{copy.afterBody}</p>
+					</div>
 				</section>
 
 				<section class="guide-frame-shell">
+					<p class="section-intro">{copy.videoBody}</p>
 					<iframe
 						class="guide-frame"
 						src={guideEmbedUrl}
-						title={copy.title}
+						title={seo.title}
 						loading="lazy"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 						referrerpolicy="strict-origin-when-cross-origin"
@@ -324,9 +387,9 @@ const guideSchema = JSON.stringify([
 				<AdUnit />
 
 				<section class="content-section">
-					<h2>{copy.beforeHeading}</h2>
+					<h2>{copy.videoHeading}</h2>
 					<div class="prose-block">
-						<p>{copy.beforeBody}</p>
+						<p>{copy.videoBody}</p>
 					</div>
 				</section>
 
@@ -337,12 +400,7 @@ const guideSchema = JSON.stringify([
 					</div>
 				</section>
 
-				<section class="content-section">
-					<h2>{copy.afterHeading}</h2>
-					<div class="prose-block">
-						<p>{copy.afterBody}</p>
-					</div>
-				</section>
+				
 
 				<section class="content-section">
 					<h2>{copy.nextHeading}</h2>

@@ -6,10 +6,10 @@ const schema = [
 	{
 		"@context": "https://schema.org",
 		"@type": "AboutPage",
-		name: "About treespuzzle.com",
+		name: "About This Site",
 		url: `${siteUrl}${globalPaths.about}`,
 		description:
-			"Background, editorial purpose, and update approach for the independent HER TREES information site.",
+			"About treespuzzle.com: an independent fan hub for Stone’s HER TREES puzzle series. Not the official publisher or developer site.",
 	},
 	{
 		"@context": "https://schema.org",
@@ -33,14 +33,24 @@ const schema = [
 ---
 
 <StaticPageLayout
-	title="What is HER TREES? - About the Indie Puzzle Game Series"
-	description="HER TREES is a hand-drawn, observation-driven puzzle game series by developer Stone. Play free in your browser or on Steam. 95% positive reviews."
+	title="About This Site"
+	description="About treespuzzle.com: an independent fan hub for Stone’s HER TREES puzzle series. We organize play pages and walkthroughs; we are not the official publisher or developer site."
 	canonicalPath={globalPaths.about}
 	pageHeading="About This Site"
 	pageIntro="treespuzzle.com is an independent editorial project built to help players understand the HER TREES puzzle series before they decide where and how to play it."
 	breadcrumbLabel="About"
 	schema={schema}
 >
+	<p>
+		If you already know which entry you want, go straight to the play pages for
+		<a href="/play/first-puzzle/">Her Trees First Puzzle</a>,
+		<a href="/play/puzzle-house/">The Puzzle House</a>, or
+		<a href="/play/puzzle-dream/">Puzzle Dream</a>.
+		Walkthroughs live on
+		<a href="/guide/">the First Puzzle guide</a>,
+		<a href="/play/puzzle-house/guide/">The Puzzle House guide</a>, and
+		<a href="/play/puzzle-dream/guide/">the Puzzle Dream walkthrough and answers</a>.
+	</p>
 	<p>
 		This website was created as a focused reference hub for a small puzzle-game
 		series that can otherwise be difficult to evaluate at a glance. The HER TREES

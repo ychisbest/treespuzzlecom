@@ -25,11 +25,7 @@ const h1Of = (html) => {
 	return match ? match[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : "";
 };
 
-const hasPuzzleDreamName = (text) =>
-	/her trees puzzle dream|puzzle dream/i.test(text);
-
-const hasVideoGame = (html) =>
-	/"@type"\s*:\s*"VideoGame"/i.test(html);
+const hasVideoGame = (html) => /"@type"\s*:\s*"VideoGame"/i.test(html);
 
 const ALLOWED_DORITOS = new Set([
 	"https://game.doritosscript.com/HerTreesFirstPuzzle.zip",
@@ -41,102 +37,170 @@ const ALLOWED_DORITOS = new Set([
 ]);
 
 const locales = [
-	{ home: "index.html", prefix: "" },
-	{ home: "fa/index.html", prefix: "fa/" },
-	{ home: "id/index.html", prefix: "id/" },
-	{ home: "vi/index.html", prefix: "vi/" },
-	{ home: "zh-cn/index.html", prefix: "zh-cn/" },
-	{ home: "fr/index.html", prefix: "fr/" },
-	{ home: "ja/index.html", prefix: "ja/" },
+	{ home: "index.html", prefix: "", play: "" },
+	{ home: "fa/index.html", prefix: "fa/", play: "/fa" },
+	{ home: "id/index.html", prefix: "id/", play: "/id" },
+	{ home: "vi/index.html", prefix: "vi/", play: "/vi" },
+	{ home: "zh-cn/index.html", prefix: "zh-cn/", play: "/zh-cn" },
+	{ home: "fr/index.html", prefix: "fr/", play: "/fr" },
+	{ home: "ja/index.html", prefix: "ja/", play: "/ja" },
 ];
+
+const isHubTitle = (title, localePrefix) => {
+	if (!title) return false;
+	if (/^Play Her Trees: Puzzle Dream/i.test(title) || /^Her Trees Puzzle Dream/i.test(title)) {
+		return false;
+	}
+	if (localePrefix === "ja/") {
+		return /ハーツリーズ|Her Trees/i.test(title) && /攻略|ハブ|案内/.test(title);
+	}
+	return /hub|导航|مجموعه|série|seri|cổng|案内|ハブ/i.test(title);
+};
 
 for (const locale of locales) {
 	const html = read(locale.home);
 	if (!html) continue;
 
-	const embedMatch = html.match(/data-embed-src="([^"]+)"/);
-	if (!embedMatch || !/puzzle-dream/i.test(embedMatch[1])) {
-		failures.push(
-			`${locale.home}: hero embed is not Puzzle Dream (${embedMatch?.[1] ?? "missing"})`,
-		);
+	if (countH1(html) !== 1) {
+		failures.push(`${locale.home}: expected 1 h1, found ${countH1(html)}`);
 	}
 
 	const title = titleOf(html);
 	const h1 = h1Of(html);
-	if (!hasPuzzleDreamName(title)) {
-		failures.push(`${locale.home}: title missing Puzzle Dream: ${title}`);
+	if (!isHubTitle(title, locale.prefix)) {
+		failures.push(`${locale.home}: title should be a series hub, got: ${title}`);
 	}
-	if (!hasPuzzleDreamName(h1)) {
-		failures.push(`${locale.home}: h1 missing Puzzle Dream: ${h1}`);
+	if (!isHubTitle(h1, locale.prefix) && !/シリーズ|系列|مجموعه|série|seri|hub|cổng|案内/i.test(h1)) {
+		failures.push(`${locale.home}: h1 should be a series hub, got: ${h1}`);
 	}
-	if (/First Puzzle/i.test(h1)) {
-		failures.push(`${locale.home}: h1 still names First Puzzle: ${h1}`);
+	if (/^Play Her Trees Puzzle Dream/i.test(h1) || /^Her Trees Puzzle Dream$/i.test(h1)) {
+		failures.push(`${locale.home}: h1 still looks like the Puzzle Dream play page: ${h1}`);
+	}
+
+	for (const playPath of [
+		`${locale.play}/play/first-puzzle/`,
+		`${locale.play}/play/puzzle-house/`,
+		`${locale.play}/play/puzzle-dream/`,
+	]) {
+		if (!html.includes(`href="${playPath}"`)) {
+			failures.push(`${locale.home}: missing play href ${playPath}`);
+		}
+	}
+
+	if (!html.includes(`${locale.play}/play/puzzle-dream/guide/`)) {
+		failures.push(`${locale.home}: missing dream guide href`);
+	}
+
+	const embedMatch = html.match(/data-embed-src="([^"]+)"/);
+	if (embedMatch && /\/her-trees-first-puzzle\/index\.html$/.test(embedMatch[1])) {
+		failures.push(
+			`${locale.home}: First Puzzle embed still points at index.html (that URL 301s to the play page)`,
+		);
+	}
+
+	const desc = html.match(/name="description" content="([^"]*)"/i)?.[1] || "";
+	if (!/first puzzle|puzzle house|puzzle dream/i.test(`${title} ${desc}`)) {
+		failures.push(`${locale.home}: meta should name the three games`);
+	}
+
+	if (locale.prefix === "" && !/SearchAction/.test(html)) {
+		failures.push("homepage missing SearchAction");
+	}
+	if (locale.prefix === "" && !html.includes("/search/?q={search_term_string}")) {
+		failures.push("homepage SearchAction missing /search/ target");
+	}
+	if (locale.prefix === "" && !/dateModified/.test(html)) {
+		failures.push("homepage missing dateModified");
+	}
+	if (
+		locale.prefix === "" &&
+		!/<details class="faq-item"[\s\S]*?<a href="\/play\/puzzle-dream\//.test(html)
+	) {
+		failures.push("homepage FAQ missing Dream play href");
 	}
 }
 
+if (fs.existsSync(path.join(distDir, "en/index.html"))) {
+	failures.push("dist/en/index.html should not be generated; /en must 301 away");
+}
+
 const playPages = [
-	"play/puzzle-dream/index.html",
-	"play/puzzle-house/index.html",
-	"fa/play/puzzle-dream/index.html",
-	"fa/play/puzzle-house/index.html",
-	"id/play/puzzle-dream/index.html",
-	"id/play/puzzle-house/index.html",
-	"vi/play/puzzle-dream/index.html",
-	"vi/play/puzzle-house/index.html",
+	["play/puzzle-dream/index.html", /puzzle dream/i, "/play/puzzle-dream/guide/"],
+	["play/puzzle-house/index.html", /puzzle house/i, "/play/puzzle-house/guide/"],
+	["fa/play/puzzle-dream/index.html", /puzzle dream/i, "/fa/play/puzzle-dream/guide/"],
+	["fa/play/puzzle-house/index.html", /puzzle house/i, "/fa/play/puzzle-house/guide/"],
+	["id/play/puzzle-dream/index.html", /puzzle dream/i, "/id/play/puzzle-dream/guide/"],
+	["id/play/puzzle-house/index.html", /puzzle house/i, "/id/play/puzzle-house/guide/"],
+	["vi/play/puzzle-dream/index.html", /puzzle dream/i, "/vi/play/puzzle-dream/guide/"],
+	["vi/play/puzzle-house/index.html", /puzzle house/i, "/vi/play/puzzle-house/guide/"],
+	["zh-cn/play/puzzle-dream/index.html", /puzzle dream/i, "/zh-cn/play/puzzle-dream/guide/"],
+	["zh-cn/play/puzzle-house/index.html", /puzzle house/i, "/zh-cn/play/puzzle-house/guide/"],
+	["ja/play/puzzle-dream/index.html", /puzzle dream|ハーツリーズ/i, "/ja/play/puzzle-dream/guide/"],
+	["ja/play/puzzle-house/index.html", /puzzle house|ハーツリーズ/i, "/ja/play/puzzle-house/guide/"],
+	["fr/play/puzzle-dream/index.html", /puzzle dream/i, "/fr/play/puzzle-dream/guide/"],
+	["fr/play/puzzle-house/index.html", /puzzle house/i, "/fr/play/puzzle-house/guide/"],
 ];
 
-for (const file of playPages) {
+for (const [file, h1Pattern, guideHref] of playPages) {
 	const html = read(file);
 	if (!html) continue;
-	const h1Count = countH1(html);
-	if (h1Count !== 1) {
-		failures.push(`${file}: expected 1 h1, found ${h1Count}`);
+	if (countH1(html) !== 1) {
+		failures.push(`${file}: expected 1 h1, found ${countH1(html)}`);
 	}
 	const h1 = h1Of(html);
-	const isDream = file.includes("puzzle-dream");
-	if (isDream && !/puzzle dream/i.test(h1)) {
-		failures.push(`${file}: h1 does not name Puzzle Dream: ${h1}`);
-	}
-	if (
-		file === "play/puzzle-dream/index.html" &&
-		!/^Her Trees Puzzle Dream/i.test(h1)
-	) {
-		failures.push(`${file}: English h1 should start with Her Trees Puzzle Dream: ${h1}`);
-	}
-	if (!isDream && !/puzzle house/i.test(h1)) {
-		failures.push(`${file}: h1 does not name Puzzle House: ${h1}`);
+	if (!h1Pattern.test(h1)) {
+		failures.push(`${file}: h1 does not name the game: ${h1}`);
 	}
 	if (!hasVideoGame(html)) {
 		failures.push(`${file}: missing JSON-LD VideoGame`);
 	}
-	if (isDream && !/play\/puzzle-dream\/guide\//.test(html)) {
-		failures.push(`${file}: missing internal link to dream guide`);
+	if (!html.includes(guideHref) && !html.includes(guideHref.replace(/^\//, "/"))) {
+		failures.push(`${file}: missing internal link to ${guideHref}`);
 	}
-	if (
-		isDream &&
-		!/<details class="faq-item"[\s\S]*?<a href="(?:\/[a-z0-9-]+)?\/play\/puzzle-dream\/guide\//.test(
-			html,
-		)
-	) {
-		failures.push(`${file}: FAQ missing Dream guide href`);
+	if (file.includes("puzzle-dream") && !/play\/first-puzzle\//.test(html)) {
+		failures.push(`${file}: missing First Puzzle play href`);
 	}
-	if (!isDream && !/play\/puzzle-house\/guide\//.test(html)) {
-		failures.push(`${file}: missing internal link to house guide`);
+	if (file === "play/puzzle-dream/index.html") {
+		const title = titleOf(html);
+		if (!/Play Her Trees: Puzzle Dream Online/i.test(title)) {
+			failures.push(`${file}: English title should be Play Her Trees: Puzzle Dream Online, got: ${title}`);
+		}
+		if (!/^Her Trees Puzzle Dream/i.test(h1)) {
+			failures.push(`${file}: English h1 should start with Her Trees Puzzle Dream: ${h1}`);
+		}
+	}
+	if (file === "play/puzzle-house/index.html") {
+		const title = titleOf(html);
+		if (!/Play Her Trees: The Puzzle House Online/i.test(title)) {
+			failures.push(`${file}: English title should be Play Her Trees: The Puzzle House Online, got: ${title}`);
+		}
+	}
+	if (file === "ja/play/puzzle-dream/index.html" || file === "ja/play/puzzle-house/index.html") {
+		const title = titleOf(html);
+		if (!/ハーツリーズ|Her Trees/i.test(title)) {
+			failures.push(`${file}: Japanese title should include ハーツリーズ or Her Trees: ${title}`);
+		}
 	}
 }
 
 const guidePages = [
-	["play/puzzle-dream/guide/index.html", ["HDA", "AEDH", "EBCFIHGDA"]],
-	["play/puzzle-house/guide/index.html", ["CAFG", "FEC", "ICGEA"]],
-	["fa/play/puzzle-dream/guide/index.html", ["HDA", "AEDH"]],
-	["fa/play/puzzle-house/guide/index.html", ["CAFG", "ICGEA"]],
-	["id/play/puzzle-dream/guide/index.html", ["HDA", "AEDH"]],
-	["id/play/puzzle-house/guide/index.html", ["CAFG", "ICGEA"]],
-	["vi/play/puzzle-dream/guide/index.html", ["HDA", "AEDH"]],
-	["vi/play/puzzle-house/guide/index.html", ["CAFG", "ICGEA"]],
+	["play/puzzle-dream/guide/index.html", ["HDA", "AEDH", "EBCFIHGDA"], "dream"],
+	["play/puzzle-house/guide/index.html", ["CAFG", "FEC", "ICGEA"], "house"],
+	["fa/play/puzzle-dream/guide/index.html", ["HDA", "AEDH"], "dream"],
+	["fa/play/puzzle-house/guide/index.html", ["CAFG", "ICGEA"], "house"],
+	["id/play/puzzle-dream/guide/index.html", ["HDA", "AEDH"], "dream"],
+	["id/play/puzzle-house/guide/index.html", ["CAFG", "ICGEA"], "house"],
+	["vi/play/puzzle-dream/guide/index.html", ["HDA", "AEDH"], "dream"],
+	["vi/play/puzzle-house/guide/index.html", ["CAFG", "ICGEA"], "house"],
+	["zh-cn/play/puzzle-dream/guide/index.html", ["HDA", "AEDH"], "dream"],
+	["zh-cn/play/puzzle-house/guide/index.html", ["CAFG", "ICGEA"], "house"],
+	["ja/play/puzzle-dream/guide/index.html", ["HDA", "AEDH"], "dream"],
+	["ja/play/puzzle-house/guide/index.html", ["CAFG", "ICGEA"], "house"],
+	["fr/play/puzzle-dream/guide/index.html", ["HDA", "AEDH"], "dream"],
+	["fr/play/puzzle-house/guide/index.html", ["CAFG", "ICGEA"], "house"],
 ];
 
-for (const [file, codes] of guidePages) {
+for (const [file, codes, kind] of guidePages) {
 	const html = read(file);
 	if (!html) continue;
 	if (!/<table\b/i.test(html)) {
@@ -147,18 +211,67 @@ for (const [file, codes] of guidePages) {
 			failures.push(`${file}: missing keypad code ${code}`);
 		}
 	}
-	if (
-		file.includes("puzzle-dream/guide") &&
-		!/href="(?:\/[a-z0-9-]+)?\/play\/puzzle-dream\/"/.test(html)
-	) {
+	if (kind === "dream" && !/href="(?:\/[a-z0-9-]+)?\/play\/puzzle-dream\/"/.test(html)) {
 		failures.push(`${file}: missing play Her Trees Puzzle Dream href`);
 	}
-	if (file.includes("puzzle-dream/guide") && !/play\/puzzle-house\/guide\//.test(html)) {
+	if (kind === "house" && !/href="(?:\/[a-z0-9-]+)?\/play\/puzzle-house\/"/.test(html)) {
+		failures.push(`${file}: missing play Her Trees The Puzzle House href`);
+	}
+	if (kind === "dream" && !/play\/puzzle-house\/guide\//.test(html)) {
 		failures.push(`${file}: missing cross-link to house guide`);
 	}
-	if (file.includes("puzzle-house/guide") && !/play\/puzzle-dream\/guide\//.test(html)) {
+	if (kind === "house" && !/play\/puzzle-dream\/guide\//.test(html)) {
 		failures.push(`${file}: missing cross-link to dream guide`);
 	}
+	if (file === "play/puzzle-dream/guide/index.html") {
+		const title = titleOf(html);
+		if (!/Her Trees Puzzle Dream Walkthrough and Answers/i.test(title)) {
+			failures.push(`${file}: English title mismatch: ${title}`);
+		}
+	}
+	if (file === "play/puzzle-house/guide/index.html") {
+		const title = titleOf(html);
+		if (!/Her Trees The Puzzle House Walkthrough and Answers/i.test(title)) {
+			failures.push(`${file}: English title mismatch: ${title}`);
+		}
+	}
+	if (file.startsWith("ja/") && !/ハーツリーズ|Her Trees/i.test(titleOf(html))) {
+		failures.push(`${file}: Japanese title should include ハーツリーズ or Her Trees: ${titleOf(html)}`);
+	}
+	if (file.startsWith("ja/") && !/攻略/.test(titleOf(html))) {
+		failures.push(`${file}: Japanese guide title should include 攻略: ${titleOf(html)}`);
+	}
+}
+
+const firstGuideHtml = read("guide/index.html");
+if (firstGuideHtml) {
+	if (!/first puzzle/i.test(titleOf(firstGuideHtml))) {
+		failures.push(`guide title missing First Puzzle: ${titleOf(firstGuideHtml)}`);
+	}
+	if (!/forgotten house/i.test(titleOf(firstGuideHtml) + firstGuideHtml)) {
+		failures.push("English First Puzzle guide should still mention Forgotten House");
+	}
+	if (!/play\/first-puzzle\//.test(firstGuideHtml)) {
+		failures.push("guide page missing First Puzzle play href");
+	}
+	if (firstGuideHtml.indexOf("<h2") > -1 && firstGuideHtml.indexOf("<iframe") > -1) {
+		if (firstGuideHtml.indexOf("<iframe") < firstGuideHtml.indexOf("id=\"first-puzzle-walkthrough\"")) {
+			failures.push("guide page: walkthrough text should appear before the video iframe");
+		}
+	}
+}
+
+const zhGuideHome = read("zh-cn/guide/index.html");
+if (zhGuideHome && zhGuideHome.length < 4000) {
+	failures.push("zh-cn/guide looks too thin");
+}
+if (zhGuideHome && !/分区提示|逐步/.test(zhGuideHome)) {
+	failures.push("zh-cn/guide should include structured hint/step text");
+}
+
+const jaGuideHome = read("ja/guide/index.html");
+if (jaGuideHome && !/ハーツリーズ|攻略/.test(titleOf(jaGuideHome))) {
+	failures.push(`ja/guide title should include ハーツリーズ or 攻略: ${titleOf(jaGuideHome)}`);
 }
 
 const walkHtml = (dir, found = []) => {
@@ -194,10 +307,53 @@ if (!fs.existsSync(redirectsPath)) {
 	for (const rule of [
 		"/her-trees-puzzle-dream/ /play/puzzle-dream/ 301",
 		"/her-trees-the-puzzle-house/ /play/puzzle-house/ 301",
+		"/en / 301",
+		"/en/* /:splat 301",
+		"/jp /ja/ 301",
+		"/zh /zh-cn/ 301",
+		"/cn /zh-cn/ 301",
+		"/analysis /analysis/puzzle-design/ 301",
+		"/her-trees-first-puzzle /play/first-puzzle/ 301",
+		"/her-trees-first-puzzle/index.html /play/first-puzzle/ 301",
+		"/apple-touch-icon-precomposed.png /apple-touch-icon.png 301",
 	]) {
 		if (!redirects.includes(rule)) {
 			failures.push(`_redirects missing rule: ${rule}`);
 		}
+	}
+	if (/^\/her-trees-first-puzzle\/\* /m.test(redirects)) {
+		failures.push("_redirects must not splat-redirect /her-trees-first-puzzle/* (Build assets must stay)");
+	}
+}
+
+const headersPath = path.join(distDir, "_headers");
+if (!fs.existsSync(headersPath)) {
+	failures.push("missing dist/_headers");
+} else {
+	const headers = fs.readFileSync(headersPath, "utf8");
+	if (!headers.includes("/_astro/*")) {
+		failures.push("_headers missing /_astro/* rule");
+	}
+	if (!/max-age=31536000/.test(headers) || !/immutable/.test(headers)) {
+		failures.push("_headers should long-cache hashed/Unity assets as immutable");
+	}
+	if (/_astro[\s\S]{0,200}must-revalidate/.test(headers)) {
+		failures.push("_headers must not set must-revalidate on hashed assets");
+	}
+}
+
+const assetLinksPath = path.join(distDir, ".well-known/assetlinks.json");
+if (!fs.existsSync(assetLinksPath)) {
+	failures.push("missing dist/.well-known/assetlinks.json");
+} else {
+	const raw = fs.readFileSync(assetLinksPath, "utf8").trim();
+	try {
+		const parsed = JSON.parse(raw);
+		if (!Array.isArray(parsed) || parsed.length !== 0) {
+			failures.push("assetlinks.json should be an empty JSON array");
+		}
+	} catch {
+		failures.push("assetlinks.json is not valid JSON");
 	}
 }
 
@@ -229,6 +385,9 @@ const sitemapHtml = read("sitemap.xml");
 if (sitemapHtml && !sitemapHtml.includes("https://treespuzzle.com/play/puzzle-dream/switch/")) {
 	failures.push("sitemap missing https://treespuzzle.com/play/puzzle-dream/switch/");
 }
+if (sitemapHtml && sitemapHtml.includes("https://treespuzzle.com/en")) {
+	failures.push("sitemap should not list /en URLs");
+}
 
 const firstPuzzleHtml = read("play/first-puzzle/index.html");
 if (firstPuzzleHtml) {
@@ -241,53 +400,19 @@ if (firstPuzzleHtml) {
 	if (!hasVideoGame(firstPuzzleHtml)) {
 		failures.push("first-puzzle: missing VideoGame");
 	}
-	if (!firstPuzzleHtml.includes("/her-trees-first-puzzle/index.html")) {
-		failures.push("first-puzzle: missing local First Puzzle embed");
+	if (!firstPuzzleHtml.includes("/her-trees-first-puzzle/embed.html")) {
+		failures.push("first-puzzle: missing local First Puzzle embed.html");
+	}
+	if (firstPuzzleHtml.includes("/her-trees-first-puzzle/index.html")) {
+		failures.push("first-puzzle: embed should not use index.html (that path 301s)");
 	}
 	if (!firstPuzzleHtml.includes("/play/puzzle-dream/guide/")) {
 		failures.push("first-puzzle: missing Dream walkthrough href");
 	}
-}
-
-const faGuideTitle = titleOf(read("fa/guide/index.html"));
-if (faGuideTitle && !/^Her Trees First Puzzle/i.test(faGuideTitle)) {
-	failures.push(`fa first-puzzle guide title: ${faGuideTitle}`);
-}
-const idGuideTitle = titleOf(read("id/guide/index.html"));
-if (idGuideTitle && !/^Her Trees First Puzzle/i.test(idGuideTitle)) {
-	failures.push(`id first-puzzle guide title: ${idGuideTitle}`);
-}
-
-const homeHtml = read("index.html");
-if (switchHtml && homeHtml) {
-	const switchTitle = titleOf(switchHtml);
-	const homeTitle = titleOf(homeHtml);
-	if (switchTitle && homeTitle && switchTitle === homeTitle) {
-		failures.push("switch page title equals homepage title");
+	const fpTitle = titleOf(firstPuzzleHtml);
+	if (!/First Puzzle/i.test(fpTitle) || !/Forgotten House/i.test(fpTitle)) {
+		failures.push(`first-puzzle title should target First Puzzle and A Forgotten House: ${fpTitle}`);
 	}
-}
-if (homeHtml && !homeHtml.includes("/play/puzzle-dream/guide/")) {
-	failures.push("homepage missing dream guide href");
-}
-if (homeHtml && !/dateModified/.test(homeHtml)) {
-	failures.push("homepage missing dateModified");
-}
-if (homeHtml && !/>Play Her Trees Puzzle Dream Online</.test(homeHtml)) {
-	failures.push("homepage missing Play Her Trees Puzzle Dream Online heading");
-}
-if (
-	homeHtml &&
-	!/<details class="faq-item"[\s\S]*?<a href="\/play\/puzzle-dream\//.test(homeHtml)
-) {
-	failures.push("homepage FAQ missing Dream play href");
-}
-
-const homeSchemaHtml = read("index.html");
-if (homeSchemaHtml && !/SearchAction/.test(homeSchemaHtml)) {
-	failures.push("homepage missing SearchAction");
-}
-if (homeSchemaHtml && !homeSchemaHtml.includes("/search/?q={search_term_string}")) {
-	failures.push("homepage SearchAction missing /search/ target");
 }
 
 const searchHtml = read("search/index.html");
@@ -305,25 +430,18 @@ if (searchHtml) {
 
 const aboutHtml = read("about/index.html");
 if (aboutHtml) {
+	if (titleOf(aboutHtml) !== h1Of(aboutHtml)) {
+		failures.push(`about title must match h1: title="${titleOf(aboutHtml)}" h1="${h1Of(aboutHtml)}"`);
+	}
+	if (/play online|puzzle dream online/i.test(titleOf(aboutHtml))) {
+		failures.push(`about title should not compete for play queries: ${titleOf(aboutHtml)}`);
+	}
 	if (!aboutHtml.includes("/play/puzzle-dream/")) {
 		failures.push("about page missing Dream play href");
 	}
 	if (!aboutHtml.includes("/play/puzzle-dream/guide/")) {
 		failures.push("about page missing Dream guide href");
 	}
-}
-
-const idHome = read("id/index.html");
-if (idHome && !/her trees puzzle dream/i.test(titleOf(idHome) + " " + (idHome.match(/name="description" content="([^"]*)"/i)?.[1] || ""))) {
-	failures.push("id homepage missing Her Trees Puzzle Dream in title/description");
-}
-const viHome = read("vi/index.html");
-if (viHome && !/her trees puzzle dream/i.test(titleOf(viHome) + " " + (viHome.match(/name="description" content="([^"]*)"/i)?.[1] || ""))) {
-	failures.push("vi homepage missing Her Trees Puzzle Dream in title/description");
-}
-const zhGuide = read("zh-cn/play/puzzle-dream/guide/index.html");
-if (zhGuide && !/^Her Trees Puzzle Dream/i.test(titleOf(zhGuide))) {
-	failures.push(`zh-cn dream guide title should start with Her Trees Puzzle Dream: ${titleOf(zhGuide)}`);
 }
 
 const analysisHtml = read("analysis/puzzle-design/index.html");
@@ -334,6 +452,11 @@ if (analysisHtml) {
 	if (!analysisHtml.includes("/play/puzzle-dream/guide/")) {
 		failures.push("analysis page missing Dream guide href");
 	}
+}
+
+const jaHome = read("ja/index.html");
+if (jaHome && !/ハーツリーズ/.test(titleOf(jaHome))) {
+	failures.push(`ja homepage title should include ハーツリーズ: ${titleOf(jaHome)}`);
 }
 
 if (failures.length) {

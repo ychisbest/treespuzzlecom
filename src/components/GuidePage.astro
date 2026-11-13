@@ -12,12 +12,17 @@ import {
 	globalPaths,
 	shareImageUrl,
 } from "../data/site-shell";
+import { firstPuzzleGuideCopy } from "../data/first-puzzle-guide";
 import {
 	buildOgLocaleAlternates,
-	guideVideoUploadDates,
 	guideAlternateLinks,
+	guideDreamPath,
+	guideFirstSeo,
+	guideHousePath,
+	guideVideoUploadDates,
 	localeToHreflang,
 	localeToOgLocale,
+	playFirstPath,
 	toAbsoluteUrl,
 } from "../data/seo";
 
@@ -27,7 +32,12 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
+const seo = guideFirstSeo[locale];
+const walkthrough = firstPuzzleGuideCopy[locale];
 const guideEmbedUrl = "https://www.youtube.com/embed/yzNEcdAW-cU";
+const firstPlayHref = playFirstPath(locale);
+const dreamGuideHref = guideDreamPath(locale);
+const houseGuideHref = guideHousePath(locale);
 
 const languageLinks = guideAlternateLinks(locale);
 
@@ -163,8 +173,8 @@ const guideSchema = JSON.stringify([
 	{
 		"@context": "https://schema.org",
 		"@type": "VideoObject",
-		name: content.guidePageTitle,
-		description: content.guidePageDescription,
+		name: seo.title,
+		description: seo.description,
 		embedUrl: guideEmbedUrl,
 		url: canonicalUrl,
 		thumbnailUrl: shareImageUrl,
@@ -201,12 +211,12 @@ const guideSchema = JSON.stringify([
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#111111" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{content.guidePageTitle}</title>
-		<meta name="description" content={content.guidePageDescription} />
+		<title>{seo.title}</title>
+		<meta name="description" content={seo.description} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta name="robots" content="index, follow" />
-		<meta property="og:title" content={content.guidePageTitle} />
-		<meta property="og:description" content={content.guidePageDescription} />
+		<meta property="og:title" content={seo.title} />
+		<meta property="og:description" content={seo.description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={content.siteName} />
@@ -218,8 +228,8 @@ const guideSchema = JSON.stringify([
 		}
 		<meta property="og:image" content={shareImageUrl} />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={content.guidePageTitle} />
-		<meta name="twitter:description" content={content.guidePageDescription} />
+		<meta name="twitter:title" content={seo.title} />
+		<meta name="twitter:description" content={seo.description} />
 		<meta name="twitter:image" content={shareImageUrl} />
 		<meta name="google-adsense-account" content={adsensePublisherId} />
 		{
@@ -244,7 +254,7 @@ const guideSchema = JSON.stringify([
 			<SiteHeader
 				locale={locale}
 				currentPath={content.guidePath}
-				tagline={content.guidePageDescription}
+				tagline={seo.description}
 				languageSwitchLabel={content.languageSwitchLabel}
 				languageLinks={languageLinks}
 			/>
@@ -257,17 +267,52 @@ const guideSchema = JSON.stringify([
 				</nav>
 
 				<section class="page-intro-block">
-					<h1>
-						{locale === "en"
-							? "Her Trees Walkthrough – First Puzzle & Forgotten House"
-							: locale === "fa"
-								? "راهنمای Her Trees – First Puzzle"
-								: content.guidePageTitle}
-					</h1>
-					<p>{content.guidePageDescription}</p>
+					<h1>{seo.h1}</h1>
+					<p>{seo.description}</p>
+					<p>
+						<a href={firstPlayHref}>{walkthrough.playLabel}</a>
+						{" · "}
+						<a href={dreamGuideHref}>{walkthrough.dreamGuideLabel}</a>
+						{" · "}
+						<a href={houseGuideHref}>{walkthrough.houseGuideLabel}</a>
+					</p>
 				</section>
 
-				<section class="guide-frame-shell">
+				<section class="content-section" id="first-puzzle-walkthrough">
+					<h2>{walkthrough.hintsHeading}</h2>
+					<p class="section-intro">{walkthrough.hintsIntro}</p>
+					<div class="start-grid">
+						{
+							walkthrough.hints.map((item) => (
+								<article class="note-card">
+									<h3>{item.title}</h3>
+									<p>{item.body}</p>
+								</article>
+							))
+						}
+					</div>
+				</section>
+
+				<section class="content-section" id="first-puzzle-steps">
+					<h2>{walkthrough.stepsHeading}</h2>
+					<div class="prose-block">
+						<p>{walkthrough.stepsIntro}</p>
+						<ol>
+							{walkthrough.steps.map((step) => <li>{step}</li>)}
+						</ol>
+						<p>{walkthrough.uncertainNote}</p>
+					</div>
+				</section>
+
+				<section class="content-section" id="forgotten-house">
+					<h2>{walkthrough.forgottenHeading}</h2>
+					<div class="prose-block">
+						<p>{walkthrough.forgottenBody}</p>
+					</div>
+				</section>
+
+				<section class="guide-frame-shell" id="first-puzzle-video">
+					<p class="section-intro">{walkthrough.videoPlacementNote}</p>
 					<iframe
 						class="guide-frame"
 						src={guideEmbedUrl}
@@ -280,73 +325,6 @@ const guideSchema = JSON.stringify([
 				</section>
 
 				<AdUnit />
-
-				{
-					locale === "en" && (
-						<>
-							<section class="content-section" id="first-puzzle-walkthrough">
-								<h2>Her Trees First Puzzle walkthrough</h2>
-								<div class="prose-block">
-									<p>
-										The embedded video is the full <strong>Her Trees First Puzzle walkthrough</strong>.
-										Use it when you are stuck on object order, symbol matching, or the letter grid on the right.
-										Prefer trying the room yourself first on the
-										<a href="/play/first-puzzle/">First Puzzle play page</a>, then scrub the video to the moment you need.
-									</p>
-									<p>
-										Quick habits that solve most softlocks: check every movable prop, look for repeated shapes between the scene and the keypad,
-										and confirm you are combining the right pair before entering letters A–I.
-									</p>
-									<p>
-										Related queries this section targets: <em>her trees first puzzle walkthrough</em>,
-										<em>hertreesfirstpuzzle walkthrough</em>, <em>first puzzle walkthrough solution</em>.
-									</p>
-								</div>
-							</section>
-							<section class="content-section" id="forgotten-house">
-								<h2>Her Trees A Forgotten House walkthrough</h2>
-								<div class="prose-block">
-									<p>
-										Searches for <strong>Her Trees A Forgotten House</strong> / <em>forgotten house walkthrough</em> often refer to an early
-										or alternate room/title in the same Stone puzzle lineage that players associate with the First Puzzle guide above.
-										If you landed here from that query, start with the video on this page and the
-										<a href="/play/first-puzzle/">browser First Puzzle</a> session — the observation rules (move, combine, match the code) are the same.
-									</p>
-									<p>
-										After First Puzzle, continue with
-										<a href="/play/puzzle-house/">The Puzzle House</a>
-										and
-										<a href="/play/puzzle-dream/">Puzzle Dream</a>
-										(each has its own guide subpage for later spoilers).
-									</p>
-									<p>
-										This site does not replace official Steam pages; it documents free browser play and walkthrough entry points.
-									</p>
-								</div>
-							</section>
-						</>
-					)
-				}
-
-				{
-					locale === "fa" && (
-						<section class="content-section" id="first-puzzle-walkthrough">
-							<h2>راهنمای First Puzzle (ویدیوی حل معما)</h2>
-							<div class="prose-block">
-								<p>
-									ویدیوی این صفحه <strong>راهنمای کامل First Puzzle</strong> است.
-									قبل از اسپویل، چند دقیقه در
-									<a href="/fa/play/first-puzzle/">صفحهٔ بازی First Puzzle</a>
-									خودتان اشیا را جابه‌جا و ترکیب کنید؛ بعد اگر لازم بود به تایم‌کد مناسب ویدیو بروید.
-								</p>
-								<p>
-									اگر گیر کردید: همهٔ اشیای قابل حرکت را چک کنید، شکل‌های تکراری بین صحنه و صفحه کلید را ببینید،
-									و قبل از وارد کردن حروف A–I از ترکیب درست مطمئن شوید.
-								</p>
-							</div>
-						</section>
-					)
-				}
 
 				<section class="content-section">
 					<h2>{guideNotes.beforeHeading}</h2>

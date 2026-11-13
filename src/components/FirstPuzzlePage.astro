@@ -7,10 +7,18 @@ import SiteHeader from "./SiteHeader.astro";
 import { homeContent, type Locale } from "../data/home-content";
 import { adsensePublisherId, siteUrl } from "../data/site-shell";
 import {
-	buildAlternateLinks,
 	buildOgLocaleAlternates,
+	firstPuzzleEmbedUrl,
+	guideDreamPath,
+	guideFirstPath,
+	guideHousePath,
 	localeToHreflang,
 	localeToOgLocale,
+	playDreamPath,
+	playFirstAlternateLinks,
+	playFirstPath,
+	playFirstSeo,
+	playHousePath,
 	toAbsoluteUrl,
 } from "../data/seo";
 
@@ -20,111 +28,65 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const pagePath =
-	locale === "en" ? "/play/first-puzzle/" : `/${locale}/play/first-puzzle/`;
-const guidePath = content.guidePath;
-const dreamPath =
-	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
-const dreamGuidePath =
-	locale === "en"
-		? "/play/puzzle-dream/guide/"
-		: `/${locale}/play/puzzle-dream/guide/`;
-const housePath =
-	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
-const embedUrl = "/her-trees-first-puzzle/index.html";
+const seo = playFirstSeo[locale];
+const pagePath = playFirstPath(locale);
+const guidePath = guideFirstPath(locale);
+const dreamPath = playDreamPath(locale);
+const dreamGuidePath = guideDreamPath(locale);
+const housePath = playHousePath(locale);
+const houseGuidePath = guideHousePath(locale);
+const embedUrl = firstPuzzleEmbedUrl;
 const shareImage = new URL(firstPuzzleImage.src, siteUrl).toString();
 
-const copyByLocale: Record<
-	Locale,
-	{ title: string; description: string; h1: string; intro: string; play: string }
-> = {
+const copyByLocale: Record<Locale, { intro: string; play: string }> = {
 	en: {
-		title: "Her Trees First Puzzle – Play Free in Browser",
-		description:
-			"Play Her Trees First Puzzle free in your browser — the shortest HER TREES room. No download. Stuck? Open the First Puzzle walkthrough, then continue to Puzzle House or Puzzle Dream.",
-		h1: "Play Her Trees First Puzzle",
 		intro:
-			"First Puzzle is the shortest HER TREES entry and the best “her trees first puzzle” landing page. Move and combine objects in one room, then enter letters on the A–I grid. This URL — not the homepage — should own First Puzzle play intent. For solutions, use the walkthrough link below.",
+			"This is the dedicated play page for Her Trees: First Puzzle — also searched as A Forgotten House. It is the shortest entry in the series: one hand-drawn room where you move and combine objects, then enter letters on the A–I grid. The homepage is only the series hub; use this URL to play. For solutions, open the walkthrough link below. There is no official smartphone app.",
 		play: "Start First Puzzle",
 	},
 	"zh-cn": {
-		title: "Her Trees First Puzzle - 浏览器免费玩",
-		description:
-			"免费在浏览器玩 Her Trees First Puzzle。最短的黑白房间解谜，不用下载。玩完可继续 Puzzle House 和 Puzzle Dream。",
-		h1: "游玩 Her Trees First Puzzle",
 		intro:
-			"First Puzzle 是系列最短的一作。首页现在直接玩 Puzzle Dream；这一页保留第一作的独立入口。",
+			"这是 Her Trees: First Puzzle（也常被搜作 A Forgotten House）的游玩专页，系列最短的一作：在一个手绘房间里移动、组合物件，再在右侧 A–I 键盘输入字母。首页只做系列导航，真正游玩请用本页。需要解法请走下面的攻略。没有官方手机应用。",
 		play: "开始 First Puzzle",
 	},
 	fa: {
-		title: "Her Trees First Puzzle - بازی رایگان در مرورگر",
-		description:
-			"Her Trees First Puzzle را رایگان در مرورگر بازی کنید. پازل کوتاه سیاه‌وسفید، بدون دانلود.",
-		h1: "بازی Her Trees First Puzzle",
 		intro:
-			"First Puzzle کوتاه‌ترین اثر مجموعه است. صفحه اصلی اکنون Puzzle Dream را پخش می‌کند؛ این صفحه ورودی مستقل بازی اول است.",
+			"این صفحه اختصاصی بازی Her Trees: First Puzzle است — گاهی با نام A Forgotten House جستجو می‌شود. کوتاه‌ترین اثر مجموعه در یک اتاق دست‌کشیده: اشیاء را جابه‌جا و ترکیب کنید و حروف را در شبکه A–I وارد کنید. صفحه اصلی فقط هاب سری است. برای راه‌حل به راهنما بروید. اپ رسمی موبایل وجود ندارد.",
 		play: "شروع First Puzzle",
 	},
 	fr: {
-		title: "Her Trees First Puzzle - Jouer gratuitement",
-		description:
-			"Jouez à Her Trees First Puzzle dans le navigateur, sans téléchargement.",
-		h1: "Jouer à Her Trees First Puzzle",
 		intro:
-			"First Puzzle est l’entrée la plus courte. L’accueil joue Puzzle Dream ; cette page garde le premier jeu.",
+			"Voici la page de jeu dédiée à Her Trees : First Puzzle (aussi cherché comme A Forgotten House). L’entrée la plus courte : une pièce dessinée à la main, où vous déplacez et combinez des objets, puis entrez des lettres sur la grille A–I. La page d’accueil n’est que le hub. Pour les solutions, ouvrez le guide. Pas d’appli mobile officielle.",
 		play: "Lancer First Puzzle",
 	},
 	id: {
-		title: "Her Trees First Puzzle - Main Gratis di Browser",
-		description:
-			"Mainkan Her Trees First Puzzle gratis di browser. Puzzle ruangan pendek, tanpa unduhan.",
-		h1: "Mainkan Her Trees First Puzzle",
 		intro:
-			"First Puzzle adalah entri terpendek. Beranda sekarang memainkan Puzzle Dream; halaman ini tetap untuk game pertama.",
+			"Ini halaman main khusus Her Trees: First Puzzle — juga dicari sebagai A Forgotten House. Entri terpendek: satu ruangan bergambar tangan, geser dan gabungkan objek, lalu masukkan huruf di kisi A–I. Beranda hanya hub seri. Untuk solusi, buka panduan. Tidak ada aplikasi seluler resmi.",
 		play: "Mulai First Puzzle",
 	},
 	ja: {
-		title: "Her Trees First Puzzle - ブラウザで無料プレイ",
-		description:
-			"Her Trees First Puzzle をブラウザで無料プレイ。短い部屋パズル、ダウンロード不要。",
-		h1: "Her Trees First Puzzle を遊ぶ",
 		intro:
-			"First Puzzle は最短の一作です。トップは Puzzle Dream、このページが第1作の専用入口です。",
+			"ここはハーツリーズ（Her Trees）: First Puzzle（A Forgotten House としても検索される）の専用プレイページです。シリーズ最短の一作で、一室の手描き部屋でオブジェクトを動かして組み合わせ、右の A–I キーパッドに文字を入力します。トップはシリーズ案内だけなので、遊ぶときはこのURLを使ってください。解法は攻略ページへ。公式スマホアプリはありません。",
 		play: "First Puzzle を始める",
 	},
 	vi: {
-		title: "Her Trees First Puzzle - Choi mien phi tren trinh duyet",
-		description:
-			"Choi Her Trees First Puzzle mien phi tren trinh duyet. Cau do phong ngan, khong can tai.",
-		h1: "Choi Her Trees First Puzzle",
 		intro:
-			"First Puzzle la phan ngan nhat. Trang chu choi Puzzle Dream; trang nay giu phan dau nhu URL rieng.",
-		play: "Bat dau First Puzzle",
+			"Đây là trang chơi riêng của Her Trees: First Puzzle — cũng được tìm với tên A Forgotten House. Phần ngắn nhất: một phòng vẽ tay, bạn di chuyển và kết hợp đồ vật, rồi nhập chữ trên lưới A–I. Trang chủ chỉ là cổng series. Để xem lời giải, mở hướng dẫn. Không có ứng dụng mobile chính thức.",
+		play: "Bắt đầu First Puzzle",
 	},
 };
 
 const copy = copyByLocale[locale];
-const languageLinks = buildAlternateLinks(
-	{
-		en: "/play/first-puzzle/",
-		"zh-cn": "/zh-cn/play/first-puzzle/",
-		fa: "/fa/play/first-puzzle/",
-		fr: "/fr/play/first-puzzle/",
-		id: "/id/play/first-puzzle/",
-		ja: "/ja/play/first-puzzle/",
-		vi: "/vi/play/first-puzzle/",
-	},
-	locale,
-);
+const languageLinks = playFirstAlternateLinks(locale);
 const canonicalUrl = toAbsoluteUrl(pagePath);
 const schema = JSON.stringify([
 	{
 		"@context": "https://schema.org",
 		"@type": "VideoGame",
 		name: "HER TREES : First Puzzle",
-		alternateName: ["Her Trees First Puzzle", "her trees first puzzle"],
+		alternateName: ["Her Trees First Puzzle", "Her Trees A Forgotten House", "A Forgotten House"],
 		url: canonicalUrl,
-		description: copy.description,
+		description: seo.description,
 		image: shareImage,
 		gamePlatform: "Web Browser",
 		playMode: "SinglePlayer",
@@ -138,12 +100,12 @@ const schema = JSON.stringify([
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>{copy.title}</title>
-		<meta name="description" content={copy.description} />
+		<title>{seo.title}</title>
+		<meta name="description" content={seo.description} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta name="robots" content="index, follow" />
-		<meta property="og:title" content={copy.title} />
-		<meta property="og:description" content={copy.description} />
+		<meta property="og:title" content={seo.title} />
+		<meta property="og:description" content={seo.description} />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:image" content={shareImage} />
 		<meta property="og:type" content="website" />
@@ -176,7 +138,7 @@ const schema = JSON.stringify([
 			<SiteHeader
 				locale={locale}
 				currentPath={pagePath}
-				tagline={copy.description}
+				tagline={seo.description}
 				languageSwitchLabel={content.languageSwitchLabel}
 				languageLinks={languageLinks}
 			/>
@@ -189,7 +151,7 @@ const schema = JSON.stringify([
 				<section class="hero-section">
 					<div class="feature-panel">
 						<div class="panel-header">
-							<h1>{copy.h1}</h1>
+							<h1>{seo.h1}</h1>
 						</div>
 						<AdUnit />
 						<div class="feature-box game-embed-shell">
@@ -213,7 +175,7 @@ const schema = JSON.stringify([
 							<iframe
 								id="first-puzzle-game"
 								class="game-embed"
-								title={copy.h1}
+								title={seo.h1}
 								loading="lazy"
 								allow="fullscreen; autoplay"
 								referrerpolicy="strict-origin-when-cross-origin"
@@ -228,14 +190,12 @@ const schema = JSON.stringify([
 							<a href={dreamGuidePath}>Her Trees Puzzle Dream walkthrough</a>
 							{" · "}
 							<a href={housePath}>Her Trees The Puzzle House</a>
+							{" · "}
+							<a href={houseGuidePath}>The Puzzle House walkthrough</a>
 						</p>
-						{
-							locale === "en" && (
-								<p>
-									Also see the guide page for{" "}
-									<a href="/guide/#forgotten-house">A Forgotten House walkthrough</a> notes.
-								</p>
-							)
+						<p>
+							<a href={`${guidePath}#forgotten-house`}>A Forgotten House</a>
+						</p>
 						}
 					</div>
 				</section>

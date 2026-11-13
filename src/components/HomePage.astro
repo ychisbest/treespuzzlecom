@@ -22,9 +22,19 @@ import {
 } from "../data/site-shell";
 import {
 	buildOgLocaleAlternates,
+	firstPuzzleEmbedUrl,
+	guideDreamPath,
+	guideFirstPath,
+	guideHousePath,
 	homeAlternateLinks,
+	homeSeo,
 	localeToHreflang,
 	localeToOgLocale,
+	pageSeoUpdated,
+	playDreamAndroidPath,
+	playDreamPath,
+	playFirstPath,
+	playHousePath,
 	toAbsoluteUrl,
 } from "../data/seo";
 
@@ -34,27 +44,12 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
-const firstPuzzleEmbedUrl = "/her-trees-first-puzzle/index.html";
-const firstPuzzlePagePath =
-	locale === "en" ? "/play/first-puzzle/" : `/${locale}/play/first-puzzle/`;
-const puzzleHousePagePath =
-	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
-const puzzleDreamPagePath =
-	locale === "en" ? "/play/puzzle-dream/" : `/${locale}/play/puzzle-dream/`;
+const seo = homeSeo[locale];
+const firstPuzzlePagePath = playFirstPath(locale);
+const puzzleHousePagePath = playHousePath(locale);
+const puzzleDreamPagePath = playDreamPath(locale);
 const treesHateYouPagePath = "/trees-hate-you/";
-const androidDreamPath =
-	locale === "en"
-		? "/play/puzzle-dream/android/"
-		: `/${locale}/play/puzzle-dream/android/`;
-const hubHeadings: Record<Locale, string> = {
-	en: "Her Trees – Puzzle Series Overview",
-	fa: "بازی Her Trees – معرفی مجموعه",
-	id: "Her Trees – Ringkasan Seri Puzzle",
-	vi: "Her Trees – Tổng quan series",
-	fr: "Her Trees – Présentation de la série",
-	"zh-cn": "Her Trees – 系列导航",
-	ja: "Her Trees – シリーズ概要",
-};
+const androidDreamPath = playDreamAndroidPath(locale);
 const hubPrefix: Record<Locale, string> = {
 	en: "Dedicated play pages:",
 	fa: "صفحات بازی:",
@@ -103,14 +98,72 @@ const hubGuide: Record<Locale, string> = {
 const hubAndroid: Partial<Record<Locale, string>> = {
 	fa: "اندروید / گوشی",
 };
-const seriesHubNote: Partial<Record<Locale, string>> = {
-	en: "Looking for a specific game? Open its play page — this homepage is the series hub, not the ranking page for Puzzle Dream or Puzzle House.",
-	fa: "نسخهٔ رسمی اندروید/گوگل‌پلی وجود ندارد — برای گوشی از صفحهٔ Puzzle Dream یا Android با مرورگر افقی استفاده کنید.",
+const seriesHubNote: Record<Locale, string> = {
+	en: "Looking for a specific game? Open its play page — this homepage is the series hub, not the ranking page for Puzzle Dream, The Puzzle House, or First Puzzle.",
+	fa: "برای بازی هر عنوان صفحه مخصوص آن را باز کنید. صفحه اصلی هاب سری است، نه صفحه رتبه‌بندی Puzzle Dream یا Puzzle House. نسخه رسمی اندروید وجود ندارد.",
+	id: "Cari game tertentu? Buka halaman main khususnya. Beranda ini adalah hub seri, bukan halaman peringkat untuk Puzzle Dream, Puzzle House, atau First Puzzle.",
+	vi: "Cần một game cụ thể? Hãy mở trang chơi riêng. Trang chủ là cổng series, không phải trang xếp hạng cho Puzzle Dream, Puzzle House hay First Puzzle.",
+	fr: "Vous cherchez un jeu précis ? Ouvrez sa page de jeu. Cette page d’accueil est le hub de la série, pas la page de classement de Puzzle Dream, Puzzle House ou First Puzzle.",
+	"zh-cn": "想玩某一作，请进入对应游玩专页。本页是系列导航，不作为 Puzzle Dream、Puzzle House 或 First Puzzle 的主排名页。没有官方手机应用。",
+	ja: "特定の作品を遊ぶときは、専用のプレイページを開いてください。このトップはシリーズ案内であり、Puzzle Dream / Puzzle House / First Puzzle の主たるランキングページではありません。公式スマホ版はありません。",
+};
+const hubCtaBlurb: Record<Locale, { first: string; house: string; dream: string; guide: string }> = {
+	en: {
+		first: "Shortest free browser entry, also searched as A Forgotten House.",
+		house: "The compact middle game. Official release is on Steam.",
+		dream: "The largest entry, 40+ puzzles. Browser play; no official app.",
+		guide: "First Puzzle walkthrough, hints, then video.",
+	},
+	"zh-cn": {
+		first: "最短的免费浏览器入口，也常被搜作 A Forgotten House。",
+		house: "紧凑的中间作。正式版在 Steam 发售。",
+		dream: "目前体量最大的一作，40 多个谜题。浏览器游玩，无官方应用。",
+		guide: "First Puzzle 文字攻略：提示、步骤，再是视频。",
+	},
+	fa: {
+		first: "کوتاه‌ترین ورود رایگان مرورگر؛ گاهی با نام A Forgotten House.",
+		house: "بازی میانی و فشرده. نسخه رسمی در Steam.",
+		dream: "بزرگ‌ترین اثر، بیش از ۴۰ پازل. بازی در مرورگر؛ بدون اپ رسمی.",
+		guide: "راهنمای First Puzzle: اشاره‌ها، سپس ویدیو.",
+	},
+	fr: {
+		first: "Entrée navigateur la plus courte, aussi cherchée comme A Forgotten House.",
+		house: "L’épisode compact du milieu. Sortie officielle sur Steam.",
+		dream: "La plus grande entrée, plus de 40 puzzles. Jeu navigateur, pas d’appli officielle.",
+		guide: "Guide First Puzzle : indices, méthode, puis vidéo.",
+	},
+	id: {
+		first: "Entri browser gratis terpendek, juga dicari sebagai A Forgotten House.",
+		house: "Game tengah yang ringkas. Rilis resmi di Steam.",
+		dream: "Entri terbesar, 40+ puzzle. Main di browser; tanpa aplikasi resmi.",
+		guide: "Panduan First Puzzle: petunjuk, langkah, lalu video.",
+	},
+	ja: {
+		first: "最短の無料ブラウザ作品。A Forgotten House としても検索されます。",
+		house: "コンパクトな中編。公式は Steam 発売です。",
+		dream: "最大ボリュームで40以上のパズル。ブラウザプレイ、公式アプリなし。",
+		guide: "First Puzzle 攻略：ヒントと手順、その後に動画。",
+	},
+	vi: {
+		first: "Phần miễn phí ngắn nhất trên trình duyệt, cũng tìm với tên A Forgotten House.",
+		house: "Phần giữa ngắn gọn. Bản chính thức trên Steam.",
+		dream: "Phần lớn nhất, hơn 40 câu đố. Chơi trình duyệt; không có app chính thức.",
+		guide: "Hướng dẫn First Puzzle: gợi ý, các bước, rồi video.",
+	},
+};
+const whereToPlayFaq: Record<Locale, { question: string }> = {
+	en: { question: "Where should I play each HER TREES game?" },
+	"zh-cn": { question: "各作应该在哪个页面游玩？" },
+	fa: { question: "هر بازی HER TREES را از کدام صفحه شروع کنم؟" },
+	fr: { question: "Où jouer à chaque jeu HER TREES ?" },
+	id: { question: "Di mana saya harus memainkan setiap game HER TREES?" },
+	ja: { question: "各ハーツリーズ作品はどのページで遊べますか？" },
+	vi: { question: "Nên chơi từng phần HER TREES ở trang nào?" },
 };
 const firstPuzzleDownloadUrl =
 	"https://game.doritosscript.com/HerTreesFirstPuzzle.zip";
 const shareImage = new URL(firstPuzzleImage.src, siteUrl).toString();
-const lastUpdated = "2026-03-18";
+const lastUpdated = pageSeoUpdated;
 const gameImages = [
 	firstPuzzleImage,
 	puzzleHouseImage,
@@ -129,7 +182,7 @@ const localizedGames = content.games.map((game, index) => ({
 	image: gameImages[index],
 	href: gameHrefs[index],
 }));
-const relatedGames = localizedGames.filter((_, index) => index !== 0);
+const relatedGames = localizedGames;
 const guideNoteCopy: Record<
 	Locale,
 	{
@@ -357,8 +410,23 @@ const homeSchema = JSON.stringify([
 		"@context": "https://schema.org",
 		"@type": "WebSite",
 		name: "Her Trees Puzzle Game",
+		url: siteUrl,
+		description: seo.description,
+		dateModified: lastUpdated,
+		potentialAction: {
+			"@type": "SearchAction",
+			target: `${siteUrl}/search/?q={search_term_string}`,
+			"query-input": "required name=search_term_string",
+		},
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		name: seo.title,
 		url: canonicalUrl,
-		description: content.pageDescription,
+		description: seo.description,
+		dateModified: lastUpdated,
+		isPartOf: { "@type": "WebSite", url: siteUrl },
 	},
 	{
 		"@context": "https://schema.org",
@@ -372,14 +440,24 @@ const homeSchema = JSON.stringify([
 	{
 		"@context": "https://schema.org",
 		"@type": "FAQPage",
-		mainEntity: content.faqs.map((faq) => ({
-			"@type": "Question",
-			name: faq.question,
-			acceptedAnswer: {
-				"@type": "Answer",
-				text: faq.answer,
+		mainEntity: [
+			{
+				"@type": "Question",
+				name: whereToPlayFaq[locale].question,
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: `${playFirstPath(locale)} ${playHousePath(locale)} ${playDreamPath(locale)}`,
+				},
 			},
-		})),
+			...content.faqs.map((faq) => ({
+				"@type": "Question",
+				name: faq.question,
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: faq.answer,
+				},
+			})),
+		],
 	},
 ]);
 ---
@@ -394,12 +472,12 @@ const homeSchema = JSON.stringify([
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#111111" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{content.pageTitle}</title>
-		<meta name="description" content={content.pageDescription} />
+		<title>{seo.title}</title>
+		<meta name="description" content={seo.description} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta name="robots" content="index, follow" />
-		<meta property="og:title" content={content.pageTitle} />
-		<meta property="og:description" content={content.pageDescription} />
+		<meta property="og:title" content={seo.title} />
+		<meta property="og:description" content={seo.description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={content.siteName} />
@@ -411,8 +489,8 @@ const homeSchema = JSON.stringify([
 		}
 		<meta property="og:image" content={shareImage} />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={content.pageTitle} />
-		<meta name="twitter:description" content={content.pageDescription} />
+		<meta name="twitter:title" content={seo.title} />
+		<meta name="twitter:description" content={seo.description} />
 		<meta name="twitter:image" content={shareImage} />
 		<meta name="google-adsense-account" content={adsensePublisherId} />
 		{
@@ -460,11 +538,30 @@ const homeSchema = JSON.stringify([
 				<section class="hero-section" id="play">
 					<div class="feature-panel">
 						<div class="panel-header">
-							<h1>{hubHeadings[locale]}</h1>
+							<h1>{seo.h1}</h1>
 							<h2>{content.playHeading}</h2>
 							<p class="section-intro">
 								{support.updatedLabel}: {lastUpdated}
 							</p>
+							<p class="section-intro">{seriesHubNote[locale]}</p>
+							<div class="hub-cta-grid">
+								<a class="hub-cta-card" href={firstPuzzlePagePath}>
+									<strong>HER TREES : First Puzzle</strong>
+									<span>{hubCtaBlurb[locale].first}</span>
+								</a>
+								<a class="hub-cta-card" href={puzzleHousePagePath}>
+									<strong>HER TREES : THE PUZZLE HOUSE</strong>
+									<span>{hubCtaBlurb[locale].house}</span>
+								</a>
+								<a class="hub-cta-card" href={puzzleDreamPagePath}>
+									<strong>HER TREES : PUZZLE DREAM</strong>
+									<span>{hubCtaBlurb[locale].dream}</span>
+								</a>
+								<a class="hub-cta-card" href={content.guidePath}>
+									<strong>{hubGuide[locale]}</strong>
+									<span>{hubCtaBlurb[locale].guide}</span>
+								</a>
+							</div>
 						</div>
 						<div class="feature-box game-embed-shell">
 							<button
@@ -670,9 +767,21 @@ const homeSchema = JSON.stringify([
 							</thead>
 							<tbody>
 								{
-									content.comparisonRows.map((row) => (
+									content.comparisonRows.map((row, index) => (
 										<tr>
-											<td>{row.game}</td>
+											<td>
+												<a
+													href={
+														index === 0
+															? firstPuzzlePagePath
+															: index === 1
+																? puzzleHousePagePath
+																: puzzleDreamPagePath
+													}
+												>
+													{row.game}
+												</a>
+											</td>
 											<td>{row.platform}</td>
 											<td>{row.playtime}</td>
 											<td>{row.access}</td>
@@ -719,19 +828,6 @@ const homeSchema = JSON.stringify([
 					</div>
 				</section>
 
-				<section class="content-section">
-					<h2>{content.sellingPointsHeading}</h2>
-					<div class="notes-grid">
-						{
-							content.highlights.map((item) => (
-								<article class="note-card">
-									<h3>{item.title}</h3>
-									<p>{item.copy}</p>
-								</article>
-							))
-						}
-					</div>
-				</section>
 
 				<section class="content-section">
 					<h2>{support.editorialHeading}</h2>
@@ -792,6 +888,22 @@ const homeSchema = JSON.stringify([
 				<section class="content-section">
 					<h2>{content.faqHeading}</h2>
 					<div class="faq-list">
+						<details class="faq-item">
+							<summary>{whereToPlayFaq[locale].question}</summary>
+							<p>
+								<a href={firstPuzzlePagePath}>HER TREES : First Puzzle</a>
+								{" · "}
+								<a href={puzzleHousePagePath}>HER TREES : THE PUZZLE HOUSE</a>
+								{" · "}
+								<a href={puzzleDreamPagePath}>HER TREES : PUZZLE DREAM</a>
+								{" · "}
+								<a href={guideDreamPath(locale)}>Puzzle Dream walkthrough</a>
+								{" · "}
+								<a href={guideHousePath(locale)}>Puzzle House walkthrough</a>
+								{" · "}
+								<a href={guideFirstPath(locale)}>{hubGuide[locale]}</a>
+							</p>
+						</details>
 						{
 							content.faqs.map((faq) => (
 								<details class="faq-item">

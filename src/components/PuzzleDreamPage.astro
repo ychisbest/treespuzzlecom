@@ -17,10 +17,16 @@ import {
 	siteUrl,
 } from "../data/site-shell";
 import {
-	buildAlternateLinks,
 	buildOgLocaleAlternates,
+	guideDreamPath,
+	guideHousePath,
 	localeToHreflang,
 	localeToOgLocale,
+	playDreamPath,
+	playFirstPath,
+	playHousePath,
+	playDreamAlternateLinks,
+	playDreamSeo,
 	toAbsoluteUrl,
 } from "../data/seo";
 
@@ -30,6 +36,7 @@ type Props = {
 
 const { locale } = Astro.props;
 const content = homeContent[locale];
+const seo = playDreamSeo[locale];
 const puzzleDreamEmbedUrl =
 	"https://game.doritosscript.com/puzzle-dream/index.html";
 const puzzleDreamPath =
@@ -38,7 +45,7 @@ const puzzleDreamGuidePath =
 	locale === "en"
 		? "/play/puzzle-dream/guide/"
 		: `/${locale}/play/puzzle-dream/guide/`;
-const firstPuzzlePagePath = `${content.path}#play`;
+const firstPuzzlePagePath = playFirstPath(locale);
 const puzzleHousePath =
 	locale === "en" ? "/play/puzzle-house/" : `/${locale}/play/puzzle-house/`;
 const treesHateYouPath = "/trees-hate-you/";
@@ -58,18 +65,7 @@ const gameHrefs = [
 	treesHateYouPath,
 ];
 
-const languageLinks = buildAlternateLinks(
-	{
-		en: "/play/puzzle-dream/",
-		"zh-cn": "/zh-cn/play/puzzle-dream/",
-		fa: "/fa/play/puzzle-dream/",
-		fr: "/fr/play/puzzle-dream/",
-		id: "/id/play/puzzle-dream/",
-		ja: "/ja/play/puzzle-dream/",
-		vi: "/vi/play/puzzle-dream/",
-	},
-	locale,
-);
+const languageLinks = playDreamAlternateLinks(locale);
 
 const relatedGames = content.games
 	.map((game, index) => ({
@@ -104,15 +100,15 @@ const pageCopy: Record<
 		iframeTitle: "HER TREES : PUZZLE DREAM 在线试玩",
 		playButton: "开始 Puzzle Dream",
 		intro:
-			"这个页面直接加载 public 目录中的 Puzzle Dream 游戏资源，进入后可以像首页一样点击开始并切换全屏游玩。",
+			"这是 Her Trees: Puzzle Dream 的游玩专页，系列第三作、目前体量最大的一作。在此启动浏览器版，卡关再打开攻略页。",
 		overviewHeading: "这一页提供什么",
 		overviewBody:
-			"相较于首页嵌入的 First Puzzle，这里对应的是系列第三作的独立入口，适合想直接体验更完整谜题量和更长流程的玩家。",
+			"搜索 Puzzle Dream 游玩时，应落到本页而不是首页。首页只做系列导航。没有官方手机或主机应用，手机请横屏使用浏览器。",
 		tipsHeading: "游玩提示",
 		tips: [
 			"首次进入会按需加载 WebGL 资源，开始前可能需要短暂等待。",
 			"手机上建议横屏体验；进入全屏时页面会尽量请求横屏锁定。",
-			"如果你只是想先快速感受系列风格，仍然可以回首页先玩 First Puzzle。",
+			"如果你只是想先快速感受系列风格，请打开 First Puzzle 游玩专页。",
 		],
 	},
 	en: {
@@ -124,10 +120,10 @@ const pageCopy: Record<
 		iframeTitle: "HER TREES : PUZZLE DREAM online",
 		playButton: "Start Puzzle Dream",
 		intro:
-			"This page loads the Puzzle Dream build from the public directory and keeps the same click-to-launch and fullscreen flow used on the homepage.",
+			"This is the dedicated play page for Her Trees: Puzzle Dream, the third and currently largest game in the series. Launch the browser build here, then open the walkthrough if a later area stops making sense.",
 		overviewHeading: "What this page is for",
 		overviewBody:
-			"Dedicated play page for Her Trees Puzzle Dream (series entry 3). Use this URL for Puzzle Dream / online / mobile intent — the homepage is only the series hub.",
+			"Use this URL for Puzzle Dream play intent. The homepage is only the series hub and should not rank as the main Puzzle Dream result. Official mobile or console apps are not offered; phone play is browser landscape only.",
 		tipsHeading: "Play notes",
 		tips: [
 			"The first launch may take a moment while the WebGL files load.",
@@ -145,15 +141,15 @@ const pageCopy: Record<
 		iframeTitle: "HER TREES : PUZZLE DREAM آنلاین",
 		playButton: "شروع Puzzle Dream",
 		intro:
-			"این صفحه نسخه Puzzle Dream را از پوشه public بارگذاری می‌کند و همان جریان کلیک‌برای‌شروع و تمام‌صفحه صفحه اصلی را حفظ می‌کند.",
+			"این صفحه اختصاصی بازی Puzzle Dream است. ساخت مرورگر را از اینجا اجرا کنید و در صورت گیر کردن به راهنما بروید.",
 		overviewHeading: "این صفحه برای چیست",
 		overviewBody:
-			"برخلاف First Puzzle جاسازی‌شده در صفحه اصلی، این ورودی اختصاصی برای بازی سوم مجموعه است، برای بازیکنانی که مجموعه پازل‌های رویایی بزرگ‌تر را فوراً می‌خواهند.",
+			"این ورودی اختصاصی بازی سوم و در حال حاضر بزرگ‌ترین اثر مجموعه است، برای بازیکنانی که مجموعه پازل‌های رویایی بزرگ‌تر را می‌خواهند. صفحه اصلی فقط هاب سری است.",
 		tipsHeading: "نکات بازی",
 		tips: [
 			"اولین راه‌اندازی ممکن است لحظه‌ای طول بکشد تا فایل‌های WebGL بارگذاری شوند.",
 			"در گوشی حالت افقی بهتر عمل می‌کند؛ تمام صفحه سعی می‌کند جهت را قفل کند.",
-			"اگر ابتدا معرفی کوتاه‌تری می‌خواهید، به صفحه اصلی برگردید و با First Puzzle شروع کنید.",
+			"اگر ابتدا معرفی کوتاه‌تری می‌خواهید، صفحه بازی First Puzzle را باز کنید.",
 		],
 	},
 	fr: {
@@ -173,7 +169,7 @@ const pageCopy: Record<
 		tips: [
 			"Le premier lancement peut prendre un moment pendant le chargement des fichiers WebGL.",
 			"Le mode paysage fonctionne mieux sur téléphone ; le plein écran essaiera de verrouiller l'orientation.",
-			"Si vous voulez d'abord une introduction plus courte, retournez à la page d'accueil et commencez par First Puzzle.",
+			"Si vous voulez d'abord une introduction plus courte, ouvrez la page de jeu First Puzzle.",
 		],
 	},
 	id: {
@@ -193,7 +189,7 @@ const pageCopy: Record<
 		tips: [
 			"Peluncuran pertama mungkin perlu beberapa saat saat file WebGL dimuat.",
 			"Mode lanskap paling nyaman di ponsel; layar penuh akan mencoba mengunci orientasi.",
-			"Jika ingin pengenalan yang lebih singkat dulu, kembali ke beranda dan mainkan First Puzzle.",
+			"Jika ingin pengenalan yang lebih singkat dulu, buka halaman main First Puzzle.",
 		],
 	},
 	ja: {
@@ -205,15 +201,15 @@ const pageCopy: Record<
 		iframeTitle: "HER TREES : PUZZLE DREAM ブラウザ版",
 		playButton: "Puzzle Dream を始める",
 		intro:
-			"このページでは public ディレクトリ内の Puzzle Dream ビルドを読み込み、トップページと同じようにクリックして起動し、全画面でも遊べます。",
+			"ここはハーツリーズ（Her Trees）: Puzzle Dream の専用プレイページです。シリーズ第3作で、現時点で最もボリュームが大きい作品です。このページでブラウザ版を起動し、詰まったら攻略を開いてください。",
 		overviewHeading: "このページの役割",
 		overviewBody:
-			"トップページの First Puzzle 埋め込みとは別に、シリーズ第3作へ直接入るための専用ページです。よりボリュームのある夢的な謎解きを遊びたい人向けです。",
+			"Puzzle Dream を遊ぶ検索は、シリーズ案内のトップではなくこのURLに集約したいです。公式のスマホ・据え置き機アプリはなく、端末では横画面のブラウザを使います。",
 		tipsHeading: "プレイのヒント",
 		tips: [
 			"初回起動では WebGL ファイルの読み込みに少し時間がかかる場合があります。",
 			"スマートフォンでは横画面が向いています。全画面時は横向き固定を試みます。",
-			"まず短くシリーズの雰囲気を見たい場合は、トップページの First Puzzle から入るのが適しています。",
+			"まず短くシリーズの雰囲気を見たい場合は、First Puzzle のプレイページから入ってください。",
 			"スマホの方は横画面のブラウザか、Android 向けページ（スマホ）を利用してください。公式アプリはありません。",
 		],
 	},
@@ -234,7 +230,7 @@ const pageCopy: Record<
 		tips: [
 			"Lan mo dau tien co the can doi trong luc tai tep WebGL.",
 			"Dien thoai nen choi ngang man hinh; fullscreen se co gang khoa huong ngang.",
-			"Neu ban muon thu nhanh phong cach cua series truoc, hay quay ve trang chu va choi First Puzzle.",
+			"Neu ban muon thu nhanh phong cach cua series truoc, hay mo trang choi First Puzzle.",
 		],
 	},
 };
@@ -321,7 +317,7 @@ const puzzleDreamSchema = JSON.stringify([
 		"@type": "VideoGame",
 		name: "HER TREES : PUZZLE DREAM",
 		url: canonicalUrl,
-		description: copy.description,
+		description: seo.description,
 		image: shareImage,
 		gamePlatform: "Web Browser",
 	},
@@ -356,12 +352,12 @@ const puzzleDreamSchema = JSON.stringify([
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#111111" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{copy.title}</title>
-		<meta name="description" content={copy.description} />
+		<title>{seo.title}</title>
+		<meta name="description" content={seo.description} />
 		<link rel="canonical" href={canonicalUrl} />
 		<meta name="robots" content="index, follow" />
-		<meta property="og:title" content={copy.title} />
-		<meta property="og:description" content={copy.description} />
+		<meta property="og:title" content={seo.title} />
+		<meta property="og:description" content={seo.description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:site_name" content={content.siteName} />
@@ -373,8 +369,8 @@ const puzzleDreamSchema = JSON.stringify([
 		}
 		<meta property="og:image" content={shareImage} />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={copy.title} />
-		<meta name="twitter:description" content={copy.description} />
+		<meta name="twitter:title" content={seo.title} />
+		<meta name="twitter:description" content={seo.description} />
 		<meta name="twitter:image" content={shareImage} />
 		<meta name="google-adsense-account" content={adsensePublisherId} />
 		{
@@ -399,7 +395,7 @@ const puzzleDreamSchema = JSON.stringify([
 			<SiteHeader
 				locale={locale}
 				currentPath={puzzleDreamPath}
-				tagline={copy.description}
+				tagline={seo.description}
 				languageSwitchLabel={content.languageSwitchLabel}
 				languageLinks={languageLinks}
 			/>
@@ -414,7 +410,7 @@ const puzzleDreamSchema = JSON.stringify([
 				<section class="hero-section">
 					<div class="feature-panel">
 						<div class="panel-header">
-							<h1>{copy.playHeading}</h1>
+							<h1>{seo.h1}</h1>
 						</div>
 						<div class="feature-box game-embed-shell">
 							<button

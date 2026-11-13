@@ -1166,3 +1166,53 @@ a:hover {
 		padding: 14px;
 	}
 }
+
+
+.guide-area-list {
+	display: grid;
+	gap: 0.4rem 1.25rem;
+	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+	margin: 0;
+	padding-left: 1.1rem;
+}
+
+.guide-area-count {
+	margin-inline-start: 0.35rem;
+	opacity: 0.7;
+}
+
+.answer-spoiler {
+	margin-bottom: 0.75rem;
+}
+
+.answer-spoiler .comparison-table-shell {
+	margin-top: 0.75rem;
+}
+
+.hub-cta-grid {
+	display: grid;
+	gap: 0.85rem;
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	margin: 1rem 0 1.25rem;
+}
+
+.hub-cta-card {
+	display: block;
+	border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+	border-radius: 12px;
+	padding: 0.9rem 1rem;
+	text-decoration: none;
+	color: inherit;
+	background: color-mix(in srgb, currentColor 4%, transparent);
+}
+
+.hub-cta-card strong {
+	display: block;
+	margin-bottom: 0.25rem;
+}
+
+.hub-cta-card span {
+	display: block;
+	font-size: 0.92em;
+	opacity: 0.86;
+}

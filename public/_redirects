@@ -1,3 +1,21 @@
+# English /en prefix → unprefixed English URLs
+/en / 301
+/en/ / 301
+/en/* /:splat 301
+
+# Locale aliases
+/jp /ja/ 301
+/jp/ /ja/ 301
+/zh /zh-cn/ 301
+/zh/ /zh-cn/ 301
+/cn /zh-cn/ 301
+/cn/ /zh-cn/ 301
+
+# Legacy analysis path
+/analysis /analysis/puzzle-design/ 301
+/analysis/ /analysis/puzzle-design/ 301
+
+# Legacy HTML aliases for play pages
 /her-trees-puzzle-dream /play/puzzle-dream/ 301
 /her-trees-puzzle-dream/ /play/puzzle-dream/ 301
 /her-trees-the-puzzle-house /play/puzzle-house/ 301
@@ -12,3 +30,11 @@
 /her-trees-game/ / 301
 /her-trees-first-puzzle-play /play/first-puzzle/ 301
 /her-trees-first-puzzle-play/ /play/first-puzzle/ 301
+
+# First Puzzle HTML entry only — do not redirect Build/ or other asset paths
+/her-trees-first-puzzle /play/first-puzzle/ 301
+/her-trees-first-puzzle/ /play/first-puzzle/ 301
+/her-trees-first-puzzle/index.html /play/first-puzzle/ 301
+
+# Icon alias
+/apple-touch-icon-precomposed.png /apple-touch-icon.png 301
