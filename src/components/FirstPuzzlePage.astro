@@ -4,6 +4,7 @@ import "../styles/global.css";
 import AdUnit from "./AdUnit.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
+import SocialBar from "./SocialBar.astro";
 import { homeContent, type Locale } from "../data/home-content";
 import { adsensePublisherId, siteUrl } from "../data/site-shell";
 import {
@@ -218,5 +219,6 @@ const schema = JSON.stringify([
 				});
 			});
 		</script>
+		<SocialBar />
 	</body>
 </html>

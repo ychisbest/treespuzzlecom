@@ -241,10 +241,10 @@ export const homeSeo: Record<Locale, PageSeo> = {
 
 export const playDreamSeo: Record<Locale, PageSeo> = {
 	en: {
-		title: "Play Her Trees: Puzzle Dream Online",
+		title: "Her Trees: Puzzle Dream – Play Online Free & Guide",
 		description:
-			"Play Her Trees: Puzzle Dream in your browser — the third and currently largest game in the series, with 40+ hand-drawn puzzles. This is the dedicated play page. No official smartphone app; phone play is browser landscape only. Open the walkthrough if you get stuck.",
-		h1: "Her Trees Puzzle Dream",
+			"Play Her Trees: Puzzle Dream free in your browser — 40+ hand-drawn monochrome puzzles. Mobile landscape supported, plus Steam, iOS & walkthrough links.",
+		h1: "Her Trees: Puzzle Dream",
 	},
 	"zh-cn": {
 		title: "在线游玩 Her Trees: Puzzle Dream",
@@ -421,46 +421,46 @@ export const guideFirstSeo: Record<Locale, PageSeo> = {
 
 export const guideDreamSeo: Record<Locale, PageSeo> = {
 	en: {
-		title: "Her Trees Puzzle Dream Walkthrough and Answers",
+		title: "Her Trees: Puzzle Dream Walkthrough, Answers & Guide",
 		description:
-			"Her Trees Puzzle Dream walkthrough and keypad answers, grouped by area. Start with spoiler-safe section hints, then open the codes or the video when you are stuck. Links back to the Puzzle Dream play page.",
-		h1: "Her Trees Puzzle Dream Walkthrough and Answers",
+			"Complete Her Trees: Puzzle Dream walkthrough, keypad answers & spoiler-free hints by area. Includes 100% video guide, playtime, and Steam/iOS/browser info.",
+		h1: "Her Trees: Puzzle Dream Walkthrough & Answers",
 	},
 	"zh-cn": {
-		title: "Her Trees Puzzle Dream 攻略与答案",
+		title: "Her Trees: Puzzle Dream 全关卡通关攻略与密码答案",
 		description:
-			"Her Trees Puzzle Dream 文字攻略与键盘答案，按区域整理。先看无剧透的分区提示，卡住再展开答案或视频。可返回 Puzzle Dream 游玩页。",
-		h1: "Her Trees Puzzle Dream 攻略与答案",
+			"Her Trees: Puzzle Dream 完整图文攻略与各区域密码答案：先看无剧透提示，再展开解答与 100% 通关视频，附时长说明与在线游玩入口。",
+		h1: "Her Trees: Puzzle Dream 攻略与答案",
 	},
 	fa: {
-		title: "راهنما و پاسخ‌های Her Trees Puzzle Dream",
+		title: "راهنمای کامل و پاسخ‌های Her Trees: Puzzle Dream",
 		description:
-			"راهنمای Puzzle Dream و پاسخ‌های صفحه کلید، گروه‌بندی‌شده بر اساس بخش. ابتدا اشاره‌های بدون اسپویلر، سپس کدها یا ویدیو. لینک بازگشت به صفحه بازی.",
-		h1: "راهنما و پاسخ‌های Her Trees Puzzle Dream",
+			"راهنمای مرحله‌به‌مرحله Her Trees: Puzzle Dream و کدهای صفحه کلید بر اساس بخش: نکات بدون اسپویلر، ویدیوی ۱۰۰٪ و پرسش‌های متداول بازی.",
+		h1: "راهنمای کامل و پاسخ‌های Her Trees: Puzzle Dream",
 	},
 	fr: {
-		title: "Guide et réponses Her Trees Puzzle Dream",
+		title: "Her Trees: Puzzle Dream – Guide, Solution et Réponses",
 		description:
-			"Walkthrough de Puzzle Dream et codes du clavier, groupés par zone. Indices sans spoiler d’abord, puis les réponses ou la vidéo. Lien vers la page de jeu.",
-		h1: "Guide et réponses Her Trees Puzzle Dream",
+			"Solution complète de Her Trees: Puzzle Dream par zone : indices sans spoiler, codes du clavier, vidéo 100 % et FAQ (durée, iOS, Steam, navigateur).",
+		h1: "Her Trees: Puzzle Dream – Guide et Réponses",
 	},
 	id: {
-		title: "Panduan dan Jawaban Her Trees Puzzle Dream",
+		title: "Her Trees: Puzzle Dream – Panduan, Walkthrough & Jawaban",
 		description:
-			"Walkthrough Puzzle Dream dan kode keypad per area. Petunjuk aman spoiler dulu, lalu buka jawaban atau video jika terjebak. Tautan kembali ke halaman main.",
-		h1: "Panduan dan Jawaban Her Trees Puzzle Dream",
+			"Panduan lengkap Her Trees: Puzzle Dream per area: petunjuk bebas spoiler, kode keypad, video walkthrough 100%, serta FAQ durasi main dan platform.",
+		h1: "Her Trees: Puzzle Dream – Panduan dan Jawaban",
 	},
 	ja: {
-		title: "ハーツリーズ Puzzle Dream 攻略と答え",
+		title: "ハーツリーズ Puzzle Dream 完全攻略・答え・ヒントまとめ",
 		description:
-			"ハーツリーズ（Her Trees）Puzzle Dream の攻略とキーパッド解答。エリア別に整理。まずはネタバレの少ないヒント、詰まったら解答や動画を開いてください。プレイページへ戻れます。",
+			"Her Trees: Puzzle Dream のエリア別攻略とキーパッド解答一覧。ネタバレ控えめのヒント、100%攻略動画、プレイ時間やSteam/iOS/ブラウザ版FAQも掲載。",
 		h1: "ハーツリーズ Puzzle Dream 攻略と答え",
 	},
 	vi: {
-		title: "Hướng dẫn và đáp án Her Trees Puzzle Dream",
+		title: "Her Trees: Puzzle Dream – Hướng dẫn, Walkthrough & Đáp án",
 		description:
-			"Walkthrough Puzzle Dream và mã keypad theo khu vực. Gợi ý ít spoiler trước, rồi mở đáp án hoặc video khi bị kẹt. Có liên kết về trang chơi.",
-		h1: "Hướng dẫn và đáp án Her Trees Puzzle Dream",
+			"Hướng dẫn đầy đủ Her Trees: Puzzle Dream theo từng khu vực: gợi ý tránh spoiler, mã keypad, video 100% và FAQ thời lượng chơi, iOS, Steam, trình duyệt.",
+		h1: "Her Trees: Puzzle Dream – Hướng dẫn và Đáp án",
 	},
 };
 

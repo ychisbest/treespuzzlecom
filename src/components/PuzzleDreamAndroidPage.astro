@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
+import SocialBar from "./SocialBar.astro";
 import AdUnit from "./AdUnit.astro";
 import { homeContent, type Locale } from "../data/home-content";
 import { adsensePublisherId } from "../data/site-shell";
@@ -283,5 +284,6 @@ const schema = JSON.stringify([
 			</main>
 			<SiteFooter locale={locale} />
 		</div>
+		<SocialBar />
 	</body>
 </html>

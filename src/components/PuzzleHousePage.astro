@@ -8,6 +8,7 @@ import "../styles/global.css";
 import AdUnit from "./AdUnit.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
+import SocialBar from "./SocialBar.astro";
 import {
 	homeContent,
 	type Locale,
@@ -723,5 +724,6 @@ const puzzleHouseSchema = JSON.stringify([
 				surface.addEventListener("mouseleave", resetSurface);
 			});
 		</script>
+		<SocialBar />
 	</body>
 </html>

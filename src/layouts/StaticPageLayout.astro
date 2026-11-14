@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import SocialBar from "../components/SocialBar.astro";
 import {
 	adsensePublisherId,
 	shellContent,
@@ -135,5 +136,6 @@ const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 
 			<SiteFooter locale={locale} />
 		</div>
+		<SocialBar />
 	</body>
 </html>

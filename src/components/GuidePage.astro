@@ -3,6 +3,7 @@ import "../styles/global.css";
 import AdUnit from "./AdUnit.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
+import SocialBar from "./SocialBar.astro";
 import {
 	homeContent,
 	type Locale,
@@ -293,6 +294,8 @@ const guideSchema = JSON.stringify([
 					</div>
 				</section>
 
+				<AdUnit />
+
 				<section class="content-section" id="first-puzzle-steps">
 					<h2>{walkthrough.stepsHeading}</h2>
 					<div class="prose-block">
@@ -323,8 +326,6 @@ const guideSchema = JSON.stringify([
 						allowfullscreen
 					></iframe>
 				</section>
-
-				<AdUnit />
 
 				<section class="content-section">
 					<h2>{guideNotes.beforeHeading}</h2>
@@ -363,5 +364,6 @@ const guideSchema = JSON.stringify([
 
 			<SiteFooter locale={locale} />
 		</div>
+		<SocialBar />
 	</body>
 </html>

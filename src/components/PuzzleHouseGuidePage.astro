@@ -4,6 +4,7 @@ import "../styles/global.css";
 import AdUnit from "./AdUnit.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
+import SocialBar from "./SocialBar.astro";
 import {
 	homeContent,
 	type Locale,
@@ -363,6 +364,8 @@ const guideSchema = JSON.stringify([
 					</div>
 				</section>
 
+				<AdUnit />
+
 				<AnswerTable locale={locale} game="house" />
 
 				<section class="content-section">
@@ -383,15 +386,6 @@ const guideSchema = JSON.stringify([
 						referrerpolicy="strict-origin-when-cross-origin"
 						allowfullscreen
 					></iframe>
-				</section>
-
-				<AdUnit />
-
-				<section class="content-section">
-					<h2>{copy.videoHeading}</h2>
-					<div class="prose-block">
-						<p>{copy.videoBody}</p>
-					</div>
 				</section>
 
 				<section class="content-section">
@@ -425,5 +419,6 @@ const guideSchema = JSON.stringify([
 
 			<SiteFooter locale={locale} />
 		</div>
+		<SocialBar />
 	</body>
 </html>

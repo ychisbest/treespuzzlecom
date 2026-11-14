@@ -1,6 +1,7 @@
 ---
 import "../../styles/trees-hate-you.css";
 import TreesHateYouPage from "../../components/TreesHateYouPage.astro";
+import SocialBar from "../../components/SocialBar.astro";
 import { adsensePublisherId, shareImageUrl } from "../../data/site-shell";
 import { toAbsoluteUrl } from "../../data/seo";
 
@@ -104,5 +105,6 @@ const schema = JSON.stringify([
 	</head>
 	<body class="thy-astro-body">
 		<TreesHateYouPage />
+		<SocialBar />
 	</body>
 </html>

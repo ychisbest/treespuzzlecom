@@ -4,6 +4,8 @@ import "../styles/global.css";
 import AdUnit from "./AdUnit.astro";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
+import SocialBar from "./SocialBar.astro";
+import { dreamGuideExtraCopy } from "../data/puzzle-dream-guide-extra";
 import {
 	homeContent,
 	type Locale,
@@ -241,6 +243,7 @@ const guideCopy: Record<
 };
 
 const copy = guideCopy[locale];
+const extra = dreamGuideExtraCopy[locale];
 const canonicalUrl = toAbsoluteUrl(guidePath);
 const ogLocale = localeToOgLocale(locale);
 const ogLocaleAlternates = buildOgLocaleAlternates(locale);
@@ -272,6 +275,18 @@ const guideSchema = JSON.stringify([
 				item: canonicalUrl,
 			},
 		],
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: extra.faqs.map((faq) => ({
+			"@type": "Question",
+			name: faq.question,
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: faq.answer,
+			},
+		})),
 	},
 ]);
 ---
@@ -362,6 +377,8 @@ const guideSchema = JSON.stringify([
 					</div>
 				</section>
 
+				<AdUnit />
+
 				<AnswerTable locale={locale} game="dream" />
 
 				<section class="content-section">
@@ -384,8 +401,6 @@ const guideSchema = JSON.stringify([
 					></iframe>
 				</section>
 
-				<AdUnit />
-
 				<section class="content-section">
 					<h2>{copy.videoHeading}</h2>
 					<div class="prose-block">
@@ -393,10 +408,38 @@ const guideSchema = JSON.stringify([
 					</div>
 				</section>
 
-				<section class="content-section">
-					<h2>{copy.videoHeading}</h2>
+				<section class="content-section" id="how-to-play">
+					<h2>{extra.howToPlayHeading}</h2>
 					<div class="prose-block">
-						<p>{copy.videoBody}</p>
+						<p>{extra.howToPlayBody}</p>
+					</div>
+				</section>
+
+				<section class="content-section" id="features">
+					<h2>{extra.featuresHeading}</h2>
+					<div class="start-grid">
+						{
+							extra.features.map((item) => (
+								<article class="note-card">
+									<h3>{item.title}</h3>
+									<p>{item.body}</p>
+								</article>
+							))
+						}
+					</div>
+				</section>
+
+				<section class="content-section" id="faq">
+					<h2>{extra.faqHeading}</h2>
+					<div class="faq-list">
+						{
+							extra.faqs.map((faq) => (
+								<details class="faq-item">
+									<summary>{faq.question}</summary>
+									<p>{faq.answer}</p>
+								</details>
+							))
+						}
 					</div>
 				</section>
 
@@ -424,5 +467,6 @@ const guideSchema = JSON.stringify([
 
 			<SiteFooter locale={locale} />
 		</div>
+		<SocialBar />
 	</body>
 </html>
