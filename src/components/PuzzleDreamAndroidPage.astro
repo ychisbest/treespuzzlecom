@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import puzzleDreamImage from "../assets/puzzle_dream.png";
 import "../styles/global.css";
 import SiteFooter from "./SiteFooter.astro";
 import SiteHeader from "./SiteHeader.astro";
@@ -262,15 +264,20 @@ const schema = JSON.stringify([
 				</section>
 				<AdUnit />
 				<section class="content-section">
-					<ul class="audience-list">
-						{
-							copy.facts.map((fact) => (
-								<li class="audience-item">
-									<p>{fact}</p>
-								</li>
-							))
-						}
-					</ul>
+					<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;align-items:start;margin-bottom:1.25rem;">
+						<ul class="audience-list" style="margin:0;">
+							{
+								copy.facts.map((fact) => (
+									<li class="audience-item">
+										<p>{fact}</p>
+									</li>
+								))
+							}
+						</ul>
+						<a href={playPath} style="display:block;border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.12);box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+							<Image src={puzzleDreamImage} alt={copy.h1} style="width:100%;height:auto;display:block;" />
+						</a>
+					</div>
 					<p class="section-intro">
 						<a href={playPath}>{copy.playLabel}</a>
 						{" · "}
