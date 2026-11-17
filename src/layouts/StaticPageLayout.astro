@@ -3,6 +3,7 @@ import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SocialBar from "../components/SocialBar.astro";
+import AdUnit from "../components/AdUnit.astro";
 import {
 	adsensePublisherId,
 	shellContent,
@@ -131,6 +132,7 @@ const ogLocaleAlternates = buildOgLocaleAlternates(locale);
 					<div class="article-prose">
 						<slot />
 					</div>
+					<AdUnit />
 				</article>
 			</main>
 
