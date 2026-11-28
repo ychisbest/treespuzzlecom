@@ -28,8 +28,40 @@
 			var adBox = document.getElementById("container-a8d5a3218c986bebe7c26991d605271c");
 			if (!adBox) return;
 			var h = Math.round(adBox.offsetHeight || 0);
-			var ok = adBox.children.length > 0 || h > 10;
-			sendEv(ok ? "ad_rendered" : "ad_blocked", (ok ? "ok:" : "empty:") + h + ":" + location.pathname);
+			var hasKids = adBox.children.length > 0;
+			var ok = hasKids && h > 10;
+			if (ok) {
+				sendEv("ad_rendered", "ok:" + h + ":" + location.pathname);
+				var sentV = false;
+				var markViewable = function () {
+					if (sentV) return;
+					sentV = true;
+					sendEv("ad_viewable", "v:" + h + ":" + location.pathname);
+				};
+				if (typeof IntersectionObserver !== "undefined") {
+					var obs = new IntersectionObserver(
+						function (entries) {
+							for (var i = 0; i < entries.length; i++) {
+								if (entries[i].isIntersecting) {
+									markViewable();
+									obs.disconnect();
+									break;
+								}
+							}
+						},
+						{ threshold: 0.5 }
+					);
+					obs.observe(adBox);
+				} else {
+					var rect = adBox.getBoundingClientRect();
+					if (rect.bottom > 0 && rect.top < (window.innerHeight || 0)) {
+						markViewable();
+					}
+				}
+			} else {
+				var reason = hasKids ? "hidden" : (window.__tpNativeNetErr ? "neterr" : "nofill");
+				sendEv("ad_blocked", reason + ":" + h + ":" + location.pathname);
+			}
 		}, 4000);
 	})();
 </script>

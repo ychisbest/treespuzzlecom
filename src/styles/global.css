@@ -412,11 +412,12 @@ a:hover {
 	background: #fff;
 }
 
-.ad-unit {
+.rec-strip {
 	margin: 20px 0;
 	padding: 18px 20px;
 	border: 1px solid var(--border-color);
 	background: #fff;
+	overflow: clip;
 }
 
 .download-note {

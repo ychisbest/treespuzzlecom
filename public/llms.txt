@@ -1,0 +1,19 @@
+# Her Trees Puzzle Game (https://treespuzzle.com)
+
+> Independent editorial guide and browser-playable hub for Stone's HER TREES non-verbal black-and-white puzzle series (First Puzzle, The Puzzle House, and Puzzle Dream) across 7 languages (`en`, `zh-cn`, `ja`, `fr`, `id`, `vi`, `fa`).
+
+## Core Playable & Guide Pages
+
+- [HER TREES Series Home (EN)](https://treespuzzle.com/)
+- [HER TREES : First Puzzle — Play in Browser](https://treespuzzle.com/play/first-puzzle/)
+- [HER TREES : THE PUZZLE HOUSE — Play & Overview](https://treespuzzle.com/play/puzzle-house/)
+- [HER TREES : PUZZLE DREAM — Play & Demo](https://treespuzzle.com/play/puzzle-dream/)
+- [First Puzzle Walkthrough (A Forgotten House)](https://treespuzzle.com/guide/)
+- [The Puzzle House Walkthrough & Hints](https://treespuzzle.com/play/puzzle-house/guide/)
+- [Puzzle Dream Walkthrough & Answers](https://treespuzzle.com/play/puzzle-dream/guide/)
+- [Puzzle Design Analysis](https://treespuzzle.com/analysis/puzzle-design/)
+- [Puzzle Dream Android / iOS / Switch Platform Notes](https://treespuzzle.com/play/puzzle-dream/android/) · [iOS](https://treespuzzle.com/play/puzzle-dream/ios/) · [Switch](https://treespuzzle.com/play/puzzle-dream/switch/)
+
+## Multilingual Editions
+
+- [简体中文](https://treespuzzle.com/zh-cn/) · [日本語](https://treespuzzle.com/ja/) · [Français](https://treespuzzle.com/fr/) · [Bahasa Indonesia](https://treespuzzle.com/id/) · [Tiếng Việt](https://treespuzzle.com/vi/) · [فارسی](https://treespuzzle.com/fa/)

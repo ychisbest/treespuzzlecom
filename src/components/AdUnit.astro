@@ -4,8 +4,8 @@
 // #container-a8d5a3218c986bebe7c26991d605271c exists per page right next to its script.
 ---
 
-<div class="ad-unit" data-ad-native aria-label="Advertisement">
-	<div class="ad-unit-slot"></div>
+<div class="rec-strip" data-rec-slot>
+	<div class="rec-strip-inner"></div>
 </div>
 <script is:inline data-cfasync="false">
 	(function () {
@@ -14,13 +14,13 @@
 		var root =
 			document.currentScript &&
 			document.currentScript.previousElementSibling;
-		if (!root || !root.hasAttribute("data-ad-native")) return;
+		if (!root || !root.hasAttribute("data-rec-slot")) return;
 		if (window.__treesAdNativeMounted || document.getElementById(CONTAINER_ID)) {
 			root.hidden = true;
 			root.style.display = "none";
 			return;
 		}
-		var slot = root.querySelector(".ad-unit-slot");
+		var slot = root.querySelector(".rec-strip-inner");
 		if (!slot) return;
 		window.__treesAdNativeMounted = true;
 		var box = document.createElement("div");
@@ -28,8 +28,13 @@
 		slot.appendChild(box);
 		var s = document.createElement("script");
 		s.async = true;
+		s.fetchPriority = "high";
+		s.setAttribute("fetchpriority", "high");
 		s.setAttribute("data-cfasync", "false");
 		s.src = SCRIPT_SRC;
+		s.onerror = function () {
+			window.__tpNativeNetErr = true;
+		};
 		slot.insertBefore(s, box);
 	})();
 </script>
